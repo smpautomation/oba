@@ -12,7 +12,7 @@
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <livewire:navbar>
             <div class="flex items-center justify-center h-screen">
-                <h1 class="font-semibold text-4xl text-gray-600"> WELCOME TO HOME PAGE </h1>
+                <h1 class="font-semibold text-4xl text-gray-600"> WELCOME TO SETTINGS PAGE</h1>
             </div>
 
 

@@ -8,14 +8,15 @@
 
         @vite(['resources/css/app.css','resources/js/app.js'])
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+        <script src="{{ asset('js/custom.js') }}" defer></script>
+
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <livewire:navbar>
-            <div class="flex items-center justify-center h-screen">
-                <h1 class="font-semibold text-4xl text-gray-600"> WELCOME TO HOME PAGE </h1>
-            </div>
-
-
-
+        @if (isset($id))
+            <livewire:checklistForm :model_id="$id">
+        @else
+            <livewire:sectionForm lazy>
+      @endif
     </body>
 </html>
