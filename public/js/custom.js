@@ -14,5 +14,5 @@ function isMobile() {
     });
   } else {
     // If it's a mobile device, use the native date picker
-    document.getElementById('datetime').setAttribute('type', 'datetime-local');
+    document.getElementById('3-datetime').setAttribute('type', 'datetime-local');
   }

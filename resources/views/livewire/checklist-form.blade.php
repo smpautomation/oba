@@ -52,37 +52,67 @@
                                 <strong>COMPLETE</strong>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-2column"></x-checkbox>
+                                <x-checkbox id="1-prep-2column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-3column"></x-checkbox>
+                                <x-checkbox id="1-prep-3column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-4column"></x-checkbox>
+                                <x-checkbox id="1-prep-4column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-5column"></x-checkbox>
+                                <x-checkbox id="1-prep-5column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-6column"></x-checkbox>
+                                <x-checkbox id="1-prep-6column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-7column"></x-checkbox>
+                                <x-checkbox id="1-prep-7column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-8column"></x-checkbox>
+                                <x-checkbox id="1-prep-8column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-9column"></x-checkbox>
+                                <x-checkbox id="1-prep-9column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="1-prep-10column" value="ok"></x-checkbox>
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <strong>REMARKS</strong>
                             </th>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-1remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-2remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-3remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-4remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-5remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-6remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-7remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-8remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-9remarks"></x-inputText>
+                            </td>
+                            <td class="w-4 p-4">
+                                <x-inputText id="1-prep-10remarks"></x-inputText>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -130,25 +160,25 @@
                                 <strong>BEFORE OBA</strong>
                             </th>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA-2column"></x-checkbox>
+                                <x-checkbox id="2-OBA-2column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA-3column"></x-checkbox>
+                                <x-checkbox id="2-OBA-3column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA-4column"></x-checkbox>
+                                <x-checkbox id="2-OBA-4column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA-5column"></x-checkbox>
+                                <x-checkbox id="2-OBA-5column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA-6column"></x-checkbox>
+                                <x-checkbox id="2-OBA-6column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA-7column"></x-checkbox>
+                                <x-checkbox id="2-OBA-7column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA-8column"></x-checkbox>
+                                <x-checkbox id="2-OBA-8column" value="ok"></x-checkbox>
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -156,25 +186,25 @@
                                 <strong>AFTER OBA</strong>
                             </th>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA2-2column"></x-checkbox>
+                                <x-checkbox id="2-OBA2-2column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA2-3column"></x-checkbox>
+                                <x-checkbox id="2-OBA2-3column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA2-4column"></x-checkbox>
+                                <x-checkbox id="2-OBA2-4column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA2-5column"></x-checkbox>
+                                <x-checkbox id="2-OBA2-5column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA2-6column"></x-checkbox>
+                                <x-checkbox id="2-OBA2-6column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA2-7column"></x-checkbox>
+                                <x-checkbox id="2-OBA2-7column" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="2-OBA2-8column"></x-checkbox>
+                                <x-checkbox id="2-OBA2-8column" value="ok"></x-checkbox>
                             </td>
                         </tr>
                     </tbody>
@@ -191,8 +221,8 @@
             <div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
-                        <x-label for="datetime" :semibold="true">Date & Time</x-label>
-                        <input id="datetime" type="text" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500       sm:text-sm" placeholder="Pick a date and time" />
+                        <x-label for="3-datetime" :semibold="true">Date & Time</x-label>
+                        <input id="3-datetime" type="text" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500       sm:text-sm" placeholder="Pick a date and time" />
                     </div>
                     <div></div>
                 </div>
@@ -212,23 +242,23 @@
                     </div>
                     <div class="flex">
                         <div class="m-8">
-                            <x-checkbox id="3-SI-1" :ml="true"></x-checkbox>
+                            <x-checkbox id="3-SI-1" :ml="true" value="wood"></x-checkbox>
                             <x-label for="3-SI-1">WOOD</x-label>
                         </div>
                         <div class="m-8">
-                            <x-checkbox id="3-SI-2" :ml="true"></x-checkbox>
+                            <x-checkbox id="3-SI-2" :ml="true" value="paper"></x-checkbox>
                             <x-label for="3-SI-2">PAPER</x-label>
                         </div>
                         <div class="m-8">
-                            <x-checkbox id="3-SI-3" :ml="true"></x-checkbox>
+                            <x-checkbox id="3-SI-3" :ml="true" value="steel"></x-checkbox>
                             <x-label for="3-SI-3" >STEEL</x-label>
                         </div>
                         <div class="m-8">
-                            <x-checkbox id="3-SI-4" :ml="true"></x-checkbox>
+                            <x-checkbox id="3-SI-4" :ml="true" value="plastic"></x-checkbox>
                             <x-label for="3-SI-4">PLASTIC</x-label>
                         </div>
                         <div class="m-8">
-                            <x-inputText type="text" id='3-SI-5-2' name='3-invoice' value="" placeholder="Others(Please Specify)"></x-inputText>
+                            <x-inputText type="text" id='3-others' name='3-others' placeholder="Others(Please Specify)"></x-inputText>
                         </div>
                     </div>
                 </div>
@@ -243,8 +273,8 @@
             <div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
-                        <x-label for="boxes" :semibold="true">No. OF BOXES OPEN:</x-label>
-                        <x-inputNumber id="boxes" btnID="boxes">BOXES</x-inputNumber>
+                        <x-label for="4-boxes" :semibold="true">No. OF BOXES OPEN:</x-label>
+                        <x-inputNumber id="4-boxes" btnID="boxes">BOXES</x-inputNumber>
                     </div>
                     <div></div>
                 </div>
@@ -260,14 +290,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="4-radio-model-yes" type="radio" value="yes" name="4-radio-model" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="4-radio-model-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="4-radio-model-no" type="radio" value="no" name="4-radio-model" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="4-radio-model-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -281,14 +311,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
+                                        <input id="4-radio-judgement-ok" type="radio" value="ok" name="4-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="4-radio-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
+                                        <input id="4-radio-judgement-ng" type="radio" value="ng" name="4-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="4-radio-judgement-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
                                     </div>
                                 </li>
                             </ul>
@@ -318,14 +348,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="4-sir-yes" type="radio" value="yes" name="4-sir" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="4-sir-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="4-sir-no" type="radio" value="no" name="4-sir" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="4-sir-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -339,14 +369,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="4-avail-yes" type="radio" value="yes" name="4-avail" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="4-avail-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="4-avail-no" type="radio" value="no" name="4-avail" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="4-avail-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -395,14 +425,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="5-radio-qfs-yes" type="radio" value="yes" name="5-radio-qfs-shipment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-radio-qfs-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="5-radio-qfs-no" type="radio" value="no" name="5-radio-qfs-shipment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-radio-qfs-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -416,14 +446,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
+                                        <input id="5-radio-qfs-ok" type="radio" value="ok" name="5-radio-qfs-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-radio-qfs-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
+                                        <input id="5-radio-qfs-ng" type="radio" value="ng" name="5-radio-qfs-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-radio-qfs-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
                                     </div>
                                 </li>
                             </ul>
@@ -463,14 +493,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="5-boxship-radio-yes" type="radio" value="yes" name="5-boxship-radio-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-boxship-radio-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="5-boxship-radio-no" type="radio" value="no" name="5-boxship-radio-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-boxship-radio-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -484,13 +514,13 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="horizontal-list-radio-license" type="radio" value="ok" name="5-boxship-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
                                         <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="horizontal-list-radio-id" type="radio" value="ng" name="5-boxship-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
                                     </div>
                                 </li>
@@ -547,14 +577,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="5-model-same-yes" type="radio" value=yes"" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-model-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="5-model-same-no" type="radio" value="no" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-model-same-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -568,14 +598,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
+                                        <input id="5-model-judgement-ok" type="radio" value="ok" name="5-model-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-model-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
+                                        <input id="5-model-judgement-ng" type="radio" value="ng" name="5-model-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-model-judgement-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
                                     </div>
                                 </li>
                             </ul>
@@ -641,14 +671,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="5-modelcode-same-yes" type="radio" value="yes" name="5-modelcode-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-modelcode-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="5-modelcode-same-no" type="radio" value="no" name="5-modelcode-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-modelcode-same-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -662,14 +692,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
+                                        <input id="5-modelcode-judegment-ok" type="radio" value="ok" name="5-modelcode-judegment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-modelcode-judegment-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
+                                        <input id="5-modelcode-judegment-ng" type="radio" value="ng" name="5-modelcode-judegment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-modelcode-judegment-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
                                     </div>
                                 </li>
                             </ul>
@@ -687,7 +717,7 @@
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label for="5-fglabel-partnumber-input">SHIPPING INVOICE</x-label><x-inputText id="5-fglabel-partnumber-input"></x-inputText>
+                            <x-label for="5-shipinv-partnumber-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-partnumber-input"></x-inputText>
                         </div>
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
@@ -718,14 +748,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="5-partnumber-same-yes" type="radio" value="yes" name="5-partnumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-partnumber-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                                        <input id="5-partnumber-same-no" type="radio" value="no" name="5-partnumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-partnumber-same-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
                             </ul>
@@ -739,14 +769,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
+                                        <input id="5-partnumber-judgement-ok" type="radio" value="ok" name="5-partnumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-partnumber-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
+                                        <input id="5-partnumber-judgement-ng" type="radio" value="ng" name="5-partnumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-partnumber-judgement-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
                                     </div>
                                 </li>
                             </ul>
@@ -763,10 +793,10 @@
                         </div>
                         <div class="p-2">
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">CUSTOMER PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-serem-co">CUSTOMER PO</x-label><x-inputText id="5-ponumber-serem-co"></x-inputText>
                             </div>
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">OUR PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-serem-oo">OUR PO</x-label><x-inputText id="5-ponumber-serem-oo"></x-inputText>
                             </div>
                         </div>
                     </div>
@@ -776,10 +806,10 @@
                         </div>
                         <div class="p-2">
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">CUSTOMER PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-shiplabel-co">CUSTOMER PO</x-label><x-inputText id="5-ponumber-shiplabel-co"></x-inputText>
                             </div>
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">OUR PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-shiplabel-oo">OUR PO</x-label><x-inputText id="5-ponumber-shiplabel-oo"></x-inputText>
                             </div>
                         </div>
                     </div>
@@ -789,10 +819,10 @@
                         </div>
                         <div class="p-2">
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">CUSTOMER PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-vmi-co">CUSTOMER PO</x-label><x-inputText id="5-ponumber-vmi-co"></x-inputText>
                             </div>
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">OUR PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-vmi-oo">OUR PO</x-label><x-inputText id="5-ponumber-vmi-oo"></x-inputText>
                             </div>
                         </div>
                     </div>
@@ -802,10 +832,10 @@
                         </div>
                         <div class="p-2">
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">CUSTOMER PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-sir-co">CUSTOMER PO</x-label><x-inputText id="5-ponumber-vmi-co"></x-inputText>
                             </div>
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">OUR PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-vmi-oo">OUR PO</x-label><x-inputText id="5-ponumber-vmi-oo"></x-inputText>
                             </div>
                         </div>
                     </div>
@@ -815,10 +845,10 @@
                         </div>
                         <div class="p-2">
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">CUSTOMER PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-specqr-co">CUSTOMER PO</x-label><x-inputText id="5-ponumber-specqr-co"></x-inputText>
                             </div>
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">OUR PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-specqr-oo">OUR PO</x-label><x-inputText id="5-ponumber-specqr-oo"></x-inputText>
                             </div>
                         </div>
                     </div>
@@ -828,10 +858,10 @@
                         </div>
                         <div class="p-2">
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">CUSTOMER PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-pallet-co">CUSTOMER PO</x-label><x-inputText id="5-ponumber-pallet-co"></x-inputText>
                             </div>
                             <div class="col-span-1 flex items-center justify-center">
-                                <x-label for="5-picklist-partnumber-input">OUR PO</x-label><x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-label for="5-ponumber-pallet-oo">OUR PO</x-label><x-inputText id="5-ponumber-pallet-oo"></x-inputText>
                             </div>
                         </div>
                     </div>
@@ -843,13 +873,13 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+                                        <input id="5-ponumber-same-yes" type="radio" value="yes" name="5-ponumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <label for="5-ponumber-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="horizontal-list-radio-id" type="radio" value="no" name="5-ponumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
@@ -864,14 +894,14 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
+                                        <input id="5-ponumber-judgement-ok" type="radio" value="ok" name="5-ponumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-ponumber-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
+                                        <input id="5-ponumber-judgement-ng" type="radio" value="ng" name="5-ponumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="5-ponumber-judgement-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
                                     </div>
                                 </li>
                             </ul>
@@ -989,70 +1019,71 @@
                         @while ($control <> 11)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td scope="row" class="px-6 py-4 w-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" colspan="5">
-                                <x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-inputText id="6-oqa-{{$control}}"></x-inputText>
                             </td>
                             <td scope="row" class="w-4 p-4">
-                                <x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-inputText id="6-boxno-{{$control}}"></x-inputText>
                             </td>
                             <td class="w-4 p-4">
-                                <x-inputText id="5-picklist-partnumber-input"></x-inputText>
+                                <x-inputText id="6-actpackstdpack-{{$control}}"></x-inputText>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-4column"></x-checkbox>
+                                <x-checkbox id="6-fgbarlabel-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-5column"></x-checkbox>
+                                <x-checkbox id="6-speclabelqrcodeinternal-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-6column"></x-checkbox>
+                                <x-checkbox id="6-cartcon-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-7column"></x-checkbox>
+                                <x-checkbox id="6-magnetpack-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-8column"></x-checkbox>
+                                <x-checkbox id="6-magnetcond-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-9column"></x-checkbox>
+                                <x-checkbox id="6-presdescicant-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-packorientation-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4" colspan="5">
-                                <x-inputText ></x-inputText>
+                                <x-inputText id="6-spacerused-{{$control}}"></x-inputText>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-sir-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-serem-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-shiplabelothermodels-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-vmi-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-mcbarlabel-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-delivstate-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-specificlabelqrcodeexternal-{{$control}}" value="ok"></x-checkbox>
                             </td>
                             <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column"></x-checkbox>
+                                <x-checkbox id="6-leakageflux-{{$control}}" value="ok"></x-checkbox>
+                            </td>
+
+                            <td class="w-4 p-4">
+                                <x-inputText id="6-identitytape-{{$control}}"></x-inputText>
                             </td>
                             <td class="w-4 p-4">
-                                <x-inputText ></x-inputText>
+                                <x-inputText id="6-pickedlist-{{$control}}"></x-inputText>
                             </td>
                             <td class="w-4 p-4">
-                                <x-inputText ></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText ></x-inputText>
+                                <x-inputText id="6-remarks-{{$control}}"></x-inputText>
                             </td>
                         </tr>
                         @php
@@ -1065,7 +1096,7 @@
             <div>
                 <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl shadow-xl p-2 bg-gray-50">
                     <div class="row-span-3 col-span-2 flex items-center justify-center">
-                        <x-label :semibold="true">*For palletized finished goods, check expiration date:</x-label><input type="date" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ml-8" />
+                        <x-label :semibold="true">*For palletized finished goods, check expiration date:</x-label><input type="date" id="6-datetime" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ml-8"  required/>
                     </div>
                     <div class="overflow-x-auto col-span-4">
                         <table class="text-sm text-left rtl:text-right text-gray-500 table-auto w-screen">
@@ -1091,7 +1122,7 @@
                                     @endphp
                                     @while($control <> 21)
                                     <td class="w-4 p-4">
-                                        <x-checkbox id="1-prep-2column"></x-checkbox>
+                                        <x-checkbox id="6-pallet-{{$control}}"></x-checkbox>
                                     </td>
                                     @php
                                         $control++;
@@ -1102,7 +1133,7 @@
                         </table>
                     </div>
                     <div class="row-span-3 col-span-2 flex items-center justify-center">
-                        <x-label :semibold="true">Results: </x-label><x-inputText id="5-serem-num-input"></x-inputText>
+                        <x-label :semibold="true">Results: </x-label><x-inputText id="6-results"></x-inputText>
                     </div>
                 </div>
             </div>
@@ -1117,32 +1148,32 @@
                 <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl shadow-xl p-2 bg-gray-50">
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label for="5-picklist-num-input">Shipping PIC</x-label><x-inputText id="5-picklist-num-input"></x-inputText>
+                            <x-label for="7-shippingpic">Shipping PIC</x-label><x-inputText id="7-shippingpic"></x-inputText>
                         </div>
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label for="5-shipinv-num-input">Date:</x-label><input type="date" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ml-8" />
+                            <x-label for="7-date">Date:</x-label><input type="date" id="7-date" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ml-8" />
                         </div>
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label for="5-serem-num-input">OBA Checked by:</x-label><x-inputText id="5-serem-num-input"></x-inputText>
+                            <x-label for="7-oba">OBA Checked by:</x-label><x-inputText id="7-oba"></x-inputText>
                         </div>
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label for="5-sir-num-input">JUDGEMENT</x-label><x-inputText id="5-sir-num-input"></x-inputText>
+                            <x-label for="7-judgement-oba">JUDGEMENT</x-label><x-inputText id="7-judgement-oba"></x-inputText>
                         </div>
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label for="5-serem-num-input">OBA Picture by:</x-label><x-inputText id="5-serem-num-input"></x-inputText>
+                            <x-label for="7-obapic">OBA Picture by:</x-label><x-inputText id="7-obapic"></x-inputText>
                         </div>
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label for="5-serem-num-input">JUDGEMENT</x-label><x-inputText id="5-serem-num-input"></x-inputText>
+                            <x-label for="7-judgement-obapic">JUDGEMENT</x-label><x-inputText id="7-judgement-obapic"></x-inputText>
                         </div>
                     </div>
                 </div>
