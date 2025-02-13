@@ -1,123 +1,10 @@
 <div>
-    <form>
+    <form wire:submit='save'>
         <div class="flex">
             <label for="section" class='mr-2'>Section:</label>
             <h5><u>&nbsp;&nbsp;{{ $checklistInfo->section }}&nbsp;&nbsp;</u></h5>
         </div>
-        <div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
-            <div class="flex items-center justify-center bg-gray-500 text-gray-100">
-                <h1 class='text-lg'>
-                    <strong>1. Preparation Checklist</strong>
-                </h1>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="text-sm text-left rtl:text-right text-gray-500 table-auto w-screen">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                <strong>PREPARATION Checklist</strong>
-                            </th>
-                            <th scope="col" class="px-6 py-3 ">
-                                MC RECEIVING CHECKLIST
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                OBA KIT
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                PACKING SPECS
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                SEREM
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                PICK LIST
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                FG LOT TRACE
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                SCANNED QR CODE
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                PACKING SLIP/SHIPPING INVOICE/SI
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                RELATED DOCUMENTS ON OBA CHECKING
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td scope="row" class="px-6 py-4 w-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <strong>COMPLETE</strong>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-2column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-3column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-4column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-5column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-6column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-7column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-8column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-9column" value="ok"></x-checkbox>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-checkbox id="1-prep-10column" value="ok"></x-checkbox>
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <strong>REMARKS</strong>
-                            </th>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-1remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-2remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-3remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-4remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-5remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-6remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-7remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-8remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-9remarks"></x-inputText>
-                            </td>
-                            <td class="w-4 p-4">
-                                <x-inputText id="1-prep-10remarks"></x-inputText>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <livewire:preparation-checklist></livewire:preparation-checklist>
         <div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
             <div class="flex items-center justify-center bg-gray-500 text-gray-100">
                 <h1 class='text-lg '>
@@ -290,7 +177,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="4-radio-model-yes" type="radio" value="yes" name="4-radio-model" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="4-radio-model-yes" type="radio" value="yes" name="4-radio-model" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="4-radio-model-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
@@ -311,7 +198,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="4-radio-judgement-ok" type="radio" value="ok" name="4-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="4-radio-judgement-ok" type="radio" value="ok" name="4-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="4-radio-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
@@ -342,13 +229,13 @@
                     </div>
                     <div class="col-span-1 md:grid-cols-2">
                         <div class="col-span-1 flex items-center justify-center">
-                            <x-label>Does SIR required?</x-label>
+                            <x-label>Does SIR <?php //required ?>?</x-label>
                         </div>
                         <div class="col-span-1">
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="4-sir-yes" type="radio" value="yes" name="4-sir" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="4-sir-yes" type="radio" value="yes" name="4-sir" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="4-sir-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
@@ -425,7 +312,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-radio-qfs-yes" type="radio" value="yes" name="5-radio-qfs-shipment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-radio-qfs-yes" type="radio" value="yes" name="5-radio-qfs-shipment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-radio-qfs-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
@@ -446,7 +333,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-radio-qfs-ok" type="radio" value="ok" name="5-radio-qfs-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-radio-qfs-ok" type="radio" value="ok" name="5-radio-qfs-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-radio-qfs-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
@@ -493,7 +380,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-boxship-radio-yes" type="radio" value="yes" name="5-boxship-radio-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-boxship-radio-yes" type="radio" value="yes" name="5-boxship-radio-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-boxship-radio-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
@@ -514,7 +401,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-license" type="radio" value="ok" name="5-boxship-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="horizontal-list-radio-license" type="radio" value="ok" name="5-boxship-radio-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
@@ -577,13 +464,13 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-model-same-yes" type="radio" value=yes"" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-model-same-yes" type="radio" value=yes"" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-model-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-model-same-no" type="radio" value="no" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-model-same-no" type="radio" value="no" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-model-same-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
                                     </div>
                                 </li>
@@ -598,7 +485,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-model-judgement-ok" type="radio" value="ok" name="5-model-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-model-judgement-ok" type="radio" value="ok" name="5-model-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-model-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
@@ -671,7 +558,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-modelcode-same-yes" type="radio" value="yes" name="5-modelcode-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-modelcode-same-yes" type="radio" value="yes" name="5-modelcode-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-modelcode-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
@@ -692,7 +579,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-modelcode-judegment-ok" type="radio" value="ok" name="5-modelcode-judegment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-modelcode-judegment-ok" type="radio" value="ok" name="5-modelcode-judegment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-modelcode-judegment-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
@@ -748,7 +635,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-partnumber-same-yes" type="radio" value="yes" name="5-partnumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-partnumber-same-yes" type="radio" value="yes" name="5-partnumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-partnumber-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
@@ -769,7 +656,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-partnumber-judgement-ok" type="radio" value="ok" name="5-partnumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-partnumber-judgement-ok" type="radio" value="ok" name="5-partnumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-partnumber-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
                                     </div>
                                 </li>
@@ -873,7 +760,7 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center ps-3">
-                                        <input id="5-ponumber-same-yes" type="radio" value="yes" name="5-ponumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" required>
+                                        <input id="5-ponumber-same-yes" type="radio" value="yes" name="5-ponumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
                                         <label for="5-ponumber-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
                                     </div>
                                 </li>
@@ -1096,7 +983,7 @@
             <div>
                 <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl shadow-xl p-2 bg-gray-50">
                     <div class="row-span-3 col-span-2 flex items-center justify-center">
-                        <x-label :semibold="true">*For palletized finished goods, check expiration date:</x-label><input type="date" id="6-datetime" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ml-8"  required/>
+                        <x-label :semibold="true">*For palletized finished goods, check expiration date:</x-label><input type="date" id="6-datetime" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ml-8"  <?php //required ?>/>
                     </div>
                     <div class="overflow-x-auto col-span-4">
                         <table class="text-sm text-left rtl:text-right text-gray-500 table-auto w-screen">
@@ -1178,6 +1065,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="p-4 m-2 rounded-xl shadow=sm bg-slate-50 flex items-center justify-center">
+            <button type="submit">
+                <a class="fancy">
+                    <span class="top-key"></span>
+                    <span class="text">SAVE</span>
+                    <span class="bottom-key-1"></span>
+                    <span class="bottom-key-2"></span>
+                </a>
+            </button>
         </div>
     </form>
 </div>

@@ -11,5 +11,11 @@ class checklist extends Model
         'id',
         'model',
         'section',
+        'preparationChecklist',
+        'obakitchecklist',
+        'shipmentInformation',
+        'checkItems',
+        'checkOverallCondition',
+        'personnel'
     ];
 }

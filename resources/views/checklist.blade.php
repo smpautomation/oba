@@ -17,6 +17,11 @@
             <livewire:checklistForm :model_id="$id">
         @else
             <livewire:sectionForm lazy>
-      @endif
+        @endif
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
     </body>
 </html>
