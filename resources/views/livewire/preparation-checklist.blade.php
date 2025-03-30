@@ -46,7 +46,7 @@
                         <strong>COMPLETE</strong>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-2column" value="1" wire:model.blur="columns.oneprep2column"></x-checkbox>
+                        <x-checkbox id="oneprep2column1" value="1" wire:model="oneprep2column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
                         <x-checkbox id="1-prep-3column" value="1" wire:model="columns.oneprep3column"></x-checkbox>

@@ -4,7 +4,7 @@
             <label for="section" class='mr-2'>Section:</label>
             <h5><u>&nbsp;&nbsp;{{ $checklistInfo->section }}&nbsp;&nbsp;</u></h5>
         </div>
-        <livewire:preparation-checklist></livewire:preparation-checklist>
+        <livewire:preparation-checklist :oneprep2column="$oneprep2column" wire:key="$oneprep2column"></livewire:preparation-checklist>
         <div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
             <div class="flex items-center justify-center bg-gray-500 text-gray-100">
                 <h1 class='text-lg '>
