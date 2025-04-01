@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id', false)->primary();
             $table->string('model');
             $table->string('section');
-            $table->unsignedBigInteger('preparationChecklist');
+            $table->unsignedBigInteger('preparationChecklist')->nullable();
             $table->json('obakitchecklist')->nullable();
             $table->json('shipmentInformation')->nullable();
             $table->json('checkItems')->nullable();
@@ -26,25 +26,26 @@ return new class extends Migration
 
         Schema::create('preparation_checklist', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->unsignedBigInteger('checklist_id');
-            $table->boolean('oneprep2column');
-            $table->boolean('oneprep3column');
-            $table->boolean('oneprep4column');
-            $table->boolean('oneprep5column');
-            $table->boolean('oneprep6column');
-            $table->boolean('oneprep7column');
-            $table->boolean('oneprep8column');
-            $table->boolean('oneprep9column');
-            $table->boolean('oneprep10column');
-            $table->string('oneprep2remarks');
-            $table->string('oneprep3remarks');
-            $table->string('oneprep4remarks');
-            $table->string('oneprep5remarks');
-            $table->string('oneprep6remarks');
-            $table->string('oneprep7remarks');
-            $table->string('oneprep8remarks');
-            $table->string('oneprep9remarks');
-            $table->string('oneprep10remarks');
+            $table->boolean('oneprep2column')->nullable();
+            $table->boolean('oneprep3column')->nullable();
+            $table->boolean('oneprep4column')->nullable();
+            $table->boolean('oneprep5column')->nullable();
+            $table->boolean('oneprep6column')->nullable();
+            $table->boolean('oneprep7column')->nullable();
+            $table->boolean('oneprep8column')->nullable();
+            $table->boolean('oneprep9column')->nullable();
+            $table->boolean('oneprep10column')->nullable();
+            $table->string('oneprep2remarks')->nullable();
+            $table->string('oneprep3remarks')->nullable();
+            $table->string('oneprep4remarks')->nullable();
+            $table->string('oneprep5remarks')->nullable();
+            $table->string('oneprep6remarks')->nullable();
+            $table->string('oneprep7remarks')->nullable();
+            $table->string('oneprep8remarks')->nullable();
+            $table->string('oneprep9remarks')->nullable();
+            $table->string('oneprep10remarks')->nullable();
             $table->foreign('checklist_id')
                 ->references('id')
                 ->on('checklist')

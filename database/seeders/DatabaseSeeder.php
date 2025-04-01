@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\model_settings;
 use App\Models\Sections;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
