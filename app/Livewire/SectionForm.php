@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\preparation_checklist;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Livewire\Component;
@@ -15,7 +16,7 @@ class SectionForm extends Component
     use WithPagination, WithoutUrlPagination;
     public $sections = [];
     public $models = [];
-    public $checklist = [];
+    public $checklist;
 
     public $selectedSection = 0;
     public $selectedModel = 0;
@@ -36,6 +37,9 @@ class SectionForm extends Component
             'id' => $new_id,
             'model' => $this->selectedModel,
             'section' => $this->selectedSection
+        ]);
+        preparation_checklist::create([
+            'checklist_id' => $new_id
         ]);
 
         session()->flash('status', 'OBA Checklist serial is ' . $new_id);

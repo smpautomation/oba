@@ -46,31 +46,31 @@
                         <strong>COMPLETE</strong>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="oneprep2column1" value="1" wire:model="columns.oneprep2column"></x-checkbox>
+                        <x-checkbox id="oneprep2column1" value="1" wire:model="inputs.oneprep2column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-3column" value="1" wire:model="columns.oneprep3column"></x-checkbox>
+                        <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-4column" value="1" wire:model="columns.oneprep4column"></x-checkbox>
+                        <x-checkbox id="1-prep-4column" value="1" wire:model="inputs.oneprep4column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-5column" value="1" wire:model="columns.oneprep5column"></x-checkbox>
+                        <x-checkbox id="1-prep-5column" value="1" wire:model="inputs.oneprep5column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-6column" value="1" wire:model="columns.oneprep6column"></x-checkbox>
+                        <x-checkbox id="1-prep-6column" value="1" wire:model="inputs.oneprep6column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-7column" value="1" wire:model="columns.oneprep7column"></x-checkbox>
+                        <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-8column" value="1" wire:model="columns.oneprep8column"></x-checkbox>
+                        <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-9column" value="1" wire:model="columns.oneprep9column"></x-checkbox>
+                        <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-10column" value="1" wire:model="columns.oneprep10column"></x-checkbox>
+                        <x-checkbox id="1-prep-10column" value="1" wire:model="inputs.oneprep10column"></x-checkbox>
                     </td>
                 </tr>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -78,31 +78,31 @@
                         <strong>REMARKS</strong>
                     </th>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-1remarks" wire:model="remarks.oneprep2remarks" wire:dirty.class="border-yellow"></x-inputText>
+                        <x-inputText id="1-prep-1remarks" wire:model="inputs.oneprep2remarks" wire:dirty.class="border-yellow"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-2remarks" wire:model="remarks.oneprep3remarks"></x-inputText>
+                        <x-inputText id="1-prep-2remarks" wire:model="inputs.oneprep3remarks"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-3remarks" wire:model="remarks.oneprep4remarks"></x-inputText>
+                        <x-inputText id="1-prep-3remarks" wire:model="inputs.oneprep4remarks"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-4remarks" wire:model="remarks.oneprep5remarks"></x-inputText>
+                        <x-inputText id="1-prep-4remarks" wire:model="inputs.oneprep5remarks"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-5remarks" wire:model="remarks.oneprep6remarks"></x-inputText>
+                        <x-inputText id="1-prep-5remarks" wire:model="inputs.oneprep6remarks"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-6remarks" wire:model="remarks.oneprep7remarks"></x-inputText>
+                        <x-inputText id="1-prep-6remarks" wire:model="inputs.oneprep7remarks"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-7remarks" wire:model="remarks.oneprep8remarks"></x-inputText>
+                        <x-inputText id="1-prep-7remarks" wire:model="inputs.oneprep8remarks"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-8remarks" wire:model="remarks.oneprep9remarks"></x-inputText>
+                        <x-inputText id="1-prep-8remarks" wire:model="inputs.oneprep9remarks"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-9remarks" wire:model="remarks.oneprep10remarks"></x-inputText>
+                        <x-inputText id="1-prep-9remarks" wire:model="inputs.oneprep10remarks"></x-inputText>
                     </td>
                 </tr>
             </tbody>

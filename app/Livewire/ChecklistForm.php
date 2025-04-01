@@ -34,15 +34,14 @@ class ChecklistForm extends Component
     #[On('return-value')] 
     public function displayData($param)
     {
-        dd($param);
+        //dd($param);
         DB::beginTransaction();
         try{
             if($param['Child Component'] == "Preparation Checklist"){
                 $checklist = PrepCheck::where('checklist_id', $this->model_id)->first();
+                $inputData = $param['Data'];
                 if ($checklist) {
-                    $checklist->update([
-                        $param[0]
-                    ]);
+                    $checklist->update($inputData);
                 }
             }
             

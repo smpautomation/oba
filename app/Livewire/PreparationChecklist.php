@@ -8,7 +8,7 @@ use Livewire\Attributes\On;
 class PreparationChecklist extends Component
 {
     
-    public $columns = [
+    public $inputs = [
         'oneprep2column' => false,
         'oneprep3column' => false,
         'oneprep4column' => false,
@@ -17,23 +17,17 @@ class PreparationChecklist extends Component
         'oneprep7column' => false,
         'oneprep8column' => false,
         'oneprep9column' => false,
-        'oneprep10column' => false
+        'oneprep10column' => false,
+        'oneprep2remarks' => null,
+        'oneprep3remarks' => null,
+        'oneprep4remarks' => null,
+        'oneprep5remarks' => null,
+        'oneprep6remarks' => null,
+        'oneprep7remarks' => null,
+        'oneprep8remarks' => null,
+        'oneprep9remarks' => null,
+        'oneprep10remarks' => null
     ];
-
-
-    public $remarks = [
-        'oneprep2remarks' => "",
-        'oneprep3remarks' => "",
-        'oneprep4remarks' => "",
-        'oneprep5remarks' => "",
-        'oneprep6remarks' => "",
-        'oneprep7remarks' => "",
-        'oneprep8remarks' => "",
-        'oneprep9remarks' => "",
-        'oneprep10remarks' => "",
-    ];
-
-
 
     public function render()
     {
@@ -41,7 +35,7 @@ class PreparationChecklist extends Component
     }
 
     public function dispatchMe(){
-        $childComponent = "preparationChecklist";
-        $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => json_encode([$this->columns, $this->remarks])]);
+        $childComponent = "Preparation Checklist";
+        $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
     }
 }
