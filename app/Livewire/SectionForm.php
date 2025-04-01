@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Sections;
 use App\Models\checklist as Checklist;
 use App\Models\model_settings as ModelSettings;
+use App\Models\OBA_Kit_Checklist;
 use Carbon\Carbon;
 
 class SectionForm extends Component
@@ -39,6 +40,9 @@ class SectionForm extends Component
             'section' => $this->selectedSection
         ]);
         preparation_checklist::create([
+            'checklist_id' => $new_id
+        ]);
+        OBA_Kit_Checklist::create([
             'checklist_id' => $new_id
         ]);
 

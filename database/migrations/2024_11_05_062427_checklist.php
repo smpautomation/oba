@@ -15,12 +15,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id', false)->primary();
             $table->string('model');
             $table->string('section');
-            $table->unsignedBigInteger('preparationChecklist')->nullable();
-            $table->json('obakitchecklist')->nullable();
-            $table->json('shipmentInformation')->nullable();
-            $table->json('checkItems')->nullable();
-            $table->json('checkOverallCondition')->nullable();
-            $table->json('personnel')->nullable();
             $table->timestamps();
         });
 
@@ -46,6 +40,31 @@ return new class extends Migration
             $table->string('oneprep8remarks')->nullable();
             $table->string('oneprep9remarks')->nullable();
             $table->string('oneprep10remarks')->nullable();
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('o_b_a__kit__checklists', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id');
+            $table->boolean('beforecheckbox1')->nullable();
+            $table->boolean('beforecheckbox2')->nullable();
+            $table->boolean('beforecheckbox3')->nullable();
+            $table->boolean('beforecheckbox4')->nullable();
+            $table->boolean('beforecheckbox5')->nullable();
+            $table->boolean('beforecheckbox6')->nullable();
+            $table->boolean('beforecheckbox7')->nullable();
+            $table->boolean('aftercheckbox1')->nullable();
+            $table->boolean('aftercheckbox2')->nullable();
+            $table->boolean('aftercheckbox3')->nullable();
+            $table->boolean('aftercheckbox4')->nullable();
+            $table->boolean('aftercheckbox5')->nullable();
+            $table->boolean('aftercheckbox6')->nullable();
+            $table->boolean('aftercheckbox7')->nullable();
             $table->foreign('checklist_id')
                 ->references('id')
                 ->on('checklist')
