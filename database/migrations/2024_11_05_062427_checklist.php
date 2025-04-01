@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id', false)->primary();
             $table->string('model');
             $table->string('section');
-            $table->json('preparationChecklist')->nullable();
+            $table->unsignedBigInteger('preparationChecklist');
             $table->json('obakitchecklist')->nullable();
             $table->json('shipmentInformation')->nullable();
             $table->json('checkItems')->nullable();
@@ -24,17 +24,45 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('checkingSimilarities', function (Blueprint $table) {
+        Schema::create('preparation_checklist', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('checklist_id')->constrained(
-                table: 'checklist', indexName: 'id'
-            )->onUpdate('cascade')->onDelete('cascade');
-            $table->string('comparison_type');
-            $table->json('field_values');
-            $table->boolean('same');
-            $table->boolean('judgement');
-            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id');
+            $table->boolean('oneprep2column');
+            $table->boolean('oneprep3column');
+            $table->boolean('oneprep4column');
+            $table->boolean('oneprep5column');
+            $table->boolean('oneprep6column');
+            $table->boolean('oneprep7column');
+            $table->boolean('oneprep8column');
+            $table->boolean('oneprep9column');
+            $table->boolean('oneprep10column');
+            $table->string('oneprep2remarks');
+            $table->string('oneprep3remarks');
+            $table->string('oneprep4remarks');
+            $table->string('oneprep5remarks');
+            $table->string('oneprep6remarks');
+            $table->string('oneprep7remarks');
+            $table->string('oneprep8remarks');
+            $table->string('oneprep9remarks');
+            $table->string('oneprep10remarks');
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
+
+        // Schema::create('checkingSimilarities', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('checklist_id')->constrained(
+        //         table: 'checklist', indexName: 'id'
+        //     )->onUpdate('cascade')->onDelete('cascade');
+        //     $table->string('comparison_type');
+        //     $table->json('field_values');
+        //     $table->boolean('same');
+        //     $table->boolean('judgement');
+        //     $table->timestamps();
+        // });
 
         // Schema::create('preparationChecklist', function (Blueprint $table) {
         //     //$table->unsignedBigInteger('checklist_id');
@@ -120,6 +148,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('checklist');
-        Schema::dropIfExists('checkingsimilarities');
+        Schema::dropIfExists('preparation_checklist');
     }
 };

@@ -5,38 +5,16 @@ namespace App\Livewire;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use App\Models\checklist as Checklist;
-use App\Livewire\PreparationChecklist;
+use App\Models\preparation_checklist as PrepCheck;
+use Livewire\Attributes\On; 
+use Illuminate\Support\Facades\DB;
+
 class ChecklistForm extends Component
 {
     public $checklistInfo = [];
     public $model_id = "";
-    public $columns = [
-        'oneprep2column' => "",
-        'oneprep3column' => "",
-        'oneprep4column' => "",
-        'oneprep5column' => "",
-        'oneprep6column' => "",
-        'oneprep7column' => "",
-        'oneprep8column' => "",
-        'oneprep9column' => "",
-        'oneprep10column' => "",
-    ];
-
-
-    public $remarks = [
-        'oneprep2remarks' => "",
-        'oneprep3remarks' => "",
-        'oneprep4remarks' => "",
-        'oneprep5remarks' => "",
-        'oneprep6remarks' => "",
-        'oneprep7remarks' => "",
-        'oneprep8remarks' => "",
-        'oneprep9remarks' => "",
-        'oneprep10remarks' => "",
-    ];
-
-
-    public $oneprep2column;
+    
+    
     
 
     public function mount($model_id){
@@ -45,17 +23,35 @@ class ChecklistForm extends Component
     }
 
     public function save(){
-
-        dd($this->oneprep2column);
-       
+        $this->dispatch('save-clicked');
     }
-3
+
     private function validateField($fieldValue)
     {
         return ($fieldValue == 1) ? 1 : 0;
     }
 
-
+    #[On('return-value')] 
+    public function displayData($param)
+    {
+        dd($param);
+        DB::beginTransaction();
+        try{
+            if($param['Child Component'] == "Preparation Checklist"){
+                $checklist = PrepCheck::where('checklist_id', $this->model_id)->first();
+                if ($checklist) {
+                    $checklist->update([
+                        $param[0]
+                    ]);
+                }
+            }
+            
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+        }
+        
+    }
 
     public function render()
     {

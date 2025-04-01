@@ -1,4 +1,4 @@
-<div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
+<div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50" wire:ignore wire:focusout="dispatchMe">
     <div class="flex items-center justify-center bg-gray-500 text-gray-100">
         <h1 class='text-lg'>
             <strong>1. Preparation Checklist</strong>
@@ -46,7 +46,7 @@
                         <strong>COMPLETE</strong>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="oneprep2column1" value="1" wire:model="oneprep2column"></x-checkbox>
+                        <x-checkbox id="oneprep2column1" value="1" wire:model="columns.oneprep2column"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
                         <x-checkbox id="1-prep-3column" value="1" wire:model="columns.oneprep3column"></x-checkbox>
