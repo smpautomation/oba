@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\preparation_checklist;
+use App\Models\shipment_information;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Livewire\Component;
@@ -43,6 +44,9 @@ class SectionForm extends Component
             'checklist_id' => $new_id
         ]);
         OBA_Kit_Checklist::create([
+            'checklist_id' => $new_id
+        ]);
+        shipment_information::create([
             'checklist_id' => $new_id
         ]);
 

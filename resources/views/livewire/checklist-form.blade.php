@@ -6,59 +6,7 @@
         </div>
         <livewire:preparation-checklist></livewire:preparation-checklist>
         <livewire:o-b-a-kit-checklist></livewire:o-b-a-kit-checklist>
-        <div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
-            <div class="flex items-center justify-center bg-gray-500 text-gray-100">
-                <h1 class='text-lg'>
-                    <strong>3. Shipment Information</strong>
-                </h1>
-            </div>
-
-            <div>
-                <div class="grid gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                        <x-label for="3-datetime" :semibold="true">Date & Time</x-label>
-                        <input id="3-datetime" type="text" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500       sm:text-sm" placeholder="Pick a date and time" />
-                    </div>
-                    <div></div>
-                </div>
-                <div class="grid gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                        <x-label for="3-modelname" :semibold="true">Model Name</x-label>
-                        <x-inputText id='3-modelname' name='3-modelname' value="{{ $checklistInfo->model }}" ></x-inputText>
-                    </div>
-                    <div>
-                        <x-label for="3-invoice" :semibold="true">Invoice No.</x-label>
-                        <x-inputText id='3-invoice' name='3-invoice' value=""></x-inputText>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div>
-                        <x-label :semibold="true">Pallet Used</x-label>
-                    </div>
-                    <div class="flex">
-                        <div class="m-8">
-                            <x-checkbox id="3-SI-1" :ml="true" value="wood"></x-checkbox>
-                            <x-label for="3-SI-1">WOOD</x-label>
-                        </div>
-                        <div class="m-8">
-                            <x-checkbox id="3-SI-2" :ml="true" value="paper"></x-checkbox>
-                            <x-label for="3-SI-2">PAPER</x-label>
-                        </div>
-                        <div class="m-8">
-                            <x-checkbox id="3-SI-3" :ml="true" value="steel"></x-checkbox>
-                            <x-label for="3-SI-3" >STEEL</x-label>
-                        </div>
-                        <div class="m-8">
-                            <x-checkbox id="3-SI-4" :ml="true" value="plastic"></x-checkbox>
-                            <x-label for="3-SI-4">PLASTIC</x-label>
-                        </div>
-                        <div class="m-8">
-                            <x-inputText type="text" id='3-others' name='3-others' placeholder="Others(Please Specify)"></x-inputText>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <livewire:shipment-information :checklist_id="$model_id"></livewire:shipment-information>
         <div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
             <div class="flex items-center justify-center bg-gray-500 text-gray-100">
                 <h1 class='text-lg'>

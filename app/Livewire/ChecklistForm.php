@@ -7,16 +7,17 @@ use Livewire\Component;
 use App\Models\checklist as Checklist;
 use App\Models\preparation_checklist as PrepCheck;
 use App\Models\OBA_Kit_Checklist as OBACheck;
-use Livewire\Attributes\On; 
+use App\Models\shipment_information as ShipInfo;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
 
 class ChecklistForm extends Component
 {
     public $checklistInfo = [];
     public $model_id = "";
-    
-    
-    
+
+
+
 
     public function mount($model_id){
         $this->model_id = $model_id;
@@ -32,7 +33,7 @@ class ChecklistForm extends Component
         return ($fieldValue == 1) ? 1 : 0;
     }
 
-    #[On('return-value')] 
+    #[On('return-value')]
     public function displayData($param)
     {
         //dd($param);
@@ -50,13 +51,19 @@ class ChecklistForm extends Component
                 if ($checklist) {
                     $checklist->update($inputData);
                 }
+            }elseif($param['Child Component'] == 'Shipment Information'){
+                $checklist = ShipInfo::where('checklist_id', $this->model_id)->first();
+                $inputData = $param['Data'];
+                if ($checklist) {
+                    $checklist->update($inputData);
+                }
             }
-            
+
             DB::commit();
         }catch(\Exception $e){
             DB::rollBack();
         }
-        
+
     }
 
     public function render()

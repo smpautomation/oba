@@ -17,4 +17,7 @@ class checklist extends Model
     {
         return $this->hasOne(OBA_Kit_Checklist::class, 'checklist_id', 'id');
     }
+    public function shipInfoCheck(){
+        return $this->hasOne(shipment_information::class, 'checklist_id', 'id');
+    }
 }

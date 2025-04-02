@@ -51,6 +51,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('checklist_id');
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->boolean('beforecheckbox1')->nullable();
             $table->boolean('beforecheckbox2')->nullable();
             $table->boolean('beforecheckbox3')->nullable();
@@ -65,11 +70,25 @@ return new class extends Migration
             $table->boolean('aftercheckbox5')->nullable();
             $table->boolean('aftercheckbox6')->nullable();
             $table->boolean('aftercheckbox7')->nullable();
+        });
+
+        Schema::create('shipment_information', function (Blueprint $table){
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id');
             $table->foreign('checklist_id')
                 ->references('id')
                 ->on('checklist')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->dateTime('datetime')->nullable();
+            $table->string('model_name')->nullable();
+            $table->string('invoice_number')->nullable();
+            $table->boolean('wood')->nullable();
+            $table->boolean('paper')->nullable();
+            $table->boolean('steel')->nullable();
+            $table->boolean('plastic')->nullable();
+            $table->string('others')->nullable();
         });
 
         // Schema::create('checkingSimilarities', function (Blueprint $table) {
