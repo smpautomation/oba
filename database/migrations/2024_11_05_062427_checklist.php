@@ -21,7 +21,13 @@ return new class extends Migration
         Schema::create('preparation_checklist', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('checklist_id');
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->boolean('oneprep2column')->nullable();
             $table->boolean('oneprep3column')->nullable();
             $table->boolean('oneprep4column')->nullable();
@@ -40,17 +46,13 @@ return new class extends Migration
             $table->string('oneprep8remarks')->nullable();
             $table->string('oneprep9remarks')->nullable();
             $table->string('oneprep10remarks')->nullable();
-            $table->foreign('checklist_id')
-                ->references('id')
-                ->on('checklist')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
 
         Schema::create('o_b_a__kit__checklists', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('checklist_id');
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
             $table->foreign('checklist_id')
                 ->references('id')
                 ->on('checklist')
@@ -75,13 +77,14 @@ return new class extends Migration
         Schema::create('shipment_information', function (Blueprint $table){
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('checklist_id');
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
             $table->foreign('checklist_id')
                 ->references('id')
                 ->on('checklist')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->dateTime('datetime')->nullable();
+            $table->string('datetime', 16)->nullable();
             $table->string('model_name')->nullable();
             $table->string('invoice_number')->nullable();
             $table->boolean('wood')->nullable();
@@ -90,6 +93,24 @@ return new class extends Migration
             $table->boolean('plastic')->nullable();
             $table->string('others')->nullable();
         });
+
+        Schema::create('check_items', function(Blueprint $table){
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->integer('open_boxes_quantity');
+            $table->boolean('same_model');
+            $table->string('specify_model');
+            $table->boolean('judgement');
+            $table->integer('carton_quantity');
+        });
+
 
         // Schema::create('checkingSimilarities', function (Blueprint $table) {
         //     $table->id();
