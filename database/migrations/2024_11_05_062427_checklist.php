@@ -153,7 +153,28 @@ return new class extends Migration
             $table->string('specific_qr_label_mc')->nullable();
             $table->boolean('same_mc')->nullable();
             $table->boolean('judgement_mc')->nullable();
-
+            $table->string('picklist_pn')->nullable();
+            $table->string('shipping_invoice_pn')->nullable();
+            $table->string('serem_pn')->nullable();
+            $table->string('sir_pn')->nullable();
+            $table->string('shipping_label_pn')->nullable();
+            $table->string('vmi_pn')->nullable();
+            $table->boolean('same_pn')->nullable();
+            $table->boolean('judgement_pn')->nullable();
+            $table->string('serem_customer_po')->nullable();
+            $table->string('serem_smp_po')->nullable();
+            $table->string('shipping_label_customer_po')->nullable();
+            $table->string('shipping_label_smp_po')->nullable();
+            $table->string('vmi_customer_po')->nullable();
+            $table->string('vmi_smp_po')->nullable();
+            $table->string('sir_customer_po')->nullable();
+            $table->string('sir_smp_po')->nullable();
+            $table->string('specific_label_customer_po')->nullable();
+            $table->string('specific_label_smp_po')->nullable();
+            $table->string('pallet_label_customer_po')->nullable();
+            $table->string('palley_label_smp_po')->nullable();
+            $table->boolean('same_po')->nullable();
+            $table->boolean('judgement_po')->nullable();
         });
 
         // Schema::create('checkingSimilarities', function (Blueprint $table) {
