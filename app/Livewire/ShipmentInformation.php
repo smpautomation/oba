@@ -9,7 +9,7 @@ use Livewire\Component;
 class ShipmentInformation extends Component
 {
     public $checklist_id;
-    public $checklistInfo = [];
+    public $checklistInfo;
 
     public $inputs = [
         'datetime' => null,
@@ -43,7 +43,7 @@ class ShipmentInformation extends Component
     }
 
     public function dispatchMe(){
-        dd($this->inputs);
+        //dd($this->inputs);
         $childComponent = "Shipment Information";
         $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
     }
