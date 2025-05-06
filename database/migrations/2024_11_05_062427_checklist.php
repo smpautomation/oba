@@ -21,7 +21,13 @@ return new class extends Migration
         Schema::create('preparation_checklist', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('checklist_id');
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->boolean('oneprep2column')->nullable();
             $table->boolean('oneprep3column')->nullable();
             $table->boolean('oneprep4column')->nullable();
@@ -40,17 +46,13 @@ return new class extends Migration
             $table->string('oneprep8remarks')->nullable();
             $table->string('oneprep9remarks')->nullable();
             $table->string('oneprep10remarks')->nullable();
-            $table->foreign('checklist_id')
-                ->references('id')
-                ->on('checklist')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
 
         Schema::create('o_b_a__kit__checklists', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('checklist_id');
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
             $table->foreign('checklist_id')
                 ->references('id')
                 ->on('checklist')
@@ -75,13 +77,14 @@ return new class extends Migration
         Schema::create('shipment_information', function (Blueprint $table){
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('checklist_id');
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
             $table->foreign('checklist_id')
                 ->references('id')
                 ->on('checklist')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->dateTime('datetime')->nullable();
+            $table->string('datetime', 16)->nullable();
             $table->string('model_name')->nullable();
             $table->string('invoice_number')->nullable();
             $table->boolean('wood')->nullable();
@@ -89,6 +92,89 @@ return new class extends Migration
             $table->boolean('steel')->nullable();
             $table->boolean('plastic')->nullable();
             $table->string('others')->nullable();
+        });
+
+        Schema::create('check_items', function(Blueprint $table){
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->integer('open_boxes_quantity');
+            $table->boolean('same_model');
+            $table->string('specify_model');
+            $table->boolean('judgement');
+            $table->integer('carton_quantity');
+        });
+
+        Schema::create('similarities_checking', function (Blueprint $table){
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('pick_list_qs')->nullable();
+            $table->string('shipping_invoice_qs')->nullable();
+            $table->string('serem_qs')->nullable();
+            $table->string('SIR_qs')->nullable();
+            $table->boolean('same_quantity_qs')->nullable();
+            $table->boolean('judgement_qs')->nullable();
+            $table->string('picklist_bs')->nullable();
+            $table->string('packing_slip_bs')->nullable();
+            $table->string('serem_bs')->nulable();
+            $table->string('pallet_label_bs')->nullable();
+            $table->boolean('same_box_bs')->nullable();
+            $table->boolean('judgement_bs')->nullable();
+            $table->string('pallet_label_mn')->nullable();
+            $table->string('shipping_invoice_mn')->nullable();
+            $table->string('serem_mn')->nullable();
+            $table->string('fg_label_mn')->nullable();
+            $table->string('vmi_qr_mn')->nullable();
+            $table->string('mc_label_mn')->nullable();
+            $table->string('pallet_label_mn')->nullable();
+            $table->boolean('same_model_mn')->nullable();
+            $table->boolean('judgement_mn')->nullable();
+            $table->string('picklist_mc')->nullable();
+            $table->string('shipping_invoice_mc')->nullable();
+            $table->string('serem_mc')->nullable();
+            $table->string('sir_mc')->nullable();
+            $table->string('shipping_label_mc')->nullable();
+            $table->string('vmi_label_mc')->nullable();
+            $table->string('mc_barcode_mc')->nullable();
+            $table->string('pallet_label_mc')->nullable();
+            $table->string('specific_qr_label_mc')->nullable();
+            $table->boolean('same_mc')->nullable();
+            $table->boolean('judgement_mc')->nullable();
+            $table->string('picklist_pn')->nullable();
+            $table->string('shipping_invoice_pn')->nullable();
+            $table->string('serem_pn')->nullable();
+            $table->string('sir_pn')->nullable();
+            $table->string('shipping_label_pn')->nullable();
+            $table->string('vmi_pn')->nullable();
+            $table->boolean('same_pn')->nullable();
+            $table->boolean('judgement_pn')->nullable();
+            $table->string('serem_customer_po')->nullable();
+            $table->string('serem_smp_po')->nullable();
+            $table->string('shipping_label_customer_po')->nullable();
+            $table->string('shipping_label_smp_po')->nullable();
+            $table->string('vmi_customer_po')->nullable();
+            $table->string('vmi_smp_po')->nullable();
+            $table->string('sir_customer_po')->nullable();
+            $table->string('sir_smp_po')->nullable();
+            $table->string('specific_label_customer_po')->nullable();
+            $table->string('specific_label_smp_po')->nullable();
+            $table->string('pallet_label_customer_po')->nullable();
+            $table->string('palley_label_smp_po')->nullable();
+            $table->boolean('same_po')->nullable();
+            $table->boolean('judgement_po')->nullable();
         });
 
         // Schema::create('checkingSimilarities', function (Blueprint $table) {
