@@ -133,7 +133,7 @@ return new class extends Migration
             $table->string('pallet_label_bs')->nullable();
             $table->boolean('same_box_bs')->nullable();
             $table->boolean('judgement_bs')->nullable();
-            $table->string('pallet_label_mn')->nullable();
+            $table->string('picklist_mn')->nullable();
             $table->string('shipping_invoice_mn')->nullable();
             $table->string('serem_mn')->nullable();
             $table->string('fg_label_mn')->nullable();
@@ -274,5 +274,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('checklist');
         Schema::dropIfExists('preparation_checklist');
+        Schema::dropIfExists('o_b_a__kit__checklists');
+        Schema::dropIfExists('shipment_information');
+        Schema::dropIfExists('check_items');
+        Schema::dropIfExists('similarities_checking');
     }
 };
