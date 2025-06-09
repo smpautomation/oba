@@ -1,4 +1,4 @@
-@vite(['resources/js/app.js', 'resources/sass/app.scss'])
+@vite(['resources/js/app.js', 'resources/css/app.css'])
 @extends('layouts.base')
 
 @section('body')
