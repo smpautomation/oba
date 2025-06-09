@@ -4,8 +4,8 @@
             <label for="section" class='mr-2'>Section:</label>
             <h5><u>&nbsp;&nbsp;{{ $checklistInfo->section }}&nbsp;&nbsp;</u></h5>
         </div>
-        <livewire:preparation-checklist></livewire:preparation-checklist>
-        <livewire:o-b-a-kit-checklist></livewire:o-b-a-kit-checklist>
+        <livewire:preparation-checklist :checklist_id="$model_id"></livewire:preparation-checklist>
+        <livewire:o-b-a-kit-checklist :checklist_id="$model_id"></livewire:o-b-a-kit-checklist>
         <livewire:shipment-information :checklist_id="$model_id"></livewire:shipment-information>
         <div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
             <div class="flex items-center justify-center bg-gray-500 text-gray-100">
