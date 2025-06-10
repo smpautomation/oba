@@ -20,4 +20,7 @@ class checklist extends Model
     public function shipInfoCheck(){
         return $this->hasOne(shipment_information::class, 'checklist_id', 'id');
     }
+    public function checkItemsCheck(){
+        return $this->hasOne(Check_Items::class, 'checklist_id', 'id');
+    }
 }

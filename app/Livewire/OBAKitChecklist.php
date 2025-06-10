@@ -51,7 +51,7 @@ class OBAKitChecklist extends Component
     }
 
     public function dispatchMe(){
-        $childComponent = "OBA Kit Checklist";
+        $childComponent = "App\Models\OBA_Kit_Checklist";
         $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
     }
 }

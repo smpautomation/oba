@@ -61,7 +61,7 @@ class PreparationChecklist extends Component
     }
 
     public function dispatchMe(){
-        $childComponent = "Preparation Checklist";
+        $childComponent = "App\Models\preparation_checklist";
         $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
     }
 }

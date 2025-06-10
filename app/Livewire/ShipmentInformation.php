@@ -45,7 +45,7 @@ class ShipmentInformation extends Component
 
     public function dispatchMe(){
         //dd($this->inputs);
-        $childComponent = "Shipment Information";
+        $childComponent = "App\Models\shipment_information";
         $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
     }
 }

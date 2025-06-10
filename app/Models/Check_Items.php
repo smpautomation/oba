@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
-class shipment_information extends Model
+class Check_Items extends Model
 {
-    protected $table = 'shipment_information';
+    protected $table = 'check_items';
     protected $guarded = [];
 
     public function checklist()

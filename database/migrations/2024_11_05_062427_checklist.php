@@ -91,7 +91,7 @@ return new class extends Migration
             $table->boolean('paper')->nullable();
             $table->boolean('steel')->nullable();
             $table->boolean('plastic')->nullable();
-            $table->string('others')->nullable();
+            $table->string('others')->nullable()->default("");
         });
 
         Schema::create('check_items', function(Blueprint $table){
@@ -104,11 +104,13 @@ return new class extends Migration
                 ->on('checklist')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->integer('open_boxes_quantity');
-            $table->boolean('same_model');
-            $table->string('specify_model');
-            $table->boolean('judgement');
-            $table->integer('carton_quantity');
+            $table->integer('open_boxes_quantity')->nullable()->default(1);
+            $table->boolean('same_model')->nullable()->default(false);
+            $table->string('specify_model')->nullable();
+            $table->boolean('judgement')->nullable()->default(false);
+            $table->integer('carton_quantity')->nullable()->default(1);
+            $table->boolean('need_sir')->nullable()->default(false);
+            $table->boolean('sir_available')->nullable()->default(false);
         });
 
         Schema::create('similarities_checking', function (Blueprint $table){
