@@ -12,11 +12,11 @@ class CheckItems extends Component
     public $checklistInfo;
 
     public $inputs = [
-        'open_boxes_quantity' => 0,
+        'open_boxes_quantity' => 1,
         'same_model' => false,
         'specify_model' => "",
         'judgement' => false,
-        'carton_quantity' => 0,
+        'carton_quantity' => 1,
         'need_sir' => false,
         'sir_available' => false
     ];
@@ -26,11 +26,11 @@ class CheckItems extends Component
         $this->checklistInfo = Checklist::find($checklist_id);
         
         $this->inputs = [
-            'open_boxes_quantity' => $this->checklistInfo->checkItemsCheck->open_boxes_quantity ?? 0,
+            'open_boxes_quantity' => $this->checklistInfo->checkItemsCheck->open_boxes_quantity ?? 1,
             'same_model' => $this->checklistInfo->checkItemsCheck->same_model ? true : false,
             'specify_model' => $this->checklistInfo->checkItemsCheck->specify_model ?? "",
             'judgement' => $this->checklistInfo->checkItemsCheck->judgement ? true : false,
-            'carton_quantity' => $this->checklistInfo->checkItemsCheck->carton_quantity ?? 0,
+            'carton_quantity' => $this->checklistInfo->checkItemsCheck->carton_quantity ?? 1,
             'need_sir' => $this->checklistInfo->checkItemsCheck->need_sir ? true : false,
             'sir_available' => $this->checklistInfo->checkItemsCheck->sir_available ? true : false,
         ];
