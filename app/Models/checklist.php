@@ -23,4 +23,7 @@ class checklist extends Model
     public function checkItemsCheck(){
         return $this->hasOne(Check_Items::class, 'checklist_id', 'id');
     }
+    public function similaritiesCheck(){
+        return $this->hasOne(Similarities_Checking::class, 'checklist_id', 'id');
+    }
 }
