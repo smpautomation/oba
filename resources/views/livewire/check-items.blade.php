@@ -60,7 +60,7 @@
             </div>
             <div class="col-span-1 md:grid-cols-2">
                 <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="4-text-1">If NO, What Model?</x-label><x-inputText id="4-text-1" wire:model='inputs.specific_model'></x-inputText>
+                    <x-label for="4-text-1">If NO, What Model?</x-label><x-inputText id="4-text-1" wire:model='inputs.specify_model'></x-inputText>
                 </div>
 
             </div>
