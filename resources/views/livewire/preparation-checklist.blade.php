@@ -1,4 +1,4 @@
-<div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50" wire:ignore wire:focusout="dispatchMe">
+<div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
     <div class="flex items-center justify-center bg-gray-500 text-gray-100">
         <h1 class='text-lg'>
             <strong>1. Preparation Checklist</strong>
@@ -46,31 +46,31 @@
                         <strong>COMPLETE</strong>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="oneprep2column1" value="1" wire:model="inputs.oneprep2column"></x-checkbox>
+                        <x-checkbox id="oneprep2column1" value="1" wire:model="inputs.oneprep2column" wire:focusout="dispatchMe('oneprep2column')" :inputStatus="$inputStatus['oneprep2column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column"></x-checkbox>
+                        <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column" wire:focusout="dispatchMe('oneprep3column')" :inputStatus="$inputStatus['oneprep3column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-4column" value="1" wire:model="inputs.oneprep4column"></x-checkbox>
+                        <x-checkbox id="1-prep-4column" value="1" wire:model="inputs.oneprep4column" wire:focusout="dispatchMe('oneprep4column')" :inputStatus="$inputStatus['oneprep4column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-5column" value="1" wire:model="inputs.oneprep5column"></x-checkbox>
+                        <x-checkbox id="1-prep-5column" value="1" wire:model="inputs.oneprep5column" wire:focusout="dispatchMe('oneprep5column')" :inputStatus="$inputStatus['oneprep5column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-6column" value="1" wire:model="inputs.oneprep6column"></x-checkbox>
+                        <x-checkbox id="1-prep-6column" value="1" wire:model="inputs.oneprep6column" wire:focusout="dispatchMe('oneprep6column')" :inputStatus="$inputStatus['oneprep6column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column"></x-checkbox>
+                        <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column" wire:focusout="dispatchMe('oneprep7column')" :inputStatus="$inputStatus['oneprep7column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column"></x-checkbox>
+                        <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column" wire:focusout="dispatchMe('oneprep8column')" :inputStatus="$inputStatus['oneprep8column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column"></x-checkbox>
+                        <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column" wire:focusout="dispatchMe('oneprep9column')" :inputStatus="$inputStatus['oneprep9column']"></x-checkbox>
                     </td>
                     <td class="w-4 p-4">
-                        <x-checkbox id="1-prep-10column" value="1" wire:model="inputs.oneprep10column"></x-checkbox>
+                        <x-checkbox id="1-prep-10column" value="1" wire:model="inputs.oneprep10column" wire:focusout="dispatchMe('oneprep10column')" :inputStatus="$inputStatus['oneprep10column']"></x-checkbox>
                     </td>
                 </tr>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -78,31 +78,31 @@
                         <strong>REMARKS</strong>
                     </th>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-1remarks" wire:model="inputs.oneprep2remarks" wire:dirty.class="border-yellow"></x-inputText>
+                        <x-inputText id="1-prep-1remarks" wire:model="inputs.oneprep2remarks" wire:focusout="dispatchMe('oneprep2remarks')" :inputStatus="$inputStatus['oneprep2remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-2remarks" wire:model="inputs.oneprep3remarks"></x-inputText>
+                        <x-inputText id="1-prep-2remarks" wire:model="inputs.oneprep3remarks" wire:focusout="dispatchMe('oneprep3remarks')" :inputStatus="$inputStatus['oneprep3remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-3remarks" wire:model="inputs.oneprep4remarks"></x-inputText>
+                        <x-inputText id="1-prep-3remarks" wire:model="inputs.oneprep4remarks" wire:focusout="dispatchMe('oneprep4remarks')" :inputStatus="$inputStatus['oneprep4remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-4remarks" wire:model="inputs.oneprep5remarks"></x-inputText>
+                        <x-inputText id="1-prep-4remarks" wire:model="inputs.oneprep5remarks" wire:focusout="dispatchMe('oneprep5remarks')" :inputStatus="$inputStatus['oneprep5remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-5remarks" wire:model="inputs.oneprep6remarks"></x-inputText>
+                        <x-inputText id="1-prep-5remarks" wire:model="inputs.oneprep6remarks" wire:focusout="dispatchMe('oneprep6remarks')" :inputStatus="$inputStatus['oneprep6remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-6remarks" wire:model="inputs.oneprep7remarks"></x-inputText>
+                        <x-inputText id="1-prep-6remarks" wire:model="inputs.oneprep7remarks" wire:focusout="dispatchMe('oneprep7remarks')" :inputStatus="$inputStatus['oneprep7remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-7remarks" wire:model="inputs.oneprep8remarks"></x-inputText>
+                        <x-inputText id="1-prep-7remarks" wire:model="inputs.oneprep8remarks" wire:focusout="dispatchMe('oneprep8remarks')" :inputStatus="$inputStatus['oneprep8remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-8remarks" wire:model="inputs.oneprep9remarks"></x-inputText>
+                        <x-inputText id="1-prep-8remarks" wire:model="inputs.oneprep9remarks" wire:focusout="dispatchMe('oneprep9remarks')" :inputStatus="$inputStatus['oneprep9remarks']"></x-inputText>
                     </td>
                     <td class="w-4 p-4">
-                        <x-inputText id="1-prep-9remarks" wire:model="inputs.oneprep10remarks"></x-inputText>
+                        <x-inputText id="1-prep-9remarks" wire:model="inputs.oneprep10remarks" wire:focusout="dispatchMe('oneprep10remarks')" :inputStatus="$inputStatus['oneprep10remarks']"></x-inputText>
                     </td>
                 </tr>
             </tbody>

@@ -3,23 +3,28 @@
 namespace App\Livewire;
 
 use App\Models\checklist as Checklist;
+use App\Models\preparation_checklist;
 use Livewire\Component;
-use Livewire\Attributes\On; 
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 
 class PreparationChecklist extends Component
 {
     public $checklist_id;
     public $checklistInfo;
     public $inputs = [
-        'oneprep2column' => false,
-        'oneprep3column' => false,
-        'oneprep4column' => false,
-        'oneprep5column' => false,
-        'oneprep6column' => false,
-        'oneprep7column' => false,
-        'oneprep8column' => false,
-        'oneprep9column' => false,
-        'oneprep10column' => false,
+        
+    ];
+    public $inputStatus = [
+        'oneprep2column' => null,
+        'oneprep3column' => null,
+        'oneprep4column' => null,
+        'oneprep5column' => null,
+        'oneprep6column' => null,
+        'oneprep7column' => null,
+        'oneprep8column' => null,
+        'oneprep9column' => null,
+        'oneprep10column' => null,
         'oneprep2remarks' => null,
         'oneprep3remarks' => null,
         'oneprep4remarks' => null,
@@ -60,8 +65,41 @@ class PreparationChecklist extends Component
         return view('livewire.preparation-checklist');
     }
 
-    public function dispatchMe(){
-        $childComponent = "App\Models\preparation_checklist";
-        $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
+    public function dispatchMe($field = null){
+        
+        DB::beginTransaction();
+        try{
+            //dd($param);
+            $checklist = preparation_checklist::where('checklist_id', $this->checklist_id)->first();
+            $inputData = $this->inputs;
+            if ($checklist) {
+                $checklist->update($inputData);
+            }
+            DB::commit();
+
+            
+            if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
+                $this->inputStatus[$field] = 'success';
+            }
+        }catch(\Exception $e){
+            if ($field) {
+                $this->inputStatus[$field] = 'error';
+            }
+            DB::rollBack();
+        }
+    }
+
+    #[On('save-clicked')]
+    public function handleSaveFromParent()
+    {
+        $this->saveChildData();
+    }
+
+    public function saveChildData()
+    {
+        $checklist = preparation_checklist::where('checklist_id', $this->checklist_id)->first();
+        if ($checklist) {
+            $checklist->update($this->inputs);
+        }
     }
 }

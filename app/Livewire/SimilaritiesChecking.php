@@ -95,10 +95,7 @@ class SimilaritiesChecking extends Component
 
     public function dispatchMe($field = null){
         //dd($this->inputs);
-        if(!isset($this->inputs[$field]) || $this->inputs[$field] == null){
-            $this->inputStatus[$field] = 'error';
-            return;
-        }
+        
         DB::beginTransaction();
         try{
             //dd($param);
@@ -110,7 +107,9 @@ class SimilaritiesChecking extends Component
             DB::commit();
 
             
-            $this->inputStatus[$field] = 'success';
+            if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
+                $this->inputStatus[$field] = 'success';
+            }
         }catch(\Exception $e){
             if ($field) {
                 $this->inputStatus[$field] = 'error';
