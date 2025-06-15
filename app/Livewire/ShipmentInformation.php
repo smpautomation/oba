@@ -3,8 +3,11 @@
 namespace App\Livewire;
 
 use App\Models\checklist as Checklist;
+use App\Models\shipment_information;
 use DateTime;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 
 class ShipmentInformation extends Component
 {
@@ -12,14 +15,17 @@ class ShipmentInformation extends Component
     public $checklistInfo;
 
     public $inputs = [
+        
+    ];
+    public $inputStatus = [
         'datetime' => null,
-        'model_name' => "",
-        'invoice_number' => "",
-        'wood' => false,
-        'paper' => false,
-        'steel' => false,
-        'plastic' => false,
-        'others' => ""
+        'model_name' => null,
+        'invoice_number' => null,
+        'wood' => null,
+        'paper' => null,
+        'steel' => null,
+        'plastic' => null,
+        'others' => null
     ];
     public $dateNow;
     public function mount($checklist_id){
@@ -43,9 +49,40 @@ class ShipmentInformation extends Component
         return view('livewire.shipment-information');
     }
 
-    public function dispatchMe(){
-        //dd($this->inputs);
-        $childComponent = "App\Models\shipment_information";
-        $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
+    public function dispatchMe($field = null){
+        DB::beginTransaction();
+        try{
+            //dd($param);
+            $checklist = shipment_information::where('checklist_id', $this->checklist_id)->first();
+            $inputData = $this->inputs;
+            if ($checklist) {
+                $checklist->update($inputData);
+            }
+            DB::commit();
+
+            
+            if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
+                $this->inputStatus[$field] = 'success';
+            }
+        }catch(\Exception $e){
+            if ($field) {
+                $this->inputStatus[$field] = 'error';
+            }
+            DB::rollBack();
+        }
+    }
+
+    #[On('save-clicked')]
+    public function handleSaveFromParent()
+    {
+        $this->saveChildData();
+    }
+
+    public function saveChildData()
+    {
+        $checklist = shipment_information::where('checklist_id', $this->checklist_id)->first();
+        if ($checklist) {
+            $checklist->update($this->inputs);
+        }
     }
 }

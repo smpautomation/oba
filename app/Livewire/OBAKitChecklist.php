@@ -2,27 +2,33 @@
 
 namespace App\Livewire;
 use App\Models\checklist as Checklist;
+use App\Models\OBA_Kit_Checklist;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 
 class OBAKitChecklist extends Component
 {
     public $checklist_id;
     public $checklistInfo;
     public $inputs = [
-        'beforecheckbox1' => false,
-        'beforecheckbox2' => false,
-        'beforecheckbox3' => false,
-        'beforecheckbox4' => false,
-        'beforecheckbox5' => false,
-        'beforecheckbox6' => false,
-        'beforecheckbox7' => false,
-        'aftercheckbox1' => false,
-        'aftercheckbox2' => false,
-        'aftercheckbox3' => false,
-        'aftercheckbox4' => false,
-        'aftercheckbox5' => false,
-        'aftercheckbox6' => false,
-        'aftercheckbox7' => false
+        
+    ];
+    public $inputStatus = [
+        'beforecheckbox1' => null,
+        'beforecheckbox2' => null,
+        'beforecheckbox3' => null,
+        'beforecheckbox4' => null,
+        'beforecheckbox5' => null,
+        'beforecheckbox6' => null,
+        'beforecheckbox7' => null,
+        'aftercheckbox1' => null,
+        'aftercheckbox2' => null,
+        'aftercheckbox3' => null,
+        'aftercheckbox4' => null,
+        'aftercheckbox5' => null,
+        'aftercheckbox6' => null,
+        'aftercheckbox7' => null
     ];
 
     public function mount($checklist_id){
@@ -50,8 +56,40 @@ class OBAKitChecklist extends Component
         return view('livewire.o-b-a-kit-checklist');
     }
 
-    public function dispatchMe(){
-        $childComponent = "App\Models\OBA_Kit_Checklist";
-        $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
+    public function dispatchMe($field = null){
+        DB::beginTransaction();
+        try{
+            //dd($param);
+            $checklist = OBA_Kit_Checklist::where('checklist_id', $this->checklist_id)->first();
+            $inputData = $this->inputs;
+            if ($checklist) {
+                $checklist->update($inputData);
+            }
+            DB::commit();
+
+            
+            if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
+                $this->inputStatus[$field] = 'success';
+            }
+        }catch(\Exception $e){
+            if ($field) {
+                $this->inputStatus[$field] = 'error';
+            }
+            DB::rollBack();
+        }
+    }
+
+    #[On('save-clicked')]
+    public function handleSaveFromParent()
+    {
+        $this->saveChildData();
+    }
+
+    public function saveChildData()
+    {
+        $checklist = OBA_Kit_Checklist::where('checklist_id', $this->checklist_id)->first();
+        if ($checklist) {
+            $checklist->update($this->inputs);
+        }
     }
 }

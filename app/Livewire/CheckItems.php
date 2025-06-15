@@ -2,9 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Models\Check_Items;
 use App\Models\checklist as Checklist;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\DB;
 
 class CheckItems extends Component
 {
@@ -12,13 +14,16 @@ class CheckItems extends Component
     public $checklistInfo;
 
     public $inputs = [
-        'open_boxes_quantity' => 1,
-        'same_model' => false,
-        'specify_model' => "",
-        'judgement' => false,
-        'carton_quantity' => 1,
-        'need_sir' => false,
-        'sir_available' => false
+        
+    ];
+    public $inputStatus = [
+        'open_boxes_quantity' => null,
+        'same_model' => null,
+        'specify_model' => null,
+        'judgement' => null,
+        'carton_quantity' => null,
+        'need_sir' => null,
+        'sir_available' => null
     ];
     public $dateNow;
     public function mount($checklist_id){
@@ -40,8 +45,42 @@ class CheckItems extends Component
         return view('livewire.check-items');
     }
 
-    public function dispatchMe(){
-        $childComponent = "App\Models\Check_Items";
-        $this->dispatch('return-value', ['Child Component' => $childComponent, 'Data' => $this->inputs]);
+    public function dispatchMe($field = null){
+        //dd($this->inputs);
+        
+        DB::beginTransaction();
+        try{
+            //dd($param);
+            $checklist = Check_Items::where('checklist_id', $this->checklist_id)->first();
+            $inputData = $this->inputs;
+            if ($checklist) {
+                $checklist->update($inputData);
+            }
+            DB::commit();
+
+            
+            if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
+                $this->inputStatus[$field] = 'success';
+            }
+        }catch(\Exception $e){
+            if ($field) {
+                $this->inputStatus[$field] = 'error';
+            }
+            DB::rollBack();
+        }
+    }
+
+    #[On('save-clicked')]
+    public function handleSaveFromParent()
+    {
+        $this->saveChildData();
+    }
+
+    public function saveChildData()
+    {
+        $checklist = Check_Items::where('checklist_id', $this->checklist_id)->first();
+        if ($checklist) {
+            $checklist->update($this->inputs);
+        }
     }
 }

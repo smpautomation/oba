@@ -8,10 +8,6 @@
 @endphp
 
 <input 
-    {{ 
-        $attributes->merge([
-            'class' => 'bg-white text-gray-900 text-sm rounded-lg block w-full p-2.5 ml-8 ' . $borderClass
-        ]) 
-    }} 
-    type="number" placeholder="00000000" 
+    {{ $attributes }} 
+    type="number" placeholder="00000000" class = "bg-white text-gray-900 text-sm rounded-lg block w-full p-2.5 ml-8 {{ $borderClass }}"
 />
