@@ -1,3 +1,18 @@
+@props(['inputStatus' => null])
 @props(['marginleft' => ""])
+@php
+    $borderClass = match($inputStatus) {
+        'success' => 'border-green-500',
+        'error' => 'border-yellow-500',
+        default => 'border-gray-300',
+    };
+@endphp
 
-<input {{ $attributes }} type="text" class="bg-white border border-gray-300 text-gray-900 {{ $marginleft }} text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+<input 
+    {{ 
+        $attributes->merge([
+            'class' => 'bg-white text-gray-900 text-sm rounded-lg block w-full p-2.5 ' . $borderClass . ' ' . $marginleft
+        ]) 
+    }} 
+    type="text"
+/>

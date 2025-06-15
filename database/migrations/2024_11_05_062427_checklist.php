@@ -131,7 +131,7 @@ return new class extends Migration
             $table->boolean('judgement_qs')->nullable();
             $table->string('picklist_bs')->nullable();
             $table->string('packing_slip_bs')->nullable();
-            $table->string('serem_bs')->nulable();
+            $table->string('serem_bs')->nullable();
             $table->string('pallet_label_bs')->nullable();
             $table->boolean('same_box_bs')->nullable();
             $table->boolean('judgement_bs')->nullable();

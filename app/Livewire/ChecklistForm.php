@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\checklist as Checklist;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithChildren;
 
 class ChecklistForm extends Component
 {
@@ -37,7 +38,7 @@ class ChecklistForm extends Component
             $checklist = $param['Child Component']::where('checklist_id', $this->model_id)->first();
             $inputData = $param['Data'];
             if ($checklist) {
-                $checklist->update($inputData);
+                $checklist->updateQuietly($inputData);
             }
 
             DB::commit();

@@ -12,6 +12,7 @@ use App\Models\checklist as Checklist;
 use App\Models\model_settings as ModelSettings;
 use App\Models\OBA_Kit_Checklist;
 use App\Models\Check_Items;
+use App\Models\Similarities_Checking;
 use Carbon\Carbon;
 
 class SectionForm extends Component
@@ -51,6 +52,9 @@ class SectionForm extends Component
             'checklist_id' => $new_id
         ]);
         Check_Items::create([
+            'checklist_id' => $new_id
+        ]);
+        Similarities_Checking::create([
             'checklist_id' => $new_id
         ]);
 
