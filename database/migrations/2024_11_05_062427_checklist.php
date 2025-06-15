@@ -174,7 +174,7 @@ return new class extends Migration
             $table->string('specific_label_customer_po')->nullable();
             $table->string('specific_label_smp_po')->nullable();
             $table->string('pallet_label_customer_po')->nullable();
-            $table->string('palley_label_smp_po')->nullable();
+            $table->string('pallet_label_smp_po')->nullable();
             $table->boolean('same_po')->nullable();
             $table->boolean('judgement_po')->nullable();
         });
