@@ -17,6 +17,6 @@ use App\Http\Controllers\ChecklistController;
 Route::view('/', 'welcome')->name('welcome');
 
 Route::view('/settings', 'settings')->name('settings');
-
+Route::view('/viewlist', 'viewlist')->name('viewlist');
 Route::view('/checklist', 'checklist')->name('checklist');
 Route::get('checklist/{id}', [ChecklistController::class, 'showChecklist']);

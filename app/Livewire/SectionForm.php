@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Check_Overall;
+use App\Models\Personnel_Check;
 use App\Models\preparation_checklist;
 use App\Models\shipment_information;
 use Livewire\WithoutUrlPagination;
@@ -59,6 +60,9 @@ class SectionForm extends Component
             'checklist_id' => $new_id
         ]);
         Check_Overall::create([
+            'checklist_id' => $new_id
+        ]);
+        Personnel_Check::create([
             'checklist_id' => $new_id
         ]);
 

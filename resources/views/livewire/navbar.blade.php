@@ -21,6 +21,12 @@
                     </button>
                 </li>
                 <li>
+                    <button wire:click="redirectTo('viewlist')" class="{{ request()->routeIs('viewlist') ? 'text-black font-semibold bg-lightblue p-2.5 pl-6 pr-6 rounded-lg mt-1' : 'animated-button'}}">
+                          <span class="text">View List</span>
+                          <span class="circle"></span>
+                    </button>
+                </li>
+                <li>
                     <button wire:click="redirectTo('settings')" class="{{ request()->routeIs('settings') ? 'text-black font-semibold bg-lightblue p-2.5 pl-6 pr-6 rounded-lg mt-1' : 'animated-button'}}">
                         <span class="text">Settings</span>
                         <span class="circle"></span>
