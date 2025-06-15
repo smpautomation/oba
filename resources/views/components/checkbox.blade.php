@@ -2,8 +2,8 @@
 @props(['inputStatus' => null])
 @php
     $borderClass = match($inputStatus) {
-        'success' => 'border-green-500',
-        'error' => 'border-yellow-500',
+        'success' => 'border-green-500 ring-2 ring-green-200',
+        'error' => 'border-yellow-500 ring-2 ring-yellow-200',
         default => 'border-gray-300',
     };
 @endphp

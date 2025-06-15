@@ -26,4 +26,12 @@ class checklist extends Model
     public function similaritiesCheck(){
         return $this->hasOne(Similarities_Checking::class, 'checklist_id', 'id');
     }
+    public function checkOverall()
+    {
+        return $this->hasOne(Check_Overall::class);
+    }
+    public function personnelCheck()
+    {
+        return $this->hasOne(Personnel_Check::class, 'checklist_id', 'id');
+    }
 }

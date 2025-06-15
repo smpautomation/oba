@@ -179,93 +179,69 @@ return new class extends Migration
             $table->boolean('judgement_po')->nullable();
         });
 
-        // Schema::create('checkingSimilarities', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('checklist_id')->constrained(
-        //         table: 'checklist', indexName: 'id'
-        //     )->onUpdate('cascade')->onDelete('cascade');
-        //     $table->string('comparison_type');
-        //     $table->json('field_values');
-        //     $table->boolean('same');
-        //     $table->boolean('judgement');
-        //     $table->timestamps();
-        // });
+        Schema::create('check_overall', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id')->unique();
+            $table->foreign('checklist_id')->references('id')->on('checklist')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('expiration_date')->nullable();
+            $table->string('results')->nullable();
+        });
 
-        // Schema::create('preparationChecklist', function (Blueprint $table) {
-        //     //$table->unsignedBigInteger('checklist_id');
-        //     $table->foreignId('checklist_id')->constrained(
-        //         table: 'checklist', indexName: 'id'
-        //     )->onUpdate('cascade')->onDelete('cascade');
-        //     $table->boolean('1_complete_mcReceivingChecklist');
-        //     $table->boolean('1_complete_obaKit');
-        //     $table->boolean('1_complete_packingSpecs');
-        //     $table->boolean('1_complete_serem');
-        //     $table->boolean('1_complete_pickList');
-        //     $table->boolean('1_complete_fgLotTrace');
-        //     $table->boolean('1_complete_scannedQRCode');
-        //     $table->boolean('1_complete_packingSlip');
-        //     $table->boolean('1_complete_relatedDocuments');
-        //     $table->string('1_remarks_mcReceivingChecklist');
-        //     $table->string('1_remarks_obaKit');
-        //     $table->string('1_remarks_packingSpecs');
-        //     $table->string('1_remarks_serem');
-        //     $table->string('1_remarks_pickList');
-        //     $table->string('1_remarks_fgLotTrace');
-        //     $table->string('1_remarks_scannedQRCode');
-        //     $table->string('1_remarks_packingSlip');
-        //     $table->string('1_remarks_relatedDocuments');
-        //     $table->timestamps();
-        // });
+        Schema::create('check_overall_items', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->foreignId('check_overall_id')->references('id')->on('check_overall')->onDelete('cascade');
+            $table->integer('item_index'); // 1 to 10
+            $table->string("oqa")->nullable();
+            $table->integer("box_no")->nullable();
+            $table->string("std_pack")->nullable();
+            $table->boolean("internal_fg_label")->nullable();
+            $table->boolean("internal_specific_label")->nullable();
+            $table->boolean("internal_carton_condition")->nullable();
+            $table->boolean("internal_magnet_pack")->nullable();
+            $table->boolean("internal_magnet_cond")->nullable();
+            $table->boolean("internal_dessicant")->nullable();
+            $table->boolean("internal_pack_orientation")->nullable();
+            $table->string("internal_spacer")->nullable();
+            $table->boolean("internal_sir")->nullable();
+            $table->boolean("external_serem")->nullable();
+            $table->boolean("external_ship_label")->nullable();
+            $table->boolean("external_vmi_label")->nullable();
+            $table->boolean("external_mc_label")->nullable();
+            $table->boolean("external_delivery_sheet")->nullable();
+            $table->boolean("external_specific_label")->nullable();
+            $table->boolean("external_flux_label")->nullable();
+            $table->string("identity_tape")->nullable();
+            $table->string("pick_list")->nullable();
+            $table->string("remarks")->nullable();
+        });
 
-        // Schema::create('obakitchecklist', function (Blueprint $table) {
-        //     $table->foreignId('checklist_id')->constrained(
-        //         table: 'checklist', indexName: 'id'
-        //     )->onUpdate('cascade')->onDelete('cascade');
-        //     $table->boolean('2_beforeOba_calculator');
-        //     $table->boolean('2_beforeOba_camera');
-        //     $table->boolean('2_beforeOba_cutter');
-        //     $table->boolean('2_beforeOba_stampPad');
-        //     $table->boolean('2_beforeOba_stamp');
-        //     $table->boolean('2_beforeOba_tapeDispenser');
-        //     $table->boolean('2_beforeOba_zebraPen');
-        //     $table->boolean('2_afterOba_calculator');
-        //     $table->boolean('2_afterOba_camera');
-        //     $table->boolean('2_afterOba_cutter');
-        //     $table->boolean('2_afterOba_stampPad');
-        //     $table->boolean('2_afterOba_stamp');
-        //     $table->boolean('2_afterOba_tapeDispenser');
-        //     $table->boolean('2_afterOba_zebraPen');
-        //     $table->timestamps();
-        // });
+        Schema::create('check_overall_pallets', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->foreignId('check_overall_id')->references('id')->on('check_overall')->onDelete('cascade');
+            $table->integer('pallet_index'); // 1 to 20
+            $table->boolean('value')->nullable();
+        });
 
-        // Schema::create('shipmentInformation', function (Blueprint $table) {
-        //     $table->foreignId('checklist_id')->constrained(
-        //         table: 'checklist', indexName: 'id'
-        //     )->onUpdate('cascade')->onDelete('cascade');
-        //     $table->dateTime('3_shipmentDateTime');
-        //     $table->string('3_modelName');
-        //     $table->string('3_invoiceNumber');
-        //     $table->boolean('3_palletWood');
-        //     $table->boolean('3_palletPaper');
-        //     $table->boolean('3_palletSteel');
-        //     $table->boolean('3_palletPlastic');
-        //     $table->string('3_palletOthers');
-        //     $table->timestamps();
-        // });
-
-        // Schema::create('checkItems', function (Blueprint $table) {
-        //     $table->foreignId('checklist_id')->constrained(
-        //         table: 'checklist', indexName: 'id'
-        //     )->onUpdate('cascade')->onDelete('cascade');
-        //     $table->integer('4_boxesOpen');
-        //     $table->boolean('4_sameModel');
-        //     $table->boolean('4_judgement');
-        //     $table->string('4_whatModel');
-        //     $table->integer('4_cartons');
-        //     $table->boolean('4_specialInspectionReport');
-        //     $table->boolean('4_specialInspectionReportAvailability');
-        //     $table->timestamps();
-        // });
+        Schema::create('personnel', function(Blueprint $table){
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('checklist_id')
+                ->unique();
+            $table->foreign('checklist_id')
+                ->references('id')
+                ->on('checklist')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('shipping_pic')->nullable();
+            $table->date('date')->nullable();
+            $table->string('oba_checked_by')->nullable();
+            $table->boolean('check_judgement')->nullable();
+            $table->string('oba_picture_by')->nullable();
+            $table->boolean('picture_judgement')->nullable();
+        });
 
     }
 
@@ -280,5 +256,7 @@ return new class extends Migration
         Schema::dropIfExists('shipment_information');
         Schema::dropIfExists('check_items');
         Schema::dropIfExists('similarities_checking');
+        Schema::dropIfExists('check_overall');
+        Schema::dropIfExists('personnel');
     }
 };
