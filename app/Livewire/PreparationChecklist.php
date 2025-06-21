@@ -4,14 +4,18 @@ namespace App\Livewire;
 
 use App\Models\checklist as Checklist;
 use App\Models\preparation_checklist;
+use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 
 class PreparationChecklist extends Component
 {
+    use WithFileUploads;
     public $checklist_id;
     public $checklistInfo;
+    public $photo;
     public $inputs = [
         
     ];
@@ -58,6 +62,27 @@ class PreparationChecklist extends Component
             'oneprep9remarks' => $this->checklistInfo->prepCheck->oneprep9remarks ?? null,
             'oneprep10remarks' => $this->checklistInfo->prepCheck->oneprep10remarks ?? null
         ];
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'photo' => 'image|max:10240', // max 10MB
+        ]);
+        $this->photo->store('photos', 'public');
+        session()->flash('message', 'Uploaded!');
+    }
+
+    public function updatedPhoto()
+    {
+        $this->validate([
+            'photo' => 'image|max:10240', // max 10MB
+        ]);
+        $folder = $this->checklist_id."/";
+        $filename = Str::uuid() . '.' . $this->photo->getClientOriginalExtension();
+        $path = $this->photo->storeAs($folder, $filename, 'public');
+
+        session()->flash('message', 'Photo uploaded to: ' . $path);
     }
 
     public function render()

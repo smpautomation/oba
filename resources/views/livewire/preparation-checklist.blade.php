@@ -107,5 +107,41 @@
                 </tr>
             </tbody>
         </table>
+        <div class="space-y-4 p-6 ml-10">
+            <!-- File input: can open camera OR file picker -->
+            <label class="block">
+                <span class="text-gray-700">Take a photo or choose from gallery</span>
+                <input 
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    wire:model="photo"
+                    class="mt-1 block w-full"
+                />
+            </label>
+
+            @error('photo')
+                <p class="text-red-500 text-sm">{{ $message }}</p>
+            @enderror
+
+            @if ($photo)
+                <div class="mt-4">
+                    <p class="font-semibold">Preview:</p>
+                    <img src="{{ $photo->temporaryUrl() }}" class="w-48 h-auto rounded border" />
+                </div>
+            @endif
+
+            <form wire:submit.prevent="save">
+            <input type="file" accept="image/*" wire:model="photo" />
+
+            @if ($photo)
+                <img src="{{ $photo->temporaryUrl() }}" class="w-48 h-auto mt-2" />
+                <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded">
+                    Upload
+                </button>
+            @endif
+        </form>
+        </div>
+        
     </div>
 </div>
