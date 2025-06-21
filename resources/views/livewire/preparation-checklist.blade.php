@@ -110,14 +110,14 @@
         {{-- Auto-upload photo component template --}}
         <div class="space-y-4 p-6 ml-10">
             <div class="text-center">
-                <label class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg cursor-pointer">
-                    📷 Take Photo / Choose File
+                <label class="block">
+                    <span class="text-gray-700">Take a photo or choose from gallery</span>
                     <input
                         type="file"
                         accept="image/*"
                         capture="environment"
                         wire:model="photo"
-                        class="hidden"
+                        class="mt-1 block w-full"
                     />
                 </label>
             </div>
@@ -147,18 +147,64 @@
             @if (!empty($uploadedPhotos))
                 <div class="mt-4">
                     <h4 class="text-sm font-medium text-gray-700 mb-2">Uploaded Photos ({{ count($uploadedPhotos) }}):</h4>
-                    <div class="grid grid-cols-3 gap-2">
-                        @foreach($uploadedPhotos as $index => $photoPath)
-                            <div class="relative group">
-                                <img src="{{ Storage::url($photoPath) }}" class="w-20 h-20 object-cover rounded border">
+                    <div class="space-y-2 max-h-64 overflow-y-auto">
+                        @foreach($uploadedPhotos as $index => $photoData)
+                            <div class="flex items-center justify-between p-2 border rounded-lg hover:bg-gray-50 transition-colors">
+                                <div class="flex-1">
+                                    <button 
+                                        wire:click="showPhoto('{{ $photoData['path'] }}')"
+                                        class="flex-1 text-left text-blue-600 hover:text-blue-800 font-medium block w-full"
+                                    >
+                                        {{ $photoData['name'] }}
+                                    </button>
+                                    <p class="text-xs text-gray-500 mt-1">{{ $photoData['uploaded_at'] }}</p>
+                                </div>
                                 <button 
                                     wire:click="removePhoto({{ $index }})"
-                                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                                    class="ml-3 bg-red-500 hover:bg-red-600 text-white rounded-full w-7 h-7 text-sm flex items-center justify-center transition-colors"
+                                    title="Remove photo"
+                                    onclick="return confirm('Are you sure you want to delete this photo?')"
                                 >
-                                    ×
+                                    🗑️
                                 </button>
                             </div>
                         @endforeach
+                    </div>
+                </div>
+            @endif
+
+            @if($showModal)
+                <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" wire:click="closeModal">
+                    <div class="bg-white rounded-lg max-w-4xl max-h-screen overflow-hidden" wire:click.stop>
+                        {{-- Modal Header --}}
+                        <div class="flex items-center justify-between p-4 border-b">
+                            <h3 class="text-lg font-medium text-gray-900">{{ $selectedPhotoName }}</h3>
+                            <button 
+                                wire:click="closeModal"
+                                class="text-gray-400 hover:text-gray-600 text-2xl"
+                            >
+                                ×
+                            </button>
+                        </div>
+                        
+                        {{-- Modal Body --}}
+                        <div class="p-4">
+                            <img 
+                                src="{{ $selectedPhotoUrl }}" 
+                                alt="{{ $selectedPhotoName }}"
+                                class="max-w-full max-h-96 mx-auto object-contain"
+                            />
+                        </div>
+                        
+                        {{-- Modal Footer --}}
+                        <div class="flex justify-end p-4 border-t space-x-2">
+                            <button 
+                                wire:click="closeModal"
+                                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded"
+                            >
+                                Close
+                            </button>
+                        </div>
                     </div>
                 </div>
             @endif

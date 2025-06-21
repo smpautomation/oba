@@ -19,6 +19,9 @@ class PreparationChecklist extends Component
     public $checklistInfo;
     public $photo;
     public $uploadedPhotos = [];
+    public $showModal = false;
+    public $selectedPhotoUrl = '';
+    public $selectedPhotoName = '';
     public $inputs = [
         
     ];
@@ -88,8 +91,10 @@ class PreparationChecklist extends Component
         }
         
         try {
-            // Generate unique filename
-            $filename = Str::random(10) . '.' . $this->photo->getClientOriginalExtension();
+            $originalName = $this->photo->getClientOriginalName();
+            $extension = $this->photo->getClientOriginalExtension();
+            $timestamp = now()->format('Y-m-d_H-i-s');
+            $filename = $timestamp . '_' . Str::random(5) . '.' . $extension;
             
             // Store the file
             $path = $this->photo->storeAs(
@@ -99,7 +104,12 @@ class PreparationChecklist extends Component
             );
             
             // Add to uploaded photos array
-            $this->uploadedPhotos[] = $path;
+            $this->uploadedPhotos[] = [
+                'name' => $originalName ?: $filename,
+                'path' => $path,
+                'filename' => $filename,
+                'uploaded_at' => now()->format('M j, Y g:i A')
+            ];
             
             // Clear the photo input to allow for more uploads
             $this->reset('photo');
@@ -122,18 +132,41 @@ class PreparationChecklist extends Component
     private function loadUploadedPhotos()
     {
         if ($this->checklist_id && Storage::disk('public')->exists($this->checklist_id)) {
-            $this->uploadedPhotos = collect(Storage::disk('public')->files($this->checklist_id))
-                ->map(function ($file) {
-                    return $file;
-                })
-                ->toArray();
+            $files = Storage::disk('public')->files($this->checklist_id);
+            
+            $this->uploadedPhotos = collect($files)->map(function ($file) {
+                $filename = basename($file);
+                $filePath = Storage::disk('public')->path($file);
+                
+                return [
+                    'name' => $filename,
+                    'path' => $file,
+                    'filename' => $filename,
+                    'uploaded_at' => file_exists($filePath) ? 
+                        date('M j, Y g:i A', filemtime($filePath)) : 
+                        'Unknown'
+                ];
+            })->toArray();
         }
+    }
+    public function showPhoto($photoPath)
+    {
+        $this->selectedPhotoUrl = Storage::url($photoPath);
+        $this->selectedPhotoName = basename($photoPath);
+        $this->showModal = true;
+    }
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->selectedPhotoUrl = '';
+        $this->selectedPhotoName = '';
     }
 
     public function removePhoto($index)
     {
         if (isset($this->uploadedPhotos[$index])) {
-            $photoPath = $this->uploadedPhotos[$index];
+            $photoData = $this->uploadedPhotos[$index];
+            $photoPath = $photoData['path'];
             
             // Delete from storage
             Storage::disk('public')->delete($photoPath);
