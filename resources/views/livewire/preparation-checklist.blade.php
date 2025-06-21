@@ -114,33 +114,48 @@
                 <input 
                     type="file"
                     accept="image/*"
+                    multiple
                     capture="environment"
-                    wire:model="photo"
+                    wire:model="photos"
                     class="mt-1 block w-full"
                 />
             </label>
 
-            @error('photo')
+            @error('photos')
                 <p class="text-red-500 text-sm">{{ $message }}</p>
             @enderror
 
-            @if ($photo)
-                <div class="mt-4">
-                    <p class="font-semibold">Preview:</p>
-                    <img src="{{ $photo->temporaryUrl() }}" class="w-48 h-auto rounded border" />
+            @if ($photos)
+                <div class="mt-4 grid grid-cols-2 gap-4">
+                    @foreach ($photos as $photo)
+                        <div>
+                            <img src="{{ $photo->temporaryUrl() }}" class="w-32 h-auto rounded border" />
+                        </div>
+                    @endforeach
                 </div>
             @endif
 
-            <form wire:submit.prevent="save">
-            <input type="file" accept="image/*" wire:model="photo" />
+            <button wire:click="upload" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+                >
+                Upload All
+            </button>
 
-            @if ($photo)
-                <img src="{{ $photo->temporaryUrl() }}" class="w-48 h-auto mt-2" />
-                <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded">
-                    Upload
-                </button>
+            @if (session()->has('message'))
+                <div class="mt-3 text-green-600 font-medium">
+                    {{ session('message') }}
+                </div>
             @endif
-        </form>
+
+            {{-- <form wire:submit.prevent="save">
+                <input type="file" accept="image/*" wire:model="photo" />
+
+                @if ($photo)
+                    <img src="{{ $photo->temporaryUrl() }}" class="w-48 h-auto mt-2" />
+                    <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded">
+                        Upload
+                    </button>
+                @endif
+            </form> --}}
         </div>
         
     </div>

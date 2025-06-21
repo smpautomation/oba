@@ -15,7 +15,7 @@ class PreparationChecklist extends Component
     use WithFileUploads;
     public $checklist_id;
     public $checklistInfo;
-    public $photo;
+    public $photos = [];
     public $inputs = [
         
     ];
@@ -64,25 +64,25 @@ class PreparationChecklist extends Component
         ];
     }
 
-    public function save()
+    public function upload()
     {
+        if (empty($this->photos)) {
+            session()->flash('message', 'Please select at least one photo.');
+            return;
+        }
         $this->validate([
-            'photo' => 'image|max:10240', // max 10MB
+            'photos.*' => 'image|max:10240', // max 10MB
         ]);
-        $this->photo->store('photos', 'public');
-        session()->flash('message', 'Uploaded!');
-    }
-
-    public function updatedPhoto()
-    {
-        $this->validate([
-            'photo' => 'image|max:10240', // max 10MB
-        ]);
-        $folder = $this->checklist_id."/";
-        $filename = Str::uuid() . '.' . $this->photo->getClientOriginalExtension();
-        $path = $this->photo->storeAs($folder, $filename, 'public');
-
-        session()->flash('message', 'Photo uploaded to: ' . $path);
+        $savedPaths = [];
+        foreach ($this->photos as $photo) {
+            if ($photo) {
+                $filename = Str::uuid() . '.' . $photo->getClientOriginalExtension();
+                $path = $photo->storeAs($this->checklist_id, $filename, 'public');
+                $savedPaths[] = $path;
+            }
+        }
+        session()->flash('message', 'Uploaded ' . count($savedPaths) . ' photo(s) successfully.');
+        $this->photos = [];
     }
 
     public function render()
