@@ -107,56 +107,61 @@
                 </tr>
             </tbody>
         </table>
+        {{-- Auto-upload photo component template --}}
         <div class="space-y-4 p-6 ml-10">
-            <!-- File input: can open camera OR file picker -->
-            <label class="block">
-                <span class="text-gray-700">Take a photo or choose from gallery</span>
-                <input 
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    capture="environment"
-                    wire:model="photos"
-                    class="mt-1 block w-full"
-                />
-            </label>
-
-            @error('photos')
+            <div class="text-center">
+                <label class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg cursor-pointer">
+                    📷 Take Photo / Choose File
+                    <input
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                        wire:model="photo"
+                        class="hidden"
+                    />
+                </label>
+            </div>
+            
+            {{-- Loading states --}}
+            <div wire:loading wire:target="photo" class="text-sm text-blue-500">
+                Processing photo...
+            </div>
+            
+            <div wire:loading wire:target="processUpload" class="text-sm text-green-500">
+                Uploading photo...
+            </div>
+            
+            {{-- Error display --}}
+            @error('photo')
                 <p class="text-red-500 text-sm">{{ $message }}</p>
             @enderror
-
-            @if ($photos)
-                <div class="mt-4 grid grid-cols-2 gap-4">
-                    @foreach ($photos as $photo)
-                        <div>
-                            <img src="{{ $photo->temporaryUrl() }}" class="w-32 h-auto rounded border" />
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-
-            <button wire:click="upload" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-                >
-                Upload All
-            </button>
-
+            
+            {{-- Success/Error messages --}}
             @if (session()->has('message'))
-                <div class="mt-3 text-green-600 font-medium">
+                <div class="mt-3 p-2 rounded bg-green-50 text-green-600">
                     {{ session('message') }}
                 </div>
             @endif
-
-            {{-- <form wire:submit.prevent="save">
-                <input type="file" accept="image/*" wire:model="photo" />
-
-                @if ($photo)
-                    <img src="{{ $photo->temporaryUrl() }}" class="w-48 h-auto mt-2" />
-                    <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded">
-                        Upload
-                    </button>
-                @endif
-            </form> --}}
+            
+            {{-- Show uploaded photos if any --}}
+            @if (!empty($uploadedPhotos))
+                <div class="mt-4">
+                    <h4 class="text-sm font-medium text-gray-700 mb-2">Uploaded Photos ({{ count($uploadedPhotos) }}):</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        @foreach($uploadedPhotos as $index => $photoPath)
+                            <div class="relative group">
+                                <img src="{{ Storage::url($photoPath) }}" class="w-20 h-20 object-cover rounded border">
+                                <button 
+                                    wire:click="removePhoto({{ $index }})"
+                                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                    ×
+                                </button>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
-        
     </div>
 </div>

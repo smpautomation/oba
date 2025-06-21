@@ -9,13 +9,16 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class PreparationChecklist extends Component
 {
     use WithFileUploads;
     public $checklist_id;
     public $checklistInfo;
-    public $photos = [];
+    public $photo;
+    public $uploadedPhotos = [];
     public $inputs = [
         
     ];
@@ -62,27 +65,85 @@ class PreparationChecklist extends Component
             'oneprep9remarks' => $this->checklistInfo->prepCheck->oneprep9remarks ?? null,
             'oneprep10remarks' => $this->checklistInfo->prepCheck->oneprep10remarks ?? null
         ];
+        $this->loadUploadedPhotos();
     }
 
-    public function upload()
+    public function updatedPhoto()
     {
-        if (empty($this->photos)) {
-            session()->flash('message', 'Please select at least one photo.');
+        // Validate the uploaded file
+        $this->validate([
+            'photo' => 'nullable|image|max:10240', // max 10MB
+        ]);
+        
+        // If photo is valid, automatically process the upload
+        if ($this->photo) {
+            $this->processUpload();
+        }
+    }
+
+    public function processUpload()
+    {
+        if (!$this->photo) {
             return;
         }
-        $this->validate([
-            'photos.*' => 'image|max:10240', // max 10MB
-        ]);
-        $savedPaths = [];
-        foreach ($this->photos as $photo) {
-            if ($photo) {
-                $filename = Str::uuid() . '.' . $photo->getClientOriginalExtension();
-                $path = $photo->storeAs($this->checklist_id, $filename, 'public');
-                $savedPaths[] = $path;
-            }
+        
+        try {
+            // Generate unique filename
+            $filename = Str::random(10) . '.' . $this->photo->getClientOriginalExtension();
+            
+            // Store the file
+            $path = $this->photo->storeAs(
+                $this->checklist_id ?: 'uploads', 
+                $filename, 
+                'public'
+            );
+            
+            // Add to uploaded photos array
+            $this->uploadedPhotos[] = $path;
+            
+            // Clear the photo input to allow for more uploads
+            $this->reset('photo');
+            
+            // Show success message
+            session()->flash('message', 'Photo uploaded successfully!');
+            
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Photo upload failed: ' . $e->getMessage());
+            
+            // Show error message
+            session()->flash('message', 'Upload failed. Please try again.');
+            
+            // Clear the photo input
+            $this->reset('photo');
         }
-        session()->flash('message', 'Uploaded ' . count($savedPaths) . ' photo(s) successfully.');
-        $this->photos = [];
+    }
+
+    private function loadUploadedPhotos()
+    {
+        if ($this->checklist_id && Storage::disk('public')->exists($this->checklist_id)) {
+            $this->uploadedPhotos = collect(Storage::disk('public')->files($this->checklist_id))
+                ->map(function ($file) {
+                    return $file;
+                })
+                ->toArray();
+        }
+    }
+
+    public function removePhoto($index)
+    {
+        if (isset($this->uploadedPhotos[$index])) {
+            $photoPath = $this->uploadedPhotos[$index];
+            
+            // Delete from storage
+            Storage::disk('public')->delete($photoPath);
+            
+            // Remove from array
+            unset($this->uploadedPhotos[$index]);
+            $this->uploadedPhotos = array_values($this->uploadedPhotos); // Re-index array
+            
+            session()->flash('message', 'Photo removed successfully.');
+        }
     }
 
     public function render()
