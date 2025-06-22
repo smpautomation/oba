@@ -1,8 +1,10 @@
-<div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50" >
-    <div class="flex items-center justify-center bg-gray-500 text-gray-100">
-        <h1 class='text-lg'>
-            <strong>4. Check Items</strong>
-        </h1>
+<div class="p-4 m-2 rounded-2xl shadow-lg bg-white">
+    <!-- Header -->
+    <div class="flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl mb-6 p-4">
+        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h1 class="text-xl font-bold">Check Items</h1>
     </div>
     <div>
         <div class="grid gap-6 mb-6 md:grid-cols-2">

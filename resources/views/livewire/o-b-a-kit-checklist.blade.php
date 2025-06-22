@@ -1,91 +1,71 @@
-<div class="p-4 m-2 rounded-xl shadow-sm bg-slate-50">
-    <div class="flex items-center justify-center bg-gray-500 text-gray-100">
-        <h1 class='text-lg '>
-            <strong>2. OBA KIT Checklist</strong>
-        </h1>
+<div class="p-4 m-2 rounded-2xl shadow-lg bg-white">
+    <!-- Header -->
+    <div class="flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl mb-6 p-4">
+        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h1 class="text-xl font-bold">OBA KIT Checklist</h1>
     </div>
-    <div class="overflow-x-scroll">
-        <table class="table-auto w-screen text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+    <!-- Table Container -->
+    <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200">
+        <table class="w-full min-w-[1000px] text-sm">
+            <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        <strong>OBA KIT Checklist</strong>
+                    <th class="px-4 py-4 text-left font-semibold text-gray-700 sticky left-0 bg-gray-50 z-10 min-w-[140px] border-r border-gray-200">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Phase
+                        </div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        CALCULATOR
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        CAMERA
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        CUTTER
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        STAMP PAD
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        STAMP
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        TAPE DISPENSER
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        ZEBRA PEN
-                    </th>
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[100px]">Calculator</th>
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[100px]">Camera</th>
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[100px]">Cutter</th>
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[100px]">Stamp Pad</th>
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[100px]">Stamp</th>
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[120px]">Tape Dispenser</th>
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[100px]">Zebra Pen</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <strong>BEFORE OBA</strong>
-                    </th>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA-2column" value="ok" wire:model='inputs.beforecheckbox1' wire:focusout="dispatchMe('beforecheckbox1')" :inputStatus="$inputStatus['beforecheckbox1']"></x-checkbox>
+                <!-- BEFORE OBA Row -->
+                <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors duration-200">
+                    <td class="px-4 py-5 font-semibold text-gray-800 sticky left-0 bg-white z-10 border-r border-gray-200">
+                        BEFORE OBA
                     </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA-3column" value="ok" wire:model='inputs.beforecheckbox2' wire:focusout="dispatchMe('beforecheckbox2')" :inputStatus="$inputStatus['beforecheckbox2']"></x-checkbox>
+                    @for ($i = 1; $i <= 7; $i++)
+                    <td class="px-3 py-5 text-center">
+                        <x-checkbox 
+                            id="2-OBA-{{ $i+1 }}column" 
+                            value="ok" 
+                            wire:model="inputs.beforecheckbox{{ $i }}" 
+                            wire:focusout="dispatchMe('beforecheckbox{{ $i }}')" 
+                            :inputStatus="$inputStatus['beforecheckbox' . $i]" 
+                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                        />
                     </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA-4column" value="ok" wire:model='inputs.beforecheckbox3' wire:focusout="dispatchMe('beforecheckbox3')" :inputStatus="$inputStatus['beforecheckbox3']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA-5column" value="ok" wire:model='inputs.beforecheckbox4' wire:focusout="dispatchMe('beforecheckbox4')" :inputStatus="$inputStatus['beforecheckbox4']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA-6column" value="ok" wire:model='inputs.beforecheckbox5' wire:focusout="dispatchMe('beforecheckbox5')" :inputStatus="$inputStatus['beforecheckbox5']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA-7column" value="ok" wire:model='inputs.beforecheckbox6' wire:focusout="dispatchMe('beforecheckbox6')" :inputStatus="$inputStatus['beforecheckbox6']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA-8column" value="ok" wire:model='inputs.beforecheckbox7' wire:focusout="dispatchMe('beforecheckbox7')" :inputStatus="$inputStatus['beforecheckbox7']"></x-checkbox>
-                    </td>
+                    @endfor
                 </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <strong>AFTER OBA</strong>
-                    </th>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA2-2column" value="ok" wire:model='inputs.aftercheckbox1' wire:focusout="dispatchMe('aftercheckbox1')" :inputStatus="$inputStatus['aftercheckbox1']"></x-checkbox>
+
+                <!-- AFTER OBA Row -->
+                <tr class="bg-gray-50 border-b border-gray-100">
+                    <td class="px-4 py-5 font-semibold text-gray-800 sticky left-0 bg-gray-50 z-10 border-r border-gray-200">
+                        AFTER OBA
                     </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA2-3column" value="ok" wire:model='inputs.aftercheckbox2' wire:focusout="dispatchMe('aftercheckbox2')" :inputStatus="$inputStatus['aftercheckbox2']"></x-checkbox>
+                    @for ($i = 1; $i <= 7; $i++)
+                    <td class="px-3 py-5 text-center">
+                        <x-checkbox 
+                            id="2-OBA2-{{ $i+1 }}column" 
+                            value="ok" 
+                            wire:model="inputs.aftercheckbox{{ $i }}" 
+                            wire:focusout="dispatchMe('aftercheckbox{{ $i }}')" 
+                            :inputStatus="$inputStatus['aftercheckbox' . $i]" 
+                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                        />
                     </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA2-4column" value="ok" wire:model='inputs.aftercheckbox3' wire:focusout="dispatchMe('aftercheckbox3')" :inputStatus="$inputStatus['aftercheckbox3']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA2-5column" value="ok" wire:model='inputs.aftercheckbox4' wire:focusout="dispatchMe('aftercheckbox4')" :inputStatus="$inputStatus['aftercheckbox4']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA2-6column" value="ok" wire:model='inputs.aftercheckbox5' wire:focusout="dispatchMe('aftercheckbox5')" :inputStatus="$inputStatus['aftercheckbox5']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA2-7column" value="ok" wire:model='inputs.aftercheckbox6' wire:focusout="dispatchMe('aftercheckbox6')" :inputStatus="$inputStatus['aftercheckbox6']"></x-checkbox>
-                    </td>
-                    <td class="w-4 p-4">
-                        <x-checkbox id="2-OBA2-8column" value="ok" wire:model='inputs.aftercheckbox7' wire:focusout="dispatchMe('aftercheckbox7')" :inputStatus="$inputStatus['aftercheckbox7']"></x-checkbox>
-                    </td>
+                    @endfor
                 </tr>
             </tbody>
         </table>

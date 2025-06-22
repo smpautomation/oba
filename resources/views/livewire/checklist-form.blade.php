@@ -11,6 +11,7 @@
         <livewire:similarities-checking :checklist_id="$model_id"></livewire:similarities-checking>
         <livewire:check-overall :checklist_id="$model_id"></livewire:check-overall>
         <livewire:personnel :checklist_id="$model_id"></livewire:personnel>
+        <livewire:photo-documentation :checklist_id="$model_id"></livewire:photo-documentation>
         <div class="p-4 m-2 rounded-xl shadow=sm bg-slate-50 flex items-center justify-center">
             <button type="submit">
                 <a class="fancy">
