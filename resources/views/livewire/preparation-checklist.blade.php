@@ -1,4 +1,4 @@
-<div class="p-4 m-2 rounded-2xl shadow-lg bg-white">
+<div class="p-4 m-2 rounded-2xl shadow-lg bg-white max-w-4xl mx-auto">
     <!-- Header -->
     <div class="flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl mb-6 p-4">
         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,31 +59,31 @@
                         </div>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="oneprep2column" value="1" wire:model="inputs.oneprep2column" wire:focusout="dispatchMe('oneprep2column')" :inputStatus="$inputStatus['oneprep2column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="oneprep2column" value="1" wire:model="inputs.oneprep2column" wire:focusout="dispatchMe('oneprep2column')" :inputStatus="$inputStatus['oneprep2column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column" wire:focusout="dispatchMe('oneprep3column')" :inputStatus="$inputStatus['oneprep3column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column" wire:focusout="dispatchMe('oneprep3column')" :inputStatus="$inputStatus['oneprep3column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-4column" value="1" wire:model="inputs.oneprep4column" wire:focusout="dispatchMe('oneprep4column')" :inputStatus="$inputStatus['oneprep4column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-4column" value="1" wire:model="inputs.oneprep4column" wire:focusout="dispatchMe('oneprep4column')" :inputStatus="$inputStatus['oneprep4column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-5column" value="1" wire:model="inputs.oneprep5column" wire:focusout="dispatchMe('oneprep5column')" :inputStatus="$inputStatus['oneprep5column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-5column" value="1" wire:model="inputs.oneprep5column" wire:focusout="dispatchMe('oneprep5column')" :inputStatus="$inputStatus['oneprep5column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-6column" value="1" wire:model="inputs.oneprep6column" wire:focusout="dispatchMe('oneprep6column')" :inputStatus="$inputStatus['oneprep6column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-6column" value="1" wire:model="inputs.oneprep6column" wire:focusout="dispatchMe('oneprep6column')" :inputStatus="$inputStatus['oneprep6column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column" wire:focusout="dispatchMe('oneprep7column')" :inputStatus="$inputStatus['oneprep7column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column" wire:focusout="dispatchMe('oneprep7column')" :inputStatus="$inputStatus['oneprep7column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column" wire:focusout="dispatchMe('oneprep8column')" :inputStatus="$inputStatus['oneprep8column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column" wire:focusout="dispatchMe('oneprep8column')" :inputStatus="$inputStatus['oneprep8column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column" wire:focusout="dispatchMe('oneprep9column')" :inputStatus="$inputStatus['oneprep9column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column" wire:focusout="dispatchMe('oneprep9column')" :inputStatus="$inputStatus['oneprep9column']" ></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-10column" value="1" wire:model="inputs.oneprep10column" wire:focusout="dispatchMe('oneprep10column')" :inputStatus="$inputStatus['oneprep10column']" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"></x-checkbox>
+                        <x-checkbox id="1-prep-10column" value="1" wire:model="inputs.oneprep10column" wire:focusout="dispatchMe('oneprep10column')" :inputStatus="$inputStatus['oneprep10column']"></x-checkbox>
                     </td>
                 </tr>
 

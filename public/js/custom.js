@@ -16,3 +16,43 @@ function isMobile() {
     // If it's a mobile device, use the native date picker
     document.getElementById('3-datetime').setAttribute('type', 'datetime-local');
   }
+  function updateCurrentTime() {
+      const now = new Date();
+      const timeString = now.toLocaleString();
+      document.getElementById('current-time').textContent = timeString;
+  }
+  
+  // Update time every second
+  setInterval(updateCurrentTime, 1000);
+  updateCurrentTime();
+
+  // Mobile menu toggle function
+  function toggleMobileMenu() {
+      const menu = document.getElementById('navbar-cta');
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('visible');
+  }
+  
+  // Close mobile menu function
+  function closeMobileMenu() {
+      const menu = document.getElementById('navbar-cta');
+      menu.classList.add('hidden');
+      menu.classList.remove('visible');
+  }
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+      const menu = document.getElementById('navbar-cta');
+      const menuButton = document.querySelector('[data-collapse-toggle="navbar-cta"]');
+      
+      if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
+          closeMobileMenu();
+      }
+  });
+  
+  // Handle keyboard navigation
+  document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+          closeMobileMenu();
+      }
+  });
