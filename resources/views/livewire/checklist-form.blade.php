@@ -1,4 +1,4 @@
-<div>
+<div class="bg-slate-200">
     <form wire:submit='save'>
         <div class="flex">
             <label for="section" class='mr-2'>Section:</label>
@@ -12,14 +12,12 @@
         <livewire:check-overall :checklist_id="$model_id"></livewire:check-overall>
         <livewire:personnel :checklist_id="$model_id"></livewire:personnel>
         <livewire:photo-documentation :checklist_id="$model_id"></livewire:photo-documentation>
-        <div class="p-4 m-2 rounded-xl shadow=sm bg-slate-50 flex items-center justify-center">
-            <button type="submit">
-                <a class="fancy">
-                    <span class="top-key"></span>
-                    <span class="text">SAVE</span>
-                    <span class="bottom-key-1"></span>
-                    <span class="bottom-key-2"></span>
-                </a>
+        <div class="container-bg p-6 rounded-2xl shadow-lg flex items-center justify-center">
+            <button type="submit" class="save-button px-8 py-4 rounded-xl text-white flex items-center space-x-3 font-medium text-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50">
+                <svg class="button-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="button-text">SAVE CHANGES</span>
             </button>
         </div>
     </form>

@@ -1,9 +1,17 @@
-<div class="p-4 m-2 rounded-2xl shadow-lg bg-white max-w-4xl mx-auto">
-    <div class="flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl mb-6 p-4">
-        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <h1 class="text-xl font-bold">Checking of Similarities</h1>
+<div class="max-w-6xl mx-auto px-4 mt-6 bg-white rounded-xl py-4">
+    <!-- Enhanced Header -->
+    <div class="gradient-bg text-white px-8 py-6 rounded-xl mb-6">
+        <div class="flex items-center justify-center">
+            <div class="bg-white/20 rounded-full p-3 mr-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-3xl font-bold">Similarities Checking</h1>
+                <p class="text-white/80 mt-1">Labels and documentation</p>
+            </div>
+        </div>
     </div>
     <div>
         <div class="section-card card-hover rounded-2xl shadow-lg p-4 md:p-6 mb-6">
