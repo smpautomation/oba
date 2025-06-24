@@ -12,6 +12,7 @@
         <livewire:check-overall :checklist_id="$model_id"></livewire:check-overall>
         <livewire:personnel :checklist_id="$model_id"></livewire:personnel>
         <livewire:photo-documentation :checklist_id="$model_id"></livewire:photo-documentation>
+        <livewire:additional-documentation :checklist_id="$model_id"></livewire:additional-documentation>
         <div class="container-bg p-6 rounded-2xl shadow-lg flex items-center justify-center">
             <button type="submit" class="save-button px-8 py-4 rounded-xl text-white flex items-center space-x-3 font-medium text-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50">
                 <svg class="button-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

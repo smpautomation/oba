@@ -266,258 +266,430 @@
             </div>
         </div>
         
-        <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl shadow-xl p-2 bg-gray-50">
-            <div class="row-span-3 col-span-2 flex items-center justify-center">
-                <x-label :semibold="true">MODEL NAME</x-label>
+        <div class="section-card card-hover rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-blue-100 p-2 rounded-lg">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h7.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-lg md:text-xl font-semibold text-gray-800">MODEL NAME</h2>
             </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-picklist-model-input">PICK LIST</x-label><x-inputText id="5-picklist-model-input" wire:model='inputs.picklist_mn' wire:focusout="dispatchMe('picklist_mn')" :inputStatus="$inputStatus['picklist_mn']"></x-inputText>
+            <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl p-2 bg-gradient-to-r from-blue-50 to-indigo-50 pt-12">
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-picklist-model-input">PICK LIST</x-label><x-inputText id="5-picklist-model-input" wire:model='inputs.picklist_mn' wire:focusout="dispatchMe('picklist_mn')" :inputStatus="$inputStatus['picklist_mn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-shipinv-model-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-model-input" wire:model='inputs.shipping_invoice_mn' wire:focusout="dispatchMe('shipping_invoice_mn')" :inputStatus="$inputStatus['shipping_invoice_mn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-serem-model-input">SEREM</x-label><x-inputText id="5-serem-model-input" marginleft="ml-4" wire:model='inputs.serem_mn' wire:focusout="dispatchMe('serem_mn')" :inputStatus="$inputStatus['serem_mn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-fglabel-model-input">FG LABEL</x-label><x-inputText id="5-fglabel-model-input" wire:model='inputs.fg_label_mn' wire:focusout="dispatchMe('fg_label_mn')" :inputStatus="$inputStatus['fg_label_mn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-vmi-model-input">VMI LABEL / QR CODE LABEL</x-label><x-inputText id="5-vmi-model-input" wire:model='inputs.vmi_qr_mn' wire:focusout="dispatchMe('vmi_qr_mn')" :inputStatus="$inputStatus['vmi_qr_mn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-mc-model-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-model-input" wire:model='inputs.mc_label_mn' wire:focusout="dispatchMe('mc_label_mn')" :inputStatus="$inputStatus['mc_label_mn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-pallet-model-input">PALLET LABEL</x-label><x-inputText id="5-pallet-model-input" wire:model='inputs.pallet_label_mn' wire:focusout="dispatchMe('pallet_label_mn')" :inputStatus="$inputStatus['pallet_label_mn']"></x-inputText>
+                    </div>
                 </div>
             </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-shipinv-model-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-model-input" wire:model='inputs.shipping_invoice_mn' wire:focusout="dispatchMe('shipping_invoice_mn')" :inputStatus="$inputStatus['shipping_invoice_mn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-serem-model-input">SEREM</x-label><x-inputText id="5-serem-model-input" marginleft="ml-4" wire:model='inputs.serem_mn' wire:focusout="dispatchMe('serem_mn')" :inputStatus="$inputStatus['serem_mn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-fglabel-model-input">FG LABEL</x-label><x-inputText id="5-fglabel-model-input" wire:model='inputs.fg_label_mn' wire:focusout="dispatchMe('fg_label_mn')" :inputStatus="$inputStatus['fg_label_mn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-vmi-model-input">VMI LABEL / QR CODE LABEL</x-label><x-inputText id="5-vmi-model-input" wire:model='inputs.vmi_qr_mn' wire:focusout="dispatchMe('vmi_qr_mn')" :inputStatus="$inputStatus['vmi_qr_mn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-mc-model-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-model-input" wire:model='inputs.mc_label_mn' wire:focusout="dispatchMe('mc_label_mn')" :inputStatus="$inputStatus['mc_label_mn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-pallet-model-input">PALLET LABEL</x-label><x-inputText id="5-pallet-model-input" wire:model='inputs.pallet_label_mn' wire:focusout="dispatchMe('pallet_label_mn')" :inputStatus="$inputStatus['pallet_label_mn']"></x-inputText>
-                </div>
-            </div>
-            <div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label>ARE ALL MODEL NAME THE SAME?</x-label>
-                </div>
-                <div class="col-span-1">
-                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-model-same-yes" type="radio" value="1" wire:model='inputs.same_model_mn' wire:focusout="dispatchMe('same_model_mn')" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
-                                <label for="5-model-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+            
+            <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    VERIFICATION
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <x-label class="text-base font-medium text-gray-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                            </svg>
+                            ARE ALL MODEL NAME THE SAME?
+                        </x-label>
+                        <div class="bg-white rounded-lg border border-gray-200 p-1">
+                            <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-model-same-yes" 
+                                        type="radio" 
+                                        value="1" 
+                                        wire:model='inputs.same_model_mn' 
+                                        wire:focusout="dispatchMe('same_model_mn')" 
+                                        name="5-model-same" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-green-600 text-xl mr-2">✓</span>YES
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-model-same-no" 
+                                        type="radio" 
+                                        value="0" 
+                                        wire:model='inputs.same_model_mn' 
+                                        wire:focusout="dispatchMe('same_model_mn')" 
+                                        name="5-model-same" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-red-600 text-xl mr-2">✗</span>NO
+                                    </label>
+                                </div>
                             </div>
-                        </li>
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-model-same-no" type="radio" value="0" wire:model='inputs.same_model_mn' wire:focusout="dispatchMe('same_model_mn')" name="5-model-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
-                                <label for="5-model-same-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                        </div>
+                    </div>
+
+                    <!-- Judgement -->
+                    <div class="space-y-3">
+                        <x-label class="text-base font-medium text-gray-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/>
+                            </svg>
+                            Final Judgement
+                        </x-label>
+                        <div class="bg-white rounded-lg border border-gray-200 p-1">
+                            <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-model-judgement-ok" 
+                                        type="radio" 
+                                        value="1" 
+                                        wire:model='inputs.judgement_mn' 
+                                        wire:focusout="dispatchMe('judgement_mn')" 
+                                        name="5-model-judgement" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-green-600 text-xl mr-2">✓</span>OK
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-model-judgement-ng" 
+                                        type="radio" 
+                                        value="0" 
+                                        wire:model='inputs.judgement_mn' 
+                                        wire:focusout="dispatchMe('judgement_mn')" 
+                                        name="5-model-judgement" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-red-600 text-xl mr-2">✗</span>NG
+                                    </label>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label>JUDGEMENT</x-label>
-                </div>
-                <div class="col-span-1">
-                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-model-judgement-ok" type="radio" value="1" wire:model='inputs.judgement_mn' wire:focusout="dispatchMe('judgement_mn')" name="5-model-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
-                                <label for="5-model-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
-                            </div>
-                        </li>
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-model-judgement-ng" type="radio" value="0" wire:model='inputs.judgement_mn' wire:focusout="dispatchMe('judgement_mn')" name="5-model-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="5-model-judgement-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl shadow-xl p-2 bg-gray-50">
-            <div class="row-span-3 col-span-2 flex items-center justify-center">
-                <x-label :semibold="true">MODEL CODE</x-label>
+
+        <div class="section-card card-hover rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-blue-100 p-2 rounded-lg">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h7.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-lg md:text-xl font-semibold text-gray-800">MODEL CODE</h2>
             </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-picklist-modelcode-input">PICK LIST</x-label><x-inputText id="5-picklist-modelcode-input" wire:model='inputs.picklist_mc' wire:focusout="dispatchMe('picklist_mc')" :inputStatus="$inputStatus['picklist_mc']"></x-inputText>
+            <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl p-2 bg-gradient-to-r from-blue-50 to-indigo-50 pt-12">
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-picklist-modelcode-input">PICK LIST</x-label><x-inputText id="5-picklist-modelcode-input" wire:model='inputs.picklist_mc' wire:focusout="dispatchMe('picklist_mc')" :inputStatus="$inputStatus['picklist_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-shipinv-modelcode-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-modelcode-input" wire:model='inputs.shipping_invoice_mc' wire:focusout="dispatchMe('shipping_invoice_mc')" :inputStatus="$inputStatus['shipping_invoice_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-serem-momodelcodedel-input">SEREM</x-label><x-inputText id="5-serem-modelcode-input" marginleft="ml-4" wire:model='inputs.serem_mc' wire:focusout="dispatchMe('serem_mc')" :inputStatus="$inputStatus['serem_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-sir-modelcode-input">SIR</x-label><x-inputText id="5-sir-modelcode-input" marginleft="ml-6" wire:model='inputs.sir_mc' wire:focusout="dispatchMe('sir_mc')" :inputStatus="$inputStatus['sir_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-shiplabel-modelcode-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-shiplabel-input" wire:model='inputs.shipping_label_mc' wire:focusout="dispatchMe('shipping_label_mc')" :inputStatus="$inputStatus['shipping_label_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-vmi-modelcode-input">VMI LABEL</x-label><x-inputText id="5-vmi-shiplabel-input" wire:model='inputs.vmi_label_mc' wire:focusout="dispatchMe('vmi_label_mc')" :inputStatus="$inputStatus['vmi_label_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-mc-modelcode-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-shiplabel-input" wire:model='inputs.mc_barcode_mc' wire:focusout="dispatchMe('mc_barcode_mc')" :inputStatus="$inputStatus['mc_barcode_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-pallet-modelcode-input">PALLET LABEL</x-label><x-inputText id="5-pallet-shiplabel-input" wire:model='inputs.pallet_label_mc' wire:focusout="dispatchMe('pallet_label_mc')" :inputStatus="$inputStatus['pallet_label_mc']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-speciallabel-modelcode-input">SPECIFIC LABEL/QR CODE LABEL</x-label><x-inputText id="5-speciallabel-shiplabel-input" wire:model='inputs.specific_qr_label_mc' wire:focusout="dispatchMe('specific_qr_label_mc')" :inputStatus="$inputStatus['specific_qr_label_mc']"></x-inputText>
+                    </div>
                 </div>
             </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-shipinv-modelcode-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-modelcode-input" wire:model='inputs.shipping_invoice_mc' wire:focusout="dispatchMe('shipping_invoice_mc')" :inputStatus="$inputStatus['shipping_invoice_mc']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-serem-momodelcodedel-input">SEREM</x-label><x-inputText id="5-serem-modelcode-input" marginleft="ml-4" wire:model='inputs.serem_mc' wire:focusout="dispatchMe('serem_mc')" :inputStatus="$inputStatus['serem_mc']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-sir-modelcode-input">SIR</x-label><x-inputText id="5-sir-modelcode-input" marginleft="ml-6" wire:model='inputs.sir_mc' wire:focusout="dispatchMe('sir_mc')" :inputStatus="$inputStatus['sir_mc']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-shiplabel-modelcode-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-shiplabel-input" wire:model='inputs.shipping_label_mc' wire:focusout="dispatchMe('shipping_label_mc')" :inputStatus="$inputStatus['shipping_label_mc']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-vmi-modelcode-input">VMI LABEL</x-label><x-inputText id="5-vmi-shiplabel-input" wire:model='inputs.vmi_label_mc' wire:focusout="dispatchMe('vmi_label_mc')" :inputStatus="$inputStatus['vmi_label_mc']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-mc-modelcode-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-shiplabel-input" wire:model='inputs.mc_barcode_mc' wire:focusout="dispatchMe('mc_barcode_mc')" :inputStatus="$inputStatus['mc_barcode_mc']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-pallet-modelcode-input">PALLET LABEL</x-label><x-inputText id="5-pallet-shiplabel-input" wire:model='inputs.pallet_label_mc' wire:focusout="dispatchMe('pallet_label_mc')" :inputStatus="$inputStatus['pallet_label_mc']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-speciallabel-modelcode-input">SPECIFIC LABEL/QR CODE LABEL</x-label><x-inputText id="5-speciallabel-shiplabel-input" wire:model='inputs.specific_qr_label_mc' wire:focusout="dispatchMe('specific_qr_label_mc')" :inputStatus="$inputStatus['specific_qr_label_mc']"></x-inputText>
-                </div>
-            </div>
-            <div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label>ARE ALL MODEL CODE THE SAME?</x-label>
-                </div>
-                <div class="col-span-1">
-                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-modelcode-same-yes" type="radio" value="1" wire:model='inputs.same_mc' wire:focusout="dispatchMe('same_mc')" name="5-modelcode-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
-                                <label for="5-modelcode-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+            <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    VERIFICATION
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <x-label class="text-base font-medium text-gray-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                            </svg>
+                            ARE ALL MODEL CODE THE SAME?
+                        </x-label>
+                        <div class="bg-white rounded-lg border border-gray-200 p-1">
+                            <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-modelcode-same-yes" 
+                                        type="radio" 
+                                        value="1" 
+                                        wire:model='inputs.same_mc' 
+                                        wire:focusout="dispatchMe('same_mc')" 
+                                        name="5-modelcode-same" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-green-600 text-xl mr-2">✓</span>YES
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-modelcode-same-no" 
+                                        type="radio" 
+                                        value="0"
+                                        wire:model='inputs.same_mc' 
+                                        wire:focusout="dispatchMe('same_mc')" 
+                                        name="5-modelcode-same" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-red-600 text-xl mr-2">✗</span>NO
+                                    </label>
+                                </div>
                             </div>
-                        </li>
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-modelcode-same-no" type="radio" value="0" wire:model='inputs.same_mc' wire:focusout="dispatchMe('same_mc')" name="5-modelcode-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="5-modelcode-same-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                        </div>
+                    </div>
+
+                    <!-- Judgement -->
+                    <div class="space-y-3">
+                        <x-label class="text-base font-medium text-gray-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/>
+                            </svg>
+                            Final Judgement
+                        </x-label>
+                        <div class="bg-white rounded-lg border border-gray-200 p-1">
+                            <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-modelcode-judegment-ok" 
+                                        type="radio" 
+                                        value="1" 
+                                        wire:model='inputs.judgement_mc' 
+                                        wire:focusout="dispatchMe('judgement_mc')" 
+                                        name="5-modelcode-judegment" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-green-600 text-xl mr-2">✓</span>OK
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-modelcode-judegment-ng" 
+                                        type="radio" 
+                                        value="0" 
+                                        wire:model='inputs.judgement_mc' 
+                                        wire:focusout="dispatchMe('judgement_mc')" 
+                                        name="5-modelcode-judegment" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-red-600 text-xl mr-2">✗</span>NG
+                                    </label>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label>JUDGEMENT</x-label>
-                </div>
-                <div class="col-span-1">
-                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-modelcode-judegment-ok" type="radio" value="1" wire:model='inputs.judgement_mc' wire:focusout="dispatchMe('judgement_mc')" name="5-modelcode-judegment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
-                                <label for="5-modelcode-judegment-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
-                            </div>
-                        </li>
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-modelcode-judegment-ng" type="radio" value="0" wire:model='inputs.judgement_mc' wire:focusout="dispatchMe('judgement_mc')" name="5-modelcode-judegment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="5-modelcode-judegment-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl shadow-xl p-2 bg-gray-50">
-            <div class="row-span-3 col-span-2 flex items-center justify-center">
-                <x-label :semibold="true">PART NUMBER</x-label>
+        <div class="section-card card-hover rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-blue-100 p-2 rounded-lg">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h7.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-lg md:text-xl font-semibold text-gray-800">PART NUMBER</h2>
             </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-picklist-partnumber-input">PICK LIST</x-label><x-inputText id="5-picklist-partnumber-input" wire:model='inputs.picklist_pn' wire:focusout="dispatchMe('picklist_pn')" :inputStatus="$inputStatus['picklist_pn']"></x-inputText>
+            <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl p-2 bg-gradient-to-r from-blue-50 to-indigo-50 pt-12">
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-picklist-partnumber-input">PICK LIST</x-label><x-inputText id="5-picklist-partnumber-input" wire:model='inputs.picklist_pn' wire:focusout="dispatchMe('picklist_pn')" :inputStatus="$inputStatus['picklist_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-shipinv-partnumber-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-partnumber-input" wire:model='inputs.shipping_invoice_pn' wire:focusout="dispatchMe('shipping_invoice_pn')" :inputStatus="$inputStatus['shipping_invoice_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-serem-partnumber-input">SEREM</x-label><x-inputText id="5-serem-partnumber-input" marginleft="ml-4" wire:model='inputs.serem_pn' wire:focusout="dispatchMe('serem_pn')" :inputStatus="$inputStatus['serem_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-sir-partnumber-input">SIR</x-label><x-inputText id="5-sir-partnumber-input" marginleft="ml-6" wire:model='inputs.sir_pn' wire:focusout="dispatchMe('sir_pn')" :inputStatus="$inputStatus['sir_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-shiplabel-partnumber-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-partnumber-input" wire:model='inputs.shipping_label_pn' wire:focusout="dispatchMe('shipping_label_pn')" :inputStatus="$inputStatus['shipping_label_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-vmi-partnumber-input">VMI LABEL</x-label><x-inputText id="5-vmi-partnumber-input" wire:model='inputs.vmi_pn' wire:focusout="dispatchMe('vmi_pn')" :inputStatus="$inputStatus['vmi_pn']"></x-inputText>
+                    </div>
                 </div>
             </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-shipinv-partnumber-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-partnumber-input" wire:model='inputs.shipping_invoice_pn' wire:focusout="dispatchMe('shipping_invoice_pn')" :inputStatus="$inputStatus['shipping_invoice_pn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-serem-partnumber-input">SEREM</x-label><x-inputText id="5-serem-partnumber-input" marginleft="ml-4" wire:model='inputs.serem_pn' wire:focusout="dispatchMe('serem_pn')" :inputStatus="$inputStatus['serem_pn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-sir-partnumber-input">SIR</x-label><x-inputText id="5-sir-partnumber-input" marginleft="ml-6" wire:model='inputs.sir_pn' wire:focusout="dispatchMe('sir_pn')" :inputStatus="$inputStatus['sir_pn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-shiplabel-partnumber-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-partnumber-input" wire:model='inputs.shipping_label_pn' wire:focusout="dispatchMe('shipping_label_pn')" :inputStatus="$inputStatus['shipping_label_pn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label for="5-vmi-partnumber-input">VMI LABEL</x-label><x-inputText id="5-vmi-partnumber-input" wire:model='inputs.vmi_pn' wire:focusout="dispatchMe('vmi_pn')" :inputStatus="$inputStatus['vmi_pn']"></x-inputText>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label>ARE ALL PART NUMBER THE SAME?</x-label>
-                </div>
-                <div class="col-span-1">
-                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-partnumber-same-yes" type="radio" value="1" wire:model='inputs.same_pn' wire:focusout="dispatchMe('same_pn')" name="5-partnumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
-                                <label for="5-partnumber-same-yes" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">YES</label>
+            <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    VERIFICATION
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <x-label class="text-base font-medium text-gray-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                            </svg>
+                            ARE ALL PART NUMBER THE SAME?
+                        </x-label>
+                        <div class="bg-white rounded-lg border border-gray-200 p-1">
+                            <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-partnumber-same-yes" 
+                                        type="radio" 
+                                        value="1" 
+                                        wire:model='inputs.same_pn'
+                                        wire:focusout="dispatchMe('same_pn')" 
+                                        name="5-partnumber-same"  
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-green-600 text-xl mr-2">✓</span>YES
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-partnumber-same-no" 
+                                        type="radio" 
+                                        value="0" 
+                                        wire:model='inputs.same_pn' 
+                                        wire:focusout="dispatchMe('same_pn')" 
+                                        name="5-partnumber-same" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-red-600 text-xl mr-2">✗</span>NO
+                                    </label>
+                                </div>
                             </div>
-                        </li>
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-partnumber-same-no" type="radio" value="0" wire:model='inputs.same_pn' wire:focusout="dispatchMe('same_pn')" name="5-partnumber-same" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="5-partnumber-same-no" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NO</label>
+                        </div>
+                    </div>
+
+                    <!-- Judgement -->
+                    <div class="space-y-3">
+                        <x-label class="text-base font-medium text-gray-700 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/>
+                            </svg>
+                            Final Judgement
+                        </x-label>
+                        <div class="bg-white rounded-lg border border-gray-200 p-1">
+                            <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-partnumber-judgement-ok" 
+                                        type="radio" 
+                                        value="1" 
+                                        wire:model='inputs.judgement_pn' 
+                                        wire:focusout="dispatchMe('judgement_pn')" 
+                                        name="5-partnumber-judgement" 
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-green-600 text-xl mr-2">✓</span>OK
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input 
+                                        id="5-partnumber-judgement-ng" 
+                                        type="radio" 
+                                        value="0" 
+                                        wire:model='inputs.judgement_pn' 
+                                        wire:focusout="dispatchMe('judgement_pn')" 
+                                        name="5-partnumber-judgement"
+                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                        >
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        <span class="text-red-600 text-xl mr-2">✗</span>NG
+                                    </label>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-span-1 md:grid-cols-2">
-                <div class="col-span-1 flex items-center justify-center">
-                    <x-label>JUDGEMENT</x-label>
-                </div>
-                <div class="col-span-1">
-                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-partnumber-judgement-ok" type="radio" value="1" wire:model='inputs.judgement_pn' wire:focusout="dispatchMe('judgement_pn')" name="5-partnumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" <?php //required ?>>
-                                <label for="5-partnumber-judgement-ok" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">OK</label>
-                            </div>
-                        </li>
-                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                            <div class="flex items-center ps-3">
-                                <input id="5-partnumber-judgement-ng" type="radio" value="0" wire:model='inputs.judgement_pn' wire:focusout="dispatchMe('judgement_pn')" name="5-partnumber-judgement" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="5-partnumber-judgement-ng" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NG</label>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
