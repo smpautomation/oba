@@ -247,75 +247,119 @@
             
         </div>
     </div>
+    
 </div>
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    let stream = null;
-    let scanning = false;
-    let video = null;
-    let canvas = null;
-    let context = null;
+let stream = null;
+let scanning = false;
+let video = null;
+let canvas = null;
+let context = null;
 
-    function initializeScanner() {
-        video = document.getElementById('scanner-video');
-        canvas = document.getElementById('scanner-canvas');
+function startScanner() {
+    console.log('Starting scanner...');
+    
+    video = document.getElementById('scanner-video');
+    canvas = document.getElementById('scanner-canvas');
+    
+    if (!video || !canvas) {
+        console.error('Video or canvas element not found');
+        return;
+    }
+    
+    context = canvas.getContext('2d');
+    
+    // Check if getUserMedia is supported
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        console.error('getUserMedia not supported');
+        @this.dispatch('scan-error', 'Camera not supported in this browser');
+        return;
+    }
+    
+    // Request camera access
+    navigator.mediaDevices.getUserMedia({ 
+        video: { 
+            facingMode: 'environment',  // Use back camera if available
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+        } 
+    })
+    .then(function(mediaStream) {
+        console.log('Camera access granted');
+        stream = mediaStream;
+        video.srcObject = stream;
         
-        if (!video || !canvas) return;
-        
-        context = canvas.getContext('2d');
-        
-        // Start camera
-        navigator.mediaDevices.getUserMedia({ 
-            video: { 
-                facingMode: 'environment',  // Use back camera if available
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            } 
-        })
-        .then(function(mediaStream) {
-            stream = mediaStream;
-            video.srcObject = stream;
-            video.onloadedmetadata = function() {
+        video.addEventListener('loadedmetadata', function() {
+            console.log('Video metadata loaded');
+            video.play().then(() => {
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
                 scanning = true;
+                console.log('Starting scan loop');
                 scanFrame();
-            };
-        })
-        .catch(function(error) {
-            console.error('Camera access error:', error);
-            @this.dispatch('scan-error', 'Camera access denied or not available');
+            }).catch(err => {
+                console.error('Error playing video:', err);
+                @this.dispatch('scan-error', 'Error starting camera');
+            });
         });
+        
+        video.addEventListener('error', function(e) {
+            console.error('Video error:', e);
+            @this.dispatch('scan-error', 'Video error occurred');
+        });
+    })
+    .catch(function(error) {
+        console.error('Camera access error:', error);
+        let errorMessage = 'Camera access denied';
+        if (error.name === 'NotFoundError') {
+            errorMessage = 'No camera found';
+        } else if (error.name === 'NotAllowedError') {
+            errorMessage = 'Camera permission denied';
+        } else if (error.name === 'NotReadableError') {
+            errorMessage = 'Camera is already in use';
+        }
+        @this.dispatch('scan-error', errorMessage);
+    });
+}
+
+function scanFrame() {
+    if (!scanning || !video || !context || video.readyState !== video.HAVE_ENOUGH_DATA) {
+        if (scanning) {
+            requestAnimationFrame(scanFrame);
+        }
+        return;
     }
 
-    function scanFrame() {
-        if (!scanning || !video || !context) return;
-
+    try {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         
         // Try QR code detection first
         const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
-        if (qrCode) {
+        if (qrCode && qrCode.data) {
+            console.log('QR Code detected:', qrCode.data);
             handleScanResult(qrCode.data);
             return;
         }
 
         // Try barcode detection
         scanBarcode(canvas);
-
-        // Continue scanning
-        if (scanning) {
-            requestAnimationFrame(scanFrame);
-        }
+    } catch (error) {
+        console.error('Scan frame error:', error);
     }
 
-    function scanBarcode(canvas) {
-        // Initialize Quagga for barcode scanning
+    // Continue scanning
+    if (scanning) {
+        requestAnimationFrame(scanFrame);
+    }
+}
+
+function scanBarcode(canvas) {
+    try {
         Quagga.decodeSingle({
             decoder: {
                 readers: [
@@ -333,54 +377,56 @@ document.addEventListener('DOMContentLoaded', function() {
             locate: true,
             src: canvas.toDataURL()
         }, function(result) {
-            if (result && result.codeResult) {
+            if (result && result.codeResult && result.codeResult.code) {
+                console.log('Barcode detected:', result.codeResult.code);
                 handleScanResult(result.codeResult.code);
             }
         });
+    } catch (error) {
+        console.error('Barcode scan error:', error);
     }
+}
 
-    function handleScanResult(code) {
-        if (scanning) {
-            scanning = false;
-            stopCamera();
-            @this.dispatch('code-scanned', code);
-        }
-    }
-
-    function stopCamera() {
+function handleScanResult(code) {
+    if (scanning && code) {
+        console.log('Handling scan result:', code);
         scanning = false;
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            stream = null;
-        }
-        if (video) {
-            video.srcObject = null;
-        }
+        stopCamera();
+        @this.dispatch('code-scanned', code);
     }
+}
 
-    // Livewire event listeners
-    window.addEventListener('livewire:init', function() {
-        Livewire.on('stop-scanner', function() {
-            stopCamera();
+function stopCamera() {
+    console.log('Stopping camera...');
+    scanning = false;
+    if (stream) {
+        stream.getTracks().forEach(track => {
+            track.stop();
+            console.log('Track stopped:', track.kind);
         });
-    });
+        stream = null;
+    }
+    if (video) {
+        video.srcObject = null;
+        video.pause();
+    }
+}
 
-    // Initialize scanner when modal opens
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'childList') {
-                const scannerVideo = document.getElementById('scanner-video');
-                if (scannerVideo && !scanning) {
-                    setTimeout(initializeScanner, 100);
-                }
-            }
-        });
+// Livewire event listeners
+document.addEventListener('livewire:init', function() {
+    Livewire.on('stop-scanner', function() {
+        stopCamera();
     });
+});
 
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+// Listen for Livewire updates to detect when modal opens
+document.addEventListener('livewire:updated', function() {
+    const scannerVideo = document.getElementById('scanner-video');
+    if (scannerVideo && !scanning && !stream) {
+        console.log('Scanner modal detected, starting camera...');
+        // Small delay to ensure modal is fully rendered
+        setTimeout(startScanner, 300);
+    }
 });
 </script>
 @endpush
