@@ -248,3 +248,139 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let stream = null;
+    let scanning = false;
+    let video = null;
+    let canvas = null;
+    let context = null;
+
+    function initializeScanner() {
+        video = document.getElementById('scanner-video');
+        canvas = document.getElementById('scanner-canvas');
+        
+        if (!video || !canvas) return;
+        
+        context = canvas.getContext('2d');
+        
+        // Start camera
+        navigator.mediaDevices.getUserMedia({ 
+            video: { 
+                facingMode: 'environment',  // Use back camera if available
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            } 
+        })
+        .then(function(mediaStream) {
+            stream = mediaStream;
+            video.srcObject = stream;
+            video.onloadedmetadata = function() {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                scanning = true;
+                scanFrame();
+            };
+        })
+        .catch(function(error) {
+            console.error('Camera access error:', error);
+            @this.dispatch('scan-error', 'Camera access denied or not available');
+        });
+    }
+
+    function scanFrame() {
+        if (!scanning || !video || !context) return;
+
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        
+        // Try QR code detection first
+        const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
+        if (qrCode) {
+            handleScanResult(qrCode.data);
+            return;
+        }
+
+        // Try barcode detection
+        scanBarcode(canvas);
+
+        // Continue scanning
+        if (scanning) {
+            requestAnimationFrame(scanFrame);
+        }
+    }
+
+    function scanBarcode(canvas) {
+        // Initialize Quagga for barcode scanning
+        Quagga.decodeSingle({
+            decoder: {
+                readers: [
+                    "code_128_reader",
+                    "ean_reader",
+                    "ean_8_reader",
+                    "code_39_reader",
+                    "code_39_vin_reader",
+                    "codabar_reader",
+                    "upc_reader",
+                    "upc_e_reader",
+                    "i2of5_reader"
+                ]
+            },
+            locate: true,
+            src: canvas.toDataURL()
+        }, function(result) {
+            if (result && result.codeResult) {
+                handleScanResult(result.codeResult.code);
+            }
+        });
+    }
+
+    function handleScanResult(code) {
+        if (scanning) {
+            scanning = false;
+            stopCamera();
+            @this.dispatch('code-scanned', code);
+        }
+    }
+
+    function stopCamera() {
+        scanning = false;
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            stream = null;
+        }
+        if (video) {
+            video.srcObject = null;
+        }
+    }
+
+    // Livewire event listeners
+    window.addEventListener('livewire:init', function() {
+        Livewire.on('stop-scanner', function() {
+            stopCamera();
+        });
+    });
+
+    // Initialize scanner when modal opens
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                const scannerVideo = document.getElementById('scanner-video');
+                if (scannerVideo && !scanning) {
+                    setTimeout(initializeScanner, 100);
+                }
+            }
+        });
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+});
+</script>
+@endpush
