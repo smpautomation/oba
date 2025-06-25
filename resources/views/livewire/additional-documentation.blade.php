@@ -278,14 +278,14 @@
                     </div>
                 </div>
                 
-                <div class="p-6 overflow-auto max-h-[50rem]">
+                <div class="p-6 overflow-auto max-h-[40rem]">
                     @if($selectedDocumentType === 'pdf')
                         <div class="text-center">
                             <embed 
                                 src="{{ $selectedDocumentUrl }}" 
                                 type="application/pdf" 
                                 width="100%" 
-                                height = "800px"
+                                height = "550px"
                                 class="rounded-lg border"
                             />
                             <p class="text-sm text-gray-500 mt-4">
