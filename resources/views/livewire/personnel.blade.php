@@ -74,6 +74,139 @@
                             </div>
                         </div>
 
+                        @push('scripts')
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+                        <style>
+                            .scanner-overlay {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 200px;
+                                height: 100px;
+                                border: 2px solid #ef4444;
+                                border-radius: 8px;
+                                z-index: 10;
+                                pointer-events: none;
+                            }
+                            
+                            .scanner-overlay::before {
+                                content: '';
+                                position: absolute;
+                                top: -2px;
+                                left: -2px;
+                                right: -2px;
+                                bottom: -2px;
+                                border: 2px solid rgba(239, 68, 68, 0.3);
+                                border-radius: 8px;
+                                animation: pulse 2s infinite;
+                            }
+                            
+                            @keyframes pulse {
+                                0%, 100% { opacity: 1; }
+                                50% { opacity: 0.5; }
+                            }
+
+                            #scanner video {
+                                width: 100% !important;
+                                height: 100% !important;
+                                object-fit: cover;
+                            }
+
+                            #scanner canvas {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                            }
+                        </style>
+                        
+                        <script>
+                            document.addEventListener('livewire:initialized', () => {
+                                let scanner = null;
+                                
+                                // Initialize scanner when showScanner becomes true
+                                Livewire.hook('morph.updated', ({ el, component }) => {
+                                    const scannerElement = document.getElementById('scanner');
+                                    const showScanner = @this.showScanner;
+                                    
+                                    if (showScanner && scannerElement && !scanner) {
+                                        initializeScanner();
+                                    } else if (!showScanner && scanner) {
+                                        stopScanner();
+                                    }
+                                });
+                                
+                                function initializeScanner() {
+                                    const scannerElement = document.getElementById('scanner');
+                                    if (!scannerElement) return;
+                                    
+                                    Quagga.init({
+                                        inputStream: {
+                                            name: "Live",
+                                            type: "LiveStream",
+                                            target: scannerElement,
+                                            constraints: {
+                                                width: 400,
+                                                height: 256,
+                                                facingMode: "environment"
+                                            }
+                                        },
+                                        decoder: {
+                                            readers: [
+                                                "code_128_reader",
+                                                "ean_reader",
+                                                "ean_8_reader",
+                                                "code_39_reader",
+                                                "code_39_vin_reader",
+                                                "codabar_reader",
+                                                "upc_reader",
+                                                "upc_e_reader",
+                                                "i2of5_reader"
+                                            ]
+                                        },
+                                        locate: true,
+                                        locator: {
+                                            patchSize: "medium",
+                                            halfSample: true
+                                        }
+                                    }, function(err) {
+                                        if (err) {
+                                            console.error('QuaggaJS initialization error:', err);
+                                            alert('Camera access denied or not available');
+                                            return;
+                                        }
+                                        
+                                        scanner = true;
+                                        Quagga.start();
+                                    });
+                                    
+                                    Quagga.onDetected(function(data) {
+                                        if (data && data.codeResult && data.codeResult.code) {
+                                            const code = data.codeResult.code;
+                                            Quagga.stop();
+                                            scanner = null;
+                                            
+                                            // Dispatch the scanned code to Livewire
+                                            @this.dispatch('barcode-scanned', { code: code });
+                                        }
+                                    });
+                                }
+                                
+                                function stopScanner() {
+                                    if (scanner) {
+                                        Quagga.stop();
+                                        scanner = null;
+                                    }
+                                }
+                                
+                                // Cleanup when component is destroyed
+                                document.addEventListener('livewire:navigating', () => {
+                                    stopScanner();
+                                });
+                            });
+                        </script>
+                        @endpush
+
                         <!-- Date -->
                         <div class="form-group">
                             <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
