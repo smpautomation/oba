@@ -37,6 +37,7 @@
                                         </div>
                                         <button type="button" 
                                                 wire:click="openQrScanner"
+                                                id="myBtn"
                                                 class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors duration-200">
                                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 16h4m-4 0v4m-4-4h4m-4-4h4m-4-4v4"></path>
@@ -108,80 +109,7 @@
                         </div>
                         @endif
 
-                        @push('scripts')
-                        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/instascan/1.0.0/instascan.min.js"></script> --}}
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                let scanner = null;
-                                let isScanning = false;
-
-                                // Listen for Livewire events
-                                Livewire.on('initQrScanner', () => {
-                                    setTimeout(() => {
-                                        initializeScanner();
-                                    }, 100);
-                                });
-
-                                Livewire.on('stopQrScanner', () => {
-                                    stopScanner();
-                                });
-
-                                function initializeScanner() {
-                                    if (isScanning) return;
-
-                                    const video = document.getElementById('qr-preview');
-                                    const loading = document.getElementById('qr-loading');
-                                    
-                                    if (!video) return;
-
-                                    scanner = new Instascan.Scanner({
-                                        video: video,
-                                        mirror: false,
-                                        continuous: true,
-                                        captureImage: false,
-                                        backgroundScan: false
-                                    });
-
-                                    scanner.addListener('scan', function(content) {
-                                        console.log('QR Code scanned:', content);
-                                        Livewire.dispatch('qrScanned', { content: content });
-                                        stopScanner();
-                                    });
-
-                                    Instascan.Camera.getCameras().then(function(cameras) {
-                                        if (cameras.length > 0) {
-                                            //scanner.start(cameras[1]);
-                                            var selectedCam = cameras[0];
-                                            $.each(cameras, (i, c) => {
-                                                if (c.name.indexOf('back') != -1) {
-                                                    selectedCam = c;
-                                                    //return false;
-                                                }
-                                            });
-                                            scanner.start(selectedCam);
-                                        } else {
-                                            console.error('No cameras found.');
-                                        }
-                                    }).catch(function(e) {
-                                        console.error(e);
-                                    });
-                                }
-
-                                function stopScanner() {
-                                    if (scanner && isScanning) {
-                                        scanner.stop();
-                                        isScanning = false;
-                                        console.log('Scanner stopped');
-                                    }
-                                }
-
-                                // Cleanup when page unloads
-                                window.addEventListener('beforeunload', function() {
-                                    stopScanner();
-                                });
-                            });
-                        </script>
-                        @endpush
+                       
 
                         
 

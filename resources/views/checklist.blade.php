@@ -10,6 +10,7 @@
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
         <script src="{{ asset('js/custom.js') }}" defer></script>
         <script src="{{ asset('js/4instascan.min.js') }}" defer></script>
+        <script src="{{ asset('js/scanner.js') }}" defer></script>
 
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
