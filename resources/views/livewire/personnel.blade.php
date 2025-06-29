@@ -36,32 +36,15 @@
                                             Shipping PIC
                                         </div>
                                         <button type="button" 
-                                                wire:click="toggleScanner" 
-                                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors">
-                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M12 12C12 12 12 12 12 12m4 2a4 4 0 11-8 0 4 4 0 018 0zm2-13a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                                wire:click="openQrScanner"
+                                                class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors duration-200">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 16h4m-4 0v4m-4-4h4m-4-4h4m-4-4v4"></path>
                                             </svg>
-                                            {{ $showScanner ? 'Close Scanner' : 'Scan Code' }}
+                                            Scan QR
                                         </button>
                                     </div>
                                 </label>
-                                
-                                @if($showScanner)
-                                    <div class="mb-4 p-4 bg-white rounded-xl border-2 border-dashed border-blue-300">
-                                        <div id="scanner-container" class="relative">
-                                            <div id="scanner" class="w-full h-64 bg-black rounded-lg overflow-hidden"></div>
-                                            <div class="scanner-overlay"></div>
-                                        </div>
-                                        <div class="mt-3 text-center">
-                                            <p class="text-sm text-gray-600 mb-2">Position the barcode/QR code within the red frame</p>
-                                            <button type="button" 
-                                                    wire:click="toggleScanner" 
-                                                    class="text-sm text-red-600 hover:text-red-800">
-                                                Cancel Scanning
-                                            </button>
-                                        </div>
-                                    </div>
-                                @endif
                                 
                                 <x-inputText
                                     id="7-shippingpic"
@@ -74,138 +57,139 @@
                             </div>
                         </div>
 
+                        <!-- QR Scanner Modal -->
+                        @if($showQrModal)
+                        <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" 
+                            x-data="{ isOpen: @entangle('showQrModal') }"
+                            x-show="isOpen"
+                            x-transition:enter="ease-out duration-300"
+                            x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100"
+                            x-transition:leave="ease-in duration-200"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0">
+                            
+                            <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-2/3 lg:w-1/2 shadow-lg rounded-md bg-white">
+                                <!-- Modal Header -->
+                                <div class="flex items-center justify-between pb-3 border-b">
+                                    <h3 class="text-lg font-semibold text-gray-900">
+                                        <svg class="w-6 h-6 inline mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 16h4m-4 0v4m-4-4h4m-4-4h4m-4-4v4"></path>
+                                        </svg>
+                                        SCAN QR CODE
+                                    </h3>
+                                    <button type="button" 
+                                            wire:click="closeQrScanner"
+                                            class="text-gray-400 hover:text-gray-600 text-2xl font-bold">
+                                        &times;
+                                    </button>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="py-4">
+                                    <div class="text-center" style="border-style: inset; padding: 20px; border-radius: 8px;">
+                                        <video autoplay="true" id="qr-preview" width="100%" style="max-width: 400px; height: auto;"></video>
+                                        <div id="qr-loading" class="mt-4">
+                                            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                                            <p class="mt-2 text-sm text-gray-600">Initializing camera...</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="flex justify-between pt-3 border-t">
+                                    <button type="button" 
+                                            wire:click="closeQrScanner"
+                                            class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
                         @push('scripts')
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
-                        <style>
-                            .scanner-overlay {
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                transform: translate(-50%, -50%);
-                                width: 200px;
-                                height: 100px;
-                                border: 2px solid #ef4444;
-                                border-radius: 8px;
-                                z-index: 10;
-                                pointer-events: none;
-                            }
-                            
-                            .scanner-overlay::before {
-                                content: '';
-                                position: absolute;
-                                top: -2px;
-                                left: -2px;
-                                right: -2px;
-                                bottom: -2px;
-                                border: 2px solid rgba(239, 68, 68, 0.3);
-                                border-radius: 8px;
-                                animation: pulse 2s infinite;
-                            }
-                            
-                            @keyframes pulse {
-                                0%, 100% { opacity: 1; }
-                                50% { opacity: 0.5; }
-                            }
-
-                            #scanner video {
-                                width: 100% !important;
-                                height: 100% !important;
-                                object-fit: cover;
-                            }
-
-                            #scanner canvas {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                            }
-                        </style>
-                        
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/instascan/1.0.0/instascan.min.js"></script>
                         <script>
-                            document.addEventListener('livewire:initialized', () => {
+                            document.addEventListener('DOMContentLoaded', function() {
                                 let scanner = null;
-                                
-                                // Initialize scanner when showScanner becomes true
-                                Livewire.hook('morph.updated', ({ el, component }) => {
-                                    const scannerElement = document.getElementById('scanner');
-                                    const showScanner = @this.showScanner;
-                                    
-                                    if (showScanner && scannerElement && !scanner) {
+                                let isScanning = false;
+
+                                // Listen for Livewire events
+                                Livewire.on('initQrScanner', () => {
+                                    setTimeout(() => {
                                         initializeScanner();
-                                    } else if (!showScanner && scanner) {
-                                        stopScanner();
-                                    }
+                                    }, 100);
                                 });
-                                
+
+                                Livewire.on('stopQrScanner', () => {
+                                    stopScanner();
+                                });
+
                                 function initializeScanner() {
-                                    const scannerElement = document.getElementById('scanner');
-                                    if (!scannerElement) return;
+                                    if (isScanning) return;
+
+                                    const video = document.getElementById('qr-preview');
+                                    const loading = document.getElementById('qr-loading');
                                     
-                                    Quagga.init({
-                                        inputStream: {
-                                            name: "Live",
-                                            type: "LiveStream",
-                                            target: scannerElement,
-                                            constraints: {
-                                                width: 400,
-                                                height: 256,
-                                                facingMode: "environment"
-                                            }
-                                        },
-                                        decoder: {
-                                            readers: [
-                                                "code_128_reader",
-                                                "ean_reader",
-                                                "ean_8_reader",
-                                                "code_39_reader",
-                                                "code_39_vin_reader",
-                                                "codabar_reader",
-                                                "upc_reader",
-                                                "upc_e_reader",
-                                                "i2of5_reader"
-                                            ]
-                                        },
-                                        locate: true,
-                                        locator: {
-                                            patchSize: "medium",
-                                            halfSample: true
-                                        }
-                                    }, function(err) {
-                                        if (err) {
-                                            console.error('QuaggaJS initialization error:', err);
-                                            alert('Camera access denied or not available');
-                                            return;
-                                        }
-                                        
-                                        scanner = true;
-                                        Quagga.start();
+                                    if (!video) return;
+
+                                    scanner = new Instascan.Scanner({
+                                        video: video,
+                                        mirror: false,
+                                        continuous: true,
+                                        captureImage: false,
+                                        backgroundScan: false
                                     });
-                                    
-                                    Quagga.onDetected(function(data) {
-                                        if (data && data.codeResult && data.codeResult.code) {
-                                            const code = data.codeResult.code;
-                                            Quagga.stop();
-                                            scanner = null;
+
+                                    scanner.addListener('scan', function(content) {
+                                        console.log('QR Code scanned:', content);
+                                        Livewire.dispatch('qrScanned', { content: content });
+                                        stopScanner();
+                                    });
+
+                                    Instascan.Camera.getCameras().then(function(cameras) {
+                                        if (cameras.length > 0) {
+                                            loading.style.display = 'none';
                                             
-                                            // Dispatch the scanned code to Livewire
-                                            @this.dispatch('barcode-scanned', { code: code });
+                                            // Prefer back camera if available
+                                            let selectedCamera = cameras[0];
+                                            cameras.forEach(camera => {
+                                                if (camera.name.toLowerCase().includes('back')) {
+                                                    selectedCamera = camera;
+                                                }
+                                            });
+
+                                            scanner.start(selectedCamera);
+                                            isScanning = true;
+                                            console.log('Scanner started with camera:', selectedCamera.name);
+                                        } else {
+                                            loading.innerHTML = '<p class="text-red-600">No cameras found. Please check camera permissions.</p>';
+                                            console.error('No cameras found.');
                                         }
+                                    }).catch(function(error) {
+                                        loading.innerHTML = '<p class="text-red-600">Camera access denied or not available.</p>';
+                                        console.error('Camera error:', error);
                                     });
                                 }
-                                
+
                                 function stopScanner() {
-                                    if (scanner) {
-                                        Quagga.stop();
-                                        scanner = null;
+                                    if (scanner && isScanning) {
+                                        scanner.stop();
+                                        isScanning = false;
+                                        console.log('Scanner stopped');
                                     }
                                 }
-                                
-                                // Cleanup when component is destroyed
-                                document.addEventListener('livewire:navigating', () => {
+
+                                // Cleanup when page unloads
+                                window.addEventListener('beforeunload', function() {
                                     stopScanner();
                                 });
                             });
                         </script>
                         @endpush
+
+                        
 
                         <!-- Date -->
                         <div class="form-group">

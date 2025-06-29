@@ -10,13 +10,11 @@ class Personnel extends Component
 {
     public $checklist_id;
     public $checklistInfo;
-    public $showScanner = false;
-    public $inputs = [
-       
-    ];
-    public $inputStatus = [
-       
-    ];
+    public $inputs = [];
+    public $inputStatus = [];
+    public $showQrModal = false;
+    protected $listeners = ['qrScanned' => 'handleQrScanned'];
+
 
     public function mount($checklist_id){
         $this->checklist_id = $checklist_id;
@@ -32,21 +30,22 @@ class Personnel extends Component
         ];
     }
 
-    public function render()
+    public function openQrScanner()
     {
-        return view('livewire.personnel');
+        $this->showQrModal = true;
+        $this->dispatch('initQrScanner');
     }
 
-    public function toggleScanner()
+    public function closeQrScanner()
     {
-        $this->showScanner = !$this->showScanner;
+        $this->showQrModal = false;
+        $this->dispatch('stopQrScanner');
     }
 
-    #[On('barcode-scanned')]
-    public function handleBarcodeScanned($code)
+    public function handleQrScanned($content)
     {
-        $this->inputs['shipping_pic'] = $code;
-        $this->showScanner = false;
+        $this->inputs['shipping_pic'] = $content;
+        $this->closeQrScanner();
         $this->dispatchMe('shipping_pic');
     }
 
@@ -83,5 +82,10 @@ class Personnel extends Component
         if ($checklist) {
             $checklist->update($this->inputs);
         }
+    }
+
+     public function render()
+    {
+        return view('livewire.personnel');
     }
 }
