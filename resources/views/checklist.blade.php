@@ -9,7 +9,7 @@
         @vite(['resources/css/app.css','resources/js/app.js'])
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
         <script src="{{ asset('js/custom.js') }}" defer></script>
-        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="{{ asset('js/4instascan.min.js') }}" defer></script>
 
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">

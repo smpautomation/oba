@@ -109,7 +109,7 @@
                         @endif
 
                         @push('scripts')
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/instascan/1.0.0/instascan.min.js"></script>
+                        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/instascan/1.0.0/instascan.min.js"></script> --}}
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
                                 let scanner = null;
