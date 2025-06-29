@@ -39,23 +39,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
         Instascan.Camera.getCameras().then(function(cameras) {
             if (cameras.length > 0) {
-                loading.style.display = 'none';
-                
-                // Prefer back camera if available
-                let selectedCamera = cameras[0];
-                cameras.forEach(camera => {
-                    if (camera.name.toLowerCase().includes('back')) {
-                        selectedCamera = camera;
-                    }
-                });
+                            // scanner.start(cameras[1]);
 
-                scanner.start(selectedCamera);
-                isScanning = true;
-                console.log('Scanner started with camera:', selectedCamera.name);
-            } else {
-                loading.innerHTML = '<p class="text-red-600">No cameras found. Please check camera permissions.</p>';
-                console.error('No cameras found.');
-            }
+                            var selectedCam = cameras[0];
+                            $.each(cameras, (i, c) => {
+                                if (c.name.indexOf('back') != -1) {
+                                    selectedCam = c;
+                                    //return false;
+                                }
+                            });
+                            scanner.start(selectedCam);
+
+                            $("#myBtnF").click(function() {
+                                // scanner.start(cameras[0]);
+
+                                var selectedCam = cameras[0];
+                                $.each(cameras, (i, c) => {
+                                    if (c.name.indexOf('front') != -1) {
+                                        selectedCam = c;
+                                        //return false;
+                                    }
+                                });
+                                scanner.start(selectedCam);
+                            });
+                        } else {
+                            console.error('No cameras found.');
+                        }
         }).catch(function(error) {
             loading.innerHTML = '<p class="text-red-600">Camera access denied or not available.</p>';
             console.error('Camera error:', error);
