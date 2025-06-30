@@ -44,7 +44,8 @@ class Personnel extends Component
 
     public function handleQrScanned($content)
     {
-        $this->inputs['shipping_pic'] = $content;
+        $id = explode(";", $content);
+        $this->inputs['shipping_pic'] = $id[2];
         $this->closeQrScanner();
         $this->dispatchMe('shipping_pic');
     }
