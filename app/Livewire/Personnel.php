@@ -77,12 +77,12 @@ class Personnel extends Component
                 // For OBA checked by, you might want different processing
                 // Example: extract name from QR content
                 $parts = explode(";", $content);
-                return isset($parts[1]) ? $parts[1] : $content; // Assuming name is 2nd element
+                return isset($parts[2]) ? $parts[2] : $content; // Assuming name is 2nd element
                 
             case 'oba_picture_by':
                 // Another example field - customize as needed
                 $parts = explode(";", $content);
-                return isset($parts[1]) ? $parts[1] : $content;
+                return isset($parts[2]) ? $parts[2] : $content;
                 
             default:
                 // Default: return content as-is

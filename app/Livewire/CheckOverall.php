@@ -48,15 +48,25 @@ class CheckOverall extends Component
             $index = $item->item_index;
             foreach ($item->getAttributes() as $field => $value) {
                 if (!in_array($field, ['id', 'check_overall_id', 'item_index', 'created_at', 'updated_at'])) {
-                    $this->inputs[$index][$field] = $value;
+                    if($value == 1 ){
+                        $this->inputs[$index][$field] = true;
+                    }
+                    else{
+                        $this->inputs[$index][$field] = $value;
+                    }
                 }
             }
         }
+        
 
         $pallets = Check_Overall_Pallet::where('check_overall_id', $this->check_overall_id)->get();
         foreach ($pallets as $pallet) {
             $key = 'pallet_' . $pallet->pallet_index;
-            $this->inputs[$key] = $pallet->value;
+            if($pallet->value == 1){
+                $this->inputs[$key] = true;
+            }else{
+                $this->inputs[$key] = false;
+            }
         }
     }
     public function render()
@@ -65,8 +75,6 @@ class CheckOverall extends Component
     }
 
     public function dispatchMe($param1, $param2 = null){
-        //dd($this->inputs);
-        
         DB::beginTransaction();
         try{
             if (!is_null($param2)) {
