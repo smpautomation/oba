@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto px-4 py-8">
-    <!-- Enhanced Header -->
+    <!-- Header -->
     <div class="gradient-bg text-white px-8 py-6 rounded-xl mb-8 form-container">
         <div class="flex items-center justify-center">
             <div class="bg-white/20 rounded-full p-3 mr-4">
@@ -15,6 +15,22 @@
         </div>
     </div>
 
+    <!-- Success Message -->
+    @if (session()->has('message'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <!-- Error Message -->
+    @if (session()->has('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    
+
     <!-- Model Selection Section -->
     <div class="section-card card-hover rounded-2xl shadow-lg p-6 mb-8 form-container">
         <div class="flex items-center space-x-3 mb-6">
@@ -28,7 +44,7 @@
         
         <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
             <label for="model-select" class="block text-sm font-medium text-gray-700 mb-3">Select Model</label>
-            <select id="model-select" wire:model='models' class="input-field select-focus w-full md:w-96 px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none bg-white">
+            <select id="model-select" wire:model.live="selectedModel" class="input-field select-focus w-full md:w-96 px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none bg-white">
                 <option value="">Choose a model...</option>
                 @foreach ($models as $model)
                     <option value="{{ $model->model_name }}">{{ $model->model_name }}</option>
@@ -37,7 +53,8 @@
         </div>
     </div>
 
-    <!-- Settings Sections -->
+    <!-- Settings Sections (Only show if model is selected) -->
+    @if(!empty($selectedModel))
     <div class="space-y-6">
         <!-- Prep Checklist Settings -->
         <div class="section-card card-hover rounded-2xl shadow-lg p-6 form-container">
@@ -58,7 +75,7 @@
                             <p class="text-sm text-gray-500">Require QR code scanning during preparation checklist</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="qr-scan-toggle" checked>
+                            <input type="checkbox" wire:model.live="scanned_qr_pc">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -86,12 +103,13 @@
                             <p class="text-sm text-gray-500">Require SIR checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="sir_qs">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
                 </div>
             </div>
+            
             <div class="space-y-4 mt-6">
                 <h4 class="font-medium text-gray-900">Model Name</h4>
                 <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -101,12 +119,13 @@
                             <p class="text-sm text-gray-500">Require VMI label checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="vmi_mn">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
                 </div>
             </div>
+            
             <div class="space-y-4 mt-6">
                 <h4 class="font-medium text-gray-900">Model Code</h4>
                 <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -116,7 +135,7 @@
                             <p class="text-sm text-gray-500">Require SIR checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="sir_mc">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -128,7 +147,7 @@
                             <p class="text-sm text-gray-500">Require VMI label checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="vmi_mc">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -140,12 +159,13 @@
                             <p class="text-sm text-gray-500">Require Specific label checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="specific_label_mc">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
                 </div>
             </div>
+            
             <div class="space-y-4 mt-6">
                 <h4 class="font-medium text-gray-900">Part Number</h4>
                 <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -155,19 +175,7 @@
                             <p class="text-sm text-gray-500">Require Pick List checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
-                            <span class="toggle-slider round"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="font-medium text-gray-900">Pick List</h3>
-                            <p class="text-sm text-gray-500">Require Pick List checking</p>
-                        </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="picklist_pn">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -179,7 +187,7 @@
                             <p class="text-sm text-gray-500">Require SIR checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="sir_pn">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -191,12 +199,13 @@
                             <p class="text-sm text-gray-500">Require VMI label checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="vmi_pn">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
                 </div>
             </div>
+            
             <div class="space-y-4 mt-6">
                 <h4 class="font-medium text-gray-900">Purchase Order Number Verification</h4>
                 <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -206,7 +215,7 @@
                             <p class="text-sm text-gray-500">Require SIR checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="sir_po">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -218,7 +227,7 @@
                             <p class="text-sm text-gray-500">Require VMI label checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="vmi_po">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -230,7 +239,7 @@
                             <p class="text-sm text-gray-500">Require specific label checking</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="model-verify-toggle" checked>
+                            <input type="checkbox" wire:model.live="specific_label_po">
                             <span class="toggle-slider round"></span>
                         </label>
                     </div>
@@ -241,11 +250,12 @@
 
     <!-- Save Button -->
     <div class="flex justify-center mt-12">
-        <button class="save-button text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center space-x-2 min-w-48">
+        <button wire:click="saveConfiguration" class="save-button text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center space-x-2 min-w-48">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
             <span>Save Configuration</span>
         </button>
     </div>
+    @endif
 </div>
