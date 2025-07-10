@@ -4,7 +4,7 @@
             <label for="section" class='mr-2'>Section:</label>
             <h5><u>&nbsp;&nbsp;{{ $checklistInfo->section }}&nbsp;&nbsp;</u></h5>
         </div>
-        <livewire:preparation-checklist :checklist_id="$model_id"></livewire:preparation-checklist>
+        <livewire:preparation-checklist :checklist_id="$model_id" :scanned_qr_code="$scanned_qr_pc"></livewire:preparation-checklist>
         <livewire:o-b-a-kit-checklist :checklist_id="$model_id"></livewire:o-b-a-kit-checklist>
         <livewire:shipment-information :checklist_id="$model_id"></livewire:shipment-information>
         <livewire:check-items :checklist_id="$model_id"></livewire:check-items>

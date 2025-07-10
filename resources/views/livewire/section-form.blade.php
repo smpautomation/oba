@@ -28,7 +28,7 @@
                         id="section" 
                         class="enhanced-focus select-focus touch-target appearance-none bg-white border-2 border-gray-200 text-gray-900 text-base sm:text-lg rounded-2xl focus:ring-4 focus:ring-cyan-200 focus:border-cyan-500 block w-full p-4 sm:p-5 pr-12 transition-all duration-200 shadow-sm hover:shadow-md hover:border-gray-300"
                     >
-                        <option value="" disabled selected>Choose a section</option>
+                        <option value="" selected>Choose a section</option>
                         @foreach ($sections as $section)
                             <option value="{{ $section->section }}">{{ $section->section }}</option>
                         @endforeach
@@ -39,7 +39,17 @@
                         </svg>
                     </div>
                 </div>
-            </div>
+                <div>
+                    @if (session()->has('SectionError'))
+                        <div class="text-red-500 text-sm mt-2">
+                            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ session('SectionError') }}
+                        </div>
+                    @endif
+                </div>
+            </div?>
 
             <!-- Model Selection -->
             <div class="space-y-3">
@@ -57,7 +67,7 @@
                         id="model" 
                         class="enhanced-focus select-focus touch-target appearance-none bg-white border-2 border-gray-200 text-gray-900 text-base sm:text-lg rounded-2xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-4 sm:p-5 pr-12 transition-all duration-200 shadow-sm hover:shadow-md hover:border-gray-300"
                     >
-                        <option value="" disabled selected>Choose a model</option>
+                        <option value="" selected>Choose a model</option>
                         @foreach ($models as $model)
                             <option value="{{ $model->model_name }}">{{ $model->model_name }}</option>
                         @endforeach
@@ -67,6 +77,16 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </div>
+                </div>
+                <div>
+                    @if (session()->has('ModelError'))
+                        <div class="text-red-500 text-sm mt-2">
+                            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ session('ModelError') }}
+                        </div>
+                    @endif
                 </div>
             </div>
 

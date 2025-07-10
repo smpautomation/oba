@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Similarities_Checking;
 use Livewire\Component;
 use App\Models\checklist as Checklist;
+use App\Models\model_settings;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 
@@ -12,6 +13,18 @@ class SimilaritiesChecking extends Component
 {
     public $checklist_id;
     public $checklistInfo;
+    public $model_settings;
+    public $sir_qs = true;
+    public $vmi_mn = true;
+    public $sir_mc = true;
+    public $vmi_mc = true;
+    public $specific_label_mc = true;
+    public $picklist_pn = true;
+    public $sir_pn = true;
+    public $vmi_pn = true;
+    public $sir_po = true;
+    public $vmi_po = true;
+    public $specific_label_po = true;
 
     public $inputs = [
         
@@ -77,7 +90,17 @@ class SimilaritiesChecking extends Component
     public function mount($checklist_id){
         $this->checklist_id = $checklist_id;
         $this->checklistInfo = Checklist::find($checklist_id);
-        
+        $this->sir_qs = $this->checklistInfo->sir_qs ? true : false;
+        $this->vmi_mn = $this->checklistInfo->vmi_mn ? true : false;
+        $this->sir_mc = $this->checklistInfo->sir_mc ? true : false;
+        $this->vmi_mc = $this->checklistInfo->vmi_mc ? true : false;
+        $this->specific_label_mc = $this->checklistInfo->specific_label_mc ? true : false;
+        $this->picklist_pn = $this->checklistInfo->picklist_pn ? true : false;
+        $this->sir_pn = $this->checklistInfo->sir_pn ? true : false;
+        $this->vmi_pn = $this->checklistInfo->vmi_pn ? true : false;
+        $this->sir_po = $this->checklistInfo->sir_po ? true : false;
+        $this->vmi_po = $this->checklistInfo->vmi_po ? true : false;
+        $this->specific_label_po = $this->checklistInfo->specific_label_po ? true : false;
         $this->inputs = [
             'pick_list_qs' => $this->checklistInfo->similaritiesCheck->pick_list_qs ?? "",
             'shipping_invoice_qs' => $this->checklistInfo->similaritiesCheck->shipping_invoice_qs ?? "",

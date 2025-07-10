@@ -45,7 +45,9 @@ class PreparationChecklist extends Component
         'oneprep9remarks' => null,
         'oneprep10remarks' => null
     ];
-    public function mount($checklist_id){
+
+    public $scanned_qr_code;
+    public function mount($checklist_id, $scanned_qr_code){
         $this->checklist_id = $checklist_id;
         $this->checklistInfo = Checklist::find($checklist_id);
         $this->inputs = [
@@ -68,6 +70,7 @@ class PreparationChecklist extends Component
             'oneprep9remarks' => $this->checklistInfo->prepCheck->oneprep9remarks ?? null,
             'oneprep10remarks' => $this->checklistInfo->prepCheck->oneprep10remarks ?? null
         ];
+        $this->scanned_qr_code = $scanned_qr_code;
     }
     public function render()
     {

@@ -11,12 +11,15 @@ use Livewire\WithChildren;
 
 class ChecklistForm extends Component
 {
-    public $checklistInfo = [];
+    public $checklistInfo;
     public $model_id = "";
+    public $scanned_qr_pc = true;
+    
 
     public function mount($model_id){
         $this->model_id = $model_id;
         $this->checklistInfo = Checklist::find($model_id);
+        $this->scanned_qr_pc = $this->checklistInfo->scanned_qr_pc ? true : false;
     }
 
     public function save(){

@@ -45,9 +45,11 @@
                     <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[120px]">
                         <div class="text-xs uppercase tracking-wide leading-tight">FG Lot<br/>Trace</div>
                     </th>
-                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[120px]">
+                    @if ($scanned_qr_code)
+                    <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[120px]>
                         <div class="text-xs uppercase tracking-wide leading-tight">Scanned<br/>QR Code</div>
                     </th>
+                    @endif
                     <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[140px]">
                         <div class="text-xs uppercase tracking-wide leading-tight">Packing Slip/<br/>Shipping Invoice</div>
                     </th>
@@ -83,9 +85,11 @@
                     <td class="px-3 py-6 text-center">
                         <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column" wire:focusout="dispatchMe('oneprep7column')" :inputStatus="$inputStatus['oneprep7column']" ></x-checkbox>
                     </td>
+                    @if($scanned_qr_code)
                     <td class="px-3 py-6 text-center">
                         <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column" wire:focusout="dispatchMe('oneprep8column')" :inputStatus="$inputStatus['oneprep8column']" ></x-checkbox>
                     </td>
+                    @endif
                     <td class="px-3 py-6 text-center">
                         <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column" wire:focusout="dispatchMe('oneprep9column')" :inputStatus="$inputStatus['oneprep9column']" ></x-checkbox>
                     </td>
@@ -122,9 +126,11 @@
                     <td class="px-2 py-4">
                         <x-inputText id="1-prep-6remarks" wire:model="inputs.oneprep7remarks" wire:focusout="dispatchMe('oneprep7remarks')" :inputStatus="$inputStatus['oneprep7remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
                     </td>
+                    @if($scanned_qr_code)
                     <td class="px-2 py-4">
                         <x-inputText id="1-prep-7remarks" wire:model="inputs.oneprep8remarks" wire:focusout="dispatchMe('oneprep8remarks')" :inputStatus="$inputStatus['oneprep8remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
                     </td>
+                    @endif
                     <td class="px-2 py-4">
                         <x-inputText id="1-prep-8remarks" wire:model="inputs.oneprep9remarks" wire:focusout="dispatchMe('oneprep9remarks')" :inputStatus="$inputStatus['oneprep9remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
                     </td>

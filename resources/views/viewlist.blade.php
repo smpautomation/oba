@@ -11,8 +11,6 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <livewire:navbar>
-            <div class="flex items-center justify-center h-screen">
-                <h1 class="font-semibold text-4xl text-gray-600"> WELCOME TO VIEW LIST PAGE</h1>
-            </div>
+        <livewire:viewlist></livewire:viewlist>
     </body>
 </html>

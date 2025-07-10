@@ -10,6 +10,7 @@
             <div>
                 <h1 class="text-3xl font-bold">Similarities Checking</h1>
                 <p class="text-white/80 mt-1">Labels and documentation</p>
+                <p>{{ $checklist_id }}</p>
             </div>
         </div>
     </div>
@@ -42,11 +43,13 @@
                         <x-label for="5-serem-num-input">SEREM</x-label><x-inputNum id="5-serem-num-input" wire:model='inputs.serem_qs' wire:focusout="dispatchMe('serem_qs')" :inputStatus="$inputStatus['serem_qs']"></x-inputNum>
                     </div>
                 </div>
+                @if($sir_qs)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sir-num-input">SIR</x-label><x-inputNum id="5-sir-num-input" wire:model='inputs.sir_qs' wire:focusout="dispatchMe('sir_qs')" :inputStatus="$inputStatus['sir_qs']"></x-inputNum>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
@@ -296,11 +299,13 @@
                         <x-label for="5-fglabel-model-input">FG LABEL</x-label><x-inputText id="5-fglabel-model-input" wire:model='inputs.fg_label_mn' wire:focusout="dispatchMe('fg_label_mn')" :inputStatus="$inputStatus['fg_label_mn']"></x-inputText>
                     </div>
                 </div>
+                @if($vmi_mn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-vmi-model-input">VMI LABEL / QR CODE LABEL</x-label><x-inputText id="5-vmi-model-input" wire:model='inputs.vmi_qr_mn' wire:focusout="dispatchMe('vmi_qr_mn')" :inputStatus="$inputStatus['vmi_qr_mn']"></x-inputText>
                     </div>
                 </div>
+                @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-mc-model-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-model-input" wire:model='inputs.mc_label_mn' wire:focusout="dispatchMe('mc_label_mn')" :inputStatus="$inputStatus['mc_label_mn']"></x-inputText>
@@ -433,21 +438,25 @@
                         <x-label for="5-serem-momodelcodedel-input">SEREM</x-label><x-inputText id="5-serem-modelcode-input" marginleft="ml-4" wire:model='inputs.serem_mc' wire:focusout="dispatchMe('serem_mc')" :inputStatus="$inputStatus['serem_mc']"></x-inputText>
                     </div>
                 </div>
+                @if($sir_mc)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sir-modelcode-input">SIR</x-label><x-inputText id="5-sir-modelcode-input" marginleft="ml-6" wire:model='inputs.sir_mc' wire:focusout="dispatchMe('sir_mc')" :inputStatus="$inputStatus['sir_mc']"></x-inputText>
                     </div>
                 </div>
+                @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shiplabel-modelcode-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-shiplabel-input" wire:model='inputs.shipping_label_mc' wire:focusout="dispatchMe('shipping_label_mc')" :inputStatus="$inputStatus['shipping_label_mc']"></x-inputText>
                     </div>
                 </div>
+                @if($vmi_mc)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-vmi-modelcode-input">VMI LABEL</x-label><x-inputText id="5-vmi-shiplabel-input" wire:model='inputs.vmi_label_mc' wire:focusout="dispatchMe('vmi_label_mc')" :inputStatus="$inputStatus['vmi_label_mc']"></x-inputText>
                     </div>
                 </div>
+                @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-mc-modelcode-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-shiplabel-input" wire:model='inputs.mc_barcode_mc' wire:focusout="dispatchMe('mc_barcode_mc')" :inputStatus="$inputStatus['mc_barcode_mc']"></x-inputText>
@@ -458,11 +467,13 @@
                         <x-label for="5-pallet-modelcode-input">PALLET LABEL</x-label><x-inputText id="5-pallet-shiplabel-input" wire:model='inputs.pallet_label_mc' wire:focusout="dispatchMe('pallet_label_mc')" :inputStatus="$inputStatus['pallet_label_mc']"></x-inputText>
                     </div>
                 </div>
+                @if($specific_label_mc)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-speciallabel-modelcode-input">SPECIFIC LABEL/QR CODE LABEL</x-label><x-inputText id="5-speciallabel-shiplabel-input" wire:model='inputs.specific_qr_label_mc' wire:focusout="dispatchMe('specific_qr_label_mc')" :inputStatus="$inputStatus['specific_qr_label_mc']"></x-inputText>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
@@ -568,11 +579,13 @@
                 <h2 class="text-lg md:text-xl font-semibold text-gray-800">PART NUMBER</h2>
             </div>
             <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl p-2 bg-gradient-to-r from-blue-50 to-indigo-50 pt-12">
+                @if($picklist_pn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-partnumber-input">PICK LIST</x-label><x-inputText id="5-picklist-partnumber-input" wire:model='inputs.picklist_pn' wire:focusout="dispatchMe('picklist_pn')" :inputStatus="$inputStatus['picklist_pn']"></x-inputText>
                     </div>
                 </div>
+                @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shipinv-partnumber-input">SHIPPING INVOICE</x-label><x-inputText id="5-shipinv-partnumber-input" wire:model='inputs.shipping_invoice_pn' wire:focusout="dispatchMe('shipping_invoice_pn')" :inputStatus="$inputStatus['shipping_invoice_pn']"></x-inputText>
@@ -583,21 +596,25 @@
                         <x-label for="5-serem-partnumber-input">SEREM</x-label><x-inputText id="5-serem-partnumber-input" marginleft="ml-4" wire:model='inputs.serem_pn' wire:focusout="dispatchMe('serem_pn')" :inputStatus="$inputStatus['serem_pn']"></x-inputText>
                     </div>
                 </div>
+                @if($sir_pn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sir-partnumber-input">SIR</x-label><x-inputText id="5-sir-partnumber-input" marginleft="ml-6" wire:model='inputs.sir_pn' wire:focusout="dispatchMe('sir_pn')" :inputStatus="$inputStatus['sir_pn']"></x-inputText>
                     </div>
                 </div>
+                @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shiplabel-partnumber-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-partnumber-input" wire:model='inputs.shipping_label_pn' wire:focusout="dispatchMe('shipping_label_pn')" :inputStatus="$inputStatus['shipping_label_pn']"></x-inputText>
                     </div>
                 </div>
+                @if($vmi_pn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-vmi-partnumber-input">VMI LABEL</x-label><x-inputText id="5-vmi-partnumber-input" wire:model='inputs.vmi_pn' wire:focusout="dispatchMe('vmi_pn')" :inputStatus="$inputStatus['vmi_pn']"></x-inputText>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
@@ -790,7 +807,8 @@
                                 </div>
                             </div>
                         </div>
-
+                        
+                        @if($vmi_po)
                         <!-- VMI Label Section -->
                         <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 overflow-hidden">
                             <div class="bg-purple-600 px-4 py-3">
@@ -831,7 +849,9 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
+                        @if($specific_label_po)
                         <!-- Specific Label Section -->
                         <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 overflow-hidden">
                             <div class="bg-indigo-600 px-4 py-3">
@@ -871,11 +891,12 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
 
                     <!-- Right Column -->
                     <div class="space-y-6">
-                        
+                        @if($sir_po)
                         <!-- SIR Section -->
                         <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 overflow-hidden">
                             <div class="bg-red-600 px-4 py-3">
@@ -915,6 +936,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Pallet Label Section -->
                         <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 overflow-hidden">
