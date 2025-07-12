@@ -14,7 +14,8 @@ class Viewlist extends Component
     public $sortBy = 'created_at';
     public $sortDirection = 'desc';
     public $filterStatus = 'all';
-
+    public $showDeleteModal = false;
+    public $checklistToDelete = null;
     protected $queryString = [
         'search' => ['except' => ''],
         'sortBy' => ['except' => 'created_at'],
@@ -45,48 +46,35 @@ class Viewlist extends Component
 
     public function getChecklistsProperty()
     {
-        $checklist = checklist::orderBy('created_at', 'desc')->get();
+        $query = checklist::with('prepCheck', 'obaCheck', 'shipInfoCheck', 'checkItemsCheck', 'similaritiesCheck', 'checkOverall', 'personnelCheck')->orderBy('created_at', 'desc');
 
-        // Apply filters
+        // Apply search filter
         if ($this->search) {
-            $checklist = $checklist->filter(function ($item) {
-                return stripos($item['id'], $this->search) !== false ||
-                       stripos($item['model'], $this->search) !== false ||
-                       stripos($item['section'], $this->search) !== false;
+            $query->where(function($q) {
+                $q->where('id', 'like', '%' . $this->search . '%')
+                ->orWhere('model', 'like', '%' . $this->search . '%')
+                ->orWhere('section', 'like', '%' . $this->search . '%');
             });
         }
-
+        
+        // Apply status filter
         if ($this->filterStatus !== 'all') {
-            $checklist = $checklist->filter(function ($item) {
-                return $item['model'] === $this->filterStatus;
-            });
+            $query->where('status', $this->filterStatus);
         }
-
+        
         // Apply sorting
-        $checklist = $checklist->sortBy($this->sortBy, SORT_REGULAR, $this->sortDirection === 'desc');
+        $query->orderBy($this->sortBy, $this->sortDirection);
 
-        return $checklist->values();
+        return $query->paginate(10);
     }
 
     public function getStatusBadgeClass($status)
     {
         return match ($status) {
-            'completed' => 'bg-green-100 text-green-800 border-green-200',
-            'in_progress' => 'bg-blue-100 text-blue-800 border-blue-200',
-            'pending' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
-            'overdue' => 'bg-red-100 text-red-800 border-red-200',
+            'Closed' => 'bg-green-100 text-green-800 border-green-200',
+            'In Progress' => 'bg-blue-100 text-blue-800 border-blue-200',
+            'Open' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
             default => 'bg-gray-100 text-gray-800 border-gray-200',
-        };
-    }
-
-    public function getPriorityBadgeClass($priority)
-    {
-        return match ($priority) {
-            'critical' => 'bg-red-500 text-white',
-            'high' => 'bg-orange-500 text-white',
-            'medium' => 'bg-yellow-500 text-white',
-            'low' => 'bg-green-500 text-white',
-            default => 'bg-gray-500 text-white',
         };
     }
 
@@ -95,6 +83,38 @@ class Viewlist extends Component
         return $total > 0 ? round(($completed / $total) * 100) : 0;
     }
 
+    public function viewChecklist($checklistId)
+    {
+        return redirect()->to('/checklist/' . $checklistId);
+    }
+
+    public function deleteChecklist()
+    {
+        if ($this->checklistToDelete) {
+            $checklist = checklist::find($this->checklistToDelete);
+            if ($checklist) {
+                $checklist->delete();
+                session()->flash('message', 'Checklist deleted successfully.');
+                $this->resetPage(); // Reset to first page after deletion
+            } else {
+                session()->flash('error', 'Checklist not found.');
+            }
+        }
+        
+        $this->closeDeleteModal();
+    }
+
+        public function confirmDelete($checklistId)
+    {
+        $this->checklistToDelete = $checklistId;
+        $this->showDeleteModal = true;
+    }
+
+    public function closeDeleteModal()
+    {
+        $this->showDeleteModal = false;
+        $this->checklistToDelete = null;
+    }
     public function render()
     {
         return view('livewire.viewlist', [

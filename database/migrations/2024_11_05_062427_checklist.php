@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('checklist', function (Blueprint $table) {
-            $table->unsignedBigInteger('id', false)->primary();
+            $table->unsignedBigInteger('id', false)->primary()->onDelete('cascade');
+            $table->string('status')->default('Open');
             $table->string('model');
             $table->string('section');
             $table->boolean("scanned_qr_pc")->default(true);
