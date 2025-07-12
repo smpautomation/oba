@@ -13,4 +13,5 @@
         <livewire:navbar>
         <livewire:settings>
     </body>
+    <x-footer></x-footer>
 </html>

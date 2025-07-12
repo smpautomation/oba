@@ -13,4 +13,5 @@
         <livewire:navbar>
         <livewire:viewlist></livewire:viewlist>
     </body>
+    <x-footer></x-footer>
 </html>
