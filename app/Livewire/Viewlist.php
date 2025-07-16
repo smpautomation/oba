@@ -53,7 +53,9 @@ class Viewlist extends Component
             $query->where(function($q) {
                 $q->where('id', 'like', '%' . $this->search . '%')
                 ->orWhere('model', 'like', '%' . $this->search . '%')
-                ->orWhere('section', 'like', '%' . $this->search . '%');
+                ->orWhere('section', 'like', '%' . $this->search . '%')
+                ->orWhere('status', 'like', '%' . $this->search . '%')
+                ->orWhere('auditor', 'like', '%' . $this->search . '%');
             });
         }
         
@@ -76,11 +78,6 @@ class Viewlist extends Component
             'Open' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
             default => 'bg-gray-100 text-gray-800 border-gray-200',
         };
-    }
-
-    public function getProgressPercentage($completed, $total)
-    {
-        return $total > 0 ? round(($completed / $total) * 100) : 0;
     }
 
     public function viewChecklist($checklistId)

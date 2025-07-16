@@ -17,7 +17,7 @@ class SectionsFactory extends Factory
     public function definition(): array
     {
         return [
-            'section' => $this->faker->word()
+            'section' => $this->faker->country()
         ];
     }
 }

@@ -11,7 +11,10 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <livewire:navbar>
-        <livewire:settings>
+        <main class="flex-1">
+            <livewire:settings>
+        </main>
+        
     </body>
     <x-footer></x-footer>
 </html>

@@ -2,15 +2,32 @@
 namespace App\Livewire;
 
 use App\Models\model_settings;
+use App\Models\Sections;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Settings extends Component
 {
-    public $models = [];
+    public $models;
+    public $sections;
+
+    //properties for add/remove section
+    public $selectedModelAddRemove = '';
+    public $searchTerm = '';
+    public $filteredModels;
+    public $totalModels;
+    public $showAddForm = false;
+    public $newModelName = '';
+
+    public $selectedSectionAddRemove = '';
+    public $searchTermSection = '';
+    public $filteredSections;
+    public $totalSections;
+    public $showAddFormSection = false;
+    public $newSectionName = '';
+
+    // properties for model settings
     public $selectedModel = '';
-   
-    // Properties for each toggle switch
     public $scanned_qr_pc = true;
     public $sir_qs = true;
     public $vmi_mn = true;
@@ -24,9 +41,43 @@ class Settings extends Component
     public $vmi_po = true;
     public $specific_label_po = true;
 
+
+    //properties for section visibility
+    public $showAddRemove = false;
+    public $showChecklistConfiguration = false;
+    public $showSystemLogs = false;
+
     public function mount()
     {
         $this->models = model_settings::all();
+        $this->totalModels = $this->models->count();
+        $this->filteredModels = $this->models;
+        $this->sections = Sections::all();
+        $this->totalSections = $this->sections->count();
+        $this->filteredSections = $this->sections;
+    }
+
+    public function showAddRemoveSection()
+    {
+        $this->showAddRemove = !$this->showAddRemove;
+        $this->showChecklistConfiguration = false; // Hide other sections
+        $this->showSystemLogs = false; // Hide other sections
+        Log::info('Toggle Add/Remove Section: ' . ($this->showAddRemove ? 'Shown' : 'Hidden'));
+    }
+
+    public function showChecklistConfigurationSection()
+    {
+        $this->showChecklistConfiguration = !$this->showChecklistConfiguration;
+        $this->showAddRemove = false; // Hide other sections
+        $this->showSystemLogs = false; // Hide other sections
+        Log::info('Toggle Checklist Configuration Section: ' . ($this->showChecklistConfiguration ? 'Shown' : 'Hidden'));
+    }
+
+    public function showSystemLogsSection(){
+        $this->showSystemLogs = !$this->showSystemLogs;
+        $this->showAddRemove = false; // Hide other sections
+        $this->showChecklistConfiguration = false; // Hide other sections
+        Log::info('Toggle Checklist Configuration Section: ' . ($this->showSystemLogs ? 'Shown' : 'Hidden'));
     }
 
     public function updatedSelectedModel($value)
@@ -114,8 +165,198 @@ class Settings extends Component
         }
     }
 
+    public function updatedSearchTerm()
+    {
+        $this->filterModels();
+    }
+
+    public function filterModels()
+    {
+        if (empty($this->searchTerm)) {
+            $this->filteredModels = $this->models;
+        } else {
+            $this->filteredModels = $this->models->filter(function ($model) {
+                return stripos($model->model_name, $this->searchTerm) !== false;
+            });
+        }
+    }
+
+    public function selectModel($modelName)
+    {
+        $this->selectedModelAddRemove = $modelName;
+        $this->searchTerm = '';
+        $this->filteredModels = $this->models;
+        
+        // Emit event to parent component if needed
+        
+    }
+
+    public function clearSelection()
+    {
+        $this->selectedModelAddRemove = '';
+        $this->searchTerm = '';
+        $this->filteredModels = $this->models;
+        
+    }
+
+    public function deleteModel()
+    {
+        if ($this->selectedModelAddRemove) {
+            // Find and delete the model from database
+            $model = model_settings::where('model_name', $this->selectedModelAddRemove)->first();
+            if ($model) {
+                $model->delete();
+                
+                // Refresh the models list
+                $this->models = model_settings::orderBy('model_name')->get();
+                $this->totalModels = $this->models->count();
+                $this->filteredModels = $this->models;
+                
+                // Clear selection after deletion
+                $this->selectedModelAddRemove = '';
+                $this->searchTerm = '';
+                
+                // Show success message
+                session()->flash('message', 'Model deleted successfully!');
+            }
+        }
+    }
+
+    public function addModel()
+    {
+        $this->validate([
+            'newModelName' => 'required|string|max:255|unique:model_settings,model_name'
+        ]);
+
+        // Create new model
+        model_settings::create([
+            'model_name' => $this->newModelName
+        ]);
+
+        // Refresh the models list
+        $this->models = model_settings::orderBy('model_name')->get();
+        $this->totalModels = $this->models->count();
+        $this->filteredModels = $this->models;
+
+        // Reset form
+        $this->newModelName = '';
+        $this->showAddForm = false;
+
+        // Show success message
+        session()->flash('message', 'Model added successfully!');
+    }
+
+    public function cancelAdd()
+    {
+        $this->newModelName = '';
+        $this->showAddForm = false;
+    }
+
+    
+
+    public function updatedSearchTermSection()
+    {
+        $this->filterSections();
+    }
+
+    public function filterSections()
+    {
+        if (empty($this->searchTermSection)) {
+            $this->filteredSections = $this->sections;
+        } else {
+            $this->filteredSections = $this->sections->filter(function ($section) {
+                return stripos($section->section, $this->searchTermSection) !== false;
+            });
+        }
+    }
+
+    public function selectSection($sectionName)
+    {
+        $this->selectedSectionAddRemove = $sectionName;
+        $this->searchTermSection = '';
+        $this->filteredSections = $this->sections;
+            
+    }
+
+    public function clearSelectionSection()
+    {
+        $this->selectedSectionAddRemove = '';
+        $this->searchTermSection = '';
+        $this->filteredSections = $this->sections;
+        
+    }
+
+    public function deleteSection()
+    {
+        if ($this->selectedSectionAddRemove) {
+            $section = Sections::where('section', $this->selectedSectionAddRemove)->first();
+            if ($section) {
+                $section->delete();
+                
+                $this->sections = Sections::orderBy('section')->get();
+                $this->totalSections = $this->sections->count();
+                $this->filteredSections = $this->sections;
+                
+                $this->selectedSectionAddRemove = '';
+                $this->searchTermSection = '';
+                
+                // Show success message
+                session()->flash('message', 'Section deleted successfully!');
+            }
+        }
+    }
+
+    public function addSection()
+    {
+        $this->validate([
+            'newSectionName' => 'required|string|max:15|unique:section,section'
+        ]);
+
+        Sections::create([
+            'section' => $this->newSectionName
+        ]);
+
+        $this->sections = Sections::orderBy('section')->get();
+        $this->totalSections = $this->sections->count();
+        $this->filteredSections = $this->sections;
+
+        $this->newSectionName = '';
+        $this->showAddFormSection = false;
+
+        // Show success message
+        session()->flash('message', 'Section added successfully!');
+    }
+
+    public function cancelAddSection()
+    {
+        $this->newSectionName = '';
+        $this->showAddFormSection = false;
+    }
+
+    protected function rules()
+    {
+        return [
+            'newModelName' => 'required|string|max:8|unique:model_settings,model_name',
+            'newSectionName' => 'required|string|max:15|unique:section,section'
+        ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'newModelName.required' => 'Model name is required.',
+            'newModelName.unique' => 'This model name already exists.',
+            'newModelName.max' => 'Model name cannot exceed 8 characters.',
+            'newSectionName.required' => 'Section name is required.',
+            'newSectionName.unique' => 'This section name already exists.',
+            'newSectionName.max' => 'Section name cannot exceed 15 characters.'
+        ];
+    }
+
     public function render()
     {
+
         return view('livewire.settings');
     }
+
 }

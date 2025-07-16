@@ -68,9 +68,9 @@
             <div>
                 <select wire:model.live="filterStatus" class="w-full custom-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     <option value="all">All Statuses</option>
-                    <option value="completed">Open</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="pending">Closed</option>
+                    <option value="Open">Open</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Closed">Closed</option>
                 </select>
             </div>
         </div>
