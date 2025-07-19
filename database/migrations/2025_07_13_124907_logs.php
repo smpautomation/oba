@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('LogType'); // e.g., 'info', 'error', 'warning'
             $table->string('action');
             $table->text('description')->nullable();
-            $table->string('user_id')->nullable();
             $table->timestamps();
         });
 

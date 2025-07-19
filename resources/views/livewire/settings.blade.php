@@ -672,26 +672,46 @@
                         <h2 class="text-xl font-semibold text-gray-800">System Logs</h2>
                     </div>
                     
-                    <!-- Filter Controls -->
-                    <div class="flex items-center space-x-4">
-                        <select class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <div class="flex flex-wrap items-center gap-4 mb-6">
+                        <!-- Search Box -->
+                        <div class="flex-1 min-w-64">
+                            <input type="text" 
+                                wire:model.live.debounce.300ms="searchTerm"
+                                placeholder="Search description..." 
+                                class="input-field w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <!-- Date Range -->
+                        <div class="flex items-center space-x-2">
+                            <input type="date" 
+                                wire:model.live="startDate"
+                                class="input-field px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <span class="text-gray-500">to</span>
+                            <input type="date" 
+                                wire:model.live="endDate"
+                                class="input-field px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <!-- Existing Filters -->
+                        <select wire:model.live="logTypeFilter" 
+                                class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">All Types</option>
                             <option value="info">Info</option>
                             <option value="error">Error</option>
                             <option value="warning">Warning</option>
                         </select>
                         
-                        <select class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select wire:model.live="logNameFilter" 
+                                class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">All Logs</option>
                             <option value="System">System</option>
                             <option value="User Actions">User Actions</option>
                         </select>
                         
-                        <button class="filter-button px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
-                            </svg>
-                            Filter
+                        <!-- Clear Filters Button -->
+                        <button wire:click="clearFilters" 
+                                class="filter-button px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                            Clear Filters
                         </button>
                     </div>
                 </div>
@@ -714,15 +734,12 @@
                                     Description
                                 </th>
                                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    User ID
-                                </th>
-                                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Date
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            @foreach ($systemLogs as $logs)
+                            @foreach ($this->systemLogs as $logs)
                             <tr class="table-row">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="log-badge inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
@@ -751,9 +768,6 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <span class="font-mono text-xs bg-gray-100 px-2 py-1 rounded">{{ $logs['user_id'] }}</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $logs['created_at'] }}
                                 </td>
                             </tr>
@@ -764,33 +778,32 @@
                 </div>
                 
                 <!-- Pagination -->
-                <div class="flex items-center justify-between mt-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between mt-6 gap-4">
                     <div class="flex items-center space-x-2 text-sm text-gray-500">
                         <span>Showing</span>
-                        <span class="font-medium">1</span>
+                        <span class="font-medium">{{ $this->systemLogs->firstItem() ?? 0 }}</span>
                         <span>to</span>
-                        <span class="font-medium">5</span>
+                        <span class="font-medium">{{ $this->systemLogs->lastItem() ?? 0 }}</span>
                         <span>of</span>
-                        <span class="font-medium">150</span>
+                        <span class="font-medium">{{ $this->systemLogs->total() }}</span>
                         <span>results</span>
                     </div>
                     
                     <div class="flex items-center space-x-2">
-                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
-                            Previous
-                        </button>
-                        <button class="filter-button px-3 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                            1
-                        </button>
-                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
-                            2
-                        </button>
-                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
-                            3
-                        </button>
-                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
-                            Next
-                        </button>
+                        {{ $this->systemLogs->links() }}
+                    </div>
+                    
+                    <!-- Per Page Selector -->
+                    <div class="flex items-center space-x-2 text-sm">
+                        <span>Show:</span>
+                        <select wire:model.live="perPage" 
+                                class="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span>per page</span>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\checklist;
+use App\Models\Log as AppLog;
+use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -22,6 +24,40 @@ class Viewlist extends Component
         'sortDirection' => ['except' => 'desc'],
         'filterStatus' => ['except' => 'all'],
     ];
+    public $userIp;
+
+    public function mount(){
+        $this->userIp = $this->getClientIpAddress(request());
+    }
+
+    private function getClientIpAddress(Request $request): string
+    {
+        // Check for various headers that might contain the real IP
+        $ipKeys = [
+            'HTTP_CF_CONNECTING_IP',     // CloudFlare
+            'HTTP_X_REAL_IP',            // Nginx proxy
+            'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+            'HTTP_X_FORWARDED',          // Proxy
+            'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+            'HTTP_CLIENT_IP',            // Proxy
+            'REMOTE_ADDR'                // Standard
+        ];
+
+        foreach ($ipKeys as $key) {
+            if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
+                $ips = explode(',', $_SERVER[$key]);
+                $ip = trim($ips[0]);
+                
+                // Validate IP address
+                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                    return $ip;
+                }
+            }
+        }
+
+        // Fallback to request IP
+        return $request->ip();
+    }
 
     public function updatingSearch()
     {
@@ -82,6 +118,12 @@ class Viewlist extends Component
 
     public function viewChecklist($checklistId)
     {
+        AppLog::create([
+            'LogName' => 'User Action',
+            'LogType' => 'info',
+            'action' => 'viewlist_delete',
+            'description' => '{"specific_action":"View Selected Checklist '.$checklistId.'", "ip address":"'. $this->userIp .'"}'
+        ]);
         return redirect()->to('/checklist/' . $checklistId);
     }
 
@@ -92,9 +134,21 @@ class Viewlist extends Component
             if ($checklist) {
                 $checklist->delete();
                 session()->flash('message', 'Checklist deleted successfully.');
+                AppLog::create([
+                    'LogName' => 'User Action',
+                    'LogType' => 'info',
+                    'action' => 'viewlist_delete',
+                    'description' => '{"specific_action":"Delete Checklist '.$this->checklistToDelete.'", "ip address":"'. $this->userIp .'"}'
+                ]);
                 $this->resetPage(); // Reset to first page after deletion
             } else {
                 session()->flash('error', 'Checklist not found.');
+                AppLog::create([
+                    'LogName' => 'User Action',
+                    'LogType' => 'error',
+                    'action' => 'viewlist_delete',
+                    'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Not Found", "ip address":"'. $this->userIp .'"}'
+                ]);
             }
         }
         
@@ -112,6 +166,8 @@ class Viewlist extends Component
         $this->showDeleteModal = false;
         $this->checklistToDelete = null;
     }
+    
+
     public function render()
     {
         return view('livewire.viewlist', [
