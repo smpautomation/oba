@@ -15,6 +15,7 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         
+        <livewire:navbar>
         @if (isset($id))
             <livewire:checklistForm :model_id="$id">
         @else
@@ -25,6 +26,7 @@
                 {{ session('status') }}
             </div>
         @endif
+        <x-footer></x-footer>
     </body>
     
 </html>

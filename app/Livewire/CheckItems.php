@@ -7,8 +7,6 @@ use App\Models\checklist as Checklist;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
-use App\Models\Log as AppLog;
-use Illuminate\Http\Request;
 
 class CheckItems extends Component
 {
@@ -28,63 +26,20 @@ class CheckItems extends Component
         'sir_available' => null
     ];
     public $dateNow;
-    public $userIP;
     public function mount($checklist_id){
-        $this->userIP = $this->getClientIpAddress(request());
-        try{
-            $this->checklist_id = $checklist_id;
-            $this->checklistInfo = Checklist::find($checklist_id);
-            
-            $this->inputs = [
-                'open_boxes_quantity' => $this->checklistInfo->checkItemsCheck->open_boxes_quantity ?? 1,
-                'same_model' => $this->checklistInfo->checkItemsCheck->same_model ? true : false,
-                'specify_model' => $this->checklistInfo->checkItemsCheck->specify_model ?? "",
-                'judgement' => $this->checklistInfo->checkItemsCheck->judgement ? true : false,
-                'carton_quantity' => $this->checklistInfo->checkItemsCheck->carton_quantity ?? 1,
-                'need_sir' => $this->checklistInfo->checkItemsCheck->need_sir ? true : false,
-                'sir_available' => $this->checklistInfo->checkItemsCheck->sir_available ? true : false,
-            ];
-            
-        }catch(\Exception $e){
-            AppLog::create([
-                'LogName' => 'System',
-                'LogType' => 'error',
-                'action' => 'checklist_mount',
-                'description' => '{"specific_action":"Check Items Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
-            ]);
-        }
+        $this->checklist_id = $checklist_id;
+        $this->checklistInfo = Checklist::find($checklist_id);
         
-    }
-
-    private function getClientIpAddress(Request $request): string
-    {
-        // Check for various headers that might contain the real IP
-        $ipKeys = [
-            'HTTP_CF_CONNECTING_IP',     // CloudFlare
-            'HTTP_X_REAL_IP',            // Nginx proxy
-            'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
-            'HTTP_X_FORWARDED',          // Proxy
-            'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
-            'HTTP_CLIENT_IP',            // Proxy
-            'REMOTE_ADDR'                // Standard
+        $this->inputs = [
+            'open_boxes_quantity' => $this->checklistInfo->checkItemsCheck->open_boxes_quantity ?? 1,
+            'same_model' => $this->checklistInfo->checkItemsCheck->same_model ? true : false,
+            'specify_model' => $this->checklistInfo->checkItemsCheck->specify_model ?? "",
+            'judgement' => $this->checklistInfo->checkItemsCheck->judgement ? true : false,
+            'carton_quantity' => $this->checklistInfo->checkItemsCheck->carton_quantity ?? 1,
+            'need_sir' => $this->checklistInfo->checkItemsCheck->need_sir ? true : false,
+            'sir_available' => $this->checklistInfo->checkItemsCheck->sir_available ? true : false,
         ];
-
-        foreach ($ipKeys as $key) {
-            if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
-                $ips = explode(',', $_SERVER[$key]);
-                $ip = trim($ips[0]);
-                
-                // Validate IP address
-                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-                    return $ip;
-                }
-            }
-        }
-
-        // Fallback to request IP
-        return $request->ip();
     }
-
     public function render()
     {
         return view('livewire.check-items');
@@ -112,12 +67,6 @@ class CheckItems extends Component
                 $this->inputStatus[$field] = 'error';
             }
             DB::rollBack();
-            AppLog::create([
-                'LogName' => 'System',
-                'LogType' => 'error',
-                'action' => 'checklist_checkItems',
-                'description' => '{"specific_action":"Check Items Dispatch Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
-            ]);
         }
     }
 

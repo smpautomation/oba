@@ -8,8 +8,6 @@ use App\Models\checklist as Checklist;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Log as AppLog;
-use Illuminate\Http\Request;
 
 class PhotoDocumentation extends Component
 {
@@ -29,49 +27,10 @@ class PhotoDocumentation extends Component
     public $photoName = '';
     public $originalPhotoName = '';
 
-    public $userIP;
     public function mount($checklist_id){
-        $this->userIP = $this->getClientIpAddress(request());
-        try{
-            $this->checklist_id = $checklist_id;
-            $this->checklistInfo = Checklist::find($checklist_id);
-            $this->loadUploadedPhotos();
-        }catch(\Exception $e){
-            AppLog::create([
-                'LogName' => 'System',
-                'LogType' => 'error',
-                'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
-            ]);
-        }
-    }
-    private function getClientIpAddress(Request $request): string
-    {
-        // Check for various headers that might contain the real IP
-        $ipKeys = [
-            'HTTP_CF_CONNECTING_IP',     // CloudFlare
-            'HTTP_X_REAL_IP',            // Nginx proxy
-            'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
-            'HTTP_X_FORWARDED',          // Proxy
-            'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
-            'HTTP_CLIENT_IP',            // Proxy
-            'REMOTE_ADDR'                // Standard
-        ];
-
-        foreach ($ipKeys as $key) {
-            if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
-                $ips = explode(',', $_SERVER[$key]);
-                $ip = trim($ips[0]);
-                
-                // Validate IP address
-                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-                    return $ip;
-                }
-            }
-        }
-
-        // Fallback to request IP
-        return $request->ip();
+        $this->checklist_id = $checklist_id;
+        $this->checklistInfo = Checklist::find($checklist_id);
+        $this->loadUploadedPhotos();
     }
 
     public function updatedPhoto()
@@ -153,22 +112,12 @@ class PhotoDocumentation extends Component
             $this->reset(['photo', 'tempPhoto', 'photoName', 'originalPhotoName']);
             $this->showRenameModal = false;
             
-            AppLog::create([
-                'LogName' => 'User Action',
-                'LogType' => 'info',
-                'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Upload Successful '.$filename.'", "ip address":"'. $this->userIP .'"}'
-            ]);
             // Show success message
             session()->flash('message', 'Photo uploaded successfully!');
             
         } catch (\Exception $e) {
-            AppLog::create([
-                'LogName' => 'System',
-                'LogType' => 'error',
-                'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Upload unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
-            ]);
+            // Log the error
+            Log::error('Photo upload failed: ' . $e->getMessage());
             
             // Show error message
             session()->flash('message', 'Upload failed. Please try again.');
@@ -181,33 +130,23 @@ class PhotoDocumentation extends Component
 
     private function loadUploadedPhotos()
     {
-        try{
-            if ($this->checklist_id && Storage::disk('public')->exists($this->checklist_id)) {
-                $files = Storage::disk('public')->files($this->checklist_id);
+        if ($this->checklist_id && Storage::disk('public')->exists($this->checklist_id)) {
+            $files = Storage::disk('public')->files($this->checklist_id);
+            
+            $this->uploadedPhotos = collect($files)->map(function ($file) {
+                $filename = basename($file);
+                $filePath = Storage::disk('public')->path($file);
                 
-                $this->uploadedPhotos = collect($files)->map(function ($file) {
-                    $filename = basename($file);
-                    $filePath = Storage::disk('public')->path($file);
-                    
-                    return [
-                        'name' => $filename,
-                        'path' => $file,
-                        'filename' => $filename,
-                        'uploaded_at' => file_exists($filePath) ? 
-                            date('M j, Y g:i A', filemtime($filePath)) : 
-                            'Unknown'
-                    ];
-                })->toArray();
-            }
-        }catch(\Exception $e){
-            AppLog::create([
-                'LogName' => 'System',
-                'LogType' => 'error',
-                'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Load Unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
-            ]);
+                return [
+                    'name' => $filename,
+                    'path' => $file,
+                    'filename' => $filename,
+                    'uploaded_at' => file_exists($filePath) ? 
+                        date('M j, Y g:i A', filemtime($filePath)) : 
+                        'Unknown'
+                ];
+            })->toArray();
         }
-        
     }
 
     public function showPhoto($photoPath)
@@ -226,34 +165,18 @@ class PhotoDocumentation extends Component
 
     public function removePhoto($index)
     {
-        try{
-            if (isset($this->uploadedPhotos[$index])) {
-                $photoData = $this->uploadedPhotos[$index];
-                $photoPath = $photoData['path'];
-                
-                // Delete from storage
-                Storage::disk('public')->delete($photoPath);
-                
-                AppLog::create([
-                    'LogName' => 'User Action',
-                    'LogType' => 'error',
-                    'action' => 'checklist_photo',
-                    'description' => '{"specific_action":"Photo Removal Successful '.$photoPath.'", "ip address":"'. $this->userIP .'"}'
-                ]);
-
-                // Remove from array
-                unset($this->uploadedPhotos[$index]);
-                $this->uploadedPhotos = array_values($this->uploadedPhotos); // Re-index array
-                
-                session()->flash('message', 'Photo removed successfully.');
-            }
-        }catch(\Exception $e){
-            AppLog::create([
-                'LogName' => 'System',
-                'LogType' => 'error',
-                'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Removal unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
-            ]);
+        if (isset($this->uploadedPhotos[$index])) {
+            $photoData = $this->uploadedPhotos[$index];
+            $photoPath = $photoData['path'];
+            
+            // Delete from storage
+            Storage::disk('public')->delete($photoPath);
+            
+            // Remove from array
+            unset($this->uploadedPhotos[$index]);
+            $this->uploadedPhotos = array_values($this->uploadedPhotos); // Re-index array
+            
+            session()->flash('message', 'Photo removed successfully.');
         }
     }
 
