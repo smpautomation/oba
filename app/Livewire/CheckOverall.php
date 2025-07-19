@@ -183,9 +183,6 @@ class CheckOverall extends Component
 
     public function saveChildData()
     {
-        $checklist = Check_Overall::where('checklist_id', $this->checklist_id)->first();
-        if ($checklist) {
-            $checklist->update($this->inputs);
-        }
+        //
     }
 }
