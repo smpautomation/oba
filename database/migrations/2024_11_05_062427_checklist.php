@@ -140,7 +140,7 @@ return new class extends Migration
             $table->string('pick_list_qs')->nullable();
             $table->string('shipping_invoice_qs')->nullable();
             $table->string('serem_qs')->nullable();
-            $table->string('SIR_qs')->nullable();
+            $table->string('sir_qs')->nullable();
             $table->boolean('same_quantity_qs')->nullable();
             $table->boolean('judgement_qs')->nullable();
             $table->string('picklist_bs')->nullable();
