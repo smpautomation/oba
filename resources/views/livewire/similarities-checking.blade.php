@@ -1059,7 +1059,7 @@
                                         <input 
                                             id="5-ponumber-judgement-ok" 
                                             type="radio" 
-                                            value="1" 
+                                            value="0" 
                                             wire:model='inputs.judgement_po' 
                                             wire:focusout="dispatchMe('judgement_po')" 
                                             name="5-ponumber-judgement"  
