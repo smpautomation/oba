@@ -26,6 +26,7 @@
                 {{ session('status') }}
             </div>
         @endif
+        <x-footer></x-footer>
     </body>
-    <x-footer></x-footer>
+    
 </html>

@@ -4,7 +4,7 @@
             <!-- Logo Section with Livewire -->
             <a wire:click="redirectTo('welcome')" class="logo-container">
                 <div class="h-10 w-10 md:h-12 md:w-12">
-                    <img src="photo/smp_logo.png" class="h-12" alt="SMP Logo" />
+                    {{-- <img src="photo/smp_logo.png" class="h-12" alt="SMP Logo" /> --}}
                 </div>
                 <div class="hidden sm:block">
                     <h1 class="logo-text text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
