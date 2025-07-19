@@ -8,10 +8,14 @@
 
         @vite(['resources/css/app.css','resources/js/app.js'])
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/custom-welcome.css') }}" rel="stylesheet" />
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <livewire:navbar>
-        <livewire:viewlist></livewire:viewlist>
+        <main class="hero-gradient min-h-screen relative floating-orbs">
+            <livewire:navbar>
+            <livewire:viewlist></livewire:viewlist>
+        </main>
+        
     </body>
     <x-footer></x-footer>
 </html>

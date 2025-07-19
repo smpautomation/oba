@@ -3,8 +3,8 @@
     <div class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">Checklist Overview</h1>
-                <p class="text-gray-600">Manage and track your checklists and their progress</p>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2 text-white">Checklist Overview</h1>
+                <p class="text-white">Manage and track your checklists and their progress</p>
             </div>
             <div class="flex items-center gap-3">
                 <div class="status-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -79,7 +79,7 @@
     <!-- Table Section -->
     <div class="table-wrapper">
         <div class="overflow-x-auto">
-            <table class="enhanced-table w-full">
+            <table class="enhanced-table w-full bg-white">
                 <thead>
                     <tr>
                         <th class="sticky-header px-6 py-4 text-left">

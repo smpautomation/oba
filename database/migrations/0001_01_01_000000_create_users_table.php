@@ -13,20 +13,19 @@ return new class extends Migration
     {
         // Schema::create('users', function (Blueprint $table) {
         //     $table->id();
-        //     $table->string('name');
+        //     $table->string('id_number')->unique();
         //     $table->string('email', 191)->unique();
-        //     $table->timestamp('email_verified_at')->nullable();
         //     $table->string('password');
         //     $table->rememberToken();
         //     $table->timestamps();
         // });
 
-        // Schema::create('password_reset_tokens', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('email', 191)->unique();
-        //     $table->string('token');
-        //     $table->timestamp('created_at')->nullable();
-        // });
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->string('email', 191)->unique();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->charset = 'utf8'; // Set character set to utf8

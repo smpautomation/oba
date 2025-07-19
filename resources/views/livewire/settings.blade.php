@@ -411,25 +411,6 @@
     </div>
     @endif
 
-    @if ($showSystemLogs)
-        <div class="bg-red-50 rounded-xl shadow-lg p-6 space-y-6 bg-opacity-90 backdrop-blur-md">
-            <div class="section-card card-hover rounded-2xl shadow-lg p-6 mb-8 form-container">
-                <div class="flex items-center space-x-3 mb-6">
-                    <div class="bg-emerald-500 p-2 rounded-lg">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                    </div>
-                    <h2 class="text-xl font-semibold text-gray-800">System Logs</h2>
-                </div>
-
-                <div>
-                    <p class="text-gray-600 mb-4">Feature not yet ready. Currently ongoing development.</p>
-                </div>
-            </div>
-        </div>
-    @endif
-
     @if($showChecklistConfiguration)
     <div class="bg-red-50 rounded-xl shadow-lg p-6 space-y-6 bg-opacity-90 backdrop-blur-md mt-10">
         <!-- Model Selection Section -->
@@ -677,4 +658,144 @@
         @endif
     </div>
     @endif
+
+    @if ($showSystemLogs)
+        <div class="bg-red-50 rounded-xl shadow-lg p-6 space-y-6 bg-opacity-90 backdrop-blur-md">
+            <div class="section-card card-hover rounded-2xl shadow-lg p-6 mb-8 form-container">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-emerald-500 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">System Logs</h2>
+                    </div>
+                    
+                    <!-- Filter Controls -->
+                    <div class="flex items-center space-x-4">
+                        <select class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">All Types</option>
+                            <option value="info">Info</option>
+                            <option value="error">Error</option>
+                            <option value="warning">Warning</option>
+                        </select>
+                        
+                        <select class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">All Logs</option>
+                            <option value="System">System</option>
+                            <option value="User Actions">User Actions</option>
+                        </select>
+                        
+                        <button class="filter-button px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                            </svg>
+                            Filter
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Table Container -->
+                <div class="overflow-x-auto">
+                    <table class="w-full bg-white rounded-lg shadow-sm">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Log Type
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Log Name
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Action
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Description
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    User ID
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($systemLogs as $logs)
+                            <tr class="table-row">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="log-badge inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                        @if ($logs['LogType'] == 'info')
+                                        bg-blue-100 text-blue-800
+                                        @elseif ($logs['LogType'] == 'error')
+                                        bg-red-100 text-red-800
+                                        @elseif ($logs['LogType'] == 'warning')
+                                        bg-yellow-100 text-yellow-800
+                                        @endif ">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                        </svg>
+                                        {{ $logs['LogType'] }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {{ $logs['LogName'] }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $logs['action'] }}
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    <div class="max-w-xs">
+                                        {{ $logs['description'] }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <span class="font-mono text-xs bg-gray-100 px-2 py-1 rounded">{{ $logs['user_id'] }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $logs['created_at'] }}
+                                </td>
+                            </tr>
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="flex items-center justify-between mt-6">
+                    <div class="flex items-center space-x-2 text-sm text-gray-500">
+                        <span>Showing</span>
+                        <span class="font-medium">1</span>
+                        <span>to</span>
+                        <span class="font-medium">5</span>
+                        <span>of</span>
+                        <span class="font-medium">150</span>
+                        <span>results</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                            Previous
+                        </button>
+                        <button class="filter-button px-3 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                            1
+                        </button>
+                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                            2
+                        </button>
+                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                            3
+                        </button>
+                        <button class="filter-button px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    
 </div>
