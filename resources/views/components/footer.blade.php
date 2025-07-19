@@ -5,7 +5,7 @@
                 <!-- Brand Section -->
                 <div class="flex items-center gap-3">
                     <div class="bg-opacity-20 backdrop-blur-sm rounded-lg p-2">
-                        {{-- <img src="photo/AE.png" class="h-32" alt="SMP Logo" /> --}}
+                        <img src="photo/AE.png" class="h-32" alt="SMP Logo" />
                     </div>
                     
                 </div>
