@@ -8,7 +8,8 @@ use App\Models\checklist as Checklist;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;
+use App\Models\Log as AppLog;
+use Illuminate\Http\Request;
 
 class AdditionalDocumentation extends Component
 {
@@ -28,11 +29,52 @@ class AdditionalDocumentation extends Component
     public $tempDocument = null;
     public $documentName = '';
     public $originalDocumentName = '';
+    public $userIP;
 
     public function mount($checklist_id){
-        $this->checklist_id = $checklist_id;
-        $this->checklistInfo = Checklist::find($checklist_id);
-        $this->loadUploadedDocuments();
+        $this->userIP = $this->getClientIpAddress(request());
+        try{
+            $this->checklist_id = $checklist_id;
+            $this->checklistInfo = Checklist::find($checklist_id);
+            $this->loadUploadedDocuments();
+        }catch(\Exception $e){
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'error',
+                'action' => 'checklist_mount',
+                'description' => '{"specific_action":"Checklist '.$checklist_id.' Documents Mount Failed", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
+        }
+        
+    }
+
+    private function getClientIpAddress(Request $request): string
+    {
+        // Check for various headers that might contain the real IP
+        $ipKeys = [
+            'HTTP_CF_CONNECTING_IP',     // CloudFlare
+            'HTTP_X_REAL_IP',            // Nginx proxy
+            'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+            'HTTP_X_FORWARDED',          // Proxy
+            'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+            'HTTP_CLIENT_IP',            // Proxy
+            'REMOTE_ADDR'                // Standard
+        ];
+
+        foreach ($ipKeys as $key) {
+            if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
+                $ips = explode(',', $_SERVER[$key]);
+                $ip = trim($ips[0]);
+                
+                // Validate IP address
+                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                    return $ip;
+                }
+            }
+        }
+
+        // Fallback to request IP
+        return $request->ip();
     }
 
     public function updatedDocument()
@@ -121,14 +163,23 @@ class AdditionalDocumentation extends Component
             
             // Show success message
             session()->flash('message', 'Document uploaded successfully!');
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'info',
+                'action' => 'checklist_upload',
+                'description' => '{"specific_action":"Upload Document Successfull", "ip address":"'. $this->userIP .'"}'
+            ]);
             
         } catch (\Exception $e) {
-            // Log the error
-            Log::error('Document upload failed: ' . $e->getMessage());
             
             // Show error message
             session()->flash('message', 'Upload failed. Please try again.');
-            
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'error',
+                'action' => 'checklist_upload',
+                'description' => '{"specific_action":"Upload Failed, "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
             // Clear all document-related properties
             $this->reset(['document', 'tempDocument', 'documentName', 'originalDocumentName']);
             $this->showRenameModal = false;
@@ -137,28 +188,38 @@ class AdditionalDocumentation extends Component
 
     private function loadUploadedDocuments()
     {
-        $documentsPath = ($this->checklist_id ?: 'uploads') . '/documents';
+        try{
+            $documentsPath = ($this->checklist_id ?: 'uploads') . '/documents';
         
-        if (Storage::disk('public')->exists($documentsPath)) {
-            $files = Storage::disk('public')->files($documentsPath);
-            
-            $this->uploadedDocuments = collect($files)->map(function ($file) {
-                $filename = basename($file);
-                $filePath = Storage::disk('public')->path($file);
-                $extension = pathinfo($filename, PATHINFO_EXTENSION);
+            if (Storage::disk('public')->exists($documentsPath)) {
+                $files = Storage::disk('public')->files($documentsPath);
                 
-                return [
-                    'name' => $filename,
-                    'path' => $file,
-                    'filename' => $filename,
-                    'type' => strtolower($extension),
-                    'size' => file_exists($filePath) ? $this->formatFileSize(filesize($filePath)) : 'Unknown',
-                    'uploaded_at' => file_exists($filePath) ? 
-                        date('M j, Y g:i A', filemtime($filePath)) : 
-                        'Unknown'
-                ];
-            })->toArray();
+                $this->uploadedDocuments = collect($files)->map(function ($file) {
+                    $filename = basename($file);
+                    $filePath = Storage::disk('public')->path($file);
+                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+                    
+                    return [
+                        'name' => $filename,
+                        'path' => $file,
+                        'filename' => $filename,
+                        'type' => strtolower($extension),
+                        'size' => file_exists($filePath) ? $this->formatFileSize(filesize($filePath)) : 'Unknown',
+                        'uploaded_at' => file_exists($filePath) ? 
+                            date('M j, Y g:i A', filemtime($filePath)) : 
+                            'Unknown'
+                    ];
+                })->toArray();
+            }
+        }catch(\Exception $e){
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'error',
+                'action' => 'checklist_load',
+                'description' => '{"specific_action":"Document Loading Failed, "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
         }
+        
     }
 
     private function formatFileSize($bytes)
@@ -185,13 +246,24 @@ class AdditionalDocumentation extends Component
     }
 
     public function downloadDocument($documentPath)
-    {
-        if (Storage::disk('public')->exists($documentPath)) {
-            $filename = basename($documentPath);
-            //return Storage::disk('public')->download($documentPath, $filename);
+    {   
+        try{
+            if (Storage::disk('public')->exists($documentPath)) {
+                $filename = basename($documentPath);
+                //return Storage::disk('public')->download($documentPath, $filename);
+            }
+            
+            session()->flash('error', 'Document not found.');
+        }catch(\Exception $e){
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'error',
+                'action' => 'checklist_download',
+                'description' => '{"specific_action":"Document not found, "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
         }
         
-        session()->flash('error', 'Document not found.');
+        
     }
 
     public function closeModal()
@@ -204,19 +276,35 @@ class AdditionalDocumentation extends Component
 
     public function removeDocument($index)
     {
-        if (isset($this->uploadedDocuments[$index])) {
-            $documentData = $this->uploadedDocuments[$index];
-            $documentPath = $documentData['path'];
-            
-            // Delete from storage
-            Storage::disk('public')->delete($documentPath);
-            
-            // Remove from array
-            unset($this->uploadedDocuments[$index]);
-            $this->uploadedDocuments = array_values($this->uploadedDocuments); // Re-index array
-            
-            session()->flash('message', 'Document removed successfully.');
+        try{
+            if (isset($this->uploadedDocuments[$index])) {
+                $documentData = $this->uploadedDocuments[$index];
+                $documentPath = $documentData['path'];
+                
+                // Delete from storage
+                Storage::disk('public')->delete($documentPath);
+                AppLog::create([
+                    'LogName' => 'User Action',
+                    'LogType' => 'info',
+                    'action' => 'checklist_remove',
+                    'description' => '{"specific_action":"Document removed successfully '.$documentPath.'", "ip address":"'. $this->userIP .'"}'
+                ]);
+
+                // Remove from array
+                unset($this->uploadedDocuments[$index]);
+                $this->uploadedDocuments = array_values($this->uploadedDocuments); // Re-index array
+                
+                session()->flash('message', 'Document removed successfully.');
+            }
+        }catch(\Exception $e){
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'error',
+                'action' => 'checklist_remove',
+                'description' => '{"specific_action":"Document Removal Failed", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
         }
+        
     }
 
     private function getFileIcon($type)
