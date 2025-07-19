@@ -33,9 +33,6 @@ class Personnel extends Component
                 'oba_picture_by' => $this->checklistInfo->personnelCheck->oba_picture_by ?? null,
                 'picture_judgement' => $this->checklistInfo->personnelCheck->picture_judgement ?? null
             ];
-            if($this->checklistInfo->personnelCheck->oba_picture_by == ""){
-                $this->openQrScanner('oba_checked_by');
-            }
         }catch(\Exception $e){
             AppLog::create([
                 'LogName' => 'System',

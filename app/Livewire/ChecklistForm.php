@@ -62,12 +62,29 @@ class ChecklistForm extends Component
     }
 
     public function save(){
-        $this->dispatch('save-clicked');
-    }
-
-    private function validateField($fieldValue)
-    {
-        return ($fieldValue == 1) ? 1 : 0;
+        //$this->dispatch('save-clicked');
+        DB::beginTransaction();
+        try{
+            //dd($param);
+            $checklist = Checklist::where('id', $this->model_id)->first();
+            $inputData = [
+                'status' => 'Closed'
+            ];
+            if ($checklist) {
+                $checklist->updateQuietly($inputData);
+            }
+            
+            DB::commit();
+            redirect('/viewlist');
+        }catch(\Exception $e){
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'error',
+                'action' => 'checklist_checklistForm',
+                'description' => '{"specific_action":"CheckList Closing Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
+            DB::rollBack();
+        }
     }
 
     #[On('return-value')]
