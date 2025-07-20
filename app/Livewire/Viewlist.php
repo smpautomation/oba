@@ -91,7 +91,8 @@ class Viewlist extends Component
                 ->orWhere('model', 'like', '%' . $this->search . '%')
                 ->orWhere('section', 'like', '%' . $this->search . '%')
                 ->orWhere('status', 'like', '%' . $this->search . '%')
-                ->orWhere('auditor', 'like', '%' . $this->search . '%');
+                ->orWhere('auditor', 'like', '%' . $this->search . '%')
+                ->orWhere('created_at', 'like', '%' . $this->search . '%');
             });
         }
         

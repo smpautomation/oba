@@ -55,7 +55,7 @@
                     <input 
                         type="text" 
                         wire:model.live.debounce.300ms="search"
-                        placeholder="Search checklists, model, or sections..."
+                        placeholder="Search checklists id, date (yyyy-mm-dd), auditor name, model, or sections..."
                         class="w-full custom-input rounded-lg px-4 py-3 pl-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                     <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@
                 <select wire:model.live="filterStatus" class="w-full custom-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     <option value="all">All Statuses</option>
                     <option value="Open">Open</option>
-                    <option value="In Progress">In Progress</option>
+                    {{-- <option value="In Progress">In Progress</option> --}}
                     <option value="Closed">Closed</option>
                 </select>
             </div>
@@ -120,6 +120,16 @@
                             <button wire:click="sortBy('created_at')" class="flex items-center gap-2 font-semibold text-gray-700 hover:text-blue-600 transition-colors mx-auto">
                                 Audit Started
                                 @if($sortBy === 'created_at')
+                                    <svg class="w-4 h-4 transform {{ $sortDirection === 'asc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                @endif
+                            </button>
+                        </th>
+                        <th class="px-6 py-4 text-center">
+                            <button wire:click="sortBy('created_at')" class="flex items-center gap-2 font-semibold text-gray-700 hover:text-blue-600 transition-colors mx-auto">
+                                Audit Closed
+                                @if($sortBy === 'updated_at')
                                     <svg class="w-4 h-4 transform {{ $sortDirection === 'asc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                     </svg>
@@ -215,7 +225,7 @@
                                 </div>
                             </td>
                             
-                            <!-- Due Date -->
+                            <!-- Audit Started -->
                             <td class="px-6 py-4 text-center">
                                 <div class="space-y-1">
                                     <div class="text-sm font-medium text-gray-700">
@@ -224,6 +234,20 @@
                                     <div class="text-xs {{ \Carbon\Carbon::parse($checklist['created_at'])->isPast() ? 'text-red-600' : 'text-gray-500' }}">
                                         {{ \Carbon\Carbon::parse($checklist['created_at'])->diffForHumans() }}
                                     </div>
+                                </div>
+                            </td>
+
+                            <!-- Audit Closed -->
+                            <td class="px-6 py-4 text-center">
+                                <div class="space-y-1">
+                                    @if($checklist['status'] == 'Closed')
+                                    <div class="text-sm font-medium text-gray-700">
+                                        {{ \Carbon\Carbon::parse($checklist['updated_at'])->format('M d, Y') }}
+                                    </div>
+                                    <div class="text-xs {{ \Carbon\Carbon::parse($checklist['updated_at'])->isPast() ? 'text-red-600' : 'text-gray-500' }}">
+                                        {{ \Carbon\Carbon::parse($checklist['updated_at'])->diffForHumans() }}
+                                    </div>
+                                    @endif
                                 </div>
                             </td>
                             

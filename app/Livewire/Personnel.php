@@ -138,6 +138,12 @@ class Personnel extends Component
             $inputData = $this->inputs;
             if ($checklist) {
                 $checklist->update($inputData);
+                if(isset($inputData['oba_checked_by'])){
+                    $updateMainRecord = checklist::find($this->checklist_id);
+                    $updateMainRecord->update([
+                        "auditor" => $inputData['oba_checked_by']
+                    ]);
+                }
             }
             DB::commit();
            
