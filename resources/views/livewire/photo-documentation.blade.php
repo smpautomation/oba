@@ -29,6 +29,9 @@
                     capture="environment"
                     wire:model="photo"
                     class="hidden"
+                    @if($checklistInfo->status == "Closed")
+                    disabled
+                    @endif
                 />
                 <div class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 min-h-[48px] text-lg">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

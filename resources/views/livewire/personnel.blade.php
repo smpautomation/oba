@@ -37,7 +37,11 @@
                                     </div>
                                     <button type="button" 
                                             wire:click="openQrScanner('shipping_pic')"
-                                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors duration-200">
+                                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors duration-200"
+                                            @if($checklistInfo->status == "Closed")
+                                            disabled
+                                            @endif
+                                            >
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 16h4m-4 0v4m-4-4h4m-4-4h4m-4-4v4"></path>
                                         </svg>
@@ -52,7 +56,8 @@
                                 wire:focusout="dispatchMe('shipping_pic')"
                                 :inputStatus="$inputStatus['shipping_pic'] ?? null"
                                 class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                                placeholder="Enter shipping person in charge or scan barcode">
+                                placeholder="Enter shipping person in charge or scan barcode"
+                                :closingStatus="$checklistInfo->status">
                             </x-inputText>
                         </div>
                     </div>
@@ -74,6 +79,9 @@
                                 class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900"
                                 wire:model='inputs.date' 
                                 wire:focusout="dispatchMe('date')"
+                                @if($checklistInfo->status == "Closed")
+                                disabled
+                                @endif
                             />
                         </div>
                     </div>
@@ -100,7 +108,10 @@
                                     </div>
                                     <button type="button" 
                                             wire:click="openQrScanner('oba_checked_by')"
-                                            class="inline-flex items-center px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-medium rounded-lg transition-colors duration-200">
+                                            class="inline-flex items-center px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-medium rounded-lg transition-colors duration-200"
+                                            @if($checklistInfo->status == "Closed")
+                                            disabled
+                                            @endif>
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 16h4m-4 0v4m-4-4h4m-4-4h4m-4-4v4"></path>
                                         </svg>
@@ -114,7 +125,8 @@
                                 wire:focusout="dispatchMe('oba_checked_by')" 
                                 :inputStatus="$inputStatus['oba_checked_by'] ?? null"
                                 class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                                placeholder="Enter inspector name">
+                                placeholder="Enter inspector name"
+                                :closingStatus="$checklistInfo->status">
                             </x-inputText>
                         </div>
                     </div>
@@ -136,7 +148,8 @@
                                 wire:focusout="dispatchMe('check_judgement')" 
                                 :inputStatus="$inputStatus['check_judgement'] ?? null"
                                 class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                                placeholder="Enter judgement result">
+                                placeholder="Enter judgement result"
+                                :closingStatus="$checklistInfo->status">
                             </x-inputText>
                         </div>
                     </div>
@@ -164,7 +177,10 @@
                                     </div>
                                     <button type="button" 
                                         wire:click="openQrScanner('oba_picture_by')"
-                                        class="inline-flex items-center px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded-lg transition-colors duration-200">
+                                        class="inline-flex items-center px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded-lg transition-colors duration-200"
+                                        @if($checklistInfo->status == "Closed")
+                                        disabled
+                                        @endif>
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 16h4m-4 0v4m-4-4h4m-4-4h4m-4-4v4"></path>
                                         </svg>
@@ -178,7 +194,8 @@
                                 wire:focusout="dispatchMe('oba_picture_by')" 
                                 :inputStatus="$inputStatus['oba_picture_by'] ?? null"
                                 class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                                placeholder="Enter photographer name">
+                                placeholder="Enter photographer name"
+                                :closingStatus="$checklistInfo->status">
                             </x-inputText>
                         </div>
                     </div>
@@ -200,7 +217,8 @@
                                 wire:focusout="dispatchMe('picture_judgement')" 
                                 :inputStatus="$inputStatus['picture_judgement'] ?? null"
                                 class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                                placeholder="Enter picture quality judgement">
+                                placeholder="Enter picture quality judgement"
+                                :closingStatus="$checklistInfo->status">
                             </x-inputText>
                         </div>
                     </div>
