@@ -49,7 +49,7 @@
                                 📊 Actual Pack/<br>Std. Pack
                             </th>
                             <th class="px-4 py-3 font-semibold bg-red-50">
-                                🏷️ FG Barcode<br>Label
+                                🏷️ Package Barcode<br>Label
                             </th>
                             <th class="px-4 py-3 font-semibold bg-red-50">
                                 🔍 Specific Label/<br>VDA/DMC/QR Code
@@ -85,7 +85,7 @@
                                 🏷️ VMI LABEL<br>(MIN,MOR & MIS)
                             </th>
                             <th class="px-4 py-3 font-semibold bg-blue-50">
-                                📊 MC Barcode<br>Label
+                                📊 Box Barcode<br>Label
                             </th>
                             <th class="px-4 py-3 font-semibold bg-blue-50">
                                 📄 Delivery Statement<br>(TOF models only)

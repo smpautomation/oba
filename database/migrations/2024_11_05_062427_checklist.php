@@ -106,6 +106,7 @@ return new class extends Migration
             $table->boolean('steel')->nullable();
             $table->boolean('plastic')->nullable();
             $table->string('others')->nullable()->default("");
+            $table->string('pallet_size')->nullable()->default("");
         });
 
         Schema::create('check_items', function(Blueprint $table){
@@ -167,6 +168,7 @@ return new class extends Migration
             $table->string('mc_barcode_mc')->nullable();
             $table->string('pallet_label_mc')->nullable();
             $table->string('specific_qr_label_mc')->nullable();
+            $table->string('package_mc')->nullable();
             $table->boolean('same_mc')->nullable();
             $table->boolean('judgement_mc')->nullable();
             $table->string('picklist_pn')->nullable();
@@ -175,6 +177,12 @@ return new class extends Migration
             $table->string('sir_pn')->nullable();
             $table->string('shipping_label_pn')->nullable();
             $table->string('vmi_pn')->nullable();
+            $table->string('package_pn')->nullable();
+            $table->string('qr_qa_pn')->nullable();
+            $table->string('qr_mgtz_pn')->nullable();
+            $table->string('qr_mc_pn')->nullable();
+            $table->string('pallet_label_pn')->nullable();
+            $table->string('sci_label_pn')->nullable();
             $table->boolean('same_pn')->nullable();
             $table->boolean('judgement_pn')->nullable();
             $table->string('serem_customer_po')->nullable();

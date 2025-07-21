@@ -295,7 +295,8 @@
                 </div>
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
-                        <x-label for="5-fglabel-model-input">FG LABEL</x-label><x-inputText id="5-fglabel-model-input" wire:model='inputs.fg_label_mn' wire:focusout="dispatchMe('fg_label_mn')" :inputStatus="$inputStatus['fg_label_mn']"></x-inputText>
+                        {{-- //FG BARCODE LABEL --}}
+                        <x-label for="5-fglabel-model-input">PACKAGE BARCODE LABEL</x-label><x-inputText id="5-fglabel-model-input" wire:model='inputs.fg_label_mn' wire:focusout="dispatchMe('fg_label_mn')" :inputStatus="$inputStatus['fg_label_mn']"></x-inputText>
                     </div>
                 </div>
                 @if($vmi_mn)
@@ -307,7 +308,7 @@
                 @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
-                        <x-label for="5-mc-model-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-model-input" wire:model='inputs.mc_label_mn' wire:focusout="dispatchMe('mc_label_mn')" :inputStatus="$inputStatus['mc_label_mn']"></x-inputText>
+                        <x-label for="5-mc-model-input">BOX BARCODE LABEL</x-label><x-inputText id="5-mc-model-input" wire:model='inputs.mc_label_mn' wire:focusout="dispatchMe('mc_label_mn')" :inputStatus="$inputStatus['mc_label_mn']"></x-inputText>
                     </div>
                 </div>
                 <div class="col-span-1 md:grid-cols-2">
@@ -446,33 +447,38 @@
                 @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
-                        <x-label for="5-shiplabel-modelcode-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-shiplabel-input" wire:model='inputs.shipping_label_mc' wire:focusout="dispatchMe('shipping_label_mc')" :inputStatus="$inputStatus['shipping_label_mc']"></x-inputText>
+                        <x-label for="5-shiplabel-modelcode-input">SHIPPING LABEL (OTHER MODEL)</x-label><x-inputText id="5-shiplabel-modelcode-input" wire:model='inputs.shipping_label_mc' wire:focusout="dispatchMe('shipping_label_mc')" :inputStatus="$inputStatus['shipping_label_mc']"></x-inputText>
                     </div>
                 </div>
                 @if($vmi_mc)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
-                        <x-label for="5-vmi-modelcode-input">VMI LABEL</x-label><x-inputText id="5-vmi-shiplabel-input" wire:model='inputs.vmi_label_mc' wire:focusout="dispatchMe('vmi_label_mc')" :inputStatus="$inputStatus['vmi_label_mc']"></x-inputText>
+                        <x-label for="5-vmi-modelcode-input">VMI LABEL</x-label><x-inputText id="5-vmi-modelcode-input" wire:model='inputs.vmi_label_mc' wire:focusout="dispatchMe('vmi_label_mc')" :inputStatus="$inputStatus['vmi_label_mc']"></x-inputText>
                     </div>
                 </div>
                 @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
-                        <x-label for="5-mc-modelcode-input">MC BARCODE LABEL</x-label><x-inputText id="5-mc-shiplabel-input" wire:model='inputs.mc_barcode_mc' wire:focusout="dispatchMe('mc_barcode_mc')" :inputStatus="$inputStatus['mc_barcode_mc']"></x-inputText>
+                        <x-label for="5-mc-modelcode-input">BOX BARCODE LABEL</x-label><x-inputText id="5-mc-modelcode-input" wire:model='inputs.mc_barcode_mc' wire:focusout="dispatchMe('mc_barcode_mc')" :inputStatus="$inputStatus['mc_barcode_mc']"></x-inputText>
                     </div>
                 </div>
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
-                        <x-label for="5-pallet-modelcode-input">PALLET LABEL</x-label><x-inputText id="5-pallet-shiplabel-input" wire:model='inputs.pallet_label_mc' wire:focusout="dispatchMe('pallet_label_mc')" :inputStatus="$inputStatus['pallet_label_mc']"></x-inputText>
+                        <x-label for="5-pallet-modelcode-input">PALLET LABEL</x-label><x-inputText id="5-pallet-modelcode-input" wire:model='inputs.pallet_label_mc' wire:focusout="dispatchMe('pallet_label_mc')" :inputStatus="$inputStatus['pallet_label_mc']"></x-inputText>
                     </div>
                 </div>
                 @if($specific_label_mc)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
-                        <x-label for="5-speciallabel-modelcode-input">SPECIFIC LABEL/QR CODE LABEL</x-label><x-inputText id="5-speciallabel-shiplabel-input" wire:model='inputs.specific_qr_label_mc' wire:focusout="dispatchMe('specific_qr_label_mc')" :inputStatus="$inputStatus['specific_qr_label_mc']"></x-inputText>
+                        <x-label for="5-speciallabel-modelcode-input">SPECIFIC LABEL/QR CODE LABEL</x-label><x-inputText id="5-speciallabel-modelcode-input" wire:model='inputs.specific_qr_label_mc' wire:focusout="dispatchMe('specific_qr_label_mc')" :inputStatus="$inputStatus['specific_qr_label_mc']"></x-inputText>
                     </div>
                 </div>
                 @endif
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-package-modelcode-input">PACKAGE BARCODE LABEL</x-label><x-inputText id="5-package-modelcode-input" wire:model='inputs.package_mc' wire:focusout="dispatchMe('package_mc')" :inputStatus="$inputStatus['package_mc']"></x-inputText>
+                    </div>
+                </div>
             </div>
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
@@ -614,6 +620,36 @@
                     </div>
                 </div>
                 @endif
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-package-partnumber-input">PACKAGE BARCODE LABEL</x-label><x-inputText id="5-package-partnumber-input" wire:model='inputs.package_pn' wire:focusout="dispatchMe('package_pn')" :inputStatus="$inputStatus['package_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-qr_qa-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY QA)</x-label><x-inputText id="5-qr_qa-partnumber-input" wire:model='inputs.qr_qa_pn' wire:focusout="dispatchMe('qr_qa_pn')" :inputStatus="$inputStatus['qr_qa_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-qr_mgtz-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY MGTZ)</x-label><x-inputText id="5-qr_mgtz-partnumber-input" wire:model='inputs.qr_mgtz_pn' wire:focusout="dispatchMe('qr_mgtz_pn')" :inputStatus="$inputStatus['qr_mgtz_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-qr_mc-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY MC)</x-label><x-inputText id="5-qr_mc-partnumber-input" wire:model='inputs.qr_mc_pn' wire:focusout="dispatchMe('qr_mc_pn')" :inputStatus="$inputStatus['qr_mc_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-pallet-partnumber-input">PALLET LABEL</x-label><x-inputText id="5-pallet-partnumber-input" wire:model='inputs.pallet_label_pn' wire:focusout="dispatchMe('pallet_label_pn')" :inputStatus="$inputStatus['pallet_label_pn']"></x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-sci_label-partnumber-input">SCI LABEL(SIAM COMPRESSOR INDUSTRY CO.,LTD)</x-label><x-inputText id="5-sci_label-partnumber-input" wire:model='inputs.sci_label_pn' wire:focusout="dispatchMe('sci_label_pn')" :inputStatus="$inputStatus['sci_label_pn']"></x-inputText>
+                    </div>
+                </div>
             </div>
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">

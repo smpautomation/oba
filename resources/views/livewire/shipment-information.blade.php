@@ -224,6 +224,23 @@
                     @endif
                 />
             </div>
+            <div>
+                <label for="3-others" class="block text-sm font-semibold text-gray-700 my-2">
+                    PALLET SIZE
+                </label>
+                <input 
+                    type="text" 
+                    id="3-pallet_size" 
+                    name="3-pallet_size" 
+                    placeholder="Enter pallet size..." 
+                    wire:model="inputs.pallet_size" 
+                    wire:focusout="dispatchMe('pallet_size')" 
+                    class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
+                    @if($checklistInfo->status == "Closed")
+                    disabled
+                    @endif
+                />
+            </div>
         </div>  
     </div>
 </div>

@@ -27,7 +27,8 @@ class ShipmentInformation extends Component
         'paper' => null,
         'steel' => null,
         'plastic' => null,
-        'others' => null
+        'others' => null,
+        'pallet_size' => null
     ];
     public $dateNow;
     public $userIP;
@@ -46,7 +47,8 @@ class ShipmentInformation extends Component
                 'paper' => $this->checklistInfo->shipInfoCheck->paper ? true : false,
                 'steel' => $this->checklistInfo->shipInfoCheck->steel ? true : false,
                 'plastic' => $this->checklistInfo->shipInfoCheck->plastic ? true : false,
-                'others' => $this->checklistInfo->shipInfoCheck->others ?? false
+                'others' => $this->checklistInfo->shipInfoCheck->others ?? false,
+                'pallet_size' => $this->checklistInfo->shipInfoCheck->pallet_size ?? false
             ];
         }catch(\Exception $e){
             AppLog::create([

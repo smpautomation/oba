@@ -64,7 +64,7 @@
         </div>
 
         <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 md:p-6">
-            <x-label :semibold="true" class="block text-lg font-semibold text-gray-800 mb-4">100% Checking of Barcode Label Model Name</x-label>
+            <x-label :semibold="true" class="block text-lg font-semibold text-gray-800 mb-4">100% Checking of Box Barcode Label Model Name</x-label>
             
             <!-- Model Name Question -->
             <div class="mb-6">
