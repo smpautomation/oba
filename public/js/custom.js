@@ -19,7 +19,12 @@ function isMobile() {
   function updateCurrentTime() {
       const now = new Date();
       const timeString = now.toLocaleString();
-      document.getElementById('current-time').textContent = timeString;
+      try {
+        document.getElementById('current-time').textContent = timeString;
+      } catch (error) {
+        
+      }
+      
   }
   
   // Update time every second

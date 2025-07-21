@@ -117,7 +117,6 @@
                 </button>
             </div>
         </form>
-
         <!-- Footer -->
         <div class="mt-8 pt-6 border-t border-gray-200 text-center">
             <p class="text-gray-500 text-sm">Ready to begin? Make your selections above.</p>

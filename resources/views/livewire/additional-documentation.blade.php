@@ -3,7 +3,7 @@
     <div class="fixed top-[54%] {{ $sidebarOpen ? 'right-3/4' : 'right-0' }} z-50 transform -translate-y-1/2 transition-all duration-300">
         <button 
             wire:click="toggleSidebar"
-            class="bg-blue-600 hover:bg-blue-700 text-white p-3 {{ $sidebarOpen ? 'rounded-l-lg' : 'rounded-l-lg' }} shadow-lg transition-colors duration-200"
+            class="gradient-bg text-white p-3 {{ $sidebarOpen ? 'rounded-l-lg' : 'rounded-l-lg' }} shadow-lg transition-colors duration-200"
             title="{{ $sidebarOpen ? 'Close Photo Panel' : 'Open Photo Panel' }}"
         >
             <svg class="w-6 h-6 transform transition-transform duration-200 {{ $sidebarOpen ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
