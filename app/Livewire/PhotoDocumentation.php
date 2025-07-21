@@ -28,6 +28,7 @@ class PhotoDocumentation extends Component
     public $tempPhoto = null;
     public $photoName = '';
     public $originalPhotoName = '';
+    public $sidebarOpen = false;
 
     public $userIP;
     public function mount($checklist_id){
@@ -74,6 +75,10 @@ class PhotoDocumentation extends Component
         return $request->ip();
     }
 
+    public function toggleSidebar()
+    {
+        $this->sidebarOpen = !$this->sidebarOpen;
+    }
     public function updatedPhoto()
     {
         // Validate the uploaded file

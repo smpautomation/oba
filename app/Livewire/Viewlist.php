@@ -18,11 +18,19 @@ class Viewlist extends Component
     public $filterStatus = 'all';
     public $showDeleteModal = false;
     public $checklistToDelete = null;
+    public $filterDateFrom = '';
+    public $filterDateTo = '';
+    public $filterModel = 'all';
+    public $filterSection = 'all';
     protected $queryString = [
         'search' => ['except' => ''],
         'sortBy' => ['except' => 'created_at'],
         'sortDirection' => ['except' => 'desc'],
         'filterStatus' => ['except' => 'all'],
+        'filterDateFrom' => ['except' => ''],
+        'filterDateTo' => ['except' => ''],
+        'filterModel' => ['except' => 'all'],
+        'filterSection' => ['except' => 'all'],
     ];
     public $userIp;
 
@@ -57,6 +65,33 @@ class Viewlist extends Component
 
         // Fallback to request IP
         return $request->ip();
+    }
+
+    public function resetDateFilter()
+    {
+        $this->filterDateFrom = '';
+        $this->filterDateTo = '';
+        $this->resetPage();
+    }
+
+    public function updatedFilterDateFrom()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFilterDateTo()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFilterModel()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFilterSection()
+    {
+        $this->resetPage();
     }
 
     public function updatingSearch()
@@ -101,6 +136,25 @@ class Viewlist extends Component
             $query->where('status', $this->filterStatus);
         }
         
+        // Apply date range filter
+        if ($this->filterDateFrom) {
+            $query->whereDate('created_at', '>=', $this->filterDateFrom);
+        }
+        
+        if ($this->filterDateTo) {
+            $query->whereDate('created_at', '<=', $this->filterDateTo);
+        }
+        
+        // Apply model filter
+        if ($this->filterModel !== 'all') {
+            $query->where('model', $this->filterModel);
+        }
+        
+        // Apply section filter
+        if ($this->filterSection !== 'all') {
+            $query->where('section', $this->filterSection);
+        }
+        
         // Apply sorting
         $query->orderBy($this->sortBy, $this->sortDirection);
 
@@ -115,6 +169,16 @@ class Viewlist extends Component
             'Open' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
             default => 'bg-gray-100 text-gray-800 border-gray-200',
         };
+    }
+
+    public function getUniqueModelsProperty()
+    {
+        return checklist::distinct()->pluck('model')->filter()->sort();
+    }
+
+    public function getUniqueSectionsProperty()
+    {
+        return checklist::distinct()->pluck('section')->filter()->sort();
     }
 
     public function viewChecklist($checklistId)

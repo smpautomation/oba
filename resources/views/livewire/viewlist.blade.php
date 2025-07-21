@@ -10,16 +10,6 @@
                 <div class="status-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                     {{ $checklists->count() }} Total Checklists
                 </div>
-                {{-- <button class="animated-button">
-                    <svg class="arr-1" viewBox="0 0 24 24" fill="none">
-                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/>
-                    </svg>
-                    <svg class="arr-2" viewBox="0 0 24 24" fill="none">
-                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/>
-                    </svg>
-                    <span class="text">New Checklist</span>
-                    <span class="circle"></span>
-                </button> --}}
             </div>
         </div>
     </div>
@@ -48,14 +38,14 @@
 
     <!-- Search and Filter Section -->
     <div class="glass-effect rounded-xl p-6 mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
             <!-- Search Input -->
-            <div class="md:col-span-2">
+            <div class="lg:col-span-2">
                 <div class="relative">
                     <input 
                         type="text" 
                         wire:model.live.debounce.300ms="search"
-                        placeholder="Search checklists id, date (yyyy-mm-dd), auditor name, model, or sections..."
+                        placeholder="Search checklists id or auditor name ..."
                         class="w-full custom-input rounded-lg px-4 py-3 pl-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                     <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,9 +59,68 @@
                 <select wire:model.live="filterStatus" class="w-full custom-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     <option value="all">All Statuses</option>
                     <option value="Open">Open</option>
-                    {{-- <option value="In Progress">In Progress</option> --}}
                     <option value="Closed">Closed</option>
                 </select>
+            </div>
+            
+            <!-- Model Filter -->
+            <div>
+                <select wire:model.live="filterModel" class="w-full custom-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="all">All Models</option>
+                    @foreach($this->uniqueModels as $model)
+                        <option value="{{ $model }}">{{ $model }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <!-- Section Filter -->
+            <div>
+                <select wire:model.live="filterSection" class="w-full custom-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="all">All Sections</option>
+                    @foreach($this->uniqueSections as $section)
+                        <option value="{{ $section }}">{{ $section }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <!-- Clear Filters Button -->
+            <div class="flex items-end">
+                <button 
+                    wire:click="$set('search', ''); $set('filterStatus', 'all'); $set('filterModel', 'all'); $set('filterSection', 'all'); resetDateFilter()"
+                    class="w-full bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition-colors"
+                >
+                    Clear All
+                </button>
+            </div>
+        </div>
+        
+        <!-- Date Range Filter Row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-200">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">From Date</label>
+                <input 
+                    type="date" 
+                    wire:model.live="filterDateFrom"
+                    class="w-full custom-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">To Date</label>
+                <input 
+                    type="date" 
+                    wire:model.live="filterDateTo"
+                    class="w-full custom-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+            </div>
+            
+            <div class="flex items-end">
+                <button 
+                    wire:click="resetDateFilter"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg transition-colors"
+                >
+                    Clear Dates
+                </button>
             </div>
         </div>
     </div>

@@ -29,7 +29,9 @@ class AdditionalDocumentation extends Component
     public $tempDocument = null;
     public $documentName = '';
     public $originalDocumentName = '';
+
     public $userIP;
+    public $sidebarOpen = false;
 
     public function mount($checklist_id){
         $this->userIP = $this->getClientIpAddress(request());
@@ -77,6 +79,10 @@ class AdditionalDocumentation extends Component
         return $request->ip();
     }
 
+    public function toggleSidebar()
+    {
+        $this->sidebarOpen = !$this->sidebarOpen;
+    }
     public function updatedDocument()
     {
         // Validate the uploaded file

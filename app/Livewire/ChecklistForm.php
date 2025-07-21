@@ -61,8 +61,12 @@ class ChecklistForm extends Component
         return $request->ip();
     }
 
-    public function save(){
+    public function doNothing(){
         //$this->dispatch('save-clicked');
+        
+    }
+
+    public function closeMe(){
         DB::beginTransaction();
         try{
             //dd($param);
@@ -75,7 +79,7 @@ class ChecklistForm extends Component
             }
             
             DB::commit();
-            //redirect('/viewlist'); -> comment due to redirecting even if finish audit is not clicked
+            redirect('/viewlist');
         }catch(\Exception $e){
             AppLog::create([
                 'LogName' => 'System',

@@ -1020,6 +1020,9 @@ footer { margin-top: auto; }
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
+        .gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
         
         .section-container:hover {
             transform: translateY(-2px);
