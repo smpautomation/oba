@@ -1,11 +1,16 @@
 @props(['inputStatus' => null])
 @props(['marginleft' => ""])
+@props(['closingStatus' => ''])
 @php
     $borderClass = match($inputStatus) {
         'success' => 'border-green-500',
         'error' => 'border-yellow-500',
         default => 'border-gray-300',
     };
+    $status = '';
+    if($closingStatus == "Closed"){
+        $status = 'disabled';
+    }
 @endphp
 
 <input 
@@ -15,4 +20,5 @@
         ]) 
     }} 
     type="text"
+    {{ $status }}
 />

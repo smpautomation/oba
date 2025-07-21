@@ -37,7 +37,8 @@
                         :inputStatus="$inputStatus['open_boxes_quantity']"
                         class="input-field w-full md:w-40 px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-semibold text-center"
                         placeholder="0"
-                        min="0">
+                        min="0"
+                        :closingStatus="$checklistInfo->status">
                     </x-inputNumber>
                     <span class="text-sm font-medium text-gray-600 bg-white px-4 py-3 rounded-lg border whitespace-nowrap">BOXES</span>
                 </div>
@@ -82,6 +83,9 @@
                                 class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                 wire:model='inputs.same_model' 
                                 wire:focusout="dispatchMe('same_model')"
+                                @if($checklistInfo->status == "Closed")
+                                disabled
+                                @endif
                                 >
                             <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
                                 <span class="text-green-600 text-xl mr-2">✓</span>YES
@@ -98,6 +102,9 @@
                                 class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                 wire:model='inputs.same_model' 
                                 wire:focusout="dispatchMe('same_model')"
+                                @if($checklistInfo->status == "Closed")
+                                disabled
+                                @endif
                                 >
                             <label for="4-radio-model-no" class="text-base font-medium cursor-pointer">
                                 <span class="text-red-600 text-xl mr-2">✗</span>NO
@@ -117,7 +124,8 @@
                         wire:focusout="dispatchMe('specify_model')" 
                         :inputStatus="$inputStatus['specify_model']"
                         class="input-field w-full px-4 py-3 border-2 border-red-200 rounded-lg focus:border-red-500 focus:outline-none"
-                        placeholder="Enter model name(s)...">
+                        placeholder="Enter model name(s)..."
+                        :closingStatus="$checklistInfo->status">
                     </x-inputText>
                 </div>
                 
@@ -132,7 +140,8 @@
                             :inputStatus="$inputStatus['carton_quantity']"
                             class="input-field w-full md:w-40 px-4 py-3 border-2 border-red-200 rounded-lg focus:border-red-500 focus:outline-none text-center"
                             placeholder="0"
-                            min="0">
+                            min="0"
+                            :closingStatus="$checklistInfo->status">
                         </x-inputNumber>
                         <span class="text-sm font-medium text-red-700 bg-white px-4 py-3 rounded-lg border border-red-200 whitespace-nowrap">CARTONS</span>
                     </div>
@@ -153,7 +162,10 @@
                                 name="4-radio-judgement" 
                                 class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                 wire:model='inputs.judgement' 
-                                wire:focusout="dispatchMe('judgement')">
+                                wire:focusout="dispatchMe('judgement')"
+                                @if($checklistInfo->status == "Closed")
+                                disabled
+                                @endif>
                             <label for="4-radio-judgement-ok" class="text-base font-medium cursor-pointer">
                                 <span class="text-green-600 text-xl mr-2">✓</span>OK
                             </label>
@@ -168,7 +180,10 @@
                                 name="4-radio-judgement" 
                                 class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                 wire:model='inputs.judgement' 
-                                wire:focusout="dispatchMe('judgement')">
+                                wire:focusout="dispatchMe('judgement')"
+                                @if($checklistInfo->status == "Closed")
+                                disabled
+                                @endif>
                             <label for="4-radio-judgement-ng" class="text-base font-medium cursor-pointer">
                                 <span class="text-red-600 text-xl mr-2">✗</span>NG
                             </label>
@@ -213,6 +228,9 @@
                                 class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                 wire:model='inputs.need_sir' 
                                 wire:focusout="dispatchMe('need_sir')"
+                                @if($checklistInfo->status == "Closed")
+                                disabled
+                                @endif
                                 >
                             <label for="4-sir-yes" class="text-base font-medium cursor-pointer">
                                 <span class="text-blue-600 text-xl mr-2">✓</span>YES
@@ -229,6 +247,9 @@
                                 class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                 wire:model='inputs.need_sir' 
                                 wire:focusout="dispatchMe('need_sir')"
+                                @if($checklistInfo->status == "Closed")
+                                disabled
+                                @endif
                                 >
                             <label for="4-sir-no" class="text-base font-medium cursor-pointer">
                                 <span class="text-gray-600 text-xl mr-2">✗</span>NO
@@ -253,7 +274,10 @@
                                     name="4-avail" 
                                     class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                     wire:model='inputs.sir_available' 
-                                    wire:focusout="dispatchMe('sir_available')">
+                                    wire:focusout="dispatchMe('sir_available')"
+                                    @if($checklistInfo->status == "Closed")
+                                    disabled
+                                    @endif>
                                 <label for="4-avail-yes" class="text-base font-medium cursor-pointer">
                                     <span class="text-green-600 text-xl mr-2">✓</span>YES
                                 </label>
@@ -268,7 +292,10 @@
                                     name="4-avail" 
                                     class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                     wire:model='inputs.sir_available' 
-                                    wire:focusout="dispatchMe('sir_available')">
+                                    wire:focusout="dispatchMe('sir_available')"
+                                    @if($checklistInfo->status == "Closed")
+                                    disabled
+                                    @endif>
                                 <label for="4-avail-no" class="text-base font-medium cursor-pointer">
                                     <span class="text-red-600 text-xl mr-2">✗</span>NO
                                 </label>

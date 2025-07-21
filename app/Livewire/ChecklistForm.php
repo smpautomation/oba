@@ -75,7 +75,8 @@ class ChecklistForm extends Component
             }
             
             DB::commit();
-            redirect('/viewlist');
+            dd('test');
+            //redirect('/viewlist'); -> comment due to redirecting even if finish audit is not clicked
         }catch(\Exception $e){
             AppLog::create([
                 'LogName' => 'System',

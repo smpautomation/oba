@@ -10,7 +10,6 @@
             <div>
                 <h1 class="text-3xl font-bold">Similarities Checking</h1>
                 <p class="text-white/80 mt-1">Labels and documentation</p>
-                <p>{{ $checklist_id }}</p>
             </div>
         </div>
     </div>

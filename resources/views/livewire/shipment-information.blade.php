@@ -35,6 +35,9 @@
                         wire:focusout="dispatchMe('datetime')" 
                         class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
                         placeholder="Pick a date and time" 
+                        @if($checklistInfo->status == "Closed")
+                        disabled
+                        @endif
                     />
                 </div>
                 <div class="flex items-center justify-center">
@@ -84,6 +87,9 @@
                         wire:focusout="dispatchMe('invoice_number')" 
                         class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
                         placeholder="Enter invoice number"
+                        @if($checklistInfo->status == "Closed")
+                        disabled
+                        @endif
                     />
                 </div>
             </div>
@@ -108,6 +114,9 @@
                             wire:model="inputs.wood" 
                             wire:focusout="dispatchMe('wood')" 
                             class="custom-checkbox"
+                            @if($checklistInfo->status == "Closed")
+                            disabled
+                            @endif
                         />
                         <div>
                             <div class="flex items-center">
@@ -130,6 +139,9 @@
                             wire:model="inputs.paper" 
                             wire:focusout="dispatchMe('paper')" 
                             class="custom-checkbox"
+                            @if($checklistInfo->status == "Closed")
+                            disabled
+                            @endif
                         />
                         <div>
                             <div class="flex items-center">
@@ -152,6 +164,9 @@
                             wire:model="inputs.steel" 
                             wire:focusout="dispatchMe('steel')" 
                             class="custom-checkbox"
+                            @if($checklistInfo->status == "Closed")
+                            disabled
+                            @endif
                         />
                         <div>
                             <div class="flex items-center">
@@ -174,6 +189,9 @@
                             wire:model="inputs.plastic" 
                             wire:focusout="dispatchMe('plastic')" 
                             class="custom-checkbox"
+                            @if($checklistInfo->status == "Closed")
+                            disabled
+                            @endif
                         />
                         <div>
                             <div class="flex items-center">
@@ -201,6 +219,9 @@
                     wire:model="inputs.others" 
                     wire:focusout="dispatchMe('others')" 
                     class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
+                    @if($checklistInfo->status == "Closed")
+                    disabled
+                    @endif
                 />
             </div>
         </div>  

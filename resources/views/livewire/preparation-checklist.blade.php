@@ -16,7 +16,7 @@
 
     <!-- Main Table Container -->
     <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
-        <table class="w-full min-w-[1200px] text-sm">
+        <table class="w-full min-w-[1200px] text-sm" >
             <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
                 <tr>
                     <th class="px-4 py-4 text-left font-semibold text-gray-700 sticky left-0 bg-gray-50 z-10 min-w-[120px] border-r border-gray-200">
@@ -68,33 +68,33 @@
                         </div>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="oneprep2column" value="1" wire:model="inputs.oneprep2column" wire:focusout="dispatchMe('oneprep2column')" :inputStatus="$inputStatus['oneprep2column']" ></x-checkbox>
+                        <x-checkbox id="oneprep2column" value="1" wire:model="inputs.oneprep2column" wire:focusout="dispatchMe('oneprep2column')" :inputStatus="$inputStatus['oneprep2column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column" wire:focusout="dispatchMe('oneprep3column')" :inputStatus="$inputStatus['oneprep3column']" ></x-checkbox>
+                        <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column" wire:focusout="dispatchMe('oneprep3column')" :inputStatus="$inputStatus['oneprep3column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-4column" value="1" wire:model="inputs.oneprep4column" wire:focusout="dispatchMe('oneprep4column')" :inputStatus="$inputStatus['oneprep4column']" ></x-checkbox>
+                        <x-checkbox id="1-prep-4column" value="1" wire:model="inputs.oneprep4column" wire:focusout="dispatchMe('oneprep4column')" :inputStatus="$inputStatus['oneprep4column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-5column" value="1" wire:model="inputs.oneprep5column" wire:focusout="dispatchMe('oneprep5column')" :inputStatus="$inputStatus['oneprep5column']" ></x-checkbox>
+                        <x-checkbox id="1-prep-5column" value="1" wire:model="inputs.oneprep5column" wire:focusout="dispatchMe('oneprep5column')" :inputStatus="$inputStatus['oneprep5column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-6column" value="1" wire:model="inputs.oneprep6column" wire:focusout="dispatchMe('oneprep6column')" :inputStatus="$inputStatus['oneprep6column']" ></x-checkbox>
+                        <x-checkbox id="1-prep-6column" value="1" wire:model="inputs.oneprep6column" wire:focusout="dispatchMe('oneprep6column')" :inputStatus="$inputStatus['oneprep6column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column" wire:focusout="dispatchMe('oneprep7column')" :inputStatus="$inputStatus['oneprep7column']" ></x-checkbox>
+                        <x-checkbox id="1-prep-7column" value="1" wire:model="inputs.oneprep7column" wire:focusout="dispatchMe('oneprep7column')" :inputStatus="$inputStatus['oneprep7column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     @if($scanned_qr_code)
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column" wire:focusout="dispatchMe('oneprep8column')" :inputStatus="$inputStatus['oneprep8column']" ></x-checkbox>
+                        <x-checkbox id="1-prep-8column" value="1" wire:model="inputs.oneprep8column" wire:focusout="dispatchMe('oneprep8column')" :inputStatus="$inputStatus['oneprep8column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     @endif
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column" wire:focusout="dispatchMe('oneprep9column')" :inputStatus="$inputStatus['oneprep9column']" ></x-checkbox>
+                        <x-checkbox id="1-prep-9column" value="1" wire:model="inputs.oneprep9column" wire:focusout="dispatchMe('oneprep9column')" :inputStatus="$inputStatus['oneprep9column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                     <td class="px-3 py-6 text-center">
-                        <x-checkbox id="1-prep-10column" value="1" wire:model="inputs.oneprep10column" wire:focusout="dispatchMe('oneprep10column')" :inputStatus="$inputStatus['oneprep10column']"></x-checkbox>
+                        <x-checkbox id="1-prep-10column" value="1" wire:model="inputs.oneprep10column" wire:focusout="dispatchMe('oneprep10column')" :inputStatus="$inputStatus['oneprep10column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
                 </tr>
 
@@ -109,33 +109,33 @@
                         </div>
                     </td>
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-1remarks" wire:model="inputs.oneprep2remarks" wire:focusout="dispatchMe('oneprep2remarks')" :inputStatus="$inputStatus['oneprep2remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-1remarks" wire:model="inputs.oneprep2remarks" wire:focusout="dispatchMe('oneprep2remarks')" :inputStatus="$inputStatus['oneprep2remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-2remarks" wire:model="inputs.oneprep3remarks" wire:focusout="dispatchMe('oneprep3remarks')" :inputStatus="$inputStatus['oneprep3remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-2remarks" wire:model="inputs.oneprep3remarks" wire:focusout="dispatchMe('oneprep3remarks')" :inputStatus="$inputStatus['oneprep3remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-3remarks" wire:model="inputs.oneprep4remarks" wire:focusout="dispatchMe('oneprep4remarks')" :inputStatus="$inputStatus['oneprep4remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-3remarks" wire:model="inputs.oneprep4remarks" wire:focusout="dispatchMe('oneprep4remarks')" :inputStatus="$inputStatus['oneprep4remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-4remarks" wire:model="inputs.oneprep5remarks" wire:focusout="dispatchMe('oneprep5remarks')" :inputStatus="$inputStatus['oneprep5remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-4remarks" wire:model="inputs.oneprep5remarks" wire:focusout="dispatchMe('oneprep5remarks')" :inputStatus="$inputStatus['oneprep5remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-5remarks" wire:model="inputs.oneprep6remarks" wire:focusout="dispatchMe('oneprep6remarks')" :inputStatus="$inputStatus['oneprep6remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-5remarks" wire:model="inputs.oneprep6remarks" wire:focusout="dispatchMe('oneprep6remarks')" :inputStatus="$inputStatus['oneprep6remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-6remarks" wire:model="inputs.oneprep7remarks" wire:focusout="dispatchMe('oneprep7remarks')" :inputStatus="$inputStatus['oneprep7remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-6remarks" wire:model="inputs.oneprep7remarks" wire:focusout="dispatchMe('oneprep7remarks')" :inputStatus="$inputStatus['oneprep7remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     @if($scanned_qr_code)
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-7remarks" wire:model="inputs.oneprep8remarks" wire:focusout="dispatchMe('oneprep8remarks')" :inputStatus="$inputStatus['oneprep8remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-7remarks" wire:model="inputs.oneprep8remarks" wire:focusout="dispatchMe('oneprep8remarks')" :inputStatus="$inputStatus['oneprep8remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     @endif
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-8remarks" wire:model="inputs.oneprep9remarks" wire:focusout="dispatchMe('oneprep9remarks')" :inputStatus="$inputStatus['oneprep9remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-8remarks" wire:model="inputs.oneprep9remarks" wire:focusout="dispatchMe('oneprep9remarks')" :inputStatus="$inputStatus['oneprep9remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                     <td class="px-2 py-4">
-                        <x-inputText id="1-prep-9remarks" wire:model="inputs.oneprep10remarks" wire:focusout="dispatchMe('oneprep10remarks')" :inputStatus="$inputStatus['oneprep10remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..."></x-inputText>
+                        <x-inputText id="1-prep-9remarks" wire:model="inputs.oneprep10remarks" wire:focusout="dispatchMe('oneprep10remarks')" :inputStatus="$inputStatus['oneprep10remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
                 </tr>
             </tbody>
