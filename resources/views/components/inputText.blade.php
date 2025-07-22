@@ -14,7 +14,7 @@
     }
 
     // Merge additional classes with existing ones
-    $finalClasses = trim("text-gray-900 text-sm rounded-lg block w-full p-2.5 ml-8 $borderClass $class");
+    $finalClasses = trim("text-gray-900 text-sm rounded-lg block w-full p-2.5 $borderClass $class ");
 @endphp
 
 <input 
