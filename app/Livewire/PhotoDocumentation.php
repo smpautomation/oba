@@ -113,10 +113,12 @@ class PhotoDocumentation extends Component
     {
         // Validate the photo name
         $this->validate([
-            'photoName' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_\.]+$/',
+            'photoName' => 'required|string|max:50|regex:/^[a-zA-Z0-9\s\-_\.]+$/',
         ], [
             'photoName.required' => 'Photo name is required.',
             'photoName.regex' => 'Photo name can only contain letters, numbers, spaces, hyphens, underscores, and dots.',
+            'photoName.string' => 'Only String is Accepted.',
+            'photoName.max' => 'exceeded the amount of characters allowed in photo name.'
         ]);
 
         if ($this->tempPhoto) {
