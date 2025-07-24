@@ -84,6 +84,11 @@ class PhotoDocumentation extends Component
         // Validate the uploaded file
         $this->validate([
             'photo' => 'nullable|image|max:10240', // max 10MB
+        ],
+        [
+            'photo.nullable' => 'The Photo is Nullable',
+            'photo.image' => 'The file must be an image (JPEG, JPG, PNG)',
+            'photo.max' => 'The file exceed the maximum size of allowed upload per photo'
         ]);
         
         // If photo is valid, show rename modal
@@ -241,7 +246,7 @@ class PhotoDocumentation extends Component
                 
                 AppLog::create([
                     'LogName' => 'User Action',
-                    'LogType' => 'error',
+                    'LogType' => 'warning',
                     'action' => 'checklist_photo',
                     'description' => '{"specific_action":"Photo Removal Successful '.$photoPath.'", "ip address":"'. $this->userIP .'"}'
                 ]);
