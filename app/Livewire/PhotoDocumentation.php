@@ -83,7 +83,7 @@ class PhotoDocumentation extends Component
     {
         // Validate the uploaded file
         $this->validate([
-            'photo' => 'nullable|image|max:10240', // max 10MB
+            'photo' => 'nullable|image|max:2048', // max 10MB
         ],
         [
             'photo.nullable' => 'The Photo is Nullable',
