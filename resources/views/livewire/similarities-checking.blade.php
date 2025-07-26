@@ -110,7 +110,7 @@
                                         wire:focusout="dispatchMe('same_quantity_qs')" 
                                         name="5-radio-qfs-shipment" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -127,7 +127,7 @@
                                         wire:focusout="dispatchMe('same_quantity_qs')" 
                                         name="5-radio-qfs-shipment" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -157,7 +157,7 @@
                                         wire:focusout="dispatchMe('judgement_qs')" 
                                         name="5-radio-qfs-judgement"  
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -174,7 +174,7 @@
                                         wire:focusout="dispatchMe('judgement_qs')" 
                                         name="5-radio-qfs-judgement" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -281,7 +281,7 @@
                                         wire:focusout="dispatchMe('same_box_bs')" 
                                         name="5-boxship-radio-same" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif
                                         >
@@ -298,7 +298,7 @@
                                         wire:focusout="dispatchMe('same_box_bs')" 
                                         name="5-boxship-radio-same" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif
                                         >
@@ -329,7 +329,7 @@
                                         wire:focusout="dispatchMe('judgement_bs')" 
                                         name="5-boxship-radio-judgement" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif
                                         >
@@ -346,7 +346,7 @@
                                         wire:focusout="dispatchMe('judgement_bs')" 
                                         name="5-boxship-radio-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif
                                         >
@@ -766,7 +766,7 @@
                                         wire:focusout="dispatchMe('same_mc')" 
                                         name="5-modelcode-same" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -783,7 +783,7 @@
                                         wire:focusout="dispatchMe('same_mc')" 
                                         name="5-modelcode-same" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -814,7 +814,7 @@
                                         wire:focusout="dispatchMe('judgement_mc')" 
                                         name="5-modelcode-judegment" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -831,7 +831,7 @@
                                         wire:focusout="dispatchMe('judgement_mc')" 
                                         name="5-modelcode-judegment" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                         disabled
                                         @endif
                                         >
@@ -1440,7 +1440,7 @@
                                             wire:focusout="dispatchMe('same_po')" 
                                             name="5-ponumber-same" 
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status)
+                                            @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif>
                                         <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
@@ -1456,7 +1456,7 @@
                                             wire:focusout="dispatchMe('same_po')" 
                                             name="5-ponumber-same" 
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status)
+                                            @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif>
                                         <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
@@ -1486,7 +1486,7 @@
                                             wire:focusout="dispatchMe('judgement_po')" 
                                             name="5-ponumber-judgement"
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status)
+                                            @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif
                                             >
@@ -1503,7 +1503,7 @@
                                             wire:focusout="dispatchMe('judgement_po')" 
                                             name="5-ponumber-judgement"  
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status)
+                                            @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif
                                             >
