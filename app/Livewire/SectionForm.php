@@ -33,15 +33,14 @@ class SectionForm extends Component
     public $userIP; 
     private function getClientIpAddress(Request $request): string
     {
-        // Check for various headers that might contain the real IP
         $ipKeys = [
-            'HTTP_CF_CONNECTING_IP',     // CloudFlare
-            'HTTP_X_REAL_IP',            // Nginx proxy
-            'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
-            'HTTP_X_FORWARDED',          // Proxy
-            'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
-            'HTTP_CLIENT_IP',            // Proxy
-            'REMOTE_ADDR'                // Standard
+            'HTTP_CF_CONNECTING_IP',     
+            'HTTP_X_REAL_IP',            
+            'HTTP_X_FORWARDED_FOR',     
+            'HTTP_X_FORWARDED',          
+            'HTTP_X_CLUSTER_CLIENT_IP', 
+            'HTTP_CLIENT_IP',            
+            'REMOTE_ADDR'               
         ];
 
         foreach ($ipKeys as $key) {

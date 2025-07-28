@@ -32,9 +32,9 @@ class ShipmentInformation extends Component
     ];
     public $dateNow;
     public $userIP;
-    public function mount($checklist_id){
-        $this->userIP = $this->getClientIpAddress(request());
+    public function mount($checklist_id, $userIP){
         try{
+            $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
             
@@ -59,34 +59,7 @@ class ShipmentInformation extends Component
             ]);
         }
     }
-    private function getClientIpAddress(Request $request): string
-    {
-        // Check for various headers that might contain the real IP
-        $ipKeys = [
-            'HTTP_CF_CONNECTING_IP',     // CloudFlare
-            'HTTP_X_REAL_IP',            // Nginx proxy
-            'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
-            'HTTP_X_FORWARDED',          // Proxy
-            'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
-            'HTTP_CLIENT_IP',            // Proxy
-            'REMOTE_ADDR'                // Standard
-        ];
-
-        foreach ($ipKeys as $key) {
-            if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
-                $ips = explode(',', $_SERVER[$key]);
-                $ip = trim($ips[0]);
-                
-                // Validate IP address
-                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-                    return $ip;
-                }
-            }
-        }
-
-        // Fallback to request IP
-        return $request->ip();
-    }
+    
     public function render()
     {
         return view('livewire.shipment-information');

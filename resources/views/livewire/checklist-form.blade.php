@@ -20,15 +20,15 @@
                 </svg>
             </div> 
         </div>
-        <livewire:preparation-checklist :checklist_id="$model_id" :scanned_qr_code="$scanned_qr_pc"></livewire:preparation-checklist>
-        <livewire:o-b-a-kit-checklist :checklist_id="$model_id"></livewire:o-b-a-kit-checklist>
-        <livewire:shipment-information :checklist_id="$model_id"></livewire:shipment-information>
-        <livewire:check-items :checklist_id="$model_id"></livewire:check-items>
-        <livewire:similarities-checking :checklist_id="$model_id"></livewire:similarities-checking>
-        <livewire:check-overall :checklist_id="$model_id"></livewire:check-overall>
-        <livewire:personnel :checklist_id="$model_id"></livewire:personnel>
-        <livewire:photo-documentation :checklist_id="$model_id"></livewire:photo-documentation>
-        <livewire:additional-documentation :checklist_id="$model_id"></livewire:additional-documentation>
+        <livewire:preparation-checklist :checklist_id="$model_id" :scanned_qr_code="$scanned_qr_pc" :userIP="$userIP"></livewire:preparation-checklist>
+        <livewire:o-b-a-kit-checklist :checklist_id="$model_id" :userIP="$userIP"></livewire:o-b-a-kit-checklist>
+        <livewire:shipment-information :checklist_id="$model_id" :userIP="$userIP"></livewire:shipment-information>
+        <livewire:check-items :checklist_id="$model_id" :userIP="$userIP"></livewire:check-items>
+        <livewire:similarities-checking :checklist_id="$model_id" :userIP="$userIP"></livewire:similarities-checking>
+        <livewire:check-overall :checklist_id="$model_id" :userIP="$userIP"></livewire:check-overall>
+        <livewire:personnel :checklist_id="$model_id" :userIP="$userIP"></livewire:personnel>
+        <livewire:photo-documentation :checklist_id="$model_id" :userIP="$userIP"></livewire:photo-documentation>
+        <livewire:additional-documentation :checklist_id="$model_id" :userIP="$userIP"></livewire:additional-documentation>
         <div class="container-bg p-6 rounded-2xl shadow-lg flex items-center justify-center">
             @if ($checklistInfo->status != 'Closed')
             <button type="submit" wire:click='closeMe' class="save-button px-8 py-4 rounded-xl text-white flex items-center space-x-3 font-medium text-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50">

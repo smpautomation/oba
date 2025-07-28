@@ -33,9 +33,9 @@ class AdditionalDocumentation extends Component
     public $userIP;
     public $sidebarOpen = false;
 
-    public function mount($checklist_id){
-        $this->userIP = $this->getClientIpAddress(request());
+    public function mount($checklist_id, $userIP){
         try{
+            $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
             $this->loadUploadedDocuments();

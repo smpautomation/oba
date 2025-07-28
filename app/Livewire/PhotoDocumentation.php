@@ -6,7 +6,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\checklist as Checklist;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Log as AppLog;
 use Illuminate\Http\Request;
@@ -31,9 +30,9 @@ class PhotoDocumentation extends Component
     public $sidebarOpen = false;
 
     public $userIP;
-    public function mount($checklist_id){
-        $this->userIP = $this->getClientIpAddress(request());
+    public function mount($checklist_id, $userIP){
         try{
+            $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
             $this->loadUploadedPhotos();
@@ -46,34 +45,6 @@ class PhotoDocumentation extends Component
             ]);
         }
     }
-    private function getClientIpAddress(Request $request): string
-    {
-        // Check for various headers that might contain the real IP
-        $ipKeys = [
-            'HTTP_CF_CONNECTING_IP',     // CloudFlare
-            'HTTP_X_REAL_IP',            // Nginx proxy
-            'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
-            'HTTP_X_FORWARDED',          // Proxy
-            'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
-            'HTTP_CLIENT_IP',            // Proxy
-            'REMOTE_ADDR'                // Standard
-        ];
-
-        foreach ($ipKeys as $key) {
-            if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
-                $ips = explode(',', $_SERVER[$key]);
-                $ip = trim($ips[0]);
-                
-                // Validate IP address
-                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-                    return $ip;
-                }
-            }
-        }
-
-        // Fallback to request IP
-        return $request->ip();
-    }
 
     public function toggleSidebar()
     {
@@ -81,7 +52,6 @@ class PhotoDocumentation extends Component
     }
     public function updatedPhoto()
     {
-        // Validate the uploaded file
         $this->validate([
             'photo' => 'nullable|image|max:2048', // max 10MB
         ],
@@ -91,7 +61,6 @@ class PhotoDocumentation extends Component
             'photo.max' => 'The file exceed the maximum size of allowed upload per photo'
         ]);
         
-        // If photo is valid, show rename modal
         if ($this->photo) {
             $this->showRenamePrompt();
         }
@@ -102,7 +71,6 @@ class PhotoDocumentation extends Component
         $this->tempPhoto = $this->photo;
         $this->originalPhotoName = $this->photo->getClientOriginalName();
         
-        // Set default name (without extension)
         $nameWithoutExtension = pathinfo($this->originalPhotoName, PATHINFO_FILENAME);
         $this->photoName = $nameWithoutExtension;
         
@@ -111,7 +79,6 @@ class PhotoDocumentation extends Component
 
     public function confirmRename()
     {
-        // Validate the photo name
         $this->validate([
             'photoName' => 'required|string|max:50|regex:/^[a-zA-Z0-9\s\-_\.]+$/',
         ], [
@@ -143,17 +110,14 @@ class PhotoDocumentation extends Component
             $timestamp = now()->format('Y-m-d_H-i-s');
             $customName = trim($this->photoName);
             
-            // Create filename with custom name
             $filename = $timestamp . '_' . Str::slug($customName) . '.' . $extension;
             
-            // Store the file
             $path = $this->tempPhoto->storeAs(
                 $this->checklist_id ?: 'uploads', 
                 $filename, 
                 'public'
             );
             
-            // Add to uploaded photos array with custom name
             $this->uploadedPhotos[] = [
                 'name' => $customName . '.' . $extension,
                 'path' => $path,
@@ -161,7 +125,6 @@ class PhotoDocumentation extends Component
                 'uploaded_at' => now()->format('M j, Y g:i A')
             ];
             
-            // Clear all photo-related properties
             $this->reset(['photo', 'tempPhoto', 'photoName', 'originalPhotoName']);
             $this->showRenameModal = false;
             
@@ -171,7 +134,6 @@ class PhotoDocumentation extends Component
                 'action' => 'checklist_photo',
                 'description' => '{"specific_action":"Photo Upload Successful '.$filename.'", "ip address":"'. $this->userIP .'"}'
             ]);
-            // Show success message
             session()->flash('message', 'Photo uploaded successfully!');
             
         } catch (\Exception $e) {
@@ -182,10 +144,8 @@ class PhotoDocumentation extends Component
                 'description' => '{"specific_action":"Photo Upload unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
             ]);
             
-            // Show error message
             session()->flash('message', 'Upload failed. Please try again.');
             
-            // Clear all photo-related properties
             $this->reset(['photo', 'tempPhoto', 'photoName', 'originalPhotoName']);
             $this->showRenameModal = false;
         }
@@ -253,7 +213,6 @@ class PhotoDocumentation extends Component
                     'description' => '{"specific_action":"Photo Removal Successful '.$photoPath.'", "ip address":"'. $this->userIP .'"}'
                 ]);
 
-                // Remove from array
                 unset($this->uploadedPhotos[$index]);
                 $this->uploadedPhotos = array_values($this->uploadedPhotos); // Re-index array
                 
