@@ -329,7 +329,7 @@
                                         wire:focusout="dispatchMe('judgement_bs')" 
                                         name="5-boxship-radio-judgement" 
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
+                                        @if($checklistInfo->status)
                                             disabled
                                             @endif
                                         >
@@ -1126,7 +1126,7 @@
                 </div>
             </div>
         </div>
-        <div class="mx-auto section-card card-hover rounded-2xl shadow-lg p-4 md:p-6 mb-6"">
+        <div class="mx-auto section-card card-hover rounded-2xl shadow-lg p-4 md:p-6 mb-6">
             <div class="flex items-center space-x-3 mb-6">
                 <div class="bg-blue-100 p-2 rounded-lg">
                     <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
