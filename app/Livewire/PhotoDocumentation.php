@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class PhotoDocumentation extends Component
 {
     use WithFileUploads;
-    
+
     public $checklist_id;
     public $checklistInfo;
     public $photo;
@@ -21,7 +21,7 @@ class PhotoDocumentation extends Component
     public $showModal = false;
     public $selectedPhotoUrl = '';
     public $selectedPhotoName = '';
-    
+
     // New properties for rename functionality
     public $showRenameModal = false;
     public $tempPhoto = null;
@@ -60,7 +60,7 @@ class PhotoDocumentation extends Component
             'photo.image' => 'The file must be an image (JPEG, JPG, PNG)',
             'photo.max' => 'The file exceed the maximum size of allowed upload per photo'
         ]);
-        
+
         if ($this->photo) {
             $this->showRenamePrompt();
         }
@@ -70,10 +70,10 @@ class PhotoDocumentation extends Component
     {
         $this->tempPhoto = $this->photo;
         $this->originalPhotoName = $this->photo->getClientOriginalName();
-        
+
         $nameWithoutExtension = pathinfo($this->originalPhotoName, PATHINFO_FILENAME);
         $this->photoName = $nameWithoutExtension;
-        
+
         $this->showRenameModal = true;
     }
 
@@ -104,30 +104,30 @@ class PhotoDocumentation extends Component
         if (!$this->tempPhoto) {
             return;
         }
-        
+
         try {
             $extension = $this->tempPhoto->getClientOriginalExtension();
             $timestamp = now()->format('Y-m-d_H-i-s');
             $customName = trim($this->photoName);
-            
+
             $filename = $timestamp . '_' . Str::slug($customName) . '.' . $extension;
-            
+
             $path = $this->tempPhoto->storeAs(
-                $this->checklist_id ?: 'uploads', 
-                $filename, 
+                $this->checklist_id ?: 'uploads',
+                $filename,
                 'public'
             );
-            
+
             $this->uploadedPhotos[] = [
                 'name' => $customName . '.' . $extension,
                 'path' => $path,
                 'filename' => $filename,
                 'uploaded_at' => now()->format('M j, Y g:i A')
             ];
-            
+
             $this->reset(['photo', 'tempPhoto', 'photoName', 'originalPhotoName']);
             $this->showRenameModal = false;
-            
+
             AppLog::create([
                 'LogName' => 'User Action',
                 'LogType' => 'info',
@@ -135,7 +135,7 @@ class PhotoDocumentation extends Component
                 'description' => '{"specific_action":"Photo Upload Successful '.$filename.'", "ip address":"'. $this->userIP .'"}'
             ]);
             session()->flash('message', 'Photo uploaded successfully!');
-            
+
         } catch (\Exception $e) {
             AppLog::create([
                 'LogName' => 'System',
@@ -143,9 +143,9 @@ class PhotoDocumentation extends Component
                 'action' => 'checklist_photo',
                 'description' => '{"specific_action":"Photo Upload unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
             ]);
-            
+
             session()->flash('message', 'Upload failed. Please try again.');
-            
+
             $this->reset(['photo', 'tempPhoto', 'photoName', 'originalPhotoName']);
             $this->showRenameModal = false;
         }
@@ -156,17 +156,17 @@ class PhotoDocumentation extends Component
         try{
             if ($this->checklist_id && Storage::disk('public')->exists($this->checklist_id)) {
                 $files = Storage::disk('public')->files($this->checklist_id);
-                
+
                 $this->uploadedPhotos = collect($files)->map(function ($file) {
                     $filename = basename($file);
                     $filePath = Storage::disk('public')->path($file);
-                    
+
                     return [
                         'name' => $filename,
                         'path' => $file,
                         'filename' => $filename,
-                        'uploaded_at' => file_exists($filePath) ? 
-                            date('M j, Y g:i A', filemtime($filePath)) : 
+                        'uploaded_at' => file_exists($filePath) ?
+                            date('M j, Y g:i A', filemtime($filePath)) :
                             'Unknown'
                     ];
                 })->toArray();
@@ -179,7 +179,7 @@ class PhotoDocumentation extends Component
                 'description' => '{"specific_action":"Photo Load Unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
             ]);
         }
-        
+
     }
 
     public function showPhoto($photoPath)
@@ -202,10 +202,10 @@ class PhotoDocumentation extends Component
             if (isset($this->uploadedPhotos[$index])) {
                 $photoData = $this->uploadedPhotos[$index];
                 $photoPath = $photoData['path'];
-                
+
                 // Delete from storage
                 Storage::disk('public')->delete($photoPath);
-                
+
                 AppLog::create([
                     'LogName' => 'User Action',
                     'LogType' => 'warning',
@@ -215,7 +215,7 @@ class PhotoDocumentation extends Component
 
                 unset($this->uploadedPhotos[$index]);
                 $this->uploadedPhotos = array_values($this->uploadedPhotos); // Re-index array
-                
+
                 session()->flash('message', 'Photo removed successfully.');
             }
         }catch(\Exception $e){
