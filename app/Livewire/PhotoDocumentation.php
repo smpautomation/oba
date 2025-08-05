@@ -53,7 +53,7 @@ class PhotoDocumentation extends Component
     public function updatedPhoto()
     {
         $this->validate([
-            'photo' => 'nullable|image|max:2048', // max 10MB
+            'photo' => 'nullable|image|max:10240', // max 10MB
         ],
         [
             'photo.nullable' => 'The Photo is Nullable',
