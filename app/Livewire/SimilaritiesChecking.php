@@ -28,10 +28,10 @@ class SimilaritiesChecking extends Component
     public $specific_label_po = true;
 
     public $inputs = [
-        
+
     ];
 
-    public $inputStatus = [ 
+    public $inputStatus = [
         'pick_list_qs' => null,
         'shipping_invoice_qs' => null,
         'serem_qs' => null,
@@ -100,7 +100,7 @@ class SimilaritiesChecking extends Component
         'shipping_invoice_qs' => null,
         'serem_qs' => null,
         'sir_qs' => null,
-        
+
         // For Number of Boxes category (bs)
         'picklist_bs' => null,
         'packing_slip_bs' => null,
@@ -256,7 +256,7 @@ class SimilaritiesChecking extends Component
 
     public function dispatchMe($field = null){
         //dd($this->inputs);
-        
+
         DB::beginTransaction();
         try{
             //dd($param);
@@ -267,7 +267,7 @@ class SimilaritiesChecking extends Component
             }
             DB::commit();
 
-            
+
             if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
                 $this->inputStatus[$field] = 'success';
             }
@@ -325,70 +325,21 @@ class SimilaritiesChecking extends Component
     {
         $values = [];
         $filledFields = [];
-        
-        // Filter fields based on conditions (e.g., sir_qs only if $this->sir_qs is true)
+
         $activeFields = $this->getActiveFieldsForCategory($categoryKey, $fields);
-        
-        // Collect non-empty values from active fields
+
         foreach ($activeFields as $field) {
             if (isset($this->inputs[$field]) && $this->inputs[$field] !== '' && $this->inputs[$field] !== null) {
                 $values[] = $this->inputs[$field];
                 $filledFields[] = $field;
             }
         }
-        
-        // Reset comparison status for all active fields first
+
         foreach ($activeFields as $field) {
             $this->inputComparison[$field] = null;
         }
-        
-        // Skip if less than 2 fields are filled
+
         if (count($filledFields) < 2) {
-            // Reset verification radio when not enough data to compare
-            if ($categoryKey === 'qs') {
-                $this->inputs['same_quantity_qs'] = null;
-            } elseif ($categoryKey === 'bs') {
-                $this->inputs['same_box_bs'] = null;
-            }elseif ($categoryKey === 'mn') {
-                $this->inputs['same_model_mn'] = null;
-            }elseif ($categoryKey === 'mc') {
-                $this->inputs['same_mc'] = null;
-            }elseif ($categoryKey === 'pn') {
-                $this->inputs['same_pn'] = null;
-            }elseif ($categoryKey === 'po') {
-                $this->inputs['same_po'] = null;
-            }
-            return;
-        }
-        
-        // Check if all values are the same
-        $allSame = count(array_unique($values)) === 1;
-        
-        // Update comparison status for filled fields
-        foreach ($filledFields as $field) {
-            $this->inputComparison[$field] = $allSame ? 'match' : 'no-match';
-        }
-        
-        // Auto-select verification based on comparison results
-        if (count($filledFields) === count($activeFields)) {
-            // All active fields are filled
-            if ($categoryKey === 'qs') {
-                $this->inputs['same_quantity_qs'] = $allSame ? true : false;
-            } elseif ($categoryKey === 'bs') {
-                $this->inputs['same_box_bs'] = $allSame ? true : false;
-            }elseif ($categoryKey === 'mn') {
-                $this->inputs['same_model_mn'] = $allSame ? true : false;
-            }elseif ($categoryKey === 'mc') {
-                $this->inputs['same_mc'] = $allSame ? true : false;
-            }elseif ($categoryKey === 'pn') {
-                $this->inputs['same_pn'] = $allSame ? true : false;
-            }elseif ($categoryKey === 'po') {
-                $this->inputs['same_po'] = $allSame ? true : false;
-            }
-            
-            
-        } else {
-            // Not all fields are filled, reset verification
             if ($categoryKey === 'qs') {
                 $this->inputs['same_quantity_qs'] = null;
             } elseif ($categoryKey === 'bs') {
@@ -401,7 +352,53 @@ class SimilaritiesChecking extends Component
                 $this->inputs['same_pn'] = null;
             } elseif ($categoryKey === 'po') {
                 $this->inputs['same_po'] = null;
-            } 
+            }
+            return;
+        }
+
+        $normalizedValues = [];
+        foreach ($values as $value) {
+            if ($categoryKey === 'mc') {
+                $normalizedValues[] = ltrim($value, '0') ?: '0'; // Keep '0' if value is all zeros
+            } else {
+                $normalizedValues[] = $value;
+            }
+        }
+
+        $allSame = count(array_unique($normalizedValues)) === 1;
+
+        foreach ($filledFields as $field) {
+            $this->inputComparison[$field] = $allSame ? 'match' : 'no-match';
+        }
+
+        if (count($filledFields) === count($activeFields)) {
+            if ($categoryKey === 'qs') {
+                $this->inputs['same_quantity_qs'] = $allSame ? true : false;
+            } elseif ($categoryKey === 'bs') {
+                $this->inputs['same_box_bs'] = $allSame ? true : false;
+            } elseif ($categoryKey === 'mn') {
+                $this->inputs['same_model_mn'] = $allSame ? true : false;
+            } elseif ($categoryKey === 'mc') {
+                $this->inputs['same_mc'] = $allSame ? true : false;
+            } elseif ($categoryKey === 'pn') {
+                $this->inputs['same_pn'] = $allSame ? true : false;
+            } elseif ($categoryKey === 'po') {
+                $this->inputs['same_po'] = $allSame ? true : false;
+            }
+        } else {
+            if ($categoryKey === 'qs') {
+                $this->inputs['same_quantity_qs'] = null;
+            } elseif ($categoryKey === 'bs') {
+                $this->inputs['same_box_bs'] = null;
+            } elseif ($categoryKey === 'mn') {
+                $this->inputs['same_model_mn'] = null;
+            } elseif ($categoryKey === 'mc') {
+                $this->inputs['same_mc'] = null;
+            } elseif ($categoryKey === 'pn') {
+                $this->inputs['same_pn'] = null;
+            } elseif ($categoryKey === 'po') {
+                $this->inputs['same_po'] = null;
+            }
         }
     }
 
@@ -409,14 +406,14 @@ class SimilaritiesChecking extends Component
     {
         if (strpos($propertyName, 'inputs.') === 0) {
             $field = str_replace('inputs.', '', $propertyName);
-            
+
             // Handle verification radio changes
             if (in_array($field, ['same_quantity_qs', 'same_box_bs', 'same_model_mn', 'same_mc', 'same_pn', 'same_po'])) {
                 // If user manually changes verification, don't auto-update it temporarily
                 // You could add logic here if needed
                 return;
             }
-            
+
             $this->checkCategoryComparison($field);
         }
     }
@@ -432,7 +429,7 @@ class SimilaritiesChecking extends Component
                 return true;
             });
         }
-        
+
         // For other categories, return all fields
         return $fields;
     }

@@ -24,14 +24,14 @@
                 <h2 class="text-lg md:text-xl font-semibold text-gray-800">Quantity For Shipment</h2>
             </div>
             <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl p-2 bg-gradient-to-r from-blue-50 to-indigo-50 pt-12">
-                
+
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-num-input">PICK LIST</x-label>
-                        <x-inputNum 
-                        id="5-picklist-num-input" 
-                        wire:model='inputs.pick_list_qs' 
-                        wire:focusout="dispatchMe('pick_list_qs')" 
+                        <x-inputNum
+                        id="5-picklist-num-input"
+                        wire:model='inputs.pick_list_qs'
+                        wire:focusout="dispatchMe('pick_list_qs')"
                         :inputStatus="$inputStatus['pick_list_qs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['pick_list_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['pick_list_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
@@ -41,11 +41,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shipinv-num-input">SHIPPING INVOICE</x-label>
-                        <x-inputNum 
-                        id="5-shipinv-num-input" 
-                        wire:model='inputs.shipping_invoice_qs' 
-                        wire:focusout="dispatchMe('shipping_invoice_qs')" 
-                        :inputStatus="$inputStatus['shipping_invoice_qs']" 
+                        <x-inputNum
+                        id="5-shipinv-num-input"
+                        wire:model='inputs.shipping_invoice_qs'
+                        wire:focusout="dispatchMe('shipping_invoice_qs')"
+                        :inputStatus="$inputStatus['shipping_invoice_qs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['shipping_invoice_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_invoice_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -55,11 +55,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-serem-num-input">SEREM</x-label>
-                        <x-inputNum 
-                        id="5-serem-num-input" 
-                        wire:model='inputs.serem_qs' 
-                        wire:focusout="dispatchMe('serem_qs')" 
-                        :inputStatus="$inputStatus['serem_qs']" 
+                        <x-inputNum
+                        id="5-serem-num-input"
+                        wire:model='inputs.serem_qs'
+                        wire:focusout="dispatchMe('serem_qs')"
+                        :inputStatus="$inputStatus['serem_qs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['serem_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -70,11 +70,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sir-num-input">SIR</x-label>
-                        <x-inputNum 
-                        id="5-sir-num-input" 
-                        wire:model='inputs.sir_qs' 
-                        wire:focusout="dispatchMe('sir_qs')" 
-                        :inputStatus="$inputStatus['sir_qs']" 
+                        <x-inputNum
+                        id="5-sir-num-input"
+                        wire:model='inputs.sir_qs'
+                        wire:focusout="dispatchMe('sir_qs')"
+                        :inputStatus="$inputStatus['sir_qs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['sir_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -90,7 +90,7 @@
                     </svg>
                     VERIFICATION
                 </h3>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <x-label class="text-base font-medium text-gray-700 flex items-center">
@@ -102,13 +102,13 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-radio-qfs-yes" 
-                                        type="radio" 
-                                        value="1" 
-                                        wire:model='inputs.same_quantity_qs' 
-                                        wire:focusout="dispatchMe('same_quantity_qs')" 
-                                        name="5-radio-qfs-shipment" 
+                                    <input
+                                        id="5-radio-qfs-yes"
+                                        type="radio"
+                                        value="1"
+                                        wire:model='inputs.same_quantity_qs'
+                                        wire:focusout="dispatchMe('same_quantity_qs')"
+                                        name="5-radio-qfs-shipment"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -119,13 +119,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-radio-qfs-no" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.same_quantity_qs' 
-                                        wire:focusout="dispatchMe('same_quantity_qs')" 
-                                        name="5-radio-qfs-shipment" 
+                                    <input
+                                        id="5-radio-qfs-no"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.same_quantity_qs'
+                                        wire:focusout="dispatchMe('same_quantity_qs')"
+                                        name="5-radio-qfs-shipment"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -150,12 +150,12 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-radio-qfs-ok" 
+                                    <input
+                                        id="5-radio-qfs-ok"
                                         type="radio" value="1"
-                                        wire:model='inputs.judgement_qs' 
-                                        wire:focusout="dispatchMe('judgement_qs')" 
-                                        name="5-radio-qfs-judgement"  
+                                        wire:model='inputs.judgement_qs'
+                                        wire:focusout="dispatchMe('judgement_qs')"
+                                        name="5-radio-qfs-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -166,13 +166,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-radio-qfs-ng" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.judgement_qs' 
-                                        wire:focusout="dispatchMe('judgement_qs')" 
-                                        name="5-radio-qfs-judgement" 
+                                    <input
+                                        id="5-radio-qfs-ng"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.judgement_qs'
+                                        wire:focusout="dispatchMe('judgement_qs')"
+                                        name="5-radio-qfs-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -201,11 +201,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-boxship-input">PICK LIST</x-label>
-                        <x-inputNum 
-                        id="5-picklist-boxship-input" 
-                        wire:model='inputs.picklist_bs' 
-                        wire:focusout="dispatchMe('picklist_bs')" 
-                        :inputStatus="$inputStatus['picklist_bs']" 
+                        <x-inputNum
+                        id="5-picklist-boxship-input"
+                        wire:model='inputs.picklist_bs'
+                        wire:focusout="dispatchMe('picklist_bs')"
+                        :inputStatus="$inputStatus['picklist_bs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['picklist_bs'] === 'match' ? 'bg-green-100' : ($inputComparison['picklist_bs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -215,11 +215,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-packslip-boxship-input">PACKING SLIP</x-label>
-                        <x-inputNum 
-                        id="5-packslip-boxship-input" 
-                        wire:model='inputs.packing_slip_bs' 
-                        wire:focusout="dispatchMe('packing_slip_bs')" 
-                        :inputStatus="$inputStatus['packing_slip_bs']" 
+                        <x-inputNum
+                        id="5-packslip-boxship-input"
+                        wire:model='inputs.packing_slip_bs'
+                        wire:focusout="dispatchMe('packing_slip_bs')"
+                        :inputStatus="$inputStatus['packing_slip_bs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['packing_slip_bs'] === 'match' ? 'bg-green-100' : ($inputComparison['packing_slip_bs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -229,11 +229,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-serem-boxship-input">SEREM</x-label>
-                        <x-inputNum 
-                        id="5-serem-boxship-input" 
-                        wire:model='inputs.serem_bs' 
-                        wire:focusout="dispatchMe('serem_bs')" 
-                        :inputStatus="$inputStatus['serem_bs']" 
+                        <x-inputNum
+                        id="5-serem-boxship-input"
+                        wire:model='inputs.serem_bs'
+                        wire:focusout="dispatchMe('serem_bs')"
+                        :inputStatus="$inputStatus['serem_bs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['serem_bs'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_bs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -243,11 +243,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-palletlabel-boxship-input">PALLET LABEL</x-label>
-                        <x-inputNum 
-                        id="5-palletlabel-boxship-input" 
-                        wire:model='inputs.pallet_label_bs' 
-                        wire:focusout="dispatchMe('pallet_label_bs')" 
-                        :inputStatus="$inputStatus['pallet_label_bs']" 
+                        <x-inputNum
+                        id="5-palletlabel-boxship-input"
+                        wire:model='inputs.pallet_label_bs'
+                        wire:focusout="dispatchMe('pallet_label_bs')"
+                        :inputStatus="$inputStatus['pallet_label_bs']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['pallet_label_bs'] === 'match' ? 'bg-green-100' : ($inputComparison['pallet_label_bs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -262,7 +262,7 @@
                     </svg>
                     VERIFICATION
                 </h3>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <x-label class="text-base font-medium text-gray-700 flex items-center">
@@ -274,12 +274,12 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-boxship-radio-yes" 
-                                        type="radio" value="1" 
-                                        wire:model='inputs.same_box_bs' 
-                                        wire:focusout="dispatchMe('same_box_bs')" 
-                                        name="5-boxship-radio-same" 
+                                    <input
+                                        id="5-boxship-radio-yes"
+                                        type="radio" value="1"
+                                        wire:model='inputs.same_box_bs'
+                                        wire:focusout="dispatchMe('same_box_bs')"
+                                        name="5-boxship-radio-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                             disabled
@@ -290,13 +290,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-boxship-radio-no" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.same_box_bs' 
-                                        wire:focusout="dispatchMe('same_box_bs')" 
-                                        name="5-boxship-radio-same" 
+                                    <input
+                                        id="5-boxship-radio-no"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.same_box_bs'
+                                        wire:focusout="dispatchMe('same_box_bs')"
+                                        name="5-boxship-radio-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                             disabled
@@ -321,15 +321,15 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="horizontal-list-radio-license" 
-                                        type="radio" 
-                                        value="1" 
-                                        wire:model='inputs.judgement_bs' 
-                                        wire:focusout="dispatchMe('judgement_bs')" 
-                                        name="5-boxship-radio-judgement" 
+                                    <input
+                                        id="horizontal-list-radio-license"
+                                        type="radio"
+                                        value="1"
+                                        wire:model='inputs.judgement_bs'
+                                        wire:focusout="dispatchMe('judgement_bs')"
+                                        name="5-boxship-radio-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status)
+                                        @if($checklistInfo->status == "Closed")
                                             disabled
                                             @endif
                                         >
@@ -338,12 +338,12 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="horizontal-list-radio-id" 
+                                    <input
+                                        id="horizontal-list-radio-id"
                                         type="radio"
-                                        value="0" 
-                                        wire:model='inputs.judgement_bs' 
-                                        wire:focusout="dispatchMe('judgement_bs')" 
+                                        value="0"
+                                        wire:model='inputs.judgement_bs'
+                                        wire:focusout="dispatchMe('judgement_bs')"
                                         name="5-boxship-radio-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
@@ -373,11 +373,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-model-input">PICK LIST</x-label>
-                        <x-inputText 
-                        id="5-picklist-model-input" 
-                        wire:model='inputs.picklist_mn' 
-                        wire:focusout="dispatchMe('picklist_mn')" 
-                        :inputStatus="$inputStatus['picklist_mn']" 
+                        <x-inputText
+                        id="5-picklist-model-input"
+                        wire:model='inputs.picklist_mn'
+                        wire:focusout="dispatchMe('picklist_mn')"
+                        :inputStatus="$inputStatus['picklist_mn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['picklist_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['picklist_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -387,11 +387,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shipinv-model-input">SHIPPING INVOICE</x-label>
-                        <x-inputText 
-                        id="5-shipinv-model-input" 
-                        wire:model='inputs.shipping_invoice_mn' 
-                        wire:focusout="dispatchMe('shipping_invoice_mn')" 
-                        :inputStatus="$inputStatus['shipping_invoice_mn']" 
+                        <x-inputText
+                        id="5-shipinv-model-input"
+                        wire:model='inputs.shipping_invoice_mn'
+                        wire:focusout="dispatchMe('shipping_invoice_mn')"
+                        :inputStatus="$inputStatus['shipping_invoice_mn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['shipping_invoice_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_invoice_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -401,12 +401,12 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-serem-model-input">SEREM</x-label>
-                        <x-inputText 
-                        id="5-serem-model-input" 
-                        marginleft="ml-4" 
-                        wire:model='inputs.serem_mn' 
-                        wire:focusout="dispatchMe('serem_mn')" 
-                        :inputStatus="$inputStatus['serem_mn']" 
+                        <x-inputText
+                        id="5-serem-model-input"
+                        marginleft="ml-4"
+                        wire:model='inputs.serem_mn'
+                        wire:focusout="dispatchMe('serem_mn')"
+                        :inputStatus="$inputStatus['serem_mn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['serem_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -417,11 +417,11 @@
                     <div class="col-span-1 flex items-center justify-center">
                         {{-- //FG BARCODE LABEL --}}
                         <x-label for="5-fglabel-model-input">PACKAGE BARCODE LABEL</x-label>
-                        <x-inputText 
-                        id="5-fglabel-model-input" 
-                        wire:model='inputs.fg_label_mn' 
-                        wire:focusout="dispatchMe('fg_label_mn')" 
-                        :inputStatus="$inputStatus['fg_label_mn']" 
+                        <x-inputText
+                        id="5-fglabel-model-input"
+                        wire:model='inputs.fg_label_mn'
+                        wire:focusout="dispatchMe('fg_label_mn')"
+                        :inputStatus="$inputStatus['fg_label_mn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['fg_label_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['fg_label_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -432,11 +432,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-vmi-model-input">VMI LABEL / QR CODE LABEL</x-label>
-                        <x-inputText 
-                        id="5-vmi-model-input" 
+                        <x-inputText
+                        id="5-vmi-model-input"
                         wire:model='inputs.vmi_qr_mn'
-                        wire:focusout="dispatchMe('vmi_qr_mn')" 
-                        :inputStatus="$inputStatus['vmi_qr_mn']" 
+                        wire:focusout="dispatchMe('vmi_qr_mn')"
+                        :inputStatus="$inputStatus['vmi_qr_mn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['vmi_qr_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['vmi_qr_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -447,11 +447,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-mc-model-input">BOX BARCODE LABEL</x-label>
-                        <x-inputText 
-                        id="5-mc-model-input" 
-                        wire:model='inputs.mc_label_mn' 
-                        wire:focusout="dispatchMe('mc_label_mn')" 
-                        :inputStatus="$inputStatus['mc_label_mn']" 
+                        <x-inputText
+                        id="5-mc-model-input"
+                        wire:model='inputs.mc_label_mn'
+                        wire:focusout="dispatchMe('mc_label_mn')"
+                        :inputStatus="$inputStatus['mc_label_mn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['mc_label_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['mc_label_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -461,11 +461,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-pallet-model-input">PALLET LABEL</x-label>
-                        <x-inputText 
-                        id="5-pallet-model-input" 
-                        wire:model='inputs.pallet_label_mn' 
-                        wire:focusout="dispatchMe('pallet_label_mn')" 
-                        :inputStatus="$inputStatus['pallet_label_mn']" 
+                        <x-inputText
+                        id="5-pallet-model-input"
+                        wire:model='inputs.pallet_label_mn'
+                        wire:focusout="dispatchMe('pallet_label_mn')"
+                        :inputStatus="$inputStatus['pallet_label_mn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['pallet_label_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['pallet_label_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -473,7 +473,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
@@ -481,7 +481,7 @@
                     </svg>
                     VERIFICATION
                 </h3>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <x-label class="text-base font-medium text-gray-700 flex items-center">
@@ -493,13 +493,13 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-model-same-yes" 
-                                        type="radio" 
-                                        value="1" 
-                                        wire:model='inputs.same_model_mn' 
-                                        wire:focusout="dispatchMe('same_model_mn')" 
-                                        name="5-model-same" 
+                                    <input
+                                        id="5-model-same-yes"
+                                        type="radio"
+                                        value="1"
+                                        wire:model='inputs.same_model_mn'
+                                        wire:focusout="dispatchMe('same_model_mn')"
+                                        name="5-model-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -510,13 +510,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-model-same-no" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.same_model_mn' 
-                                        wire:focusout="dispatchMe('same_model_mn')" 
-                                        name="5-model-same" 
+                                    <input
+                                        id="5-model-same-no"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.same_model_mn'
+                                        wire:focusout="dispatchMe('same_model_mn')"
+                                        name="5-model-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -541,13 +541,13 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-model-judgement-ok" 
-                                        type="radio" 
-                                        value="1" 
-                                        wire:model='inputs.judgement_mn' 
-                                        wire:focusout="dispatchMe('judgement_mn')" 
-                                        name="5-model-judgement" 
+                                    <input
+                                        id="5-model-judgement-ok"
+                                        type="radio"
+                                        value="1"
+                                        wire:model='inputs.judgement_mn'
+                                        wire:focusout="dispatchMe('judgement_mn')"
+                                        name="5-model-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -558,13 +558,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-model-judgement-ng" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.judgement_mn' 
-                                        wire:focusout="dispatchMe('judgement_mn')" 
-                                        name="5-model-judgement" 
+                                    <input
+                                        id="5-model-judgement-ng"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.judgement_mn'
+                                        wire:focusout="dispatchMe('judgement_mn')"
+                                        name="5-model-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -593,11 +593,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-modelcode-input">PICK LIST</x-label>
-                        <x-inputText 
-                        id="5-picklist-modelcode-input" 
-                        wire:model='inputs.picklist_mc' 
-                        wire:focusout="dispatchMe('picklist_mc')" 
-                        :inputStatus="$inputStatus['picklist_mc']" 
+                        <x-inputText
+                        id="5-picklist-modelcode-input"
+                        wire:model='inputs.picklist_mc'
+                        wire:focusout="dispatchMe('picklist_mc')"
+                        :inputStatus="$inputStatus['picklist_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['picklist_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['picklist_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -607,11 +607,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shipinv-modelcode-input">SHIPPING INVOICE</x-label>
-                        <x-inputText 
-                        id="5-shipinv-modelcode-input" 
-                        wire:model='inputs.shipping_invoice_mc' 
-                        wire:focusout="dispatchMe('shipping_invoice_mc')" 
-                        :inputStatus="$inputStatus['shipping_invoice_mc']" 
+                        <x-inputText
+                        id="5-shipinv-modelcode-input"
+                        wire:model='inputs.shipping_invoice_mc'
+                        wire:focusout="dispatchMe('shipping_invoice_mc')"
+                        :inputStatus="$inputStatus['shipping_invoice_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['shipping_invoice_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_invoice_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -621,12 +621,12 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-serem-momodelcodedel-input">SEREM</x-label>
-                        <x-inputText 
-                        id="5-serem-modelcode-input" 
-                        marginleft="ml-4" 
+                        <x-inputText
+                        id="5-serem-modelcode-input"
+                        marginleft="ml-4"
                         wire:model='inputs.serem_mc'
-                        wire:focusout="dispatchMe('serem_mc')" 
-                        :inputStatus="$inputStatus['serem_mc']" 
+                        wire:focusout="dispatchMe('serem_mc')"
+                        :inputStatus="$inputStatus['serem_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['serem_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -637,12 +637,12 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sir-modelcode-input">SIR</x-label>
-                        <x-inputText 
-                        id="5-sir-modelcode-input" 
-                        marginleft="ml-6" 
-                        wire:model='inputs.sir_mc' 
-                        wire:focusout="dispatchMe('sir_mc')" 
-                        :inputStatus="$inputStatus['sir_mc']" 
+                        <x-inputText
+                        id="5-sir-modelcode-input"
+                        marginleft="ml-6"
+                        wire:model='inputs.sir_mc'
+                        wire:focusout="dispatchMe('sir_mc')"
+                        :inputStatus="$inputStatus['sir_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['sir_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -653,11 +653,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shiplabel-modelcode-input">SHIPPING LABEL (OTHER MODEL)</x-label>
-                        <x-inputText 
-                        id="5-shiplabel-modelcode-input" 
-                        wire:model='inputs.shipping_label_mc' 
-                        wire:focusout="dispatchMe('shipping_label_mc')" 
-                        :inputStatus="$inputStatus['shipping_label_mc']" 
+                        <x-inputText
+                        id="5-shiplabel-modelcode-input"
+                        wire:model='inputs.shipping_label_mc'
+                        wire:focusout="dispatchMe('shipping_label_mc')"
+                        :inputStatus="$inputStatus['shipping_label_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['shipping_label_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_label_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -668,11 +668,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-vmi-modelcode-input">VMI LABEL</x-label>
-                        <x-inputText 
-                        id="5-vmi-modelcode-input" 
-                        wire:model='inputs.vmi_label_mc' 
-                        wire:focusout="dispatchMe('vmi_label_mc')" 
-                        :inputStatus="$inputStatus['vmi_label_mc']" 
+                        <x-inputText
+                        id="5-vmi-modelcode-input"
+                        wire:model='inputs.vmi_label_mc'
+                        wire:focusout="dispatchMe('vmi_label_mc')"
+                        :inputStatus="$inputStatus['vmi_label_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['vmi_label_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['vmi_label_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -683,11 +683,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-mc-modelcode-input">BOX BARCODE LABEL</x-label>
-                        <x-inputText 
-                        id="5-mc-modelcode-input" 
-                        wire:model='inputs.mc_barcode_mc' 
-                        wire:focusout="dispatchMe('mc_barcode_mc')" 
-                        :inputStatus="$inputStatus['mc_barcode_mc']" 
+                        <x-inputText
+                        id="5-mc-modelcode-input"
+                        wire:model='inputs.mc_barcode_mc'
+                        wire:focusout="dispatchMe('mc_barcode_mc')"
+                        :inputStatus="$inputStatus['mc_barcode_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['mc_barcode_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['mc_barcode_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -697,11 +697,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-pallet-modelcode-input">PALLET LABEL</x-label>
-                        <x-inputText 
-                        id="5-pallet-modelcode-input" 
-                        wire:model='inputs.pallet_label_mc' 
-                        wire:focusout="dispatchMe('pallet_label_mc')" 
-                        :inputStatus="$inputStatus['pallet_label_mc']" 
+                        <x-inputText
+                        id="5-pallet-modelcode-input"
+                        wire:model='inputs.pallet_label_mc'
+                        wire:focusout="dispatchMe('pallet_label_mc')"
+                        :inputStatus="$inputStatus['pallet_label_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['pallet_label_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['pallet_label_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -712,11 +712,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-speciallabel-modelcode-input">SPECIFIC LABEL/QR CODE LABEL</x-label>
-                        <x-inputText 
-                        id="5-speciallabel-modelcode-input" 
-                        wire:model='inputs.specific_qr_label_mc' 
-                        wire:focusout="dispatchMe('specific_qr_label_mc')" 
-                        :inputStatus="$inputStatus['specific_qr_label_mc']" 
+                        <x-inputText
+                        id="5-speciallabel-modelcode-input"
+                        wire:model='inputs.specific_qr_label_mc'
+                        wire:focusout="dispatchMe('specific_qr_label_mc')"
+                        :inputStatus="$inputStatus['specific_qr_label_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['specific_qr_label_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['specific_qr_label_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -727,11 +727,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-package-modelcode-input">PACKAGE BARCODE LABEL</x-label>
-                        <x-inputText 
-                        id="5-package-modelcode-input" 
-                        wire:model='inputs.package_mc' 
-                        wire:focusout="dispatchMe('package_mc')" 
-                        :inputStatus="$inputStatus['package_mc']" 
+                        <x-inputText
+                        id="5-package-modelcode-input"
+                        wire:model='inputs.package_mc'
+                        wire:focusout="dispatchMe('package_mc')"
+                        :inputStatus="$inputStatus['package_mc']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['package_mc'] === 'match' ? 'bg-green-100' : ($inputComparison['package_mc'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
@@ -746,7 +746,7 @@
                     </svg>
                     VERIFICATION
                 </h3>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <x-label class="text-base font-medium text-gray-700 flex items-center">
@@ -758,13 +758,13 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-modelcode-same-yes" 
-                                        type="radio" 
-                                        value="1" 
-                                        wire:model='inputs.same_mc' 
-                                        wire:focusout="dispatchMe('same_mc')" 
-                                        name="5-modelcode-same" 
+                                    <input
+                                        id="5-modelcode-same-yes"
+                                        type="radio"
+                                        value="1"
+                                        wire:model='inputs.same_mc'
+                                        wire:focusout="dispatchMe('same_mc')"
+                                        name="5-modelcode-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -775,13 +775,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-modelcode-same-no" 
-                                        type="radio" 
+                                    <input
+                                        id="5-modelcode-same-no"
+                                        type="radio"
                                         value="0"
-                                        wire:model='inputs.same_mc' 
-                                        wire:focusout="dispatchMe('same_mc')" 
-                                        name="5-modelcode-same" 
+                                        wire:model='inputs.same_mc'
+                                        wire:focusout="dispatchMe('same_mc')"
+                                        name="5-modelcode-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -806,13 +806,13 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-modelcode-judegment-ok" 
-                                        type="radio" 
-                                        value="1" 
-                                        wire:model='inputs.judgement_mc' 
-                                        wire:focusout="dispatchMe('judgement_mc')" 
-                                        name="5-modelcode-judegment" 
+                                    <input
+                                        id="5-modelcode-judegment-ok"
+                                        type="radio"
+                                        value="1"
+                                        wire:model='inputs.judgement_mc'
+                                        wire:focusout="dispatchMe('judgement_mc')"
+                                        name="5-modelcode-judegment"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -823,13 +823,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-modelcode-judegment-ng" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.judgement_mc' 
-                                        wire:focusout="dispatchMe('judgement_mc')" 
-                                        name="5-modelcode-judegment" 
+                                    <input
+                                        id="5-modelcode-judegment-ng"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.judgement_mc'
+                                        wire:focusout="dispatchMe('judgement_mc')"
+                                        name="5-modelcode-judegment"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -859,11 +859,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-partnumber-input">PICK LIST</x-label>
-                        <x-inputText 
-                        id="5-picklist-partnumber-input" 
-                        wire:model='inputs.picklist_pn' 
-                        wire:focusout="dispatchMe('picklist_pn')" 
-                        :inputStatus="$inputStatus['picklist_pn']" 
+                        <x-inputText
+                        id="5-picklist-partnumber-input"
+                        wire:model='inputs.picklist_pn'
+                        wire:focusout="dispatchMe('picklist_pn')"
+                        :inputStatus="$inputStatus['picklist_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['picklist_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['picklist_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -873,11 +873,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shipinv-partnumber-input">SHIPPING INVOICE</x-label>
-                        <x-inputText 
-                        id="5-shipinv-partnumber-input" 
-                        wire:model='inputs.shipping_invoice_pn' 
-                        wire:focusout="dispatchMe('shipping_invoice_pn')" 
-                        :inputStatus="$inputStatus['shipping_invoice_pn']" 
+                        <x-inputText
+                        id="5-shipinv-partnumber-input"
+                        wire:model='inputs.shipping_invoice_pn'
+                        wire:focusout="dispatchMe('shipping_invoice_pn')"
+                        :inputStatus="$inputStatus['shipping_invoice_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['shipping_invoice_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_invoice_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -886,12 +886,12 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-serem-partnumber-input">SEREM</x-label>
-                        <x-inputText 
-                        id="5-serem-partnumber-input" 
-                        marginleft="ml-4" 
-                        wire:model='inputs.serem_pn' 
-                        wire:focusout="dispatchMe('serem_pn')" 
-                        :inputStatus="$inputStatus['serem_pn']" 
+                        <x-inputText
+                        id="5-serem-partnumber-input"
+                        marginleft="ml-4"
+                        wire:model='inputs.serem_pn'
+                        wire:focusout="dispatchMe('serem_pn')"
+                        :inputStatus="$inputStatus['serem_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['serem_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -901,12 +901,12 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sir-partnumber-input">SIR</x-label>
-                        <x-inputText 
-                        id="5-sir-partnumber-input" 
-                        marginleft="ml-6" 
-                        wire:model='inputs.sir_pn' 
-                        wire:focusout="dispatchMe('sir_pn')" 
-                        :inputStatus="$inputStatus['sir_pn']" 
+                        <x-inputText
+                        id="5-sir-partnumber-input"
+                        marginleft="ml-6"
+                        wire:model='inputs.sir_pn'
+                        wire:focusout="dispatchMe('sir_pn')"
+                        :inputStatus="$inputStatus['sir_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['sir_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -916,11 +916,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shiplabel-partnumber-input">SHIPPING LABEL (OTHER MODEL)</x-label>
-                        <x-inputText 
-                        id="5-shiplabel-partnumber-input" 
-                        wire:model='inputs.shipping_label_pn' 
-                        wire:focusout="dispatchMe('shipping_label_pn')" 
-                        :inputStatus="$inputStatus['shipping_label_pn']" 
+                        <x-inputText
+                        id="5-shiplabel-partnumber-input"
+                        wire:model='inputs.shipping_label_pn'
+                        wire:focusout="dispatchMe('shipping_label_pn')"
+                        :inputStatus="$inputStatus['shipping_label_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['shipping_label_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_label_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -930,11 +930,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-vmi-partnumber-input">VMI LABEL</x-label>
-                        <x-inputText 
-                        id="5-vmi-partnumber-input" 
-                        wire:model='inputs.vmi_pn' 
-                        wire:focusout="dispatchMe('vmi_pn')" 
-                        :inputStatus="$inputStatus['vmi_pn']" 
+                        <x-inputText
+                        id="5-vmi-partnumber-input"
+                        wire:model='inputs.vmi_pn'
+                        wire:focusout="dispatchMe('vmi_pn')"
+                        :inputStatus="$inputStatus['vmi_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['vmi_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['vmi_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -944,11 +944,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-package-partnumber-input">PACKAGE BARCODE LABEL</x-label>
-                        <x-inputText 
-                        id="5-package-partnumber-input" 
-                        wire:model='inputs.package_pn' 
-                        wire:focusout="dispatchMe('package_pn')" 
-                        :inputStatus="$inputStatus['package_pn']" 
+                        <x-inputText
+                        id="5-package-partnumber-input"
+                        wire:model='inputs.package_pn'
+                        wire:focusout="dispatchMe('package_pn')"
+                        :inputStatus="$inputStatus['package_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['package_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['package_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -957,11 +957,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-qr_qa-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY QA)</x-label>
-                        <x-inputText 
-                        id="5-qr_qa-partnumber-input" 
+                        <x-inputText
+                        id="5-qr_qa-partnumber-input"
                         wire:model='inputs.qr_qa_pn'
-                        wire:focusout="dispatchMe('qr_qa_pn')" 
-                        :inputStatus="$inputStatus['qr_qa_pn']" 
+                        wire:focusout="dispatchMe('qr_qa_pn')"
+                        :inputStatus="$inputStatus['qr_qa_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['qr_qa_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['qr_qa_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                          ></x-inputText>
@@ -970,11 +970,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-qr_mgtz-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY MGTZ)</x-label>
-                        <x-inputText 
-                        id="5-qr_mgtz-partnumber-input" 
-                        wire:model='inputs.qr_mgtz_pn' 
-                        wire:focusout="dispatchMe('qr_mgtz_pn')" 
-                        :inputStatus="$inputStatus['qr_mgtz_pn']" 
+                        <x-inputText
+                        id="5-qr_mgtz-partnumber-input"
+                        wire:model='inputs.qr_mgtz_pn'
+                        wire:focusout="dispatchMe('qr_mgtz_pn')"
+                        :inputStatus="$inputStatus['qr_mgtz_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['qr_mgtz_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['qr_mgtz_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -983,11 +983,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-qr_mc-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY MC)</x-label>
-                        <x-inputText 
-                        id="5-qr_mc-partnumber-input" 
-                        wire:model='inputs.qr_mc_pn' 
-                        wire:focusout="dispatchMe('qr_mc_pn')" 
-                        :inputStatus="$inputStatus['qr_mc_pn']" 
+                        <x-inputText
+                        id="5-qr_mc-partnumber-input"
+                        wire:model='inputs.qr_mc_pn'
+                        wire:focusout="dispatchMe('qr_mc_pn')"
+                        :inputStatus="$inputStatus['qr_mc_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['qr_mc_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['qr_mc_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -996,11 +996,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-pallet-partnumber-input">PALLET LABEL</x-label>
-                        <x-inputText 
-                        id="5-pallet-partnumber-input" 
-                        wire:model='inputs.pallet_label_pn' 
-                        wire:focusout="dispatchMe('pallet_label_pn')" 
-                        :inputStatus="$inputStatus['pallet_label_pn']" 
+                        <x-inputText
+                        id="5-pallet-partnumber-input"
+                        wire:model='inputs.pallet_label_pn'
+                        wire:focusout="dispatchMe('pallet_label_pn')"
+                        :inputStatus="$inputStatus['pallet_label_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['pallet_label_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['pallet_label_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -1009,11 +1009,11 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sci_label-partnumber-input">SCI LABEL(SIAM COMPRESSOR INDUSTRY CO.,LTD)</x-label>
-                        <x-inputText 
-                        id="5-sci_label-partnumber-input" 
-                        wire:model='inputs.sci_label_pn' 
-                        wire:focusout="dispatchMe('sci_label_pn')" 
-                        :inputStatus="$inputStatus['sci_label_pn']" 
+                        <x-inputText
+                        id="5-sci_label-partnumber-input"
+                        wire:model='inputs.sci_label_pn'
+                        wire:focusout="dispatchMe('sci_label_pn')"
+                        :inputStatus="$inputStatus['sci_label_pn']"
                         :closingStatus="$checklistInfo->status"
                         class="{{ $inputComparison['sci_label_pn'] === 'match' ? 'bg-green-100' : ($inputComparison['sci_label_pn'] === 'no-match' ? 'bg-red-100' : '') }}"
                         ></x-inputText>
@@ -1027,7 +1027,7 @@
                     </svg>
                     VERIFICATION
                 </h3>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <x-label class="text-base font-medium text-gray-700 flex items-center">
@@ -1039,13 +1039,13 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-partnumber-same-yes" 
-                                        type="radio" 
-                                        value="1" 
+                                    <input
+                                        id="5-partnumber-same-yes"
+                                        type="radio"
+                                        value="1"
                                         wire:model='inputs.same_pn'
-                                        wire:focusout="dispatchMe('same_pn')" 
-                                        name="5-partnumber-same"  
+                                        wire:focusout="dispatchMe('same_pn')"
+                                        name="5-partnumber-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -1056,13 +1056,13 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-partnumber-same-no" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.same_pn' 
-                                        wire:focusout="dispatchMe('same_pn')" 
-                                        name="5-partnumber-same" 
+                                    <input
+                                        id="5-partnumber-same-no"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.same_pn'
+                                        wire:focusout="dispatchMe('same_pn')"
+                                        name="5-partnumber-same"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -1087,13 +1087,13 @@
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-partnumber-judgement-ok" 
-                                        type="radio" 
-                                        value="1" 
-                                        wire:model='inputs.judgement_pn' 
-                                        wire:focusout="dispatchMe('judgement_pn')" 
-                                        name="5-partnumber-judgement" 
+                                    <input
+                                        id="5-partnumber-judgement-ok"
+                                        type="radio"
+                                        value="1"
+                                        wire:model='inputs.judgement_pn'
+                                        wire:focusout="dispatchMe('judgement_pn')"
+                                        name="5-partnumber-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
                                         disabled
@@ -1104,12 +1104,12 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input 
-                                        id="5-partnumber-judgement-ng" 
-                                        type="radio" 
-                                        value="0" 
-                                        wire:model='inputs.judgement_pn' 
-                                        wire:focusout="dispatchMe('judgement_pn')" 
+                                    <input
+                                        id="5-partnumber-judgement-ng"
+                                        type="radio"
+                                        value="0"
+                                        wire:model='inputs.judgement_pn'
+                                        wire:focusout="dispatchMe('judgement_pn')"
                                         name="5-partnumber-judgement"
                                         class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                         @if($checklistInfo->status == "Closed")
@@ -1137,11 +1137,11 @@
             </div>
 
             <div class="p-4 space-y-4">
-                
-                
+
+
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    
+
                     <!-- Left Column -->
                     <div class="space-y-6">
                         <!-- Serem -->
@@ -1160,10 +1160,10 @@
                                         <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-2">CUSTOMER</span>
                                         Customer PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-serem-co" 
-                                        wire:model='inputs.serem_customer_po' 
-                                        wire:focusout="dispatchMe('serem_customer_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-serem-co"
+                                        wire:model='inputs.serem_customer_po'
+                                        wire:focusout="dispatchMe('serem_customer_po')"
                                         :inputStatus="$inputStatus['serem_customer_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors mr-1 {{ $inputComparison['serem_customer_po'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_customer_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1174,10 +1174,10 @@
                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-2">INTERNAL</span>
                                         Our PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-serem-oo" 
-                                        wire:model='inputs.serem_smp_po' 
-                                        wire:focusout="dispatchMe('serem_smp_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-serem-oo"
+                                        wire:model='inputs.serem_smp_po'
+                                        wire:focusout="dispatchMe('serem_smp_po')"
                                         :inputStatus="$inputStatus['serem_smp_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors {{ $inputComparison['serem_smp_po'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_smp_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1185,7 +1185,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Shipping Label Section -->
                         <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 overflow-hidden">
                             <div class="bg-orange-600 px-4 py-3">
@@ -1204,10 +1204,10 @@
                                         <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-2">CUSTOMER</span>
                                         Customer PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-shiplabel-co" 
-                                        wire:model='inputs.shipping_label_customer_po' 
-                                        wire:focusout="dispatchMe('shipping_label_customer_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-shiplabel-co"
+                                        wire:model='inputs.shipping_label_customer_po'
+                                        wire:focusout="dispatchMe('shipping_label_customer_po')"
                                         :inputStatus="$inputStatus['shipping_label_customer_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors {{ $inputComparison['shipping_label_customer_po'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_label_customer_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1218,10 +1218,10 @@
                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-2">INTERNAL</span>
                                         Our PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-shiplabel-oo" 
-                                        wire:model='inputs.shipping_label_smp_po' 
-                                        wire:focusout="dispatchMe('shipping_label_smp_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-shiplabel-oo"
+                                        wire:model='inputs.shipping_label_smp_po'
+                                        wire:focusout="dispatchMe('shipping_label_smp_po')"
                                         :inputStatus="$inputStatus['shipping_label_smp_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors {{ $inputComparison['shipping_label_smp_po'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_label_smp_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1229,7 +1229,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         @if($vmi_po)
                         <!-- VMI Label Section -->
                         <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 overflow-hidden">
@@ -1248,10 +1248,10 @@
                                         <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-2">CUSTOMER</span>
                                         Customer PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-vmi-co" 
-                                        wire:model='inputs.vmi_customer_po' 
-                                        wire:focusout="dispatchMe('vmi_customer_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-vmi-co"
+                                        wire:model='inputs.vmi_customer_po'
+                                        wire:focusout="dispatchMe('vmi_customer_po')"
                                         :inputStatus="$inputStatus['vmi_customer_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors {{ $inputComparison['vmi_customer_po'] === 'match' ? 'bg-green-100' : ($inputComparison['vmi_customer_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1262,10 +1262,10 @@
                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-2">INTERNAL</span>
                                         Our PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-vmi-oo" 
-                                        wire:model='inputs.vmi_smp_po' 
-                                        wire:focusout="dispatchMe('vmi_smp_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-vmi-oo"
+                                        wire:model='inputs.vmi_smp_po'
+                                        wire:focusout="dispatchMe('vmi_smp_po')"
                                         :inputStatus="$inputStatus['vmi_smp_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors {{ $inputComparison['vmi_smp_po'] === 'match' ? 'bg-green-100' : ($inputComparison['vmi_smp_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1275,7 +1275,7 @@
                         </div>
                         @endif
 
-                        
+
                     </div>
 
                     <!-- Right Column -->
@@ -1297,10 +1297,10 @@
                                         <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-2">CUSTOMER</span>
                                         Customer PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-sir-co" 
-                                        wire:model='inputs.sir_customer_po' 
-                                        wire:focusout="dispatchMe('sir_customer_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-sir-co"
+                                        wire:model='inputs.sir_customer_po'
+                                        wire:focusout="dispatchMe('sir_customer_po')"
                                         :inputStatus="$inputStatus['sir_customer_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors {{ $inputComparison['sir_customer_po'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_customer_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1311,10 +1311,10 @@
                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-2">INTERNAL</span>
                                         Our PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-sir-oo" 
-                                        wire:model='inputs.sir_smp_po' 
-                                        wire:focusout="dispatchMe('sir_smp_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-sir-oo"
+                                        wire:model='inputs.sir_smp_po'
+                                        wire:focusout="dispatchMe('sir_smp_po')"
                                         :inputStatus="$inputStatus['sir_smp_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors {{ $inputComparison['sir_smp_po'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_smp_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1340,10 +1340,10 @@
                                         <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-2">CUSTOMER</span>
                                         Customer PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-pallet-co" 
-                                        wire:model='inputs.pallet_label_customer_po' 
-                                        wire:focusout="dispatchMe('pallet_label_customer_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-pallet-co"
+                                        wire:model='inputs.pallet_label_customer_po'
+                                        wire:focusout="dispatchMe('pallet_label_customer_po')"
                                         :inputStatus="$inputStatus['pallet_label_customer_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors {{ $inputComparison['pallet_label_customer_po'] === 'match' ? 'bg-green-100' : ($inputComparison['pallet_label_customer_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1354,10 +1354,10 @@
                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-2">INTERNAL</span>
                                         Our PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-pallet-oo" 
-                                        wire:model='inputs.pallet_label_smp_po' 
-                                        wire:focusout="dispatchMe('pallet_label_smp_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-pallet-oo"
+                                        wire:model='inputs.pallet_label_smp_po'
+                                        wire:focusout="dispatchMe('pallet_label_smp_po')"
                                         :inputStatus="$inputStatus['pallet_label_smp_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors {{ $inputComparison['pallet_label_smp_po'] === 'match' ? 'bg-green-100' : ($inputComparison['pallet_label_smp_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1383,10 +1383,10 @@
                                         <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-2">CUSTOMER</span>
                                         Customer PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-specqr-co" 
-                                        wire:model='inputs.specific_label_customer_po' 
-                                        wire:focusout="dispatchMe('specific_label_customer_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-specqr-co"
+                                        wire:model='inputs.specific_label_customer_po'
+                                        wire:focusout="dispatchMe('specific_label_customer_po')"
                                         :inputStatus="$inputStatus['specific_label_customer_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors {{ $inputComparison['specific_label_customer_po'] === 'match' ? 'bg-green-100' : ($inputComparison['specific_label_customer_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1397,10 +1397,10 @@
                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-2">INTERNAL</span>
                                         Our PO
                                     </x-label>
-                                    <x-inputText 
-                                        id="5-ponumber-specqr-oo" 
-                                        wire:model='inputs.specific_label_smp_po' 
-                                        wire:focusout="dispatchMe('specific_label_smp_po')" 
+                                    <x-inputText
+                                        id="5-ponumber-specqr-oo"
+                                        wire:model='inputs.specific_label_smp_po'
+                                        wire:focusout="dispatchMe('specific_label_smp_po')"
                                         :inputStatus="$inputStatus['specific_label_smp_po']"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors {{ $inputComparison['specific_label_smp_po'] === 'match' ? 'bg-green-100' : ($inputComparison['specific_label_smp_po'] === 'no-match' ? 'bg-red-100' : '') }}"
                                         :closingStatus="$checklistInfo->status">
@@ -1419,7 +1419,7 @@
                         </svg>
                         VERIFICATION
                     </h3>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Same PO Question -->
                         <div class="space-y-3">
@@ -1432,13 +1432,13 @@
                             <div class="bg-white rounded-lg border border-gray-200 p-1">
                                 <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
                                     <div class="flex items-center space-x-3">
-                                        <input 
-                                            id="5-ponumber-same-yes" 
-                                            type="radio" 
-                                            value="1" 
-                                            wire:model='inputs.same_po' 
-                                            wire:focusout="dispatchMe('same_po')" 
-                                            name="5-ponumber-same" 
+                                        <input
+                                            id="5-ponumber-same-yes"
+                                            type="radio"
+                                            value="1"
+                                            wire:model='inputs.same_po'
+                                            wire:focusout="dispatchMe('same_po')"
+                                            name="5-ponumber-same"
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                             @if($checklistInfo->status == "Closed")
                                             disabled
@@ -1448,13 +1448,13 @@
                                         </label>
                                     </div>
                                     <div class="flex items-center space-x-3">
-                                        <input 
-                                            id="5-ponumber-same-no" 
-                                            type="radio" 
-                                            value="0" 
-                                            wire:model='inputs.same_po' 
-                                            wire:focusout="dispatchMe('same_po')" 
-                                            name="5-ponumber-same" 
+                                        <input
+                                            id="5-ponumber-same-no"
+                                            type="radio"
+                                            value="0"
+                                            wire:model='inputs.same_po'
+                                            wire:focusout="dispatchMe('same_po')"
+                                            name="5-ponumber-same"
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                             @if($checklistInfo->status == "Closed")
                                             disabled
@@ -1478,12 +1478,12 @@
                             <div class="bg-white rounded-lg border border-gray-200 p-1">
                                 <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
                                     <div class="flex items-center space-x-3">
-                                        <input 
-                                            id="5-ponumber-judgement-ok" 
-                                            type="radio" 
-                                            value="1" 
-                                            wire:model='inputs.judgement_po' 
-                                            wire:focusout="dispatchMe('judgement_po')" 
+                                        <input
+                                            id="5-ponumber-judgement-ok"
+                                            type="radio"
+                                            value="1"
+                                            wire:model='inputs.judgement_po'
+                                            wire:focusout="dispatchMe('judgement_po')"
                                             name="5-ponumber-judgement"
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                             @if($checklistInfo->status == "Closed")
@@ -1495,13 +1495,13 @@
                                         </label>
                                     </div>
                                     <div class="flex items-center space-x-3">
-                                        <input 
-                                            id="5-ponumber-judgement-ok" 
-                                            type="radio" 
-                                            value="0" 
-                                            wire:model='inputs.judgement_po' 
-                                            wire:focusout="dispatchMe('judgement_po')" 
-                                            name="5-ponumber-judgement"  
+                                        <input
+                                            id="5-ponumber-judgement-ok"
+                                            type="radio"
+                                            value="0"
+                                            wire:model='inputs.judgement_po'
+                                            wire:focusout="dispatchMe('judgement_po')"
+                                            name="5-ponumber-judgement"
                                             class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                                             @if($checklistInfo->status == "Closed")
                                             disabled
@@ -1517,7 +1517,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
