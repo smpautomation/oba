@@ -2,7 +2,7 @@
 <div>
     <!-- Sidebar Toggle Button (Sticky) -->
     <div class="fixed top-[46%] {{ $sidebarOpen ? 'right-3/4' : 'right-0' }} z-50 transform -translate-y-1/2 transition-all duration-300">
-        <button 
+        <button
             wire:click="toggleSidebar"
             class="gradient-bg hover:bg-blue-700 text-white p-3 {{ $sidebarOpen ? 'rounded-l-lg' : 'rounded-l-lg' }} shadow-lg transition-colors duration-200"
             title="{{ $sidebarOpen ? 'Close Photo Panel' : 'Open Photo Panel' }}"
@@ -127,18 +127,18 @@
                             <div class="grid grid-cols-1 gap-4">
                                 @foreach($uploadedPhotos as $index => $photoData)
                                     <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-200 hover:scale-105">
-                                        
+
                                         <div class="p-4">
                                             <h5 class="font-medium text-gray-800 text-sm mb-1 truncate">{{ $photoData['name'] }}</h5>
                                             <p class="text-xs text-gray-500 mb-4">{{ $photoData['uploaded_at'] ?? 'Just now' }}</p>
                                             <div class="flex space-x-3">
-                                                <button 
+                                                <button
                                                     wire:click="showPhoto('{{ $photoData['path'] }}')"
                                                     class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 min-h-[40px]"
                                                 >
                                                     View
                                                 </button>
-                                                <button 
+                                                <button
                                                     wire:click="removePhoto({{ $index }})"
                                                     wire:confirm="Are you sure you want to delete this photo?"
                                                     class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 min-h-[40px] min-w-[40px]"
@@ -157,104 +157,108 @@
                     @endif
                 </div>
 
-                <!-- Rename Photo Modal -->
-                @if($showRenameModal)
-                    <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
-                        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl" wire:click.stop>
-                            <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                                <h3 class="text-xl font-semibold text-gray-900">Rename Photo</h3>
-                                <button 
-                                    wire:click="cancelRename"
-                                    class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
-                                >
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            
-                            <div class="p-6">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Original name: <span class="text-gray-500">{{ $originalPhotoName }}</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="mb-6">
-                                    <label for="photoName" class="block text-sm font-medium text-gray-700 mb-2">
-                                        New photo name
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="photoName"
-                                        wire:model="photoName"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        placeholder="Enter photo name"
-                                        wire:keydown.enter="confirmRename"
-                                    />
-                                    <p class="text-xs text-gray-500 mt-1">
-                                        The file extension will be added automatically
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
-                                <button 
-                                    wire:click="cancelRename"
-                                    class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
-                                >
-                                    Cancel
-                                </button>
-                                <button 
-                                    wire:click="confirmRename"
-                                    class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
-                                    wire:loading.attr="disabled"
-                                    wire:target="confirmRename"
-                                >
-                                    <span wire:loading.remove wire:target="confirmRename">Save Photo</span>
-                                    <span wire:loading wire:target="confirmRename">Saving...</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endif
 
-                <!-- Photo Modal (for viewing individual photos) -->
-                @if($showModal)
-                    <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50" wire:click="closeModal">
-                        <div class="bg-white rounded-2xl max-w-4xl max-h-screen overflow-hidden shadow-2xl" wire:click.stop>
-                            <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                                <h3 class="text-xl font-semibold text-gray-900">{{ $selectedPhotoName }}</h3>
-                                <button 
-                                    wire:click="closeModal"
-                                    class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
-                                >
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            
-                            <div class="p-6">
-                                <img 
-                                    src="{{ $selectedPhotoUrl }}" 
-                                    alt="{{ $selectedPhotoName }}"
-                                    class="max-w-full max-h-96 mx-auto object-contain rounded-lg"
-                                />
-                            </div>
-                            
-                            <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
-                                <button 
-                                    wire:click="closeModal"
-                                    class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
-                                >
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endif
+
+
             </div>
         </div>
     </div>
+
+    <!-- Rename Photo Modal -->
+    @if($showRenameModal)
+        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl" wire:click.stop>
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900">Rename Photo</h3>
+                    <button
+                        wire:click="cancelRename"
+                        class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="p-6">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Original name: <span class="text-gray-500">{{ $originalPhotoName }}</span>
+                        </label>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="photoName" class="block text-sm font-medium text-gray-700 mb-2">
+                            New photo name
+                        </label>
+                        <input
+                            type="text"
+                            id="photoName"
+                            wire:model="photoName"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter photo name"
+                            wire:keydown.enter="confirmRename"
+                        />
+                        <p class="text-xs text-gray-500 mt-1">
+                            The file extension will be added automatically
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
+                    <button
+                        wire:click="cancelRename"
+                        class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        wire:click="confirmRename"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
+                        wire:loading.attr="disabled"
+                        wire:target="confirmRename"
+                    >
+                        <span wire:loading.remove wire:target="confirmRename">Save Photo</span>
+                        <span wire:loading wire:target="confirmRename">Saving...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Photo Modal (for viewing individual photos) -->
+    @if($showModal)
+        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[60]" wire:click="closeModal" style="position: fixed !important;">
+            <div class="bg-white rounded-2xl max-w-4xl max-h-screen overflow-hidden shadow-2xl" wire:click.stop>
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900">{{ $selectedPhotoName }}</h3>
+                    <button
+                        wire:click="closeModal"
+                        class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="p-6">
+                    <img
+                        src="{{ $selectedPhotoUrl }}"
+                        alt="{{ $selectedPhotoName }}"
+                        class="max-w-full max-h-96 mx-auto object-contain rounded-lg"
+                    />
+                </div>
+
+                <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
+                    <button
+                        wire:click="closeModal"
+                        class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
+                    >
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>

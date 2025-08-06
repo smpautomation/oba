@@ -1,7 +1,7 @@
 <div>
     <!-- Sidebar Toggle Button (Sticky) -->
     <div class="fixed top-[54%] {{ $sidebarOpen ? 'right-3/4' : 'right-0' }} z-50 transform -translate-y-1/2 transition-all duration-300">
-        <button 
+        <button
             wire:click="toggleSidebar"
             class="gradient-bg text-white p-3 {{ $sidebarOpen ? 'rounded-l-lg' : 'rounded-l-lg' }} shadow-lg transition-colors duration-200"
             title="{{ $sidebarOpen ? 'Close Photo Panel' : 'Open Photo Panel' }}"
@@ -168,18 +168,18 @@
                                                     <p class="text-xs text-gray-500 uppercase">{{ $documentData['type'] }} • {{ $documentData['size'] }}</p>
                                                 </div>
                                             </div>
-                                            
+
                                             <p class="text-xs text-gray-500 mb-4">{{ $documentData['uploaded_at'] ?? 'Just now' }}</p>
-                                            
+
                                             <div class="flex space-x-2">
-                                                <button 
+                                                <button
                                                     wire:click="showDocument('{{ $documentData['path'] }}')"
                                                     class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 min-h-[36px]"
                                                     title="View document"
                                                 >
                                                     View
                                                 </button>
-                                                <button 
+                                                <button
                                                     wire:click="downloadDocument('{{ $documentData['path'] }}')"
                                                     class="px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 min-h-[36px]"
                                                     title="Download document"
@@ -188,7 +188,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                                     </svg>
                                                 </button>
-                                                <button 
+                                                <button
                                                     wire:click="removeDocument({{ $index }})"
                                                     wire:confirm="Are you sure you want to delete this document?"
                                                     class="px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 min-h-[36px]"
@@ -210,185 +210,187 @@
                     @endif
                 </div>
 
-                <!-- Rename Document Modal -->
-                @if($showRenameModal)
-                    <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
-                        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl" wire:click.stop>
-                            <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                                <h3 class="text-xl font-semibold text-gray-900">Rename Document</h3>
-                                <button 
-                                    wire:click="cancelRename"
-                                    class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
-                                >
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            
-                            <div class="p-6">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Original name: <span class="text-gray-500">{{ $originalDocumentName }}</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="mb-6">
-                                    <label for="documentName" class="block text-sm font-medium text-gray-700 mb-2">
-                                        New document name
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="documentName"
-                                        wire:model="documentName"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        placeholder="Enter document name"
-                                        wire:keydown.enter="confirmRename"
-                                    />
-                                    <p class="text-xs text-gray-500 mt-1">
-                                        The file extension will be added automatically
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
-                                <button 
-                                    wire:click="cancelRename"
-                                    class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
-                                >
-                                    Cancel
-                                </button>
-                                <button 
-                                    wire:click="confirmRename"
-                                    class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
-                                    wire:loading.attr="disabled"
-                                    wire:target="confirmRename"
-                                >
-                                    <span wire:loading.remove wire:target="confirmRename">Save Document</span>
-                                    <span wire:loading wire:target="confirmRename">Saving...</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endif
 
-                <!-- Document Modal (for viewing individual documents) -->
-                @if($showModal)
-                    <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50" wire:click="closeModal">
-                        <div class="bg-white rounded-2xl min-w-6xl h-[60rem] max-h-screen  overflow-hidden shadow-2xl" wire:click.stop>
-                            <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                                <h3 class="text-xl font-semibold text-gray-900">{{ $selectedDocumentName }}</h3>
-                                <div class="flex items-center space-x-3">
-                                    <button 
-                                        wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')"
-                                        class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center"
-                                    >
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                        </svg>
-                                        Download
-                                    </button>
-                                    <button 
-                                        wire:click="closeModal"
-                                        class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
-                                    >
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="p-6 overflow-auto max-h-[40rem]">
-                                @if($selectedDocumentType === 'pdf')
-                                    <div class="text-center">
-                                        <embed 
-                                            src="{{ $selectedDocumentUrl }}" 
-                                            type="application/pdf" 
-                                            width="100%" 
-                                            height = "550px"
-                                            class="rounded-lg border"
-                                        />
-                                        <p class="text-sm text-gray-500 mt-4">
-                                            If the PDF doesn't display properly, you can 
-                                            <button wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')" 
-                                                    class="text-blue-600 hover:text-blue-800 underline">
-                                                download it here
-                                            </button>
-                                        </p>
-                                    </div>
-                                @elseif(in_array($selectedDocumentType, ['doc', 'docx', 'xls', 'xlsx']))
-                                    <div class="text-center py-12">
-                                        <div class="w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4
-                                            @if(in_array($selectedDocumentType, ['doc', 'docx'])) bg-blue-100 text-blue-600
-                                            @elseif(in_array($selectedDocumentType, ['xls', 'xlsx'])) bg-green-100 text-green-600
-                                            @endif">
-                                            @if(in_array($selectedDocumentType, ['doc', 'docx']))
-                                                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"/>
-                                                </svg>
-                                            @elseif(in_array($selectedDocumentType, ['xls', 'xlsx']))
-                                                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19Z"/>
-                                                </svg>
-                                            @endif
-                                        </div>
-                                        <h4 class="text-lg font-semibold text-gray-900 mb-2">{{ $selectedDocumentName }}</h4>
-                                        <p class="text-gray-600 mb-6">
-                                            @if(in_array($selectedDocumentType, ['doc', 'docx']))
-                                                Word documents cannot be previewed in the browser.
-                                            @elseif(in_array($selectedDocumentType, ['xls', 'xlsx']))
-                                                Excel spreadsheets cannot be previewed in the browser.
-                                            @endif
-                                            <br>Please download the file to view its contents.
-                                        </p>
-                                        <button 
-                                            wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')"
-                                            class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center mx-auto"
-                                        >
-                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                            </svg>
-                                            Download Document
-                                        </button>
-                                    </div>
-                                @else
-                                    <div class="text-center py-12">
-                                        <div class="w-24 h-24 mx-auto bg-gray-100 text-gray-600 rounded-full flex items-center justify-center mb-4">
-                                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-                                            </svg>
-                                        </div>
-                                        <h4 class="text-lg font-semibold text-gray-900 mb-2">{{ $selectedDocumentName }}</h4>
-                                        <p class="text-gray-600 mb-6">
-                                            This document type cannot be previewed in the browser.<br>
-                                            Please download the file to view its contents.
-                                        </p>
-                                        <button 
-                                            wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')"
-                                            class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center mx-auto"
-                                        >
-                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                            </svg>
-                                            Download Document
-                                        </button>
-                                    </div>
-                                @endif
-                            </div>
-                            
-                            <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
-                                <button 
-                                    wire:click="closeModal"
-                                    class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
-                                >
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
     </div>
+
+    <!-- Rename Document Modal -->
+    @if($showRenameModal)
+        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl" wire:click.stop>
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900">Rename Document</h3>
+                    <button
+                        wire:click="cancelRename"
+                        class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="p-6">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Original name: <span class="text-gray-500">{{ $originalDocumentName }}</span>
+                        </label>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="documentName" class="block text-sm font-medium text-gray-700 mb-2">
+                            New document name
+                        </label>
+                        <input
+                            type="text"
+                            id="documentName"
+                            wire:model="documentName"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter document name"
+                            wire:keydown.enter="confirmRename"
+                        />
+                        <p class="text-xs text-gray-500 mt-1">
+                            The file extension will be added automatically
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
+                    <button
+                        wire:click="cancelRename"
+                        class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        wire:click="confirmRename"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
+                        wire:loading.attr="disabled"
+                        wire:target="confirmRename"
+                    >
+                        <span wire:loading.remove wire:target="confirmRename">Save Document</span>
+                        <span wire:loading wire:target="confirmRename">Saving...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Document Modal (for viewing individual documents) -->
+    @if($showModal)
+        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50" wire:click="closeModal">
+            <div class="bg-white rounded-2xl min-w-6xl h-[60rem] max-h-screen  overflow-hidden shadow-2xl" wire:click.stop>
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-900">{{ $selectedDocumentName }}</h3>
+                    <div class="flex items-center space-x-3">
+                        <button
+                            wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')"
+                            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center"
+                        >
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Download
+                        </button>
+                        <button
+                            wire:click="closeModal"
+                            class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-2 hover:bg-gray-100 rounded-full"
+                        >
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-6 overflow-auto max-h-[40rem]">
+                    @if($selectedDocumentType === 'pdf')
+                        <div class="text-center">
+                            <embed
+                                src="{{ $selectedDocumentUrl }}"
+                                type="application/pdf"
+                                width="100%"
+                                height = "550px"
+                                class="rounded-lg border"
+                            />
+                            <p class="text-sm text-gray-500 mt-4">
+                                If the PDF doesn't display properly, you can
+                                <button wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')"
+                                        class="text-blue-600 hover:text-blue-800 underline">
+                                    download it here
+                                </button>
+                            </p>
+                        </div>
+                    @elseif(in_array($selectedDocumentType, ['doc', 'docx', 'xls', 'xlsx']))
+                        <div class="text-center py-12">
+                            <div class="w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4
+                                @if(in_array($selectedDocumentType, ['doc', 'docx'])) bg-blue-100 text-blue-600
+                                @elseif(in_array($selectedDocumentType, ['xls', 'xlsx'])) bg-green-100 text-green-600
+                                @endif">
+                                @if(in_array($selectedDocumentType, ['doc', 'docx']))
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"/>
+                                    </svg>
+                                @elseif(in_array($selectedDocumentType, ['xls', 'xlsx']))
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19Z"/>
+                                    </svg>
+                                @endif
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-2">{{ $selectedDocumentName }}</h4>
+                            <p class="text-gray-600 mb-6">
+                                @if(in_array($selectedDocumentType, ['doc', 'docx']))
+                                    Word documents cannot be previewed in the browser.
+                                @elseif(in_array($selectedDocumentType, ['xls', 'xlsx']))
+                                    Excel spreadsheets cannot be previewed in the browser.
+                                @endif
+                                <br>Please download the file to view its contents.
+                            </p>
+                            <button
+                                wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')"
+                                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center mx-auto"
+                            >
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                Download Document
+                            </button>
+                        </div>
+                    @else
+                        <div class="text-center py-12">
+                            <div class="w-24 h-24 mx-auto bg-gray-100 text-gray-600 rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-2">{{ $selectedDocumentName }}</h4>
+                            <p class="text-gray-600 mb-6">
+                                This document type cannot be previewed in the browser.<br>
+                                Please download the file to view its contents.
+                            </p>
+                            <button
+                                wire:click="downloadDocument('{{ collect($uploadedDocuments)->firstWhere('name', $selectedDocumentName)['path'] ?? '' }}')"
+                                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center mx-auto"
+                            >
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                Download Document
+                            </button>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="flex justify-end p-6 border-t border-gray-200 space-x-3">
+                    <button
+                        wire:click="closeModal"
+                        class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 min-h-[44px]"
+                    >
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
