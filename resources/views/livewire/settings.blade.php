@@ -6,16 +6,16 @@
                 <div class="glass-effect rounded-full p-4 mr-6 shadow-lg">
                     <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                         <img src="photo/cogwheel.png" />
-                        
+
                     </div>
                 </div>
                 <div class="text-center">
-                    <h1 class="text-4xl font-bold mb-2 tracking-tight">Settings</h1>          
+                    <h1 class="text-4xl font-bold mb-2 tracking-tight">Settings</h1>
                     <p class="text-white/90 text-lg font-medium">Configure Website Setting</p>
                     <div class="w-24 h-1 bg-white/30 rounded-full mx-auto mt-3"></div>
                 </div>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Compact Button 1 -->
                 <button class="group relative p-6 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 hover:shadow-lg" wire:click="showAddRemoveSection">
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </button>
-                
+
                 <!-- Compact Button 2 -->
                 <button class="group relative p-6 bg-gradient-to-br from-purple-50 to-pink-100 rounded-2xl border-2 border-transparent hover:border-purple-300 transition-all duration-300 hover:shadow-lg" wire:click="showChecklistConfigurationSection">
                     <div class="flex items-center gap-4">
@@ -75,9 +75,9 @@
                 </button>
             </div>
     </div>
-    
 
-    
+
+
 
     @if($showAddRemove)
     <div class="bg-red-50 rounded-xl shadow-lg p-6 space-y-6 bg-opacity-90 backdrop-blur-md">
@@ -91,23 +91,23 @@
                 </div>
                 <h2 class="text-xl font-semibold text-gray-800">Add/Remove Configuration</h2>
             </div>
-            
+
             <!-- Models -->
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-4">
                 <h1 class="text-xl font-semibold text-gray-800">Models</h1>
                 <label class="block text-sm font-medium text-gray-700 mb-3">*To delete a model, please select the model name.</label>
-                
+
                 <!-- Success Message -->
-                @if (session()->has('message'))
+                @if (session()->has('messageModel'))
                     <div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-                        {{ session('message') }}
+                        {{ session('messageModel') }}
                     </div>
                 @endif
 
                 <!-- Add Model Button and Form -->
                 <div class="mb-4">
                     @if(!$showAddForm)
-                        <button 
+                        <button
                             wire:click="$set('showAddForm', true)"
                             class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
                         >
@@ -117,7 +117,7 @@
                         <div class="bg-white border-2 border-blue-200 rounded-lg p-4">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="font-medium text-gray-800">Add New Model</h3>
-                                <button 
+                                <button
                                     wire:click="cancelAdd"
                                     class="text-gray-500 hover:text-gray-700"
                                 >
@@ -126,28 +126,39 @@
                                     </svg>
                                 </button>
                             </div>
-                            
+
                             <div class="space-y-3">
                                 <div>
-                                    <input 
-                                        type="text" 
+                                    <select
+                                        wire:model="section_id"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none mr-4">
+                                        <option selected value=''>Select a section</option>
+                                        @foreach($sections as $section)
+                                            <option value="{{ $section->id }}">{{ $section->section }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('section_id')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                    <input
+                                        type="text"
                                         wire:model="newModelName"
                                         placeholder="Enter model name..."
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
                                     >
-                                    @error('newModelName') 
-                                        <span class="text-red-500 text-sm">{{ $message }}</span> 
+                                    @error('newModelName')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="flex space-x-2">
-                                    <button 
+                                    <button
                                         wire:click="addModel"
                                         class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
                                     >
                                         Add Model
                                     </button>
-                                    <button 
+                                    <button
                                         wire:click="cancelAdd"
                                         class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
                                     >
@@ -158,7 +169,7 @@
                         </div>
                     @endif
                 </div>
-                
+
                 <!-- Search Input -->
                 <div class="relative mb-4">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -166,14 +177,14 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         wire:model.live.debounce.300ms="searchTerm"
-                        placeholder="Search models..." 
+                        placeholder="Search models..."
                         class="w-full md:w-96 pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none bg-white transition-colors duration-200"
                     >
                     @if($searchTerm)
-                        <button 
+                        <button
                             wire:click="$set('searchTerm', '')"
                             class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
                         >
@@ -192,7 +203,7 @@
                             <span class="font-medium text-gray-800">{{ $selectedModelAddRemove }}</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <button 
+                            <button
                                 wire:click="deleteModel"
                                 wire:confirm="Are you sure you want to delete this model?"
                                 class="text-red-500 hover:text-red-700 hover:bg-red-50 px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200"
@@ -200,7 +211,7 @@
                             >
                                 Delete
                             </button>
-                            <button 
+                            <button
                                 wire:click="clearSelection"
                                 class="text-gray-500 hover:text-gray-700 hover:bg-gray-50 p-1 rounded-full transition-colors duration-200"
                                 title="Clear selection"
@@ -226,12 +237,12 @@
                             </div>
                         @else
                             @foreach($filteredModels as $model)
-                                <button 
+                                <button
                                     wire:click="selectModel('{{ $model->model_name }}')"
                                     class="w-full text-left px-4 py-3 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none border-b border-gray-100 last:border-b-0 transition-colors duration-150"
                                 >
                                     <div class="flex items-center justify-between">
-                                        <span class="font-medium text-gray-800">{{ $model->model_name }}</span>
+                                        <span class="font-medium text-gray-800">{{ $model->model_name . " - " . $model->getSection->section }}</span>
                                         @if($model->description ?? false)
                                             <span class="text-sm text-gray-500 ml-2">{{ Str::limit($model->description, 30) }}</span>
                                         @endif
@@ -254,7 +265,7 @@
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
                 <h1 class="text-xl font-semibold text-gray-800">Sections</h1>
                 <label class="block text-sm font-medium text-gray-700 mb-3">*To delete a section, please select the section name.</label>
-                
+
                 <!-- Success Message -->
                 @if (session()->has('message'))
                     <div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
@@ -265,7 +276,7 @@
                 <!-- Add Section Button and Form -->
                 <div class="mb-4">
                     @if(!$showAddFormSection)
-                        <button 
+                        <button
                             wire:click="$set('showAddFormSection', true)"
                             class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
                         >
@@ -275,7 +286,7 @@
                         <div class="bg-white border-2 border-blue-200 rounded-lg p-4">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="font-medium text-gray-800">Add New Section</h3>
-                                <button 
+                                <button
                                     wire:click="cancelAddSection"
                                     class="text-gray-500 hover:text-gray-700"
                                 >
@@ -284,28 +295,28 @@
                                     </svg>
                                 </button>
                             </div>
-                            
+
                             <div class="space-y-3">
                                 <div>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         wire:model="newSectionName"
                                         placeholder="Enter section name..."
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
                                     >
-                                    @error('newSectionName') 
-                                        <span class="text-red-500 text-sm">{{ $message }}</span> 
+                                    @error('newSectionName')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="flex space-x-2">
-                                    <button 
+                                    <button
                                         wire:click="addSection"
                                         class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
                                     >
                                         Add Section
                                     </button>
-                                    <button 
+                                    <button
                                         wire:click="cancelAddSection"
                                         class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
                                     >
@@ -316,7 +327,7 @@
                         </div>
                     @endif
                 </div>
-                
+
                 <!-- Search Input -->
                 <div class="relative mb-4">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -324,14 +335,14 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         wire:model.live.debounce.300ms="searchTermSection"
-                        placeholder="Search section..." 
+                        placeholder="Search section..."
                         class="w-full md:w-96 pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none bg-white transition-colors duration-200"
                     >
                     @if($searchTermSection)
-                        <button 
+                        <button
                             wire:click="$set('searchTermSection', '')"
                             class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
                         >
@@ -350,7 +361,7 @@
                             <span class="font-medium text-gray-800">{{ $selectedSectionAddRemove }}</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <button 
+                            <button
                                 wire:click="deleteSection"
                                 wire:confirm="Are you sure you want to delete this section?"
                                 class="text-red-500 hover:text-red-700 hover:bg-red-50 px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200"
@@ -358,7 +369,7 @@
                             >
                                 Delete
                             </button>
-                            <button 
+                            <button
                                 wire:click="clearSelectionSection"
                                 class="text-gray-500 hover:text-gray-700 hover:bg-gray-50 p-1 rounded-full transition-colors duration-200"
                                 title="Clear selection section"
@@ -384,7 +395,7 @@
                             </div>
                         @else
                             @foreach($filteredSections as $section)
-                                <button 
+                                <button
                                     wire:click="selectSection('{{ $section->section }}')"
                                     class="w-full text-left px-4 py-3 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none border-b border-gray-100 last:border-b-0 transition-colors duration-150"
                                 >
@@ -425,7 +436,7 @@
             <div class="mb-4 bg-purple-100 rounded-lg w-1/2">
                 <p class="block text-sm font-medium text-gray-700 mb-3"><strong class='text-red-700'>*</strong>Note: Default Checklist Configuration is True for all parameter</p>
             </div>
-            
+
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
                 <label for="model-select" class="block text-sm font-medium text-gray-700 mb-3">Select Model</label>
                 <select id="model-select" wire:model.live="selectedModel" class="input-field select-focus w-full md:w-96 px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none bg-white">
@@ -450,7 +461,7 @@
                     </div>
                     <h2 class="text-xl font-semibold text-gray-800">Preparation Checklist Settings</h2>
                 </div>
-                
+
                 <div class="space-y-4">
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
                         <div class="flex items-center justify-between">
@@ -477,7 +488,7 @@
                     </div>
                     <h2 class="text-xl font-semibold text-gray-800">Similarities Checking Settings</h2>
                 </div>
-                
+
                 <div class="space-y-4">
                     <h4 class="font-medium text-gray-900">Quantity For Shipment</h4>
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -493,7 +504,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="space-y-4 mt-6">
                     <h4 class="font-medium text-gray-900">Model Name</h4>
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -509,7 +520,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="space-y-4 mt-6">
                     <h4 class="font-medium text-gray-900">Model Code</h4>
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -549,7 +560,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="space-y-4 mt-6">
                     <h4 class="font-medium text-gray-900">Part Number</h4>
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -589,7 +600,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="space-y-4 mt-6">
                     <h4 class="font-medium text-gray-900">Purchase Order Number Verification</h4>
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
@@ -671,51 +682,51 @@
                         </div>
                         <h2 class="text-xl font-semibold text-gray-800">System Logs</h2>
                     </div>
-                    
+
                     <div class="flex flex-wrap items-center gap-4 mb-6">
                         <!-- Search Box -->
                         <div class="flex-1 min-w-64">
-                            <input type="text" 
+                            <input type="text"
                                 wire:model.live.debounce.300ms="searchTerm"
-                                placeholder="Search description..." 
+                                placeholder="Search description..."
                                 class="input-field w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        
+
                         <!-- Date Range -->
                         <div class="flex items-center space-x-2">
-                            <input type="date" 
+                            <input type="date"
                                 wire:model.live="startDate"
                                 class="input-field px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <span class="text-gray-500">to</span>
-                            <input type="date" 
+                            <input type="date"
                                 wire:model.live="endDate"
                                 class="input-field px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        
+
                         <!-- Existing Filters -->
-                        <select wire:model.live="logTypeFilter" 
+                        <select wire:model.live="logTypeFilter"
                                 class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">All Types</option>
                             <option value="info">Info</option>
                             <option value="error">Error</option>
                             <option value="warning">Warning</option>
                         </select>
-                        
-                        <select wire:model.live="logNameFilter" 
+
+                        <select wire:model.live="logNameFilter"
                                 class="input-field select-focus px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">All Logs</option>
                             <option value="System">System</option>
                             <option value="User Actions">User Actions</option>
                         </select>
-                        
+
                         <!-- Clear Filters Button -->
-                        <button wire:click="clearFilters" 
+                        <button wire:click="clearFilters"
                                 class="filter-button px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
                             Clear Filters
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Table Container -->
                 <div class="overflow-x-auto">
                     <table class="w-full bg-white rounded-lg shadow-sm">
@@ -772,11 +783,11 @@
                                 </td>
                             </tr>
                             @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>
-                
+
                 <!-- Pagination -->
                 <div class="flex flex-col sm:flex-row items-center justify-between mt-6 gap-4">
                     <div class="flex items-center space-x-2 text-sm text-gray-500">
@@ -788,15 +799,15 @@
                         <span class="font-medium">{{ $this->systemLogs->total() }}</span>
                         <span>results</span>
                     </div>
-                    
+
                     <div class="flex items-center space-x-2">
                         {{ $this->systemLogs->links() }}
                     </div>
-                    
+
                     <!-- Per Page Selector -->
                     <div class="flex items-center space-x-2 text-sm">
                         <span>Show:</span>
-                        <select wire:model.live="perPage" 
+                        <select wire:model.live="perPage"
                                 class="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -810,5 +821,5 @@
         </div>
     @endif
 
-    
+
 </div>

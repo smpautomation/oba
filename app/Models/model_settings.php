@@ -9,6 +9,7 @@ class model_settings extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'section_id',
         'model_name',
         'scanned_qr_pc',
         'sir_qs',
@@ -37,4 +38,8 @@ class model_settings extends Model
         'vmi_po' => 'boolean',
         'specific_label_po' => 'boolean',
     ];
+
+    public function getSection(){
+        return $this->belongsTo(Sections::class, 'section_id', 'id');
+    }
 }

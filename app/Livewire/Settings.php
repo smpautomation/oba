@@ -22,6 +22,7 @@ class Settings extends Component
     public $totalModels;
     public $showAddForm = false;
     public $newModelName = '';
+    public $section_id;
 
     public $selectedSectionAddRemove = '';
     public $searchTermSection = '';
@@ -90,7 +91,7 @@ class Settings extends Component
             if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
                 $ips = explode(',', $_SERVER[$key]);
                 $ip = trim($ips[0]);
-                
+
                 // Validate IP address
                 if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
                     return $ip;
@@ -123,10 +124,10 @@ class Settings extends Component
     }
 
     public function updatedSelectedModel($value)
-    {        
+    {
         if (!empty($value)) {
             $modelData = model_settings::where('model_name', $value)->first();
-           
+
             if ($modelData) {
                 $this->scanned_qr_pc = (bool) $modelData->scanned_qr_pc;
                 $this->sir_qs = (bool) $modelData->sir_qs;
@@ -144,10 +145,10 @@ class Settings extends Component
         } else {
             $this->resetSettings();
         }
-    
+
         $this->render();
     }
-   
+
     private function resetSettings()
     {
         $this->scanned_qr_pc = true;
@@ -166,10 +167,10 @@ class Settings extends Component
 
     public function saveConfiguration()
     {
-        
+
         if (!empty($this->selectedModel)) {
             $modelData = model_settings::where('model_name', $this->selectedModel)->first();
-           
+
             if ($modelData) {
                 $modelData->update([
                     'scanned_qr_pc' => $this->scanned_qr_pc,
@@ -185,7 +186,7 @@ class Settings extends Component
                     'vmi_po' => $this->vmi_po,
                     'specific_label_po' => $this->specific_label_po,
                 ]);
-                
+
                 session()->flash('message', 'Configuration saved successfully!');
                 ModelsLog::create([
                     'LogName' => 'User Action',
@@ -234,9 +235,9 @@ class Settings extends Component
         $this->selectedModelAddRemove = $modelName;
         $this->searchTerm = '';
         $this->filteredModels = $this->models;
-        
+
         // Emit event to parent component if needed
-        
+
     }
 
     public function clearSelection()
@@ -244,7 +245,7 @@ class Settings extends Component
         $this->selectedModelAddRemove = '';
         $this->searchTerm = '';
         $this->filteredModels = $this->models;
-        
+
     }
 
     public function deleteModel()
@@ -254,16 +255,16 @@ class Settings extends Component
             $model = model_settings::where('model_name', $this->selectedModelAddRemove)->first();
             if ($model) {
                 $model->delete();
-                
+
                 // Refresh the models list
                 $this->models = model_settings::orderBy('model_name')->get();
                 $this->totalModels = $this->models->count();
                 $this->filteredModels = $this->models;
-                
+
                 // Clear selection after deletion
                 $this->selectedModelAddRemove = '';
                 $this->searchTerm = '';
-                
+
                 // Show success message
                 session()->flash('message', 'Model deleted successfully!');
                 ModelsLog::create([
@@ -279,11 +280,13 @@ class Settings extends Component
     public function addModel()
     {
         $this->validate([
+            'section_id' => 'required|integer',
             'newModelName' => 'required|string|max:255|unique:model_settings,model_name'
         ]);
 
         // Create new model
         model_settings::create([
+            'section_id' => $this->section_id,
             'model_name' => $this->newModelName
         ]);
 
@@ -292,18 +295,20 @@ class Settings extends Component
         $this->totalModels = $this->models->count();
         $this->filteredModels = $this->models;
 
-        // Reset form
-        $this->newModelName = '';
-        $this->showAddForm = false;
+
 
         // Show success message
-        session()->flash('message', 'Model added successfully!');
+        session()->flash('messageModel', 'Model added successfully!');
         ModelsLog::create([
             'LogName' => 'User Action',
             'LogType' => 'info',
             'action' => 'add/remove_configuration',
             'description' => '{"specific_action":"Add Model '.$this->newModelName.'", "ip address":"'. $this->userIP .'"}'
         ]);
+
+        // Reset form
+        $this->newModelName = '';
+        $this->showAddForm = false;
     }
 
     public function cancelAdd()
@@ -332,7 +337,7 @@ class Settings extends Component
         $this->selectedSectionAddRemove = $sectionName;
         $this->searchTermSection = '';
         $this->filteredSections = $this->sections;
-            
+
     }
 
     public function clearSelectionSection()
@@ -340,7 +345,7 @@ class Settings extends Component
         $this->selectedSectionAddRemove = '';
         $this->searchTermSection = '';
         $this->filteredSections = $this->sections;
-        
+
     }
 
     public function deleteSection()
@@ -349,14 +354,14 @@ class Settings extends Component
             $section = Sections::where('section', $this->selectedSectionAddRemove)->first();
             if ($section) {
                 $section->delete();
-                
+
                 $this->sections = Sections::orderBy('section')->get();
                 $this->totalSections = $this->sections->count();
                 $this->filteredSections = $this->sections;
-                
+
                 $this->selectedSectionAddRemove = '';
                 $this->searchTermSection = '';
-                
+
                 // Show success message
                 session()->flash('message', 'Section deleted successfully!');
                 ModelsLog::create([
@@ -406,6 +411,7 @@ class Settings extends Component
     {
         return [
             'newModelName' => 'required|string|max:8|unique:model_settings,model_name',
+            'section_id' => 'required|integer',
             'newSectionName' => 'required|string|max:15|unique:section,section'
         ];
     }
@@ -416,6 +422,7 @@ class Settings extends Component
             'newModelName.required' => 'Model name is required.',
             'newModelName.unique' => 'This model name already exists.',
             'newModelName.max' => 'Model name cannot exceed 8 characters.',
+            'section_id.required' => 'Please pick a section',
             'newSectionName.required' => 'Section name is required.',
             'newSectionName.unique' => 'This section name already exists.',
             'newSectionName.max' => 'Section name cannot exceed 15 characters.'
@@ -426,31 +433,31 @@ class Settings extends Component
     public function getSystemLogsProperty()
     {
         $query = ModelsLog::query();
-        
+
         // Search filter
         if (!empty($this->searchTerm)) {
             $query->where('description', 'like', '%' . $this->searchTerm . '%');
         }
-        
+
         // Log type filter
         if (!empty($this->logTypeFilter)) {
             $query->where('LogType', $this->logTypeFilter);
         }
-        
+
         // Log name filter
         if (!empty($this->logNameFilter)) {
             $query->where('LogName', $this->logNameFilter);
         }
-        
+
         // Date range filter
         if (!empty($this->startDate)) {
             $query->whereDate('created_at', '>=', $this->startDate);
         }
-        
+
         if (!empty($this->endDate)) {
             $query->whereDate('created_at', '<=', $this->endDate);
         }
-        
+
         return $query->orderBy('created_at', 'desc')
                     ->paginate($this->perPage);
     }
@@ -462,9 +469,9 @@ class Settings extends Component
         $this->endDate = '';
         $this->logTypeFilter = '';
         $this->logNameFilter = '';
-        $this->resetPage(); 
+        $this->resetPage();
     }
-  
+
 
     public function render()
     {
