@@ -30,24 +30,24 @@ class SectionForm extends Component
 
     public $selectedSection;
     public $selectedModel;
-    public $userIP; 
+    public $userIP;
     private function getClientIpAddress(Request $request): string
     {
         $ipKeys = [
-            'HTTP_CF_CONNECTING_IP',     
-            'HTTP_X_REAL_IP',            
-            'HTTP_X_FORWARDED_FOR',     
-            'HTTP_X_FORWARDED',          
-            'HTTP_X_CLUSTER_CLIENT_IP', 
-            'HTTP_CLIENT_IP',            
-            'REMOTE_ADDR'               
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_X_REAL_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_FORWARDED',
+            'HTTP_X_CLUSTER_CLIENT_IP',
+            'HTTP_CLIENT_IP',
+            'REMOTE_ADDR'
         ];
 
         foreach ($ipKeys as $key) {
             if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
                 $ips = explode(',', $_SERVER[$key]);
                 $ip = trim($ips[0]);
-                
+
                 // Validate IP address
                 if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
                     return $ip;
@@ -135,16 +135,20 @@ class SectionForm extends Component
                 'description' => '{"specific_action":"Create new checklist '.$new_id.' Model '.$this->selectedModel.' Section '.$this->selectedSection.'", "error":"'.$e.'", "ip address":"'. $this->userIP .'"}'
             ]);
         }
-        
 
-        
+
+
 
         return redirect()->to('/checklist/'.$new_id);
+    }
+
+    public function loadModel(){
+        $section_id = Sections::where('section', $this->selectedSection)->first();
+        $this->models = ModelSettings::where('section_id', $section_id->id)->get();
     }
     public function mount()
     {
         $this->sections = Sections::all();
-        $this->models = ModelSettings::all();
         $this->userIP = $this->getClientIpAddress(request());
     }
     public function render()

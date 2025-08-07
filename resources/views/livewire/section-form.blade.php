@@ -23,9 +23,10 @@
                     </span>
                 </label>
                 <div class="relative">
-                    <select 
-                        wire:model='selectedSection' 
-                        id="section" 
+                    <select
+                        wire:model='selectedSection'
+                        wire:change='loadModel()'
+                        id="section"
                         class="enhanced-focus select-focus touch-target appearance-none bg-white border-2 border-gray-200 text-gray-900 text-base sm:text-lg rounded-2xl focus:ring-4 focus:ring-cyan-200 focus:border-cyan-500 block w-full p-4 sm:p-5 pr-12 transition-all duration-200 shadow-sm hover:shadow-md hover:border-gray-300"
                     >
                         <option value="" selected>Choose a section</option>
@@ -62,15 +63,20 @@
                     </span>
                 </label>
                 <div class="relative">
-                    <select 
-                        wire:model='selectedModel' 
-                        id="model" 
+                    <select
+                        wire:model='selectedModel'
+                        id="model"
                         class="enhanced-focus select-focus touch-target appearance-none bg-white border-2 border-gray-200 text-gray-900 text-base sm:text-lg rounded-2xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-4 sm:p-5 pr-12 transition-all duration-200 shadow-sm hover:shadow-md hover:border-gray-300"
                     >
-                        <option value="" selected>Choose a model</option>
-                        @foreach ($models as $model)
-                            <option value="{{ $model->model_name }}">{{ $model->model_name }}</option>
-                        @endforeach
+                        @if(empty($models))
+                            <option value="" selected>Please pick a section first</option>
+                        @else
+                            @foreach ($models as $model)
+                                <option value="{{ $model->model_name }}">{{ $model->model_name }}</option>
+                            @endforeach
+                        @endif
+
+
                     </select>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,8 +110,8 @@
 
             <!-- Submit Button -->
             <div class="pt-4">
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="btn-hover enhanced-focus touch-target w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-4 sm:py-5 px-6 rounded-2xl text-base sm:text-lg transition-all duration-200 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-cyan-200 active:transform active:scale-95"
                 >
                     <span class="flex items-center justify-center gap-3">
