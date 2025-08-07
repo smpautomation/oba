@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
-{  
+{
     use HasFactory;
 
     /**
@@ -16,6 +16,11 @@ return new class extends Migration
     {
         Schema::create('model_settings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('section_id');
+            $table->foreign('section_id')
+                ->references('id')
+                ->on('section')
+                ->onUpdate('cascade');
             $table->string('model_name', 191)->index();
             $table->boolean("scanned_qr_pc")->default(true);
             $table->boolean("sir_qs")->default(true);
