@@ -468,6 +468,7 @@
                         </x-inputText>
                     </div>
                 </div>
+                @if($sir_mn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-pallet-model-input">SIR</x-label>
@@ -482,6 +483,7 @@
                         </x-inputText>
                     </div>
                 </div>
+                @endif
             </div>
 
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
@@ -849,7 +851,6 @@
                 <h2 class="text-lg md:text-xl font-semibold text-gray-800">PART NUMBER</h2>
             </div>
             <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl p-2 bg-gradient-to-r from-blue-50 to-indigo-50 pt-12">
-                @if($picklist_pn)
                 <div class="col-span-1 md:grid-cols-2" hidden>
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-partnumber-input">PICK LIST</x-label>
@@ -863,7 +864,6 @@
                         ></x-inputText>
                     </div>
                 </div>
-                @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shipinv-partnumber-input">SHIPPING INVOICE</x-label>
@@ -948,6 +948,7 @@
                         ></x-inputText>
                     </div>
                 </div>
+                @if($qr_qa_pn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-qr_qa-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY QA)</x-label>
@@ -961,6 +962,8 @@
                          ></x-inputText>
                     </div>
                 </div>
+                @endif
+                @if($qr_mgtz_pn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-qr_mgtz-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY MGTZ)</x-label>
@@ -974,6 +977,8 @@
                         ></x-inputText>
                     </div>
                 </div>
+                @endif
+                @if($qr_mc_pn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-qr_mc-partnumber-input">SPECIFIC LABEL/QR CODE LABEL(PROVIDED BY MC)</x-label>
@@ -987,6 +992,7 @@
                         ></x-inputText>
                     </div>
                 </div>
+                @endif
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-pallet-partnumber-input">PALLET LABEL</x-label>
@@ -1000,6 +1006,7 @@
                         ></x-inputText>
                     </div>
                 </div>
+                @if($sci_label_pn)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sci_label-partnumber-input">SCI LABEL(SIAM COMPRESSOR INDUSTRY CO.,LTD)</x-label>
@@ -1013,6 +1020,7 @@
                         ></x-inputText>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">

@@ -519,6 +519,18 @@
                             </label>
                         </div>
                     </div>
+                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Specific Inspection Report</h3>
+                                <p class="text-sm text-gray-500">Require SIR checking</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" wire:model.live="sir_mn">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="space-y-4 mt-6">
@@ -566,18 +578,6 @@
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="font-medium text-gray-900">Pick List</h3>
-                                <p class="text-sm text-gray-500">Require Pick List checking</p>
-                            </div>
-                            <label class="toggle-switch">
-                                <input type="checkbox" wire:model.live="picklist_pn">
-                                <span class="toggle-slider round"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
-                        <div class="flex items-center justify-between">
-                            <div>
                                 <h3 class="font-medium text-gray-900">Specific Inspection Report</h3>
                                 <p class="text-sm text-gray-500">Require SIR checking</p>
                             </div>
@@ -599,8 +599,55 @@
                             </label>
                         </div>
                     </div>
+                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">SCI Label</h3>
+                                <p class="text-sm text-gray-500">Require SCI label checking</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" wire:model.live="sci_label_pn">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Specific Label/QR Code Label(Provided by QA)</h3>
+                                <p class="text-sm text-gray-500">Require Specific Label/QR Code Label(Provided by QA) checking</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" wire:model.live="qr_qa_pn">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Specific Label/QR Code Label(Provided by MC)</h3>
+                                <p class="text-sm text-gray-500">Require Specific Label/QR Code Label(Provided by mc) checking</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" wire:model.live="qr_mc_pn">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Specific Label/QR Code Label(Provided by MAGNETIZING)</h3>
+                                <p class="text-sm text-gray-500">Require Specific Label/QR Code Label(Provided by MGTZ) checking</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" wire:model.live="qr_mgtz_pn">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-
                 <div class="space-y-4 mt-6">
                     <h4 class="font-medium text-gray-900">Purchase Order Number Verification</h4>
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
