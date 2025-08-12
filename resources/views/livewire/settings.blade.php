@@ -801,12 +801,17 @@
                             <tr class="table-row">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="log-badge inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                        @php
+                                        $info = "bg-blue-100 text-blue-800";
+                                        $error = "bg-red-100 text-red-800";
+                                        $warning = "bg-yellow-100 text-yellow-800"
+                                        @endphp
                                         @if ($logs['LogType'] == 'info')
-                                        bg-blue-100 text-blue-800
+                                            {{ $info }}
                                         @elseif ($logs['LogType'] == 'error')
-                                        bg-red-100 text-red-800
+                                            {{ $error }}
                                         @elseif ($logs['LogType'] == 'warning')
-                                        bg-yellow-100 text-yellow-800
+                                            {{ $warning }}
                                         @endif ">
                                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
