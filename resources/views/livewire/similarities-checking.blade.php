@@ -28,57 +28,57 @@
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-num-input">PICK LIST</x-label>
-                        <x-inputNum
+                        <x-inputText
                         id="5-picklist-num-input"
                         wire:model='inputs.pick_list_qs'
                         wire:focusout="dispatchMe('pick_list_qs')"
                         :inputStatus="$inputStatus['pick_list_qs']"
                         :closingStatus="$checklistInfo->status"
-                        class="{{ $inputComparison['pick_list_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['pick_list_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
-                        > </x-inputNum>
+                        class="ml-2 {{ $inputComparison['pick_list_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['pick_list_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
+                        > </x-inputText>
                     </div>
                 </div>
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-shipinv-num-input">SHIPPING INVOICE</x-label>
-                        <x-inputNum
+                        <x-inputText
                         id="5-shipinv-num-input"
                         wire:model='inputs.shipping_invoice_qs'
                         wire:focusout="dispatchMe('shipping_invoice_qs')"
                         :inputStatus="$inputStatus['shipping_invoice_qs']"
                         :closingStatus="$checklistInfo->status"
-                        class="{{ $inputComparison['shipping_invoice_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_invoice_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
+                        class="ml-2 {{ $inputComparison['shipping_invoice_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_invoice_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
-                    </x-inputNum>
+                    </x-inputText>
                     </div>
                 </div>
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-serem-num-input">SEREM</x-label>
-                        <x-inputNum
+                        <x-inputText
                         id="5-serem-num-input"
                         wire:model='inputs.serem_qs'
                         wire:focusout="dispatchMe('serem_qs')"
                         :inputStatus="$inputStatus['serem_qs']"
                         :closingStatus="$checklistInfo->status"
-                        class="{{ $inputComparison['serem_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
+                        class="ml-2 {{ $inputComparison['serem_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['serem_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
-                    </x-inputNum>
+                    </x-inputText>
                     </div>
                 </div>
                 @if($sir_qs)
                 <div class="col-span-1 md:grid-cols-2">
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-sir-num-input">SIR</x-label>
-                        <x-inputNum
+                        <x-inputText
                         id="5-sir-num-input"
                         wire:model='inputs.sir_qs'
                         wire:focusout="dispatchMe('sir_qs')"
                         :inputStatus="$inputStatus['sir_qs']"
                         :closingStatus="$checklistInfo->status"
-                        class="{{ $inputComparison['sir_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
+                        class="ml-2 {{ $inputComparison['sir_qs'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_qs'] === 'no-match' ? 'bg-red-100' : '') }}"
                         >
-                    </x-inputNum>
+                    </x-inputText>
                     </div>
                 </div>
                 @endif
@@ -101,37 +101,33 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-radio-qfs-yes"
-                                        type="radio"
                                         value="1"
                                         wire:model='inputs.same_quantity_qs'
                                         wire:focusout="dispatchMe('same_quantity_qs')"
                                         name="5-radio-qfs-shipment"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
+                                        :inputStatus="$inputStatus['same_quantity_qs']"
+                                        :closingStatus="$checklistInfo->status"
                                         >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                    </x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>YES
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-radio-qfs-no"
-                                        type="radio"
                                         value="0"
                                         wire:model='inputs.same_quantity_qs'
                                         wire:focusout="dispatchMe('same_quantity_qs')"
                                         name="5-radio-qfs-shipment"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
+                                        :inputStatus="$inputStatus['same_quantity_qs']"
+                                        :closingStatus="$checklistInfo->status"
                                         >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                    </x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NO
                                     </label>
                                 </div>
@@ -149,36 +145,32 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-radio-qfs-ok"
-                                        type="radio" value="1"
+                                         value="1"
                                         wire:model='inputs.judgement_qs'
                                         wire:focusout="dispatchMe('judgement_qs')"
                                         name="5-radio-qfs-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_qs']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>OK
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-radio-qfs-ng"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.judgement_qs'
                                         wire:focusout="dispatchMe('judgement_qs')"
                                         name="5-radio-qfs-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_qs']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NG
                                     </label>
                                 </div>
@@ -226,7 +218,7 @@
                         </x-inputNum>
                     </div>
                 </div>
-                <div class="col-span-1 md:grid-cols-2">
+                <div class="col-span-1 md:grid-cols-2" hidden>
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-serem-boxship-input">SEREM</x-label>
                         <x-inputNum
@@ -273,36 +265,32 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-boxship-radio-yes"
-                                        type="radio" value="1"
+                                         value="1"
                                         wire:model='inputs.same_box_bs'
                                         wire:focusout="dispatchMe('same_box_bs')"
                                         name="5-boxship-radio-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_box_bs']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>YES
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-boxship-radio-no"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.same_box_bs'
                                         wire:focusout="dispatchMe('same_box_bs')"
                                         name="5-boxship-radio-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_box_bs']"
+                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NO
                                     </label>
                                 </div>
@@ -320,37 +308,31 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="horizontal-list-radio-license"
-                                        type="radio"
                                         value="1"
                                         wire:model='inputs.judgement_bs'
                                         wire:focusout="dispatchMe('judgement_bs')"
                                         name="5-boxship-radio-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_bs']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>OK
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="horizontal-list-radio-id"
-                                        type="radio"
                                         value="0"
                                         wire:model='inputs.judgement_bs'
                                         wire:focusout="dispatchMe('judgement_bs')"
                                         name="5-boxship-radio-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_bs']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NG
                                     </label>
                                 </div>
@@ -472,6 +454,34 @@
                         </x-inputText>
                     </div>
                 </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-pallet-model-input">SHIPPING LABEL</x-label>
+                        <x-inputText
+                        id="5-shiplabel-model-input"
+                        wire:model='inputs.shipping_label_mn'
+                        wire:focusout="dispatchMe('shipping_label_mn')"
+                        :inputStatus="$inputStatus['shipping_label_mn']"
+                        :closingStatus="$checklistInfo->status"
+                        class="{{ $inputComparison['shipping_label_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['shipping_label_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
+                        >
+                        </x-inputText>
+                    </div>
+                </div>
+                <div class="col-span-1 md:grid-cols-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                        <x-label for="5-pallet-model-input">SIR</x-label>
+                        <x-inputText
+                        id="5-pallet-model-input"
+                        wire:model='inputs.sir_mn'
+                        wire:focusout="dispatchMe('sir_mn')"
+                        :inputStatus="$inputStatus['sir_mn']"
+                        :closingStatus="$checklistInfo->status"
+                        class="{{ $inputComparison['sir_mn'] === 'match' ? 'bg-green-100' : ($inputComparison['sir_mn'] === 'no-match' ? 'bg-red-100' : '') }}"
+                        >
+                        </x-inputText>
+                    </div>
+                </div>
             </div>
 
             <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border-2 border-slate-200 p-6">
@@ -492,37 +502,33 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-model-same-yes"
-                                        type="radio"
+
                                         value="1"
                                         wire:model='inputs.same_model_mn'
                                         wire:focusout="dispatchMe('same_model_mn')"
                                         name="5-model-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_model_mn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>YES
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-model-same-no"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.same_model_mn'
                                         wire:focusout="dispatchMe('same_model_mn')"
                                         name="5-model-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_model_mn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NO
                                     </label>
                                 </div>
@@ -540,37 +546,33 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-model-judgement-ok"
-                                        type="radio"
+
                                         value="1"
                                         wire:model='inputs.judgement_mn'
                                         wire:focusout="dispatchMe('judgement_mn')"
                                         name="5-model-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_mn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>OK
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-model-judgement-ng"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.judgement_mn'
                                         wire:focusout="dispatchMe('judgement_mn')"
                                         name="5-model-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_mn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NG
                                     </label>
                                 </div>
@@ -757,37 +759,33 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-modelcode-same-yes"
-                                        type="radio"
+
                                         value="1"
                                         wire:model='inputs.same_mc'
                                         wire:focusout="dispatchMe('same_mc')"
                                         name="5-modelcode-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_mc']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>YES
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-modelcode-same-no"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.same_mc'
                                         wire:focusout="dispatchMe('same_mc')"
                                         name="5-modelcode-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_mc']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NO
                                     </label>
                                 </div>
@@ -805,37 +803,33 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-modelcode-judegment-ok"
-                                        type="radio"
+
                                         value="1"
                                         wire:model='inputs.judgement_mc'
                                         wire:focusout="dispatchMe('judgement_mc')"
                                         name="5-modelcode-judegment"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_mc']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>OK
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-modelcode-judegment-ng"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.judgement_mc'
                                         wire:focusout="dispatchMe('judgement_mc')"
                                         name="5-modelcode-judegment"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_mc']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NG
                                     </label>
                                 </div>
@@ -856,7 +850,7 @@
             </div>
             <div class="grid gap-6 mb-6 mt-2 md:grid-rows-3 md:grid-cols-2 rounded-xl p-2 bg-gradient-to-r from-blue-50 to-indigo-50 pt-12">
                 @if($picklist_pn)
-                <div class="col-span-1 md:grid-cols-2">
+                <div class="col-span-1 md:grid-cols-2" hidden>
                     <div class="col-span-1 flex items-center justify-center">
                         <x-label for="5-picklist-partnumber-input">PICK LIST</x-label>
                         <x-inputText
@@ -1038,37 +1032,33 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-partnumber-same-yes"
-                                        type="radio"
+
                                         value="1"
                                         wire:model='inputs.same_pn'
                                         wire:focusout="dispatchMe('same_pn')"
                                         name="5-partnumber-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_pn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>YES
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-partnumber-same-no"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.same_pn'
                                         wire:focusout="dispatchMe('same_pn')"
                                         name="5-partnumber-same"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['same_pn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NO
                                     </label>
                                 </div>
@@ -1086,37 +1076,33 @@
                         </x-label>
                         <div class="bg-white rounded-lg border border-gray-200 p-1">
                             <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-partnumber-judgement-ok"
-                                        type="radio"
+
                                         value="1"
                                         wire:model='inputs.judgement_pn'
                                         wire:focusout="dispatchMe('judgement_pn')"
                                         name="5-partnumber-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_pn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-green-600 text-xl mr-2">✓</span>OK
                                     </label>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <input
+                                <div class="flex items-center space-x-3 text-transparent">
+                                    <x-radio
                                         id="5-partnumber-judgement-ng"
-                                        type="radio"
+
                                         value="0"
                                         wire:model='inputs.judgement_pn'
                                         wire:focusout="dispatchMe('judgement_pn')"
                                         name="5-partnumber-judgement"
-                                        class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                        >
-                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        :inputStatus="$inputStatus['judgement_pn']"
+                                        :closingStatus="$checklistInfo->status"
+                                        ></x-radio>
+                                    <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                         <span class="text-red-600 text-xl mr-2">✗</span>NG
                                     </label>
                                 </div>
@@ -1431,35 +1417,32 @@
                             </x-label>
                             <div class="bg-white rounded-lg border border-gray-200 p-1">
                                 <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4" >
-                                    <div class="flex items-center space-x-3">
-                                        <input
+                                    <div class="flex items-center space-x-3 text-transparent">
+                                        <x-radio
                                             id="5-ponumber-same-yes"
-                                            type="radio"
                                             value="1"
                                             wire:model='inputs.same_po'
                                             wire:focusout="dispatchMe('same_po')"
                                             name="5-ponumber-same"
-                                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif>
-                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                            :inputStatus="$inputStatus['same_po']"
+                                            :closingStatus="$checklistInfo->status"
+                                            >
+                                        </x-radio>
+                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                             <span class="text-green-600 text-xl mr-2">✓</span>YES
                                         </label>
                                     </div>
-                                    <div class="flex items-center space-x-3">
-                                        <input
+                                    <div class="flex items-center space-x-3 text-transparent">
+                                        <x-radio
                                             id="5-ponumber-same-no"
-                                            type="radio"
                                             value="0"
                                             wire:model='inputs.same_po'
                                             wire:focusout="dispatchMe('same_po')"
                                             name="5-ponumber-same"
-                                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif>
-                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                            :inputStatus="$inputStatus['same_po']"
+                                            :closingStatus="$checklistInfo->status">
+                                        </x-radio>
+                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                             <span class="text-red-600 text-xl mr-2">✗</span>NO
                                         </label>
                                     </div>
@@ -1477,37 +1460,34 @@
                             </x-label>
                             <div class="bg-white rounded-lg border border-gray-200 p-1">
                                 <div class="grid grid-cols-2 gap-1 radio-container rounded-lg p-4">
-                                    <div class="flex items-center space-x-3">
-                                        <input
+                                    <div class="flex items-center space-x-3 text-transparent">
+                                        <x-radio
                                             id="5-ponumber-judgement-ok"
-                                            type="radio"
+
                                             value="1"
                                             wire:model='inputs.judgement_po'
                                             wire:focusout="dispatchMe('judgement_po')"
                                             name="5-ponumber-judgement"
-                                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif
+                                            :inputStatus="$inputStatus['judgement_po']"
+                                            :closingStatus="$checklistInfo->status"
                                             >
-                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        </x-radio>
+                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                             <span class="text-green-600 text-xl mr-2">✓</span>OK
                                         </label>
                                     </div>
-                                    <div class="flex items-center space-x-3">
-                                        <input
+                                    <div class="flex items-center space-x-3 text-transparent">
+                                        <x-radio
                                             id="5-ponumber-judgement-ok"
-                                            type="radio"
                                             value="0"
                                             wire:model='inputs.judgement_po'
                                             wire:focusout="dispatchMe('judgement_po')"
                                             name="5-ponumber-judgement"
-                                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                            @if($checklistInfo->status == "Closed")
-                                            disabled
-                                            @endif
+                                            :inputStatus="$inputStatus['judgement_po']"
+                                            :closingStatus="$checklistInfo->status"
                                             >
-                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer">
+                                        </x-radio>
+                                        <label for="4-radio-model-yes" class="text-base font-medium cursor-pointer text-black">
                                             <span class="text-red-600 text-xl mr-2">✗</span>NG
                                         </label>
                                     </div>

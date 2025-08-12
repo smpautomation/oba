@@ -17,7 +17,7 @@ class ShipmentInformation extends Component
     public $checklistInfo;
 
     public $inputs = [
-        
+
     ];
     public $inputStatus = [
         'datetime' => null,
@@ -31,16 +31,18 @@ class ShipmentInformation extends Component
         'pallet_size' => null
     ];
     public $dateNow;
+    public $dateToFormat;
     public $userIP;
     public function mount($checklist_id, $userIP){
         try{
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
-            
-            $this->dateNow = new DateTime();
+            $this->dateToFormat = new DateTime();
+            $formattedDate = $this->dateToFormat->format('Y-m-d\TH:i');
+            $this->dateNow = $formattedDate;
             $this->inputs = [
-                'datetime' => $this->checklistInfo->shipInfoCheck->datetime ?? $this->dateNow->format('Y-m-d\Th:i'),
+                'datetime' => $this->checklistInfo->shipInfoCheck->datetime ?? $this->dateNow,
                 'model_name' => $this->checklistInfo->model,
                 'invoice_number' =>  $this->checklistInfo->shipInfoCheck->invoice_number ?? "",
                 'wood' => $this->checklistInfo->shipInfoCheck->wood ? true : false,
@@ -59,7 +61,7 @@ class ShipmentInformation extends Component
             ]);
         }
     }
-    
+
     public function render()
     {
         return view('livewire.shipment-information');
@@ -76,7 +78,7 @@ class ShipmentInformation extends Component
             }
             DB::commit();
 
-            
+
             if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
                 $this->inputStatus[$field] = 'success';
             }

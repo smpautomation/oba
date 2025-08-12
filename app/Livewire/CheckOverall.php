@@ -7,6 +7,8 @@ use App\Models\Check_Overall_Item;
 use App\Models\Check_Overall_Pallet;
 use App\Models\checklist;
 use App\Models\Log as AppLog;
+use DateInterval;
+use DateTime;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -17,12 +19,13 @@ class CheckOverall extends Component
     public $checklist_id;
     public $checklistInfo;
     public $check_overall_id;
+    public $showNoticeModal = false;
 
     public $inputs = [
-        
+
     ];
     public $inputStatus = [
-
+        'results' => null
     ];
     public $userIP;
     public function mount($checklist_id, $userIP){
@@ -30,11 +33,8 @@ class CheckOverall extends Component
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = checklist::find($checklist_id);
-            
+
             $this->inputs = [
-                
-            ];
-            $this->inputStatus = [
 
             ];
 
@@ -62,7 +62,7 @@ class CheckOverall extends Component
                     }
                 }
             }
-            
+
 
             $pallets = Check_Overall_Pallet::where('check_overall_id', $this->check_overall_id)->get();
             foreach ($pallets as $pallet) {
@@ -126,11 +126,11 @@ class CheckOverall extends Component
                 $this->inputStatus[$field] = $value !== null ? 'success' : null;
             }
 
-            
+
             DB::commit();
 
-            
-            
+
+
         }catch(\Exception $e){
             AppLog::create([
                 'LogName' => 'System',
@@ -145,6 +145,19 @@ class CheckOverall extends Component
             }
             DB::rollBack();
         }
+
+        if($param1 == 'expiration_date')
+        {
+
+            $today = new DateTime();
+            $expirationDate = new DateTime($this->inputs[$param1]);
+            $addOneMonth = clone $expirationDate;
+
+            $addOneMonth->add(new DateInterval('P1M'));
+            if($addOneMonth < $today){
+                $this->showNoticeModal = true;
+            }
+        }
     }
 
     #[On('save-clicked')]
@@ -156,5 +169,14 @@ class CheckOverall extends Component
     public function saveChildData()
     {
         //
+    }
+
+    public function expiredNotice()
+    {
+
+    }
+
+    public function closeNoticeModal(){
+        $this->showNoticeModal = false;
     }
 }

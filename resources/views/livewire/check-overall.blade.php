@@ -25,7 +25,7 @@
                             @for ($j=1;$j<=15;$j++)
                                 <th class="px-3 py-4" style="border: none;"></th>
                             @endfor
-                            
+
                             <th class="internal-header px-6 py-4 text-base sm:text-lg font-bold" colspan="13">
                                 📦 INTERNAL PACKAGING
                             </th>
@@ -36,7 +36,7 @@
                                 <th class="px-3 py-4" style="border: none;"></th>
                             @endfor
                         </tr>
-                        
+
                         <!-- Column Headers -->
                         <tr class="text-xs sm:text-sm">
                             <th class="px-4 py-3 font-semibold min-w-26" colspan="5">
@@ -114,243 +114,248 @@
                         @while ($row <> 11)
                         <tr class="hover:bg-gray-50 transition-colors duration-200">
                             <td class="px-4 py-4" colspan="5">
-                                <x-inputText 
-                                    id="6-oqa-{{$row}}" 
-                                    wire:model='inputs.{{ $row }}.oqa' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'oqa')" 
+                                <x-inputText
+                                    id="6-oqa-{{$row}}"
+                                    wire:model='inputs.{{ $row }}.oqa'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'oqa')"
                                     :inputStatus="$inputStatus[$row]['oqa'] ?? null"
                                     class="touch-input w-full rounded-lg border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                                     :closingStatus="$checklistInfo->status"
                                 ></x-inputText>
                             </td>
                             <td class="px-4 py-4" colspan="5">
-                                <x-inputText 
-                                    id="6-boxno-{{$row}}" 
-                                    wire:model='inputs.{{ $row }}.box_no' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'box_no')" 
+                                <x-inputText
+                                    id="6-boxno-{{$row}}"
+                                    wire:model='inputs.{{ $row }}.box_no'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'box_no')"
                                     :inputStatus="$inputStatus[$row]['box_no'] ?? null"
                                     class="touch-input w-full rounded-lg border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                                     :closingStatus="$checklistInfo->status"
                                 ></x-inputText>
                             </td>
                             <td class="px-4 py-4" colspan="5">
-                                <x-inputText 
-                                    id="6-actpackstdpack-{{$row}}" 
-                                    wire:model='inputs.{{ $row }}.std_pack' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'std_pack')" 
+                                <x-inputText
+                                    id="6-actpackstdpack-{{$row}}"
+                                    wire:model='inputs.{{ $row }}.std_pack'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'std_pack')"
                                     :inputStatus="$inputStatus[$row]['std_pack'] ?? null"
                                     class="touch-input w-full rounded-lg border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                                     :closingStatus="$checklistInfo->status"
                                 ></x-inputText>
                             </td>
-                            
+
                             <!-- Internal Packaging Checkboxes -->
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-fgbarlabel-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_fg_label' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_fg_label')" 
+                                <x-checkboxOverallChecking
+                                    id="6-fgbarlabel-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_fg_label'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_fg_label')"
                                     :inputStatus="$inputStatus[$row]['internal_fg_label'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-speclabelqrcodeinternal-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_specific_label' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_specific_label')" 
+                                <x-checkboxOverallChecking
+                                    id="6-speclabelqrcodeinternal-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_specific_label'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_specific_label')"
                                     :inputStatus="$inputStatus[$row]['internal_specific_label'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-cartcon-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_carton_condition' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_carton_condition')" 
+                                <x-checkboxOverallChecking
+                                    id="6-cartcon-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_carton_condition'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_carton_condition')"
                                     :inputStatus="$inputStatus[$row]['internal_carton_condition'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-magnetpack-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_magnet_pack' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_magnet_pack')" 
+                                <x-checkboxOverallChecking
+                                    id="6-magnetpack-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_magnet_pack'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_magnet_pack')"
                                     :inputStatus="$inputStatus[$row]['internal_magnet_pack'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-magnetcond-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_magnet_cond' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_magnet_cond')" 
+                                <x-checkboxOverallChecking
+                                    id="6-magnetcond-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_magnet_cond'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_magnet_cond')"
                                     :inputStatus="$inputStatus[$row]['internal_magnet_cond'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-presdescicant-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_dessicant' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_dessicant')" 
+                                <x-checkboxOverallChecking
+                                    id="6-presdescicant-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_dessicant'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_dessicant')"
                                     :inputStatus="$inputStatus[$row]['internal_dessicant'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-packorientation-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_pack_orientation' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_pack_orientation')" 
+                                <x-checkboxOverallChecking
+                                    id="6-packorientation-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_pack_orientation'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_pack_orientation')"
                                     :inputStatus="$inputStatus[$row]['internal_pack_orientation'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-red-25" colspan="5">
-                                <x-inputText 
-                                    id="6-spacerused-{{$row}}" 
-                                    wire:model='inputs.{{ $row }}.internal_spacer' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_spacer')" 
+                                <x-selectText
+                                    id="6-spacerused-{{$row}}"
+                                    wire:model='inputs.{{ $row }}.internal_spacer'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_spacer')"
                                     :inputStatus="$inputStatus[$row]['internal_spacer'] ?? null"
-                                    class="touch-input w-full rounded-lg border-2 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all"
+                                    class="touch-input w-full rounded-lg border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                                     :closingStatus="$checklistInfo->status"
-                                ></x-inputText>
+                                >
+                                    <option value="Corrugated Board">Corrugated Board</option>
+                                    <option value="Styro">Styro</option>
+                                </x-selectText>
                             </td>
                             <td class="px-4 py-4 bg-red-25">
-                                <x-checkbox 
-                                    id="6-sir-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.internal_sir' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_sir')" 
+                                <x-checkboxOverallChecking
+                                    id="6-sir-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.internal_sir'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'internal_sir')"
                                     :inputStatus="$inputStatus[$row]['internal_sir'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-red-600 focus:ring-red-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
-                            
+
                             <!-- External Packaging Checkboxes -->
                             <td class="px-4 py-4 bg-blue-25">
-                                <x-checkbox 
-                                    id="6-serem-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.external_serem' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'external_serem')" 
+                                <x-checkboxOverallChecking
+                                    id="6-serem-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.external_serem'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'external_serem')"
                                     :inputStatus="$inputStatus[$row]['external_serem'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-blue-600 focus:ring-blue-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-blue-25">
-                                <x-checkbox 
-                                    id="6-shiplabelothermodels-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.external_ship_label' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'external_ship_label')" 
+                                <x-checkboxOverallChecking
+                                    id="6-shiplabelothermodels-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.external_ship_label'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'external_ship_label')"
                                     :inputStatus="$inputStatus[$row]['external_ship_label'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-blue-600 focus:ring-blue-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-blue-25">
-                                <x-checkbox 
-                                    id="6-vmi-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.external_vmi_label' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'external_vmi_label')" 
+                                <x-checkboxOverallChecking
+                                    id="6-vmi-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.external_vmi_label'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'external_vmi_label')"
                                     :inputStatus="$inputStatus[$row]['external_vmi_label'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-blue-600 focus:ring-blue-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-blue-25">
-                                <x-checkbox 
-                                    id="6-mcbarlabel-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.external_mc_label' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'external_mc_label')" 
+                                <x-checkboxOverallChecking
+                                    id="6-mcbarlabel-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.external_mc_label'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'external_mc_label')"
                                     :inputStatus="$inputStatus[$row]['external_mc_label'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-blue-600 focus:ring-blue-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-blue-25">
-                                <x-checkbox 
-                                    id="6-delivstate-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.external_delivery_sheet' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'external_delivery_sheet')" 
+                                <x-checkboxOverallChecking
+                                    id="6-delivstate-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.external_delivery_sheet'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'external_delivery_sheet')"
                                     :inputStatus="$inputStatus[$row]['external_delivery_sheet'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-blue-600 focus:ring-blue-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-blue-25">
-                                <x-checkbox 
-                                    id="6-specificlabelqrcodeexternal-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.external_specific_label' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'external_specific_label')" 
+                                <x-checkboxOverallChecking
+                                    id="6-specificlabelqrcodeexternal-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.external_specific_label'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'external_specific_label')"
                                     :inputStatus="$inputStatus[$row]['external_specific_label'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-blue-600 focus:ring-blue-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
                             <td class="px-4 py-4 bg-blue-25">
-                                <x-checkbox 
-                                    id="6-leakageflux-{{$row}}" 
-                                    value="1" 
-                                    wire:model='inputs.{{ $row }}.external_flux_label' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'external_flux_label')" 
+                                <x-checkboxOverallChecking
+                                    id="6-leakageflux-{{$row}}"
+                                    value="1"
+                                    wire:model='inputs.{{ $row }}.external_flux_label'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'external_flux_label')"
                                     :inputStatus="$inputStatus[$row]['external_flux_label'] ?? null"
-                                    class="touch-checkbox rounded border-2 text-blue-600 focus:ring-blue-500"
+
                                     :closingStatus="$checklistInfo->status"
-                                ></x-checkbox>
+                                ></x-checkboxOverallChecking>
                             </td>
-                            
+
                             <!-- Additional Fields -->
                             <td class="px-4 py-4" colspan="5">
-                                <x-inputText 
-                                    id="6-identitytape-{{$row}}" 
-                                    wire:model='inputs.{{ $row }}.identity_tape' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'identity_tape')" 
+                                <x-selectText
+                                    id="6-identitytape-{{$row}}"
+                                    wire:model='inputs.{{ $row }}.identity_tape'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'identity_tape')"
                                     :inputStatus="$inputStatus[$row]['identity_tape'] ?? null"
-                                    class="touch-input w-full rounded-lg border-2 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                                    class="touch-input w-full rounded-lg border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                                     :closingStatus="$checklistInfo->status"
-                                ></x-inputText>
+                                >
+                                    <option value="Clear">Clear</option>
+                                    <option value="Yellow">Yellow</option>
+                                </x-selectText>
                             </td>
                             <td class="px-4 py-4" colspan="5">
-                                <x-inputText 
-                                    id="6-pickedlist-{{$row}}" 
-                                    wire:model='inputs.{{ $row }}.pick_list' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'pick_list')" 
+                                <x-inputText
+                                    id="6-pickedlist-{{$row}}"
+                                    wire:model='inputs.{{ $row }}.pick_list'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'pick_list')"
                                     :inputStatus="$inputStatus[$row]['pick_list'] ?? null"
-                                    class="touch-input w-full rounded-lg border-2 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                                    class="touch-input w-full rounded-lg border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                                     :closingStatus="$checklistInfo->status"
                                 ></x-inputText>
                             </td>
                             <td class="px-4 py-4" colspan="5">
-                                <x-inputText 
-                                    id="6-remarks-{{$row}}" 
-                                    wire:model='inputs.{{ $row }}.remarks' 
-                                    wire:focusout="dispatchMe('{{ $row }}', 'remarks')" 
+                                <x-inputText
+                                    id="6-remarks-{{$row}}"
+                                    wire:model='inputs.{{ $row }}.remarks'
+                                    wire:focusout="dispatchMe('{{ $row }}', 'remarks')"
                                     :inputStatus="$inputStatus[$row]['remarks'] ?? null"
-                                    class="touch-input w-full rounded-lg border-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+                                    class="touch-input w-full rounded-lg border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                                     :closingStatus="$checklistInfo->status"
                                 ></x-inputText>
                             </td>
@@ -379,12 +384,12 @@
                                     📅 For palletized finished goods, check expiration date:
                                 </x-label>
                             </div>
-                            <input 
-                                type="date" 
-                                id="6-datetime" 
-                                class="touch-input bg-white border-2 border-gray-300 text-gray-900 rounded-xl focus:ring-4 focus:ring-orange-200 focus:border-orange-500 transition-all shadow-sm hover:shadow-md" 
-                                wire:model="inputs.expiration_date" 
-                                wire:change="dispatchMe('expiration_date')" 
+                            <input
+                                type="date"
+                                id="6-datetime"
+                                class="touch-input bg-white border-2 border-gray-300 text-gray-900 rounded-xl focus:ring-4 focus:ring-orange-200 focus:border-orange-500 transition-all shadow-sm hover:shadow-md"
+                                wire:model="inputs.expiration_date"
+                                wire:change="dispatchMe('expiration_date')"
                                 @if($checklistInfo->status == "Closed")
                                 disabled
                                 @endif
@@ -428,14 +433,13 @@
                                         @endphp
                                         @while($column <> 21)
                                         <td class="px-6 py-6">
-                                            <x-checkbox 
-                                                id="6-pallet-{{$column}}" 
-                                                wire:model="inputs.pallet_{{ $column }}" 
-                                                wire:change="dispatchMe('pallet_{{ $column }}')"       
+                                            <x-checkboxOverallChecking
+                                                id="6-pallet-{{$column}}"
+                                                wire:model="inputs.pallet_{{ $column }}"
+                                                wire:change="dispatchMe('pallet_{{ $column }}')"
                                                 :inputStatus="$inputStatus['pallet_' . $column] ?? null"
-                                                class="touch-checkbox rounded border-2 text-indigo-600 focus:ring-indigo-500"
                                                 :closingStatus="$checklistInfo->status"
-                                            ></x-checkbox>
+                                            ></x-checkboxOverallChecking>
                                         </td>
                                         @php
                                             $column++;
@@ -449,8 +453,8 @@
                 </div>
 
                 <div class="space-y-8">
-                    
-                    
+
+
                     <!-- Option 1: Modern Card with Icon -->
                     <div class="results-container bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
                         <div class="flex items-center gap-6">
@@ -458,23 +462,20 @@
                                 <i class="fas fa-chart-line text-xl"></i>
                                 <div class="status-indicator bg-green-400"></div>
                             </div>
-                            
+
                             <div class="flex-1 space-y-3">
                                 <label for="results-1" class="results-label block text-lg font-bold tracking-wide">
                                     Results
                                 </label>
-                                <div class="input-wrapper">
-                                    <input 
-                                        type="text" 
+                                <div>
+                                    <x-inputText
                                         id="results-1"
                                         placeholder="Enter your results or outcomes here..."
-                                        class="results-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-0 transition-all duration-300 text-gray-700 placeholder-gray-400"
-                                        wire:model="inputs.results" 
+                                        wire:model="inputs.results"
                                         wire:change="dispatchMe('results')"
-                                        @if($checklistInfo->status == "Closed")
-                                        disabled
-                                        @endif
-                                    >
+                                        :inputStatus="$inputStatus['results']"
+                                        :closingStatus="$checklistInfo->status"
+                                    ></x-inputText>
                                 </div>
                             </div>
                         </div>
@@ -483,4 +484,26 @@
         </div>
     </div>
     </div>
+
+    <!-- Modal for Expired Pallet Notice -->
+    @if($showNoticeModal)
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" wire:keydown.escape="closeDeleteModal">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
+                <div class="flex items-center mb-4">
+                    <svg class="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                    </svg>
+                    <h3 class="text-lg font-semibold text-gray-900">Pallet is Expired</h3>
+                </div>
+                <p class="text-gray-600 mb-6">The inputted expiration date of the pallet is more than one month from today. Please verify the pallet date.</p>
+                <div class="flex justify-end gap-3">
+                    <button wire:click="closeNoticeModal"
+                            wire:target="okExpire"
+                            class="px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded-lg transition-colors disabled:opacity-50">
+                        <span wire:loading.remove wire:target="okExpire">OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>

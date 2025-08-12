@@ -13,4 +13,8 @@ class Check_Items extends Model
     {
         return $this->belongsTo(checklist::class, 'checklist_id', 'id'); // foreign key
     }
+
+    protected $casts = [
+        'carton_quantity' => 'integer',
+    ];
 }

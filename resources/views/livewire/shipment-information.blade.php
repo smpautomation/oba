@@ -28,16 +28,16 @@
                     <label for="3-datetime" class="block text-sm font-semibold text-gray-700 mb-2">
                         Select Date & Time
                     </label>
-                    <input 
-                        id="3-datetime" 
-                        type="datetime-local" 
-                        wire:model='inputs.datetime' 
-                        wire:focusout="dispatchMe('datetime')" 
-                        class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
-                        placeholder="Pick a date and time" 
-                        @if($checklistInfo->status == "Closed")
+                    <input
+                        id="3-datetime"
+                        type="datetime-local"
+                        wire:model='inputs.datetime'
+                        wire:focusout="dispatchMe('datetime')"
+                        class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm"
+                        placeholder="Pick a date and time"
+                        {{-- @if($checklistInfo->status == "Closed") --}}
                         disabled
-                        @endif
+                        {{-- @endif --}}
                     />
                 </div>
                 <div class="flex items-center justify-center">
@@ -65,13 +65,13 @@
                     <label for="3-modelname" class="block text-sm font-semibold text-gray-700 mb-2">
                         Model Name
                     </label>
-                    <input 
-                        id="3-modelname" 
-                        name="3-modelname" 
-                        wire:model="inputs.model_name" 
-                        wire:focusout="dispatchMe('model_name')" 
-                        disabled 
-                        class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
+                    <input
+                        id="3-modelname"
+                        name="3-modelname"
+                        wire:model="inputs.model_name"
+                        wire:focusout="dispatchMe('model_name')"
+                        disabled
+                        class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm"
                         placeholder="Model name will appear here"
                     />
                     <p class="mt-1 text-xs text-gray-500">This field is auto-populated</p>
@@ -80,16 +80,18 @@
                     <label for="3-invoice" class="block text-sm font-semibold text-gray-700 mb-2">
                         Invoice Number
                     </label>
-                    <input 
-                        id="3-invoice" 
-                        name="3-invoice" 
-                        wire:model="inputs.invoice_number" 
-                        wire:focusout="dispatchMe('invoice_number')" 
-                        class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
+                    <x-inputText
+                        id="3-invoice"
+                        name="3-invoice"
+                        wire:model="inputs.invoice_number"
+                        wire:focusout="dispatchMe('invoice_number')"
+                        class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm"
                         placeholder="Enter invoice number"
-                        @if($checklistInfo->status == "Closed")
+                        :inputStatus="$inputStatus['invoice_number']"
+                        :closingStatus="$checklistInfo->status"
+                        {{-- @if($checklistInfo->status == "Closed")
                         disabled
-                        @endif
+                        @endif --}}
                     />
                 </div>
             </div>
@@ -103,20 +105,18 @@
                 </svg>
                 <h3 class="text-lg font-semibold text-gray-800">Pallet Material Selection</h3>
             </div>
-            
+
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <label class="pallet-option" data-pallet="wood">
                     <div class="flex items-center space-x-3">
-                        <input 
+                        <x-checkboxCust
                             type="checkbox"
-                            id="3-SI-1" 
-                            value="wood" 
-                            wire:model="inputs.wood" 
-                            wire:focusout="dispatchMe('wood')" 
-                            class="custom-checkbox"
-                            @if($checklistInfo->status == "Closed")
-                            disabled
-                            @endif
+                            id="3-SI-1"
+                            value="wood"
+                            wire:model="inputs.wood"
+                            wire:focusout="dispatchMe('wood')"
+                            :inputStatus="$inputStatus['wood']"
+                            :closingStatus="$checklistInfo->status"
                         />
                         <div>
                             <div class="flex items-center">
@@ -132,16 +132,14 @@
 
                 <label class="pallet-option" data-pallet="paper">
                     <div class="flex items-center space-x-3">
-                        <input 
+                        <x-checkboxCust
                             type="checkbox"
-                            id="3-SI-2" 
-                            value="paper" 
-                            wire:model="inputs.paper" 
-                            wire:focusout="dispatchMe('paper')" 
-                            class="custom-checkbox"
-                            @if($checklistInfo->status == "Closed")
-                            disabled
-                            @endif
+                            id="3-SI-2"
+                            value="paper"
+                            wire:model="inputs.paper"
+                            wire:focusout="dispatchMe('paper')"
+                            :inputStatus="$inputStatus['paper']"
+                            :closingStatus="$checklistInfo->status"
                         />
                         <div>
                             <div class="flex items-center">
@@ -157,16 +155,14 @@
 
                 <label class="pallet-option" data-pallet="steel">
                     <div class="flex items-center space-x-3">
-                        <input 
+                        <x-checkboxCust
                             type="checkbox"
-                            id="3-SI-3" 
-                            value="steel" 
-                            wire:model="inputs.steel" 
-                            wire:focusout="dispatchMe('steel')" 
-                            class="custom-checkbox"
-                            @if($checklistInfo->status == "Closed")
-                            disabled
-                            @endif
+                            id="3-SI-3"
+                            value="steel"
+                            wire:model="inputs.steel"
+                            wire:focusout="dispatchMe('steel')"
+                            :inputStatus="$inputStatus['steel']"
+                            :closingStatus="$checklistInfo->status"
                         />
                         <div>
                             <div class="flex items-center">
@@ -182,16 +178,14 @@
 
                 <label class="pallet-option" data-pallet="plastic">
                     <div class="flex items-center space-x-3">
-                        <input 
+                        <x-checkboxCust
                             type="checkbox"
-                            id="3-SI-4" 
-                            value="plastic" 
-                            wire:model="inputs.plastic" 
-                            wire:focusout="dispatchMe('plastic')" 
-                            class="custom-checkbox"
-                            @if($checklistInfo->status == "Closed")
-                            disabled
-                            @endif
+                            id="3-SI-4"
+                            value="plastic"
+                            wire:model="inputs.plastic"
+                            wire:focusout="dispatchMe('plastic')"
+                            :inputStatus="$inputStatus['plastic']"
+                            :closingStatus="$checklistInfo->status"
                         />
                         <div>
                             <div class="flex items-center">
@@ -211,36 +205,40 @@
                 <label for="3-others" class="block text-sm font-semibold text-gray-700 mb-2">
                     Other Materials (Please Specify)
                 </label>
-                <input 
-                    type="text" 
-                    id="3-others" 
-                    name="3-others" 
-                    placeholder="Enter other pallet materials..." 
-                    wire:model="inputs.others" 
-                    wire:focusout="dispatchMe('others')" 
-                    class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
-                    @if($checklistInfo->status == "Closed")
+                <x-inputText
+                    type="text"
+                    id="3-others"
+                    name="3-others"
+                    placeholder="Enter other pallet materials..."
+                    wire:model="inputs.others"
+                    wire:focusout="dispatchMe('others')"
+                    class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm"
+                    :inputStatus="$inputStatus['others']"
+                    :closingStatus="$checklistInfo->status"
+                    {{-- @if($checklistInfo->status == "Closed")
                     disabled
-                    @endif
+                    @endif --}}
                 />
             </div>
             <div>
                 <label for="3-others" class="block text-sm font-semibold text-gray-700 my-2">
                     PALLET SIZE
                 </label>
-                <input 
-                    type="text" 
-                    id="3-pallet_size" 
-                    name="3-pallet_size" 
-                    placeholder="Enter pallet size..." 
-                    wire:model="inputs.pallet_size" 
-                    wire:focusout="dispatchMe('pallet_size')" 
-                    class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm" 
-                    @if($checklistInfo->status == "Closed")
+                <x-inputText
+                    type="text"
+                    id="3-pallet_size"
+                    name="3-pallet_size"
+                    placeholder="Enter pallet size..."
+                    wire:model="inputs.pallet_size"
+                    wire:focusout="dispatchMe('pallet_size')"
+                    class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm"
+                    :inputStatus="$inputStatus['pallet_size']"
+                    :closingStatus="$checklistInfo->status"
+                    {{-- @if($checklistInfo->status == "Closed")
                     disabled
-                    @endif
+                    @endif --}}
                 />
             </div>
-        </div>  
+        </div>
     </div>
 </div>

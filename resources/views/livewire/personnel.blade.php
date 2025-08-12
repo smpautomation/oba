@@ -35,7 +35,7 @@
                                         </svg>
                                         Shipping PIC
                                     </div>
-                                    <button type="button" 
+                                    <button type="button"
                                             wire:click="openQrScanner('shipping_pic')"
                                             class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors duration-200"
                                             @if($checklistInfo->status == "Closed")
@@ -49,13 +49,12 @@
                                     </button>
                                 </div>
                             </label>
-                            
+
                             <x-inputText
                                 id="7-shippingpic"
                                 wire:model='inputs.shipping_pic'
                                 wire:focusout="dispatchMe('shipping_pic')"
                                 :inputStatus="$inputStatus['shipping_pic'] ?? null"
-                                class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                                 placeholder="Enter shipping person in charge or scan barcode"
                                 :closingStatus="$checklistInfo->status">
                             </x-inputText>
@@ -73,11 +72,11 @@
                                     Date
                                 </div>
                             </label>
-                            <input 
-                                type="date" 
-                                id="7-date" 
+                            <input
+                                type="date"
+                                id="7-date"
                                 class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900"
-                                wire:model='inputs.date' 
+                                wire:model='inputs.date'
                                 wire:focusout="dispatchMe('date')"
                                 @if($checklistInfo->status == "Closed")
                                 disabled
@@ -106,7 +105,7 @@
                                         </svg>
                                         OBA Checked By
                                     </div>
-                                    <button type="button" 
+                                    <button type="button"
                                             wire:click="openQrScanner('oba_checked_by')"
                                             class="inline-flex items-center px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-medium rounded-lg transition-colors duration-200"
                                             @if($checklistInfo->status == "Closed")
@@ -119,12 +118,11 @@
                                     </button>
                                 </div>
                             </label>
-                            <x-inputText 
-                                id="7-oba" 
-                                wire:model='inputs.oba_checked_by' 
-                                wire:focusout="dispatchMe('oba_checked_by')" 
+                            <x-inputText
+                                id="7-oba"
+                                wire:model='inputs.oba_checked_by'
+                                wire:focusout="dispatchMe('oba_checked_by')"
                                 :inputStatus="$inputStatus['oba_checked_by'] ?? null"
-                                class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                                 placeholder="Enter inspector name"
                                 :closingStatus="$checklistInfo->status">
                             </x-inputText>
@@ -142,12 +140,11 @@
                                     Judgement
                                 </div>
                             </label>
-                            <x-inputText 
-                                id="7-judgement-oba" 
-                                wire:model='inputs.check_judgement' 
-                                wire:focusout="dispatchMe('check_judgement')" 
+                            <x-inputText
+                                id="7-judgement-oba"
+                                wire:model='inputs.check_judgement'
+                                wire:focusout="dispatchMe('check_judgement')"
                                 :inputStatus="$inputStatus['check_judgement'] ?? null"
-                                class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                                 placeholder="Enter judgement result"
                                 :closingStatus="$checklistInfo->status">
                             </x-inputText>
@@ -175,7 +172,7 @@
                                         </svg>
                                         OBA Picture By
                                     </div>
-                                    <button type="button" 
+                                    <button type="button"
                                         wire:click="openQrScanner('oba_picture_by')"
                                         class="inline-flex items-center px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded-lg transition-colors duration-200"
                                         @if($checklistInfo->status == "Closed")
@@ -188,12 +185,11 @@
                                     </button>
                                 </div>
                             </label>
-                            <x-inputText 
-                                id="7-obapic" 
-                                wire:model='inputs.oba_picture_by' 
-                                wire:focusout="dispatchMe('oba_picture_by')" 
+                            <x-inputText
+                                id="7-obapic"
+                                wire:model='inputs.oba_picture_by'
+                                wire:focusout="dispatchMe('oba_picture_by')"
                                 :inputStatus="$inputStatus['oba_picture_by'] ?? null"
-                                class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                                 placeholder="Enter photographer name"
                                 :closingStatus="$checklistInfo->status">
                             </x-inputText>
@@ -211,12 +207,11 @@
                                     Picture Judgement
                                 </div>
                             </label>
-                            <x-inputText 
-                                id="7-judgement-obapic" 
-                                wire:model='inputs.picture_judgement' 
-                                wire:focusout="dispatchMe('picture_judgement')" 
+                            <x-inputText
+                                id="7-judgement-obapic"
+                                wire:model='inputs.picture_judgement'
+                                wire:focusout="dispatchMe('picture_judgement')"
                                 :inputStatus="$inputStatus['picture_judgement'] ?? null"
-                                class="input-field w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                                 placeholder="Enter picture quality judgement"
                                 :closingStatus="$checklistInfo->status">
                             </x-inputText>
@@ -228,7 +223,7 @@
     </div>
      <!-- QR Scanner Modal - Now displays current field being scanned -->
     @if($showQrModal)
-    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" 
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
         x-data="{ isOpen: @entangle('showQrModal') }"
         x-show="isOpen"
         x-transition:enter="ease-out duration-300"
@@ -237,7 +232,7 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0">
-        
+
         <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-2/3 lg:w-1/2 shadow-lg rounded-md bg-white">
             <!-- Modal Header -->
             <div class="flex items-center justify-between pb-3 border-b">
@@ -252,7 +247,7 @@
                         </span>
                     @endif
                 </h3>
-                <button type="button" 
+                <button type="button"
                         wire:click="closeQrScanner"
                         class="text-gray-400 hover:text-gray-600 text-2xl font-bold">
                     &times;
@@ -272,7 +267,7 @@
 
             <!-- Modal Footer -->
             <div class="flex justify-between pt-3 border-t">
-                <button type="button" 
+                <button type="button"
                         wire:click="closeQrScanner"
                         class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
                     Close

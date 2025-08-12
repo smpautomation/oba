@@ -1,4 +1,3 @@
-@props(['ml' => false])
 @props(['inputStatus' => null])
 @props(['closingStatus' => ''])
 @php
@@ -12,10 +11,10 @@
         $status = 'disabled';
     }
 @endphp
-<div class="flex items-center justify-center">
+<div>
     <input
-        {{ $attributes }}
+        {{ $attributes->except('class') }}
         type="checkbox"
-        class="custom-checkbox {{ $ml ? 'ml-3' : '' }} {{ $borderClass }} "
+        class="custom-checkbox {{ $borderClass }} "
         {{ $status }}>
 </div>

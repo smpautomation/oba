@@ -16,7 +16,7 @@ class Personnel extends Component
     public $inputStatus = [];
     public $showQrModal = false;
     public $currentQrField = null; // Track which field is being scanned
-    
+
     protected $listeners = ['qrScanned' => 'handleQrScanned'];
     public $userIP;
     public function mount($checklist_id, $userIP){
@@ -24,7 +24,7 @@ class Personnel extends Component
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = checklist::find($checklist_id);
-        
+
             $this->inputs = [
                 'shipping_pic' => $this->checklistInfo->personnelCheck->shipping_pic ?? null,
                 'date' => $this->checklistInfo->personnelCheck->date ?? null,
@@ -66,10 +66,10 @@ class Personnel extends Component
 
         // Process QR content based on field type
         $processedValue = $this->processQrContent($content, $this->currentQrField);
-        
+
         // Set the value to the current field being scanned
         $this->inputs[$this->currentQrField] = $processedValue;
-        
+
         $this->closeQrScanner();
         $this->dispatchMe($this->currentQrField);
     }
@@ -85,18 +85,18 @@ class Personnel extends Component
                 // For shipping_pic, extract the 3rd element after splitting by semicolon
                 $parts = explode(";", $content);
                 return isset($parts[2]) ? $parts[2] : $content;
-                
+
             case 'oba_checked_by':
                 // For OBA checked by, you might want different processing
                 // Example: extract name from QR content
                 $parts = explode(";", $content);
                 return isset($parts[2]) ? $parts[2] : $content; // Assuming name is 2nd element
-                
+
             case 'oba_picture_by':
                 // Another example field - customize as needed
                 $parts = explode(";", $content);
                 return isset($parts[2]) ? $parts[2] : $content;
-                
+
             default:
                 // Default: return content as-is
                 return $content;
@@ -118,20 +118,21 @@ class Personnel extends Component
                 }
             }
             DB::commit();
-           
+
             if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
                 $this->inputStatus[$field] = 'success';
             }
         }catch(\Exception $e){
-            if ($field) {
-                $this->inputStatus[$field] = 'error';
-            }
             AppLog::create([
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_personnel',
-                'description' => '{"specific_action":"Personnel Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":" Personnel Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
             ]);
+            if ($field) {
+                $this->inputStatus[$field] = 'error';
+            }
+
             DB::rollBack();
         }
     }

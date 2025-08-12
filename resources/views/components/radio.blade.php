@@ -1,4 +1,3 @@
-@props(['ml' => false])
 @props(['inputStatus' => null])
 @props(['closingStatus' => ''])
 @php
@@ -11,11 +10,13 @@
     if($closingStatus == "Closed"){
         $status = 'disabled';
     }
+    $class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2";
+    $finalClasses = trim("$borderClass $class");
 @endphp
-<div class="flex items-center justify-center">
+<div>
     <input
         {{ $attributes }}
-        type="checkbox"
-        class="custom-checkbox {{ $ml ? 'ml-3' : '' }} {{ $borderClass }} "
+        type="radio"
+        class="{{ $finalClasses }}"
         {{ $status }}>
-</div>
+</div>1

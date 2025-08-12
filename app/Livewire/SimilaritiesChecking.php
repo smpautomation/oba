@@ -51,6 +51,8 @@ class SimilaritiesChecking extends Component
         'vmi_qr_mn' => null,
         'mc_label_mn' => null,
         'pallet_label_mn' => null,
+        'shipping_label_mn' => null,
+        'sir_mn' => null,
         'same_model_mn' => null,
         'judgement_mn' => null,
         'picklist_mc' => null,
@@ -115,6 +117,8 @@ class SimilaritiesChecking extends Component
         'vmi_qr_mn' => null,
         'mc_label_mn' => null,
         'pallet_label_mn' => null,
+        'shipping_label_mn' => null,
+        'sir_mn' => null,
 
         // For Model Code category (mc)
         'picklist_mc' => null,
@@ -195,6 +199,8 @@ class SimilaritiesChecking extends Component
                 'vmi_qr_mn' => $this->checklistInfo->similaritiesCheck->vmi_qr_mn ?? "",
                 'mc_label_mn' => $this->checklistInfo->similaritiesCheck->mc_label_mn ?? "",
                 'pallet_label_mn' => $this->checklistInfo->similaritiesCheck->pallet_label_mn ?? "",
+                'shipping_label_mn' => $this->checklistInfo->similaritiesCheck->shipping_label_mn ?? "",
+                'sir_mn' => $this->checklistInfo->similaritiesCheck->sir_mn ?? "",
                 'same_model_mn' => $this->checklistInfo->similaritiesCheck->same_model_mn ? true : false,
                 'judgement_mn' => $this->checklistInfo->similaritiesCheck->judgement_mn ? true : false,
                 'picklist_mc' => $this->checklistInfo->similaritiesCheck->picklist_mc ?? "",
@@ -306,11 +312,12 @@ class SimilaritiesChecking extends Component
         // Define categories with correct field names
         $categories = [
             'qs' => ['pick_list_qs', 'shipping_invoice_qs', 'serem_qs', 'sir_qs'],
-            'bs' => ['picklist_bs', 'packing_slip_bs', 'serem_bs', 'pallet_label_bs'],
-            'mn' => ['picklist_mn','shipping_invoice_mn','serem_mn','fg_label_mn','vmi_qr_mn','mc_label_mn','pallet_label_mn'],
+            'bs' => ['picklist_bs', 'packing_slip_bs', 'pallet_label_bs'], //serem_bs
+            'mn' => ['picklist_mn','shipping_invoice_mn','serem_mn','fg_label_mn','vmi_qr_mn','mc_label_mn','pallet_label_mn', 'shipping_label_mn', 'sir_mn'],
             'mc' => ['picklist_mc','shipping_invoice_mc','serem_mc','sir_mc','shipping_label_mc','vmi_label_mc','mc_barcode_mc','pallet_label_mc','specific_qr_label_mc','package_mc'],
-            'pn' => ['picklist_pn','shipping_invoice_pn','serem_pn','sir_pn','shipping_label_pn','vmi_pn','package_pn','qr_qa_pn','qr_mgtz_pn','qr_mc_pn','pallet_label_pn','sci_label_pn'],
-            'po' => ['serem_customer_po','serem_smp_po','shipping_label_customer_po','shipping_label_smp_po','vmi_customer_po','vmi_smp_po','sir_customer_po','sir_smp_po','pallet_label_customer_po','pallet_label_smp_po','specific_label_customer_po','specific_label_smp_po']
+            'pn' => ['shipping_invoice_pn','serem_pn','sir_pn','shipping_label_pn','vmi_pn','package_pn','qr_qa_pn','qr_mgtz_pn','qr_mc_pn','pallet_label_pn','sci_label_pn'], //picklist_pn
+            'customer_po' => ['serem_customer_po','shipping_label_customer_po','vmi_customer_po','sir_customer_po','pallet_label_customer_po','specific_label_customer_po'],
+            'smp_po' => ['serem_smp_po','shipping_label_smp_po','vmi_smp_po','sir_smp_po','pallet_label_smp_po','specific_label_smp_po']
         ];
 
         foreach ($categories as $categoryKey => $fields) {
@@ -350,7 +357,7 @@ class SimilaritiesChecking extends Component
                 $this->inputs['same_mc'] = null;
             } elseif ($categoryKey === 'pn') {
                 $this->inputs['same_pn'] = null;
-            } elseif ($categoryKey === 'po') {
+            } elseif ($categoryKey === 'customer_po' || $categoryKey === 'smp_po') {
                 $this->inputs['same_po'] = null;
             }
             return;
@@ -382,7 +389,9 @@ class SimilaritiesChecking extends Component
                 $this->inputs['same_mc'] = $allSame ? true : false;
             } elseif ($categoryKey === 'pn') {
                 $this->inputs['same_pn'] = $allSame ? true : false;
-            } elseif ($categoryKey === 'po') {
+            } elseif ($categoryKey === 'customer_po') {
+                $this->inputs['same_po'] = $allSame ? true : false;
+            }elseif ($categoryKey === 'smp_po') {
                 $this->inputs['same_po'] = $allSame ? true : false;
             }
         } else {
@@ -396,7 +405,9 @@ class SimilaritiesChecking extends Component
                 $this->inputs['same_mc'] = null;
             } elseif ($categoryKey === 'pn') {
                 $this->inputs['same_pn'] = null;
-            } elseif ($categoryKey === 'po') {
+            } elseif ($categoryKey === 'customer_po') {
+                $this->inputs['same_po'] = null;
+            } elseif ($categoryKey === 'smp_po'){
                 $this->inputs['same_po'] = null;
             }
         }

@@ -16,7 +16,7 @@ class CheckItems extends Component
     public $checklistInfo;
 
     public $inputs = [
-        
+
     ];
     public $inputStatus = [
         'open_boxes_quantity' => null,
@@ -34,17 +34,17 @@ class CheckItems extends Component
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
-            
+
             $this->inputs = [
                 'open_boxes_quantity' => $this->checklistInfo->checkItemsCheck->open_boxes_quantity ?? 1,
-                'same_model' => $this->checklistInfo->checkItemsCheck->same_model ? true : false,
+                'same_model' => $this->checklistInfo->checkItemsCheck->same_model ?? null,
                 'specify_model' => $this->checklistInfo->checkItemsCheck->specify_model ?? "",
                 'judgement' => $this->checklistInfo->checkItemsCheck->judgement ? true : false,
                 'carton_quantity' => $this->checklistInfo->checkItemsCheck->carton_quantity ?? 1,
                 'need_sir' => $this->checklistInfo->checkItemsCheck->need_sir ? true : false,
                 'sir_available' => $this->checklistInfo->checkItemsCheck->sir_available ? true : false,
             ];
-            
+
         }catch(\Exception $e){
             AppLog::create([
                 'LogName' => 'System',
@@ -53,7 +53,7 @@ class CheckItems extends Component
                 'description' => '{"specific_action":"Check Items Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
             ]);
         }
-        
+
     }
 
     public function render()
@@ -63,7 +63,12 @@ class CheckItems extends Component
 
     public function dispatchMe($field = null){
         //dd($this->inputs);
-        
+
+        if ($field === 'same_model' && $this->inputs['same_model']) {
+            $this->inputs['specify_model'] = '';
+            $this->inputs['carton_quantity'] = 0;
+        }
+
         DB::beginTransaction();
         try{
             //dd($param);
@@ -74,7 +79,7 @@ class CheckItems extends Component
             }
             DB::commit();
 
-            
+
             if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
                 $this->inputStatus[$field] = 'success';
             }
@@ -104,5 +109,10 @@ class CheckItems extends Component
         if ($checklist) {
             $checklist->update($this->inputs);
         }
+    }
+
+    public function getShowModelDetailsProperty()
+    {
+        return $this->inputs['same_model'] === "0" || $this->inputs['same_model'] === 0 || $this->inputs['same_model'] === false;
     }
 }

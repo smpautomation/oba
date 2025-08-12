@@ -157,6 +157,8 @@ return new class extends Migration
             $table->string('vmi_qr_mn')->nullable();
             $table->string('mc_label_mn')->nullable();
             $table->string('pallet_label_mn')->nullable();
+            $table->string('shipping_label_mn')->nullable();
+            $table->string('sir_mn')->nullable();
             $table->boolean('same_model_mn')->nullable();
             $table->boolean('judgement_mn')->nullable();
             $table->string('picklist_mc')->nullable();
