@@ -266,9 +266,9 @@ return new class extends Migration
             $table->string('shipping_pic')->nullable();
             $table->date('date')->nullable();
             $table->string('oba_checked_by')->nullable();
-            $table->boolean('check_judgement')->nullable();
+            $table->string('check_judgement')->nullable();
             $table->string('oba_picture_by')->nullable();
-            $table->boolean('picture_judgement')->nullable();
+            $table->string('picture_judgement')->nullable();
         });
 
     }

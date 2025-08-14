@@ -2,6 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Models\Check_Items;
+use App\Models\Check_Overall;
+use App\Models\OBA_Kit_Checklist;
+use App\Models\Personnel_Check;
+use App\Models\preparation_checklist;
+use App\Models\shipment_information;
+use App\Models\Similarities_Checking;
 use Livewire\Component;
 use App\Models\checklist as Checklist;
 use Illuminate\Http\Request;
@@ -15,6 +22,9 @@ class ChecklistForm extends Component
     public $model_id = "";
     public $scanned_qr_pc = true;
     public $userIP;
+    public $showSummary = false;
+    public $summaryData = [];
+    public $canConfirm = false;
 
     public function mount($model_id){
         $this->userIP = $this->getClientIpAddress(request());
@@ -35,20 +45,20 @@ class ChecklistForm extends Component
     private function getClientIpAddress(Request $request): string
     {
         $ipKeys = [
-            'HTTP_CF_CONNECTING_IP',     
-            'HTTP_X_REAL_IP',            
-            'HTTP_X_FORWARDED_FOR',      
-            'HTTP_X_FORWARDED',          
-            'HTTP_X_CLUSTER_CLIENT_IP',  
-            'HTTP_CLIENT_IP',            
-            'REMOTE_ADDR'                
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_X_REAL_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_FORWARDED',
+            'HTTP_X_CLUSTER_CLIENT_IP',
+            'HTTP_CLIENT_IP',
+            'REMOTE_ADDR'
         ];
 
         foreach ($ipKeys as $key) {
             if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
                 $ips = explode(',', $_SERVER[$key]);
                 $ip = trim($ips[0]);
-                
+
                 // Validate IP address
                 if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
                     return $ip;
@@ -62,8 +72,9 @@ class ChecklistForm extends Component
 
     public function doNothing(){
         //$this->dispatch('save-clicked');
-        
+
     }
+
 
     public function closeMe(){
         DB::beginTransaction();
@@ -76,7 +87,7 @@ class ChecklistForm extends Component
             if ($checklist) {
                 $checklist->updateQuietly($inputData);
             }
-            
+
             DB::commit();
             redirect('/viewlist');
         }catch(\Exception $e){
@@ -88,6 +99,63 @@ class ChecklistForm extends Component
             ]);
             DB::rollBack();
         }
+    }
+
+    public function showSummaryModal(){
+        try {
+            $this->loadSummaryData();
+            $this->showSummary = true;
+            $this->canConfirm = false;
+
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'info',
+                'action' => 'checklist_checklistForm',
+                'description' => '{"specific_action":"clicked summary", "ip address":"'. $this->userIP .'"}'
+            ]);
+
+        } catch(\Exception $e) {
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'error',
+                'action' => 'checklist_checklistForm',
+                'description' => '{"specific_action":"Show Summary Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
+        }
+    }
+
+    private function loadSummaryData(){
+        try {
+            // Fetch all related checklist data
+            $this->summaryData = [
+                'preparation' => preparation_checklist::where('checklist_id', $this->model_id)->first(),
+                'oba_kit' => OBA_Kit_Checklist::where('checklist_id', $this->model_id)->first(),
+                'shipment' => shipment_information::where('checklist_id', $this->model_id)->first(),
+                'check_items' => Check_Items::where('checklist_id', $this->model_id)->first(),
+                'similarities' => Similarities_Checking::where('checklist_id', $this->model_id)->first(),
+                'overall' => Check_Overall::where('checklist_id', $this->model_id)->first(),
+                'personnel' => Personnel_Check::where('checklist_id', $this->model_id)->first(),
+            ];
+        } catch(\Exception $e) {
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'error',
+                'action' => 'checklist_checklistForm',
+                'description' => '{"specific_action":"Load Summary Data Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+            ]);
+        }
+    }
+    public function closeSummary(){
+        $this->showSummary = false;
+        $this->canConfirm = false;
+    }
+
+    public function confirmFinishAudit(){
+        $this->closeMe();
+    }
+
+    public function enableConfirm(){
+        $this->canConfirm = true;
     }
 
     #[On('return-value')]
@@ -120,6 +188,4 @@ class ChecklistForm extends Component
     {
         return view('livewire.checklist-form');
     }
-
-
 }

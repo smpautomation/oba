@@ -55,7 +55,7 @@ class Viewlist extends Component
             if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
                 $ips = explode(',', $_SERVER[$key]);
                 $ip = trim($ips[0]);
-                
+
                 // Validate IP address
                 if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
                     return $ip;
@@ -130,31 +130,31 @@ class Viewlist extends Component
                 ->orWhere('created_at', 'like', '%' . $this->search . '%');
             });
         }
-        
+
         // Apply status filter
         if ($this->filterStatus !== 'all') {
             $query->where('status', $this->filterStatus);
         }
-        
+
         // Apply date range filter
         if ($this->filterDateFrom) {
             $query->whereDate('created_at', '>=', $this->filterDateFrom);
         }
-        
+
         if ($this->filterDateTo) {
             $query->whereDate('created_at', '<=', $this->filterDateTo);
         }
-        
+
         // Apply model filter
         if ($this->filterModel !== 'all') {
             $query->where('model', $this->filterModel);
         }
-        
+
         // Apply section filter
         if ($this->filterSection !== 'all') {
             $query->where('section', $this->filterSection);
         }
-        
+
         // Apply sorting
         $query->orderBy($this->sortBy, $this->sortDirection);
 
@@ -216,11 +216,11 @@ class Viewlist extends Component
                 ]);
             }
         }
-        
+
         $this->closeDeleteModal();
     }
 
-        public function confirmDelete($checklistId)
+    public function confirmDelete($checklistId)
     {
         $this->checklistToDelete = $checklistId;
         $this->showDeleteModal = true;
@@ -231,7 +231,7 @@ class Viewlist extends Component
         $this->showDeleteModal = false;
         $this->checklistToDelete = null;
     }
-    
+
 
     public function render()
     {
