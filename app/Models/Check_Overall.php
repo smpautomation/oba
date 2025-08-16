@@ -15,11 +15,14 @@ class Check_Overall extends Model
     }
     public function items()
     {
-        return $this->hasMany(Check_Overall_Item::class);
+        return $this->hasMany(Check_Overall_Item::class, 'check_overall_id', 'id');
     }
-
     public function pallets()
     {
-        return $this->hasMany(Check_Overall_Pallet::class);
+        return $this->hasMany(Check_Overall_Pallet::class, 'check_overall_id', 'id');
     }
+
+    protected $casts = [
+        'expiration_date' => 'date',
+    ];
 }

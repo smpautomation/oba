@@ -224,22 +224,22 @@ return new class extends Migration
             $table->string("oqa")->nullable();
             $table->integer("box_no")->nullable();
             $table->string("std_pack")->nullable();
-            $table->boolean("internal_fg_label")->nullable();
-            $table->boolean("internal_specific_label")->nullable();
-            $table->boolean("internal_carton_condition")->nullable();
-            $table->boolean("internal_magnet_pack")->nullable();
-            $table->boolean("internal_magnet_cond")->nullable();
-            $table->boolean("internal_dessicant")->nullable();
-            $table->boolean("internal_pack_orientation")->nullable();
-            $table->string("internal_spacer")->nullable();
-            $table->boolean("internal_sir")->nullable();
-            $table->boolean("external_serem")->nullable();
-            $table->boolean("external_ship_label")->nullable();
-            $table->boolean("external_vmi_label")->nullable();
-            $table->boolean("external_mc_label")->nullable();
-            $table->boolean("external_delivery_sheet")->nullable();
-            $table->boolean("external_specific_label")->nullable();
-            $table->boolean("external_flux_label")->nullable();
+            $table->boolean("internal_fg_label")->default(false);
+            $table->boolean("internal_specific_label")->default(false);
+            $table->boolean("internal_carton_condition")->default(false);
+            $table->boolean("internal_magnet_pack")->default(false);
+            $table->boolean("internal_magnet_cond")->default(false);
+            $table->boolean("internal_dessicant")->default(false);
+            $table->boolean("internal_pack_orientation")->default(false);
+            $table->string("internal_spacer")->default(false);
+            $table->boolean("internal_sir")->default(false);
+            $table->boolean("external_serem")->default(false);
+            $table->boolean("external_ship_label")->default(false);
+            $table->boolean("external_vmi_label")->default(false);
+            $table->boolean("external_mc_label")->default(false);
+            $table->boolean("external_delivery_sheet")->default(false);
+            $table->boolean("external_specific_label")->default(false);
+            $table->boolean("external_flux_label")->default(false);
             $table->string("identity_tape")->nullable();
             $table->string("pick_list")->nullable();
             $table->string("remarks")->nullable();
@@ -250,7 +250,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('check_overall_id')->references('id')->on('check_overall')->onDelete('cascade');
             $table->integer('pallet_index'); // 1 to 20
-            $table->boolean('value')->nullable();
+            $table->boolean('value')->default(false);
         });
 
         Schema::create('personnel', function(Blueprint $table){

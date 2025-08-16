@@ -71,8 +71,7 @@ class ChecklistForm extends Component
     }
 
     public function doNothing(){
-        //$this->dispatch('save-clicked');
-
+        return;
     }
 
 
@@ -114,6 +113,8 @@ class ChecklistForm extends Component
                 'description' => '{"specific_action":"clicked summary", "ip address":"'. $this->userIP .'"}'
             ]);
 
+
+
         } catch(\Exception $e) {
             AppLog::create([
                 'LogName' => 'System',
@@ -133,7 +134,7 @@ class ChecklistForm extends Component
                 'shipment' => shipment_information::where('checklist_id', $this->model_id)->first(),
                 'check_items' => Check_Items::where('checklist_id', $this->model_id)->first(),
                 'similarities' => Similarities_Checking::where('checklist_id', $this->model_id)->first(),
-                'overall' => Check_Overall::where('checklist_id', $this->model_id)->first(),
+                'overall' => Check_Overall::with(['items', 'pallets'])->where('checklist_id', $this->model_id)->first(),
                 'personnel' => Personnel_Check::where('checklist_id', $this->model_id)->first(),
             ];
         } catch(\Exception $e) {
