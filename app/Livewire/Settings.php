@@ -55,6 +55,7 @@ class Settings extends Component
     public $showAddRemove = false;
     public $showChecklistConfiguration = false;
     public $showSystemLogs = false;
+    public $showUserManagement = false;
 
     //properties for system logs
     // Add these properties at the top of your Settings class
@@ -112,6 +113,7 @@ class Settings extends Component
         $this->showAddRemove = !$this->showAddRemove;
         $this->showChecklistConfiguration = false; // Hide other sections
         $this->showSystemLogs = false; // Hide other sections
+        $this->showUserManagement = false;
     }
 
     public function showChecklistConfigurationSection()
@@ -119,10 +121,18 @@ class Settings extends Component
         $this->showChecklistConfiguration = !$this->showChecklistConfiguration;
         $this->showAddRemove = false; // Hide other sections
         $this->showSystemLogs = false; // Hide other sections
+        $this->showUserManagement = false;
     }
 
     public function showSystemLogsSection(){
         $this->showSystemLogs = !$this->showSystemLogs;
+        $this->showAddRemove = false; // Hide other sections
+        $this->showChecklistConfiguration = false; // Hide other sections
+        $this->showUserManagement = false;
+    }
+    public function showUserManagementSection(){
+        $this->showUserManagement = !$this->showUserManagement;
+        $this->showSystemLogs = false;
         $this->showAddRemove = false; // Hide other sections
         $this->showChecklistConfiguration = false; // Hide other sections
     }

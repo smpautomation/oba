@@ -29,6 +29,5 @@ Route::middleware(['auth'])->group(function () {
 // Admin-only routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::view('/settings', 'settings')->name('settings');
-    Route::view('/users', 'users')->name('users');
 });
 

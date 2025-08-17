@@ -25,7 +25,7 @@ class RegisterForm extends Component
             'name' => 'required|string|max:255|min:2',
             'id_number' => 'required|string|unique:users,id_number|max:50',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => ['required', 'string', 'confirmed', Password::min(8)],
+            'password' => ['required', 'string', 'confirmed', Password::min(6)],
         ];
     }
 
@@ -39,7 +39,7 @@ class RegisterForm extends Component
         'email.unique' => 'This email address is already registered.',
         'password.required' => 'Password is required.',
         'password.confirmed' => 'Password confirmation does not match.',
-        'password.min' => 'Password must be at least 8 characters.',
+        'password.min' => 'Password must be at least 6 characters.',
     ];
 
     public function mount()

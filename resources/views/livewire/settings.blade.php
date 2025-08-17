@@ -73,6 +73,25 @@
                         </div>
                     </div>
                 </button>
+
+                <button wire:click="showUserManagementSection" class="group relative p-6 bg-gradient-to-br from-yellow-50 to-orange-100 rounded-2xl border-2 border-transparent hover:border-emerald-300 transition-all duration-300 hover:shadow-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 text-left">
+                            <h3 class="font-bold text-gray-900">User Management</h3>
+                            <p class="text-sm text-gray-600">Manage user roles</p>
+                        </div>
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </button>
             </div>
     </div>
 
@@ -873,5 +892,22 @@
         </div>
     @endif
 
+    @if ($showUserManagement)
+    <div class="bg-red-50 rounded-xl shadow-lg p-6 space-y-6 bg-opacity-90 backdrop-blur-md">
+        <div class="section-card card-hover rounded-2xl shadow-lg p-6 mb-8 form-container">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-emerald-500 p-2 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">User Management</h2>
+                </div>
+            </div>
+            <livewire:admin.user-management />
+        </div>
+    </div>
+    @endif
 
 </div>

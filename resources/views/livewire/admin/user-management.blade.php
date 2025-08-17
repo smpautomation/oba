@@ -1,9 +1,9 @@
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8 bg-yellow-50">
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
         <div>
-            <h1 class="text-3xl font-bold text-white mb-2">User Management</h1>
-            <p class="text-white/70">Manage user accounts and roles</p>
+            <h1 class="text-3xl font-bold text-black mb-2">User Management</h1>
+            <p class="text-black/70">Manage user accounts and roles</p>
         </div>
     </div>
 
@@ -17,8 +17,8 @@
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm text-white/70">Total Users</p>
-                    <p class="text-2xl font-bold text-white">{{ $totalUsers }}</p>
+                    <p class="text-sm text-black/70">Total Users</p>
+                    <p class="text-2xl font-bold text-black">{{ $totalUsers }}</p>
                 </div>
             </div>
         </div>
@@ -31,8 +31,8 @@
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm text-white/70">Admins</p>
-                    <p class="text-2xl font-bold text-white">{{ $totalAdmins }}</p>
+                    <p class="text-sm text-black/70">Admins</p>
+                    <p class="text-2xl font-bold text-black">{{ $totalAdmins }}</p>
                 </div>
             </div>
         </div>
@@ -45,8 +45,8 @@
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm text-white/70">Auditors</p>
-                    <p class="text-2xl font-bold text-white">{{ $totalAuditors }}</p>
+                    <p class="text-sm text-black/70">Auditors</p>
+                    <p class="text-2xl font-bold text-black">{{ $totalAuditors }}</p>
                 </div>
             </div>
         </div>
@@ -59,8 +59,8 @@
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm text-white/70">Regular Users</p>
-                    <p class="text-2xl font-bold text-white">{{ $totalRegularUsers }}</p>
+                    <p class="text-sm text-black/70">Regular Users</p>
+                    <p class="text-2xl font-bold text-black">{{ $totalRegularUsers }}</p>
                 </div>
             </div>
         </div>
@@ -74,11 +74,11 @@
                     type="text"
                     wire:model.live="search"
                     placeholder="Search users by name, email, or ID..."
-                    class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-blue-400"
+                    class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-black placeholder-white/50 focus:outline-none focus:border-blue-400"
                 >
             </div>
             <div>
-                <select wire:model.live="selectedRole" class="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-400">
+                <select wire:model.live="selectedRole" class="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-black focus:outline-none focus:border-blue-400">
                    <option value="">All Roles</option>
                    @foreach($roles as $role)
                        <option value="{{ $role->id }}" class="bg-gray-800">{{ ucfirst($role->name) }}</option>
@@ -94,11 +94,11 @@
            <table class="w-full">
                <thead class="bg-white/5">
                    <tr>
-                       <th class="px-6 py-4 text-left text-sm font-semibold text-white/90">User</th>
-                       <th class="px-6 py-4 text-left text-sm font-semibold text-white/90">ID Number</th>
-                       <th class="px-6 py-4 text-left text-sm font-semibold text-white/90">Role</th>
-                       <th class="px-6 py-4 text-left text-sm font-semibold text-white/90">Joined</th>
-                       <th class="px-6 py-4 text-left text-sm font-semibold text-white/90">Actions</th>
+                       <th class="px-6 py-4 text-left text-sm font-semibold text-black/90">User</th>
+                       <th class="px-6 py-4 text-left text-sm font-semibold text-black/90">ID Number</th>
+                       <th class="px-6 py-4 text-left text-sm font-semibold text-black/90">Role</th>
+                       <th class="px-6 py-4 text-left text-sm font-semibold text-black/90">Joined</th>
+                       <th class="px-6 py-4 text-left text-sm font-semibold text-black/90">Actions</th>
                    </tr>
                </thead>
                <tbody class="divide-y divide-white/10">
@@ -107,15 +107,15 @@
                            <td class="px-6 py-4">
                                <div class="flex items-center">
                                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                                       <span class="text-white font-semibold">{{ substr($user->name, 0, 1) }}</span>
+                                       <span class="text-black font-semibold">{{ substr($user->name, 0, 1) }}</span>
                                    </div>
                                    <div class="ml-3">
-                                       <div class="text-white font-medium">{{ $user->name }}</div>
-                                       <div class="text-white/60 text-sm">{{ $user->email }}</div>
+                                       <div class="text-black font-medium">{{ $user->name }}</div>
+                                       <div class="text-black/60 text-sm">{{ $user->email }}</div>
                                    </div>
                                </div>
                            </td>
-                           <td class="px-6 py-4 text-white/80">{{ $user->id_number }}</td>
+                           <td class="px-6 py-4 text-black/80">{{ $user->id_number }}</td>
                            <td class="px-6 py-4">
                                <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full
                                    {{ $user->role->name === 'admin' ? 'bg-red-500/20 text-red-300' : '' }}
@@ -125,7 +125,7 @@
                                    {{ ucfirst($user->role->name) }}
                                </span>
                            </td>
-                           <td class="px-6 py-4 text-white/80">
+                           <td class="px-6 py-4 text-black/80">
                                {{ $user->created_at->format('M d, Y') }}
                            </td>
                            <td class="px-6 py-4">
@@ -139,7 +139,7 @@
                        </tr>
                    @empty
                        <tr>
-                           <td colspan="5" class="px-6 py-8 text-center text-white/60">
+                           <td colspan="5" class="px-6 py-8 text-center text-black/60">
                                No users found matching your criteria.
                            </td>
                        </tr>
@@ -156,11 +156,11 @@
 
    <!-- Edit Role Modal -->
    @if($editingUser)
-       <div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-           <div class="card-hover-effect rounded-2xl p-6 w-full max-w-md">
+       <div class="fixed inset-0 bg-slate-300/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+           <div class="card-hover-effect rounded-2xl p-6 w-full max-w-md bg-slate-500">
                <div class="flex items-center justify-between mb-6">
-                   <h3 class="text-xl font-bold text-white">Change User Role</h3>
-                   <button wire:click="cancelEdit" class="text-white/60 hover:text-white">
+                   <h3 class="text-xl font-bold text-black">Change User Role</h3>
+                   <button wire:click="cancelEdit" class="text-black/60 hover:text-black">
                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
                        </svg>
@@ -170,16 +170,16 @@
                <div class="mb-6">
                    <div class="flex items-center mb-4">
                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                           <span class="text-white font-semibold">{{ substr($editingUser->name, 0, 1) }}</span>
+                           <span class="text-black font-semibold">{{ substr($editingUser->name, 0, 1) }}</span>
                        </div>
                        <div class="ml-3">
-                           <div class="text-white font-medium">{{ $editingUser->name }}</div>
-                           <div class="text-white/60 text-sm">{{ $editingUser->email }}</div>
+                           <div class="text-black font-medium">{{ $editingUser->name }}</div>
+                           <div class="text-black/60 text-sm">{{ $editingUser->email }}</div>
                        </div>
                    </div>
 
                    <div class="space-y-3">
-                       <label class="block text-white/90 text-sm font-medium">Select New Role</label>
+                       <label class="block text-black/90 text-sm font-medium">Select New Role</label>
                        @foreach($roles as $role)
                            <label class="flex items-center p-3 bg-white/5 rounded-lg cursor-pointer hover:bg-white/10 transition-colors">
                                <input
@@ -189,8 +189,8 @@
                                    class="w-4 h-4 text-blue-600 bg-transparent border-white/30"
                                >
                                <div class="ml-3">
-                                   <div class="text-white font-medium">{{ ucfirst($role->name) }}</div>
-                                   <div class="text-white/60 text-sm">{{ $role->description }}</div>
+                                   <div class="text-black font-medium">{{ ucfirst($role->name) }}</div>
+                                   <div class="text-black/60 text-sm">{{ $role->description }}</div>
                                </div>
                            </label>
                        @endforeach
@@ -200,13 +200,13 @@
                <div class="flex gap-3">
                    <button
                        wire:click="updateUserRole"
-                       class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-2 px-4 rounded-lg font-medium hover:from-green-600 hover:to-green-700 transition-all"
+                       class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-black py-2 px-4 rounded-lg font-medium hover:from-green-600 hover:to-green-700 transition-all"
                    >
                        Update Role
                    </button>
                    <button
                        wire:click="cancelEdit"
-                       class="flex-1 bg-white/10 text-white py-2 px-4 rounded-lg font-medium hover:bg-white/20 transition-all"
+                       class="flex-1 bg-white/10 text-black py-2 px-4 rounded-lg font-medium hover:bg-white/20 transition-all"
                    >
                        Cancel
                    </button>

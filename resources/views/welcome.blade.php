@@ -12,7 +12,10 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <main class="hero-gradient min-h-screen relative floating-orbs">
-        <livewire:navbar>
+        @guest
+        @else
+            <livewire:navbar>
+        @endguest
         <!-- Hero Section -->
         <div class="relative z-10 flex items-center justify-center px-4 py-12 md:py-20">
             <div class="max-w-4xl mx-auto text-center">
@@ -21,34 +24,39 @@
                     <div class="inline-flex items-center justify-center w-32 h-32 rounded-full mb-6 logo-pulse glow-effect">
                         <img src="photo/smp_logo.png" alt="Logo" class="w-24 h-24 rounded-full">
                     </div>
+                    @guest
                     <h1 class="text-5xl md:text-7xl font-bold text-shimmer mb-4">
-                        Welcome Back
+                        Out of the Box Audit Website
                     </h1>
-                    <p class="text-xl md:text-2xl text-white/90 mb-2">
-                        <span class="typing-effect">Out of the Box Audit Management</span>
-                    </p>
+                    @else
+                    <h1 class="text-5xl md:text-7xl font-bold text-shimmer mb-4">
+                        Welcome Back {{ Auth::user()->name }}!
+                    </h1>
+                    @endguest
+
+                    {{-- <p class="text-xl md:text-2xl text-white/90 mb-2">
+                        <span class="typing-effect">Management or Start your Out of the Box Audit</span>
+                    </p> --}}
                     @guest
                     <!-- Login Form Section -->
                     <div class="relative z-10 px-4 pb-20">
                         <livewire:auth.login-form />
                     </div>
                     @else
+                    <div class="flex">
                     <div class="relative z-10 px-4 pb-20">
                         <div class="max-w-md mx-auto text-center">
                             <div class="card-hover-effect rounded-3xl p-8">
                                 <h3 class="text-2xl font-bold text-white mb-6">
-                                    Hello there, {{ Auth::user()->name }}!
+                                    Quickly Start Your Audit
                                 </h3>
-                                <p class="text-white/80 mb-6">
-                                    You're logged in as <span class="font-semibold">{{ ucfirst(Auth::user()->role->name) }}</span>
-                                </p>
                                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                                     <a href="{{ route('checklist') }}" class="animated-button w-full sm:w-auto inline-flex">
                                         <div class="circle"></div>
                                         <svg viewBox="0 0 24 24" class="arr-2">
                                             <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                                         </svg>
-                                        <span class="text">Start Your Audit</span>
+                                        <span class="text mr-2">Start OBA</span>
                                         <svg viewBox="0 0 24 24" class="arr-1">
                                             <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                                         </svg>
@@ -56,6 +64,49 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="relative z-10 px-4 pb-20">
+                        <div class="max-w-md mx-auto text-center">
+                            <div class="card-hover-effect rounded-3xl p-8">
+                                <h3 class="text-2xl font-bold text-white mb-6">
+                                    View All Audit Checklist Available
+                                </h3>
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <a href="{{ route('viewlist') }}" class="animated-button w-full sm:w-auto inline-flex">
+                                        <div class="circle"></div>
+                                        <svg viewBox="0 0 24 24" class="arr-2">
+                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                        </svg>
+                                        <span class="text mr-2">View Audit List</span>
+                                        <svg viewBox="0 0 24 24" class="arr-1">
+                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 px-4 pb-20">
+                        <div class="max-w-md mx-auto text-center">
+                            <div class="card-hover-effect rounded-3xl p-8">
+                                <h3 class="text-2xl font-bold text-white mb-6">
+                                    Configure Website Settings
+                                </h3>
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <a href="{{ route('settings') }}" class="animated-button w-full sm:w-auto inline-flex">
+                                        <div class="circle"></div>
+                                        <svg viewBox="0 0 24 24" class="arr-2">
+                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                        </svg>
+                                        <span class="text mr-2">View Settings</span>
+                                        <svg viewBox="0 0 24 24" class="arr-1">
+                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                     @endguest
                     <p class="text-lg text-white/70 max-w-2xl mx-auto">

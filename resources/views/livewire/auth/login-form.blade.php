@@ -35,7 +35,7 @@
                 <input type="checkbox" wire:model="remember" class="mr-2 rounded">
                 Remember me
             </label>
-            <a href="#" class="text-blue-300 hover:text-blue-200 text-sm">Forgot password?</a>
+            {{-- <a href="#" class="text-blue-300 hover:text-blue-200 text-sm">Forgot password?</a> --}}
         </div>
 
         <button
