@@ -1,5 +1,5 @@
 <div class="max-w-2xl mx-auto">
-    <div class="card-hover-effect rounded-3xl p-8 backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl">
+    <div class="card-hover-effect rounded-3xl p-8 bg-white/10 border border-white/20 shadow-2xl">
         <!-- Header Section -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 mb-4 glow-effect">
@@ -144,7 +144,7 @@
                     <div class="input-container">
                         <input
                             type="password"
-                            wire:model.blur="password"
+                            wire:model="password"
                             placeholder="Minimum 8 characters"
                             class="enhanced-input @error('password') error @enderror"
                         >
