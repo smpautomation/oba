@@ -59,7 +59,6 @@ class RegisterForm extends Component
         $this->validate();
 
         try {
-            // Ensure role is always 'user' for new registrations
             $userRole = Role::where('name', 'user')->first();
 
             $user = User::create([
