@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Log as AppLog;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,15 @@ class Navbar extends Component
     {
         // Close mobile menu
         $this->mobileMenuOpen = false;
+
+
+
+        AppLog::create([
+            'LogName' => 'User Action',
+            'LogType' => 'info',
+            'action' => 'Logout',
+            'description' => '{"specific_action":"Logged Out",  user":"'. Auth::user()->name.'"}'
+        ]);
 
         Auth::logout();
         session()->invalidate();

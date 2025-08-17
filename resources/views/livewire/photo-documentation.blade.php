@@ -34,6 +34,7 @@
                 <!-- Photo Upload Section -->
                 <div class="space-y-6">
                     <!-- Upload Area -->
+                    @if(($checklistInfo->status != "Closed" && Auth::user()->name == $checklistInfo->auditor) || Auth::user()->role_id == 2)
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors duration-200 bg-gray-50 hover:bg-blue-50">
                         <svg class="mx-auto h-8 w-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -46,9 +47,6 @@
                                 capture="environment"
                                 wire:model="photo"
                                 class="hidden"
-                                @if($checklistInfo->status == "Closed")
-                                disabled
-                                @endif
                             />
                             <div class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 text-sm">
                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,6 +56,7 @@
                             </div>
                         </label>
                     </div>
+                    @endif
 
                     <!-- Loading States -->
                     <div wire:loading wire:target="photo" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -138,6 +137,7 @@
                                                 >
                                                     View
                                                 </button>
+                                                @if(($checklistInfo->status != "Closed" && Auth::user()->name == $checklistInfo->auditor) || Auth::user()->role_id == 2)
                                                 <button
                                                     wire:click="removePhoto({{ $index }})"
                                                     wire:confirm="Are you sure you want to delete this photo?"
@@ -148,6 +148,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                     </svg>
                                                 </button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

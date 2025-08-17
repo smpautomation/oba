@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
 use App\Models\Log as AppLog;
+use Illuminate\Support\Facades\Auth;
 
 class ChecklistForm extends Component
 {
@@ -31,13 +32,16 @@ class ChecklistForm extends Component
         try{
             $this->model_id = $model_id;
             $this->checklistInfo = Checklist::find($model_id);
+            if(Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->role_id != 2){
+                $this->checklistInfo->status = "Closed";
+            }
             $this->scanned_qr_pc = $this->checklistInfo->scanned_qr_pc ? true : false;
         }catch(\Exception $e){
             AppLog::create([
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checklistForm',
-                'description' => '{"specific_action":"CheckList Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"CheckList Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -94,7 +98,7 @@ class ChecklistForm extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checklistForm',
-                'description' => '{"specific_action":"CheckList Closing Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"CheckList Closing Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
             DB::rollBack();
         }
@@ -110,7 +114,7 @@ class ChecklistForm extends Component
                 'LogName' => 'System',
                 'LogType' => 'info',
                 'action' => 'checklist_checklistForm',
-                'description' => '{"specific_action":"clicked summary", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"clicked summary", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
 
 
@@ -120,7 +124,7 @@ class ChecklistForm extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checklistForm',
-                'description' => '{"specific_action":"Show Summary Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Show Summary Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -142,7 +146,7 @@ class ChecklistForm extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checklistForm',
-                'description' => '{"specific_action":"Load Summary Data Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Load Summary Data Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -178,7 +182,7 @@ class ChecklistForm extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checklistForm',
-                'description' => '{"specific_action":"CheckList Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"CheckList Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
             DB::rollBack();
         }

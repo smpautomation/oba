@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use App\Models\Log as AppLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShipmentInformation extends Component
 {
@@ -38,6 +39,9 @@ class ShipmentInformation extends Component
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
+            if(Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->role_id != 2){
+                $this->checklistInfo->status = "Closed";
+            }
             $this->dateToFormat = new DateTime();
             $formattedDate = $this->dateToFormat->format('Y-m-d\TH:i');
             $this->dateNow = $formattedDate;
@@ -57,7 +61,7 @@ class ShipmentInformation extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_shipinfo',
-                'description' => '{"specific_action":"ShipInfo Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"ShipInfo Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -87,7 +91,7 @@ class ShipmentInformation extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_shipinfo',
-                'description' => '{"specific_action":"ShipInfo Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"ShipInfo Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
             if ($field) {
                 $this->inputStatus[$field] = 'error';

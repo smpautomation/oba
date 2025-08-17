@@ -4,6 +4,7 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Log as AppLog;
 
 class LoginForm extends Component
 {
@@ -25,6 +26,14 @@ class LoginForm extends Component
 
             // Role-based redirection
             $user = Auth::user();
+
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'info',
+                'action' => 'login',
+                'description' => '{"specific_action":"Logged In", "user":"'. Auth::user()->name .'"}'
+            ]);
+
             return match($user->role->name) {
                 default => $this->redirect(route('login'), navigate: true),
             };

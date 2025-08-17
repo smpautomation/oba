@@ -8,7 +8,7 @@ use App\Models\checklist as Checklist;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Log as AppLog;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PhotoDocumentation extends Component
 {
@@ -41,7 +41,7 @@ class PhotoDocumentation extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Photo Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -132,7 +132,7 @@ class PhotoDocumentation extends Component
                 'LogName' => 'User Action',
                 'LogType' => 'info',
                 'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Upload Successful '.$filename.'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Photo Upload Successful '.$filename.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
             session()->flash('message', 'Photo uploaded successfully!');
 
@@ -141,7 +141,7 @@ class PhotoDocumentation extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Upload unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Photo Upload unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
 
             session()->flash('message', 'Upload failed. Please try again.');
@@ -176,7 +176,7 @@ class PhotoDocumentation extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Load Unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Photo Load Unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
 
@@ -210,7 +210,7 @@ class PhotoDocumentation extends Component
                     'LogName' => 'User Action',
                     'LogType' => 'warning',
                     'action' => 'checklist_photo',
-                    'description' => '{"specific_action":"Photo Removal Successful '.$photoPath.'", "ip address":"'. $this->userIP .'"}'
+                    'description' => '{"specific_action":"Photo Removal Successful '.$photoPath.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
                 ]);
 
                 unset($this->uploadedPhotos[$index]);
@@ -223,7 +223,7 @@ class PhotoDocumentation extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_photo',
-                'description' => '{"specific_action":"Photo Removal unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Photo Removal unsuccessful", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Jobs\LogAccessJob;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class LogAccess
@@ -28,6 +29,7 @@ class LogAccess
                 return $next($request); // skip logging
             }
         }
+
 
         $logData = [
             'ip_address' => $this->getClientIpAddress($request),
@@ -71,7 +73,7 @@ class LogAccess
             if (array_key_exists($key, $_SERVER) && !empty($_SERVER[$key])) {
                 $ips = explode(',', $_SERVER[$key]);
                 $ip = trim($ips[0]);
-                
+
                 // Validate IP address
                 if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
                     return $ip;

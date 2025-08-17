@@ -7,6 +7,7 @@ use App\Models\Log as AppLog;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Viewlist extends Component
 {
@@ -187,7 +188,7 @@ class Viewlist extends Component
             'LogName' => 'User Action',
             'LogType' => 'info',
             'action' => 'viewlist_delete',
-            'description' => '{"specific_action":"View Selected Checklist '.$checklistId.'", "ip address":"'. $this->userIp .'"}'
+            'description' => '{"specific_action":"View Selected Checklist '.$checklistId.'",  user":"'. Auth::user()->name.'"}'
         ]);
         return redirect()->to('/checklist/' . $checklistId);
     }
@@ -203,7 +204,7 @@ class Viewlist extends Component
                     'LogName' => 'User Action',
                     'LogType' => 'info',
                     'action' => 'viewlist_delete',
-                    'description' => '{"specific_action":"Delete Checklist '.$this->checklistToDelete.'", "ip address":"'. $this->userIp .'"}'
+                    'description' => '{"specific_action":"Delete Checklist '.$this->checklistToDelete.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
                 ]);
                 $this->resetPage(); // Reset to first page after deletion
             } else {
@@ -212,7 +213,7 @@ class Viewlist extends Component
                     'LogName' => 'User Action',
                     'LogType' => 'error',
                     'action' => 'viewlist_delete',
-                    'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Not Found", "ip address":"'. $this->userIp .'"}'
+                    'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Not Found", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
                 ]);
             }
         }

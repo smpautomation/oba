@@ -8,7 +8,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
 use App\Models\Log as AppLog;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckItems extends Component
 {
@@ -34,7 +34,9 @@ class CheckItems extends Component
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
-
+            if(Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->role_id != 2){
+                $this->checklistInfo->status = "Closed";
+            }
             $this->inputs = [
                 'open_boxes_quantity' => $this->checklistInfo->checkItemsCheck->open_boxes_quantity ?? 1,
                 'same_model' => $this->checklistInfo->checkItemsCheck->same_model ?? null,
@@ -50,7 +52,7 @@ class CheckItems extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_mount',
-                'description' => '{"specific_action":"Check Items Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Check Items Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
 
@@ -92,7 +94,7 @@ class CheckItems extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checkItems',
-                'description' => '{"specific_action":"Check Items Dispatch Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Check Items Dispatch Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }

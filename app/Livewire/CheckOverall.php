@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class CheckOverall extends Component
 {
@@ -33,7 +34,9 @@ class CheckOverall extends Component
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = checklist::find($checklist_id);
-
+            if(Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->role_id != 2){
+                $this->checklistInfo->status = "Closed";
+            }
             $this->inputs = [
 
             ];
@@ -78,7 +81,7 @@ class CheckOverall extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checkoverall',
-                'description' => '{"specific_action":"CheckOverall Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"CheckOverall Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -136,7 +139,7 @@ class CheckOverall extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_checkoverall',
-                'description' => '{"specific_action":"CheckOverall Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"CheckOverall Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
             if (!is_null($param2)) {
                 $this->inputStatus[$param1][$param2] = 'error';

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\Log as AppLog;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Role;
@@ -70,6 +71,13 @@ class RegisterForm extends Component
             ]);
 
             Auth::login($user);
+
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'info',
+                'action' => 'register',
+                'description' => '{"specific_action":"Logged In", "user":"'. Auth::user()->name .'"}'
+            ]);
 
             session()->flash('success', 'Welcome! Your account has been created successfully.');
 

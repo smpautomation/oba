@@ -20,6 +20,7 @@ use App\Models\Log as AppLog;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SectionForm extends Component
 {
@@ -82,6 +83,7 @@ class SectionForm extends Component
 
             Checklist::create([
                 'id' => $new_id,
+                'auditor' => Auth::user()->name,
                 'model' => $this->selectedModel,
                 'section' => $this->selectedSection,
                 'scanned_qr_pc' => $model_settings->scanned_qr_pc ? true : false,
@@ -120,14 +122,15 @@ class SectionForm extends Component
                 'checklist_id' => $new_id
             ]);
             Personnel_Check::create([
-                'checklist_id' => $new_id
+                'checklist_id' => $new_id,
+                'oba_checked_by' => Auth::user()->name
             ]);
 
             AppLog::create([
                 'LogName' => 'User Action',
                 'LogType' => 'info',
                 'action' => 'create_checklist',
-                'description' => '{"specific_action":"Create new checklist '.$new_id.' Model '.$this->selectedModel.' Section '.$this->selectedSection.'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Create new checklist '.$new_id.' Model '.$this->selectedModel.' Section '.$this->selectedSection.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
 
             session()->flash('status', 'OBA Checklist serial is ' . $new_id);
@@ -136,7 +139,7 @@ class SectionForm extends Component
                 'LogName' => 'User Action',
                 'LogType' => 'error',
                 'action' => 'create_checklist',
-                'description' => '{"specific_action":"Create new checklist '.$new_id.' Model '.$this->selectedModel.' Section '.$this->selectedSection.'", "error":"'.$e.'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Create new checklist '.$new_id.' Model '.$this->selectedModel.' Section '.$this->selectedSection.'", "error":"'.$e.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
 

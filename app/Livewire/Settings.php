@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Settings extends Component
 {
@@ -218,7 +219,7 @@ class Settings extends Component
                     'LogName' => 'User Action',
                     'LogType' => 'info',
                     'action' => 'save_configuration',
-                    'description' => '{"specific_action":"Update Selected Model '.$this->selectedModel.'", "ip address":"'. $this->userIP .'"}'
+                    'description' => '{"specific_action":"Update Selected Model '.$this->selectedModel.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
                 ]);
             } else {
                 session()->flash('error', 'Model not found in database!');
@@ -226,7 +227,7 @@ class Settings extends Component
                     'LogName' => 'User Action',
                     'LogType' => 'error',
                     'action' => 'save_configuration',
-                    'description' => '{"specific_action":"Selected Model '.$this->selectedModel.' Not Found", "ip address":"'. $this->userIP .'"}'
+                    'description' => '{"specific_action":"Selected Model '.$this->selectedModel.' Not Found", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
                 ]);
             }
         } else {
@@ -235,7 +236,7 @@ class Settings extends Component
                 'LogName' => 'User Action',
                 'LogType' => 'warning',
                 'action' => 'save_configuration',
-                'description' => '{"specific_action":"Attempted to save without selectiung model", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"Attempted to save without selectiung model", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -297,7 +298,7 @@ class Settings extends Component
                     'LogName' => 'User Action',
                     'LogType' => 'info',
                     'action' => 'add/remove_configuration',
-                    'description' => '{"specific_action":"Delete Selected Model '.$this->selectedModelAddRemove.'", "ip address":"'. $this->userIP .'"}'
+                    'description' => '{"specific_action":"Delete Selected Model '.$this->selectedModelAddRemove.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
                 ]);
             }
         }
@@ -329,7 +330,7 @@ class Settings extends Component
             'LogName' => 'User Action',
             'LogType' => 'info',
             'action' => 'add/remove_configuration',
-            'description' => '{"specific_action":"Add Model '.$this->newModelName.'", "ip address":"'. $this->userIP .'"}'
+            'description' => '{"specific_action":"Add Model '.$this->newModelName.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
         ]);
 
         // Reset form
@@ -394,7 +395,7 @@ class Settings extends Component
                     'LogName' => 'User Action',
                     'LogType' => 'info',
                     'action' => 'add/remove_configuration',
-                    'description' => '{"specific_action":"Delete Section '.$this->selectedSectionAddRemove.'", "ip address":"'. $this->userIP .'"}'
+                    'description' => '{"specific_action":"Delete Section '.$this->selectedSectionAddRemove.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
                 ]);
             }
         }
@@ -423,7 +424,7 @@ class Settings extends Component
             'LogName' => 'User Action',
             'LogType' => 'info',
             'action' => 'add/remove_configuration',
-            'description' => '{"specific_action":"Add Section '.$this->newSectionName.'", "ip address":"'. $this->userIP .'"}'
+            'description' => '{"specific_action":"Add Section '.$this->newSectionName.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
         ]);
     }
 

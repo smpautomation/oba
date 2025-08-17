@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Log as Applog;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class UserManagement extends Component
 {
@@ -35,8 +37,13 @@ class UserManagement extends Component
     public function updateUserRole()
     {
         if ($this->editingUser && $this->newRole) {
+            Applog::create([
+                'LogName' => 'User Actions',
+                'LogType' => 'info',
+                'action' => 'user_management',
+                'description' => '{"specific_action":"Update user role of ' . $this->editingUser->name . ' from '. $this->editingUser->role_id .' to "'. $this->newRole .'", user":"'. Auth::user()->name.'"}'
+            ]);
             $this->editingUser->update(['role_id' => $this->newRole]);
-
             session()->flash('success', 'User role updated successfully!');
             $this->editingUser = null;
             $this->newRole = '';

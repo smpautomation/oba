@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use App\Models\Log as AppLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OBAKitChecklist extends Component
 {
     public $checklist_id;
     public $checklistInfo;
     public $inputs = [
-        
+
     ];
     public $inputStatus = [
         'beforecheckbox1' => null,
@@ -35,11 +36,14 @@ class OBAKitChecklist extends Component
     public $userIP;
 
     public function mount($checklist_id, $userIP){
-        
+
         try{
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
+            if(Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->role_id != 2){
+                $this->checklistInfo->status = "Closed";
+            }
             $this->inputs = [
                 'beforecheckbox1' => $this->checklistInfo->obaCheck->beforecheckbox1 ? true : false,
                 'beforecheckbox2' => $this->checklistInfo->obaCheck->beforecheckbox2 ? true : false,
@@ -61,7 +65,7 @@ class OBAKitChecklist extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_obakit',
-                'description' => '{"specific_action":"OBAKit Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"OBAKit Mount Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
     }
@@ -81,7 +85,7 @@ class OBAKitChecklist extends Component
             }
             DB::commit();
 
-            
+
             if(isset($this->inputs[$field]) && $this->inputs[$field] != null){
                 $this->inputStatus[$field] = 'success';
             }
@@ -93,7 +97,7 @@ class OBAKitChecklist extends Component
                 'LogName' => 'System',
                 'LogType' => 'error',
                 'action' => 'checklist_obakit',
-                'description' => '{"specific_action":"OBAKit Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .'"}'
+                'description' => '{"specific_action":"OBAKit Dispatch Function Error", "error_msg":"'.$e->getMessage().'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
             DB::rollBack();
         }
