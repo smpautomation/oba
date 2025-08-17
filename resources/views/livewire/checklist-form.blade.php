@@ -2932,10 +2932,6 @@
                         </div>
                         @endif
 
-
-
-
-
                         <div class="h-20 flex items-center justify-center text-gray-500">
                             <div class="flex flex-col items-center space-y-2">
                                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">

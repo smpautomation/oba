@@ -14,9 +14,21 @@ use App\Http\Controllers\ChecklistController;
 |
 */
 
-Route::view('/', 'welcome')->name('welcome');
 
-Route::view('/settings', 'settings')->name('settings');
-Route::view('/viewlist', 'viewlist')->name('viewlist');
-Route::view('/checklist', 'checklist')->name('checklist');
-Route::get('checklist/{id}', [ChecklistController::class, 'showChecklist']);
+Route::view('/', 'welcome')->name('login');
+
+Route::view('/register', 'register')->name('register');
+
+// Basic authenticated routes
+Route::middleware(['auth'])->group(function () {
+    Route::view('/viewlist', 'viewlist')->name('viewlist');
+    Route::view('/checklist', 'checklist')->name('checklist');
+    Route::get('checklist/{id}', [ChecklistController::class, 'showChecklist'])->name('checklist.show');
+});
+
+// Admin-only routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::view('/settings', 'settings')->name('settings');
+    Route::view('/users', 'users')->name('users');
+});
+

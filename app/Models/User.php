@@ -48,8 +48,15 @@ class User extends Authenticatable
         ];
     }
 
+    // Add this relationship
     public function role()
     {
-        return $this->belongsTo(User::class, 'role_id', 'id');
+        return $this->belongsTo(Role::class);
+    }
+
+    // Helper method to check role
+    public function hasRole($roleName)
+    {
+        return $this->role->name === $roleName;
     }
 }

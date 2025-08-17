@@ -27,13 +27,44 @@
                     <p class="text-xl md:text-2xl text-white/90 mb-2">
                         <span class="typing-effect">Out of the Box Audit Management</span>
                     </p>
+                    @guest
+                    <!-- Login Form Section -->
+                    <div class="relative z-10 px-4 pb-20">
+                        <livewire:auth.login-form />
+                    </div>
+                    @else
+                    <div class="relative z-10 px-4 pb-20">
+                        <div class="max-w-md mx-auto text-center">
+                            <div class="card-hover-effect rounded-3xl p-8">
+                                <h3 class="text-2xl font-bold text-white mb-6">
+                                    Hello there, {{ Auth::user()->name }}!
+                                </h3>
+                                <p class="text-white/80 mb-6">
+                                    You're logged in as <span class="font-semibold">{{ ucfirst(Auth::user()->role->name) }}</span>
+                                </p>
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <a href="{{ route('checklist') }}" class="animated-button w-full sm:w-auto inline-flex">
+                                        <div class="circle"></div>
+                                        <svg viewBox="0 0 24 24" class="arr-2">
+                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                        </svg>
+                                        <span class="text">Start Your Audit</span>
+                                        <svg viewBox="0 0 24 24" class="arr-1">
+                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endguest
                     <p class="text-lg text-white/70 max-w-2xl mx-auto">
                         Streamline your auditing process with our platform for creating, managing, and analyzing audit forms.
                     </p>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="slide-in-up delay-1 flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                {{--<div class="slide-in-up delay-1 flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                     <a href="{{ route('checklist') }}" class="animated-button w-full sm:w-auto inline-flex">
                         <div class="circle"></div>
                         <svg viewBox="0 0 24 24" class="arr-2">
@@ -44,12 +75,12 @@
                             <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                         </svg>
                     </a>
-                    
-                    {{-- <button class="px-8 py-4 bg-white/10 backdrop-blur-lg border border-white/30 rounded-full text-white font-semibold hover:bg-white/20 transition-all duration-300 hover:scale-105 w-full sm:w-auto">
+
+                     <button class="px-8 py-4 bg-white/10 backdrop-blur-lg border border-white/30 rounded-full text-white font-semibold hover:bg-white/20 transition-all duration-300 hover:scale-105 w-full sm:w-auto">
                         <i class="fas fa-play mr-2"></i>
                         Watch Demo
-                    </button> --}}
-                </div>
+                    </button>
+                </div> --}}
 
                 <!-- Stats Section -->
                 {{-- <div class="slide-in-up delay-2 grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -113,40 +144,7 @@
             </div>
         </div>
 
-        {{-- <!-- Login Form Section -->
-        <div class="relative z-10 px-4 pb-20">
-            <div class="max-w-md mx-auto">
-                <div class="card-hover-effect rounded-3xl p-8">
-                    <h3 class="text-2xl font-bold text-white text-center mb-6">
-                        Sign In to Continue
-                    </h3>
-                    <form class="space-y-6">
-                        <div>
-                            <label class="block text-white/90 text-sm font-medium mb-2">Email Address</label>
-                            <input type="email" placeholder="Enter your email" class="modern-input w-full px-4 py-3 rounded-xl text-white placeholder-white/60 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-white/90 text-sm font-medium mb-2">Password</label>
-                            <input type="password" placeholder="Enter your password" class="modern-input w-full px-4 py-3 rounded-xl text-white placeholder-white/60 focus:outline-none">
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <label class="flex items-center text-white/80 text-sm">
-                                <input type="checkbox" class="mr-2 rounded">
-                                Remember me
-                            </label>
-                            <a href="#" class="text-blue-300 hover:text-blue-200 text-sm">Forgot password?</a>
-                        </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
-                            Sign In
-                        </button>
-                    </form>
-                    <p class="text-center text-white/70 text-sm mt-6">
-                        Don't have an account? 
-                        <a href="#" class="text-blue-300 hover:text-blue-200">Sign up here</a>
-                    </p>
-                </div>
-            </div>
-        </div> --}}
+
 
         <!-- Decorative Elements -->
         <div class="absolute top-1/4 left-10 w-2 h-20 bg-white/20 rounded-full transform rotate-12 hidden lg:block"></div>

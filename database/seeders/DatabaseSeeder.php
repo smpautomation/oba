@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
 
         model_settings::factory(10)->create();
         Sections::factory(10)->create();
+        $this->call([
+            RoleSeeder::class,
+        ]);
     }
 }
