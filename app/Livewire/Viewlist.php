@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\checklist;
 use App\Models\Log as AppLog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +19,15 @@ class Viewlist extends Component
     public $sortDirection = 'desc';
     public $filterStatus = 'all';
     public $showDeleteModal = false;
+
+    //add auditor
+    public $showAddAuditorModal = false;
+    public $selectedAuditor = null;
+    public $availableUsers = [];
+    public $checklistInfo;
+    public $searchAuditor = '';
+
+
     public $checklistToDelete = null;
     public $filterDateFrom = '';
     public $filterDateTo = '';
@@ -231,6 +241,78 @@ class Viewlist extends Component
     {
         $this->showDeleteModal = false;
         $this->checklistToDelete = null;
+    }
+
+    public function loadAvailableUsers()
+    {
+        $this->availableUsers = User::where('name', '!=', $this->checklistInfo->auditor)
+            ->when($this->search, function($query) {
+                $query->where(function($q) {
+                    $q->where('name', 'like', '%' . $this->search . '%')
+                      ->orWhere('email', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->orderBy('name')
+            ->get();
+    }
+
+    public function openAddAuditorModal($checklistId)
+    {
+        $this->checklistInfo = checklist::find($checklistId);
+        $this->showAddAuditorModal = true;
+        $this->selectedAuditor = null;
+        $this->search = '';
+        $this->loadAvailableUsers();
+    }
+    public function closeAddAuditorModal()
+    {
+        $this->showAddAuditorModal = false;
+        $this->selectedAuditor = null;
+        $this->search = '';
+        $this->availableUsers = [];
+    }
+    public function selectAuditor($userName)
+    {
+        $this->selectedAuditor = $userName;
+        dd($this->selectedAuditor);
+    }
+    public function updatedSearch()
+    {
+        $this->loadAvailableUsers();
+    }
+    public function addAuditor($checklistId)
+    {
+        if (!$this->selectedAuditor) {
+            session()->flash('error', 'Please select an auditor first.');
+            return;
+        }
+
+        try {
+            $checklist = checklist::find($checklistId);
+            $checklist->update([
+                'assigned_additional_auditor' => $this->selectedAuditor
+            ]);
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'info',
+                'action' => 'viewlist_addAuditor',
+                'description' => '{"specific_action":"Add Auditor '.$this->selectedAuditor.' to checklist id='.$checklistId.'",  user":"'. Auth::user()->name.'"}'
+            ]);
+            session()->flash('success', 'Additional auditor has been assigned successfully.');
+            $this->closeAddAuditorModal();
+
+            // Refresh the component data if needed
+            $this->dispatch('auditor-assigned');
+
+        } catch (\Exception $e) {
+            AppLog::create([
+                'LogName' => 'System',
+                'LogType' => 'error',
+                'action' => 'viewlist_addAuditor',
+                'description' => '{"specific_action":"Add Auditor '.$this->selectedAuditor.' to checklist id='.$checklistId.'",error: '.$e->getMessage().',  user":"'. Auth::user()->name.'"}'
+            ]);
+            session()->flash('error', 'Failed to assign auditor. Please try again.');
+        }
     }
 
 

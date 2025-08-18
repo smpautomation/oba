@@ -11,24 +11,31 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <main class="hero-gradient min-h-screen relative floating-orbs">
+            @guest
+            @else
             <livewire:navbar>
+            @endguest
+
 
             <!-- Registration Section -->
-            <div class="relative z-10 flex items-center justify-center px-4 py-12 md:py-20">
-                <div class="max-w-4xl mx-auto text-center">
-                    <!-- Logo -->
-                    <div class="slide-in-up mb-8">
-                        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full mb-6">
-                            <img src="photo/smp_logo.png" alt="Logo" class="w-20 h-20 rounded-full">
-                        </div>
-                        <h1 class="text-4xl md:text-5xl font-bold text-shimmer mb-4">
-                            Join Our Platform
-                        </h1>
-                    </div>
+            <div class="relative z-10 flex items-center justify-center px-4 pb-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <!-- Logo Section -->
+                        <div class="slide-in-up text-center lg:text-left">
+                            <div class="inline-flex items-center justify-center w-32 h-32 lg:w-40 lg:h-40 rounded-full mb-6 lg:mb-8">
+                                <img src="photo/smp_logo.png" alt="Logo" class="w-28 h-28 lg:w-36 lg:h-36 rounded-full">
+                            </div>
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-shimmer mb-4">
+                                Out of the Box Audit
+                            </h1>
 
-                    <!-- Registration Form -->
-                    <div class="slide-in-up delay-1">
-                        <livewire:auth.register-form />
+                        </div>
+
+                        <!-- Registration Form -->
+                        <div class="slide-in-up delay-1">
+                            <livewire:auth.register-form />
+                        </div>
                     </div>
                 </div>
             </div>

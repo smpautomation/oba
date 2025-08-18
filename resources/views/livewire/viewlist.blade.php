@@ -266,11 +266,20 @@
                             <!-- Assigned To -->
                             <td class="px-6 py-4 text-center">
                                 <div class="flex items-center justify-center gap-2">
-                                    <div class=" bg-blue-100 rounded-full flex items-center justify-center">
-                                        <span class="text-xs font-medium text-blue-600">
-                                            {{ strtoupper($checklist->personnelCheck['oba_checked_by']) }}
-                                        </span>
+                                    <div>
+                                        <div class=" bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span class="text-xs font-medium text-blue-600">
+                                                {{ strtoupper($checklist->auditor) }}
+                                            </span>
+                                        </div>
+                                        <div class=" bg-orange-100 rounded-full flex items-center justify-center mt-2">
+
+                                            <span class="text-xs font-medium text-blue-600">
+                                                Additional Auditor: {{ strtoupper($checklist->assigned_additional_auditor) }}
+                                            </span>
+                                        </div>
                                     </div>
+
                                 </div>
                             </td>
 
@@ -309,12 +318,20 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                         </svg>
                                     </button>
-                                    {{-- <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors" title="Edit">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                        </svg>
-                                    </button> --}}
+
                                     @if(($checklist['status'] != 'Closed' && Auth::user()->name == $checklist->personnelCheck['oba_checked_by']) || Auth::user()->role_id == 2)
+                                    <button class="p-2 text-green-600 hover:bg-red-50 rounded-lg transition-colors"
+                                            title="Add Additional Auditor"
+                                            wire:click="openAddAuditorModal({{ $checklist['id'] }})">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                                <circle cx="8.5" cy="7" r="4"/>
+                                                <path d="M20 8v6"/>
+                                                <path d="M23 11h-6"/>
+                                            </svg>
+                                    </button>
+                                    @endif
+                                    @if(($checklist['status'] != "Closed" && (Auth::user()->name == $checklist['auditor'] || Auth::user()->name == $checklist['assigned_additional_auditor'])) || Auth::user()->role_id == 2)
                                     <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                             title="Delete"
                                             wire:click="confirmDelete({{ $checklist['id'] }})">
@@ -363,6 +380,157 @@
                                     class="px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded-lg transition-colors disabled:opacity-50">
                                 <span wire:loading.remove wire:target="deleteChecklist">Delete</span>
                                 <span wire:loading wire:target="deleteChecklist">Deleting...</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if($showAddAuditorModal)
+                <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" wire:keydown.escape="closeAddAuditorModal">
+                    <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 shadow-xl max-h-[90vh] overflow-hidden flex flex-col">
+                        <div class="flex items-center mb-4">
+                            <svg class="text-green-600 mr-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="8.5" cy="7" r="4"/>
+                                <path d="M20 8v6"/>
+                                <path d="M23 11h-6"/>
+                            </svg>
+                            <h3 class="text-lg font-semibold text-gray-900">Add Auditor</h3>
+                        </div>
+
+                        <div class="flex mb-6">
+                            <svg class="text-yellow-600 mr-4 flex-shrink-0 mt-1" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+                            </svg>
+                            <p class="text-gray-600">Picking an additional auditor means that you are allowing them to edit your unfinished checklist.</p>
+                        </div>
+
+                        <!-- Search Bar -->
+                        <div class="mb-4">
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    wire:model.live="search"
+                                    placeholder="Search by name or email..."
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                >
+                                <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- User Selection Table -->
+                        <div class="flex-1 overflow-hidden">
+                            <div class="overflow-y-auto max-h-80">
+                                @if($availableUsers->count() > 0)
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50 sticky top-0">
+                                            <tr>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Select
+                                                </th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Name
+                                                </th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Email
+                                                </th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Role
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            @foreach($availableUsers as $user)
+                                                <tr class="hover:bg-gray-50 cursor-pointer {{ $selectedAuditor == $user->name ? 'bg-green-50 ring-2 ring-green-500' : '' }}"
+                                                    wire:click="selectAuditor({{ $user->name }})">
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            <input
+                                                                type="radio"
+                                                                name="selectedAuditor"
+                                                                value="{{ $user->name }}"
+                                                                {{ $selectedAuditor == $user->name ? 'checked' : '' }}
+                                                                class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 cursor-pointer"
+                                                                wire:model.live="selectedAuditor"
+                                                            >
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            <div class="flex-shrink-0 h-8 w-8">
+                                                                <div class="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                                                                    <span class="text-sm font-medium text-green-800">
+                                                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ml-4">
+                                                                <div class="text-sm font-medium text-gray-900">
+                                                                    {{ $user->name }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm text-gray-900">{{ $user->email }}</div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                            {{ $user->role->name ?? 'User' }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="text-center py-8">
+                                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                                        </svg>
+                                        <h3 class="mt-2 text-sm font-medium text-gray-900">No users found</h3>
+                                        <p class="mt-1 text-sm text-gray-500">Try adjusting your search criteria.</p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Selected User Info -->
+                        @if($selectedAuditor != "")
+                            @php
+
+                                $selectedUser = $availableUsers->where('name', $selectedAuditor)->first();
+                            @endphp
+                            @if($selectedUser)
+                                <div class="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                                    <div class="flex items-center">
+                                        <svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                        </svg>
+                                        <span class="text-sm font-medium text-green-800">Selected: {{ $selectedUser->name }} ({{ $selectedUser->email }})</span>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+
+                        <!-- Action Buttons -->
+                        <div class="flex justify-end gap-3 mt-6">
+                            <button wire:click="closeAddAuditorModal"
+                                    class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                                Cancel
+                            </button>
+                            <button wire:click="addAuditor({{ $checklistInfo->id }})"
+                                    wire:loading.attr="disabled"
+                                    wire:target="addAuditor"
+                                    class="px-4 py-2 bg-green-600 text-white hover:bg-green-700 rounded-lg transition-colors disabled:opacity-50 {{ !$selectedAuditor ? 'opacity-50 cursor-not-allowed' : '' }}"
+                                    {{ !$selectedAuditor ? 'disabled' : '' }}>
+                                <span wire:loading.remove wire:target="addAuditor">Add Auditor</span>
+                                <span wire:loading wire:target="addAuditor">Adding...</span>
                             </button>
                         </div>
                     </div>

@@ -43,73 +43,73 @@
                         <livewire:auth.login-form />
                     </div>
                     @else
-                    <div class="flex">
-                    <div class="relative z-10 px-4 pb-20">
-                        <div class="max-w-md mx-auto text-center">
-                            <div class="card-hover-effect rounded-3xl p-8">
-                                <h3 class="text-2xl font-bold text-white mb-6">
-                                    Quickly Start Your Audit
-                                </h3>
-                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <a href="{{ route('checklist') }}" class="animated-button w-full sm:w-auto inline-flex">
-                                        <div class="circle"></div>
-                                        <svg viewBox="0 0 24 24" class="arr-2">
-                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                                        </svg>
-                                        <span class="text mr-2">Start OBA</span>
-                                        <svg viewBox="0 0 24 24" class="arr-1">
-                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                                        </svg>
-                                    </a>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="relative z-10 px-4">
+                            <div class="max-w-md mx-auto text-center">
+                                <div class="card-hover-effect rounded-3xl p-8">
+                                    <h3 class="text-2xl font-bold text-white mb-6">
+                                        Quickly Start Your Audit
+                                    </h3>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                        <a href="{{ route('checklist') }}" class="animated-button w-full sm:w-auto inline-flex">
+                                            <div class="circle"></div>
+                                            <svg viewBox="0 0 24 24" class="arr-2">
+                                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                            </svg>
+                                            <span class="text mr-2">Start OBA</span>
+                                            <svg viewBox="0 0 24 24" class="arr-1">
+                                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="relative z-10 px-4 pb-20">
-                        <div class="max-w-md mx-auto text-center">
-                            <div class="card-hover-effect rounded-3xl p-8">
-                                <h3 class="text-2xl font-bold text-white mb-6">
-                                    View All Audit Checklist Available
-                                </h3>
-                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <a href="{{ route('viewlist') }}" class="animated-button w-full sm:w-auto inline-flex">
-                                        <div class="circle"></div>
-                                        <svg viewBox="0 0 24 24" class="arr-2">
-                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                                        </svg>
-                                        <span class="text mr-2">View Audit List</span>
-                                        <svg viewBox="0 0 24 24" class="arr-1">
-                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                                        </svg>
-                                    </a>
+                        <div class="relative z-10 px-4">
+                            <div class="max-w-md mx-auto text-center">
+                                <div class="card-hover-effect rounded-3xl p-8">
+                                    <h3 class="text-2xl font-bold text-white mb-6">
+                                        View All Audit Checklist Available
+                                    </h3>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                        <a href="{{ route('viewlist') }}" class="animated-button w-full sm:w-auto inline-flex">
+                                            <div class="circle"></div>
+                                            <svg viewBox="0 0 24 24" class="arr-2">
+                                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                            </svg>
+                                            <span class="text mr-2">View Audit List</span>
+                                            <svg viewBox="0 0 24 24" class="arr-1">
+                                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="relative z-10 px-4 pb-20">
-                        <div class="max-w-md mx-auto text-center">
-                            <div class="card-hover-effect rounded-3xl p-8">
-                                <h3 class="text-2xl font-bold text-white mb-6">
-                                    Configure Website Settings
-                                </h3>
-                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <a href="{{ route('settings') }}" class="animated-button w-full sm:w-auto inline-flex">
-                                        <div class="circle"></div>
-                                        <svg viewBox="0 0 24 24" class="arr-2">
-                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                                        </svg>
-                                        <span class="text mr-2">View Settings</span>
-                                        <svg viewBox="0 0 24 24" class="arr-1">
-                                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                                        </svg>
-                                    </a>
+                        <div class="relative z-10 px-4">
+                            <div class="max-w-md mx-auto text-center">
+                                <div class="card-hover-effect rounded-3xl p-8">
+                                    <h3 class="text-2xl font-bold text-white mb-6">
+                                        Configure Website Settings
+                                    </h3>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                        <a href="{{ route('settings') }}" class="animated-button w-full sm:w-auto inline-flex">
+                                            <div class="circle"></div>
+                                            <svg viewBox="0 0 24 24" class="arr-2">
+                                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                            </svg>
+                                            <span class="text mr-2">View Settings</span>
+                                            <svg viewBox="0 0 24 24" class="arr-1">
+                                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                     @endguest
-                    <p class="text-lg text-white/70 max-w-2xl mx-auto">
+                    <p class="text-lg text-white/70 max-w-2xl mx-auto mt-20">
                         Streamline your auditing process with our platform for creating, managing, and analyzing audit forms.
                     </p>
                 </div>

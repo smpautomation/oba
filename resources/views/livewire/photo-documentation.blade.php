@@ -34,7 +34,7 @@
                 <!-- Photo Upload Section -->
                 <div class="space-y-6">
                     <!-- Upload Area -->
-                    @if(($checklistInfo->status != "Closed" && Auth::user()->name == $checklistInfo->auditor) || Auth::user()->role_id == 2)
+                    @if(($checklistInfo->status != "Closed" && (Auth::user()->name == $checklistInfo->auditor || Auth::user()->name == $checklistInfo->assigned_additional_auditor)) || Auth::user()->role_id == 2)
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors duration-200 bg-gray-50 hover:bg-blue-50">
                         <svg class="mx-auto h-8 w-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -137,7 +137,7 @@
                                                 >
                                                     View
                                                 </button>
-                                                @if(($checklistInfo->status != "Closed" && Auth::user()->name == $checklistInfo->auditor) || Auth::user()->role_id == 2)
+                                                @if(($checklistInfo->status != "Closed" && (Auth::user()->name == $checklistInfo->auditor || Auth::user()->name == $checklistInfo->assigned_additional_auditor)) || Auth::user()->role_id == 2)
                                                 <button
                                                     wire:click="removePhoto({{ $index }})"
                                                     wire:confirm="Are you sure you want to delete this photo?"

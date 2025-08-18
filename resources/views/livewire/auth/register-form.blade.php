@@ -1,5 +1,5 @@
 <div class="max-w-2xl mx-auto">
-    <div class="card-hover-effect rounded-3xl p-8 bg-white/10 border border-white/20 shadow-2xl">
+    <div class="card-hover-effect rounded-3xl p-4 bg-white/10 border border-white/20 shadow-2xl">
         <!-- Header Section -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 mb-4 glow-effect">
@@ -10,9 +10,6 @@
             <h3 class="text-3xl font-bold text-shimmer mb-3">
                 Create Your Account
             </h3>
-            <p class="text-white/70 text-lg">
-                Join our platform and start your audit journey
-            </p>
         </div>
 
         <form wire:submit="register" class="space-y-6">

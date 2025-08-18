@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id', false)->primary()->onDelete('cascade');
             $table->string('status')->default('Open');
             $table->string('auditor')->default('');
+            $table->string('assigned_additional_auditor')->default('');
             $table->string('model');
             $table->string('section');
             $table->boolean("scanned_qr_pc")->default(true);

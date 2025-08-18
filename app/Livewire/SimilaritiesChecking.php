@@ -173,7 +173,7 @@ class SimilaritiesChecking extends Component
             $this->userIP = $userIP;
             $this->checklist_id = $checklist_id;
             $this->checklistInfo = Checklist::find($checklist_id);
-            if(Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->role_id != 2){
+            if((Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->name != $this->checklistInfo->assigned_additional_auditor) && Auth::user()->role_id != 2){
                 $this->checklistInfo->status = "Closed";
             }
             $this->sir_qs = $this->checklistInfo->sir_qs ? true : false;

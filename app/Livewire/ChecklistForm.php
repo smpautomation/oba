@@ -32,7 +32,7 @@ class ChecklistForm extends Component
         try{
             $this->model_id = $model_id;
             $this->checklistInfo = Checklist::find($model_id);
-            if(Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->role_id != 2){
+            if((Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->name != $this->checklistInfo->assigned_additional_auditor) && Auth::user()->role_id != 2){
                 $this->checklistInfo->status = "Closed";
             }
             $this->scanned_qr_pc = $this->checklistInfo->scanned_qr_pc ? true : false;
