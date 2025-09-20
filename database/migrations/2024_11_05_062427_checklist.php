@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('assigned_additional_auditor')->default('');
             $table->string('model');
             $table->string('section');
+            $table->boolean("mc_checklist_pc")->default(true);
             $table->boolean("scanned_qr_pc")->default(true);
             $table->boolean("sir_qs")->default(true);
             $table->boolean("vmi_mn")->default(true);

@@ -86,6 +86,7 @@ class SectionForm extends Component
                 'auditor' => Auth::user()->name,
                 'model' => $this->selectedModel,
                 'section' => $this->selectedSection,
+                'mc_checklist_pc' => $model_settings->mc_checklist_pc ? true : false,
                 'scanned_qr_pc' => $model_settings->scanned_qr_pc ? true : false,
                 'sir_qs' => $model_settings->sir_qs ? true : false,
                 'vmi_mn' => $model_settings->vmi_mn ? true : false,
