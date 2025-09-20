@@ -487,6 +487,21 @@
                     <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
                         <div class="flex items-center justify-between">
                             <div>
+                                <h3 class="font-medium text-gray-900">MC Receiving Checklist</h3>
+                                <p class="text-sm text-gray-500">Require MC Receiving Checklist during preparation checklist</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" wire:model.live="mc_checklist_pc">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
                                 <h3 class="font-medium text-gray-900">Scanned QR Code</h3>
                                 <p class="text-sm text-gray-500">Require QR code scanning during preparation checklist</p>
                             </div>

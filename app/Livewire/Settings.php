@@ -34,6 +34,7 @@ class Settings extends Component
 
     // properties for model settings
     public $selectedModel = '';
+    public $mc_checklist_pc = true;
     public $scanned_qr_pc = true;
     public $sir_qs = true;
     public $vmi_mn = true;
@@ -144,6 +145,7 @@ class Settings extends Component
             $modelData = model_settings::where('model_name', $value)->first();
 
             if ($modelData) {
+                $this->mc_checklist_pc = (bool) $modelData->mc_checklist_pc;
                 $this->scanned_qr_pc = (bool) $modelData->scanned_qr_pc;
                 $this->sir_qs = (bool) $modelData->sir_qs;
                 $this->vmi_mn = (bool) $modelData->vmi_mn;
@@ -170,6 +172,7 @@ class Settings extends Component
 
     private function resetSettings()
     {
+        $this->mc_checklist_pc = true;
         $this->scanned_qr_pc = true;
         $this->sir_qs = true;
         $this->vmi_mn = true;
@@ -196,6 +199,7 @@ class Settings extends Component
 
             if ($modelData) {
                 $modelData->update([
+                    'mc_checklist_pc' => $this->mc_checklist_pc,
                     'scanned_qr_pc' => $this->scanned_qr_pc,
                     'sir_qs' => $this->sir_qs,
                     'vmi_mn' => $this->vmi_mn,

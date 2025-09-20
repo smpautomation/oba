@@ -22,6 +22,7 @@ return new class extends Migration
                 ->on('section')
                 ->onUpdate('cascade');
             $table->string('model_name', 191)->index();
+            $table->boolean("mc_checklist_pc")->default(false);
             $table->boolean("scanned_qr_pc")->default(false);
             $table->boolean("sir_qs")->default(false);
             $table->boolean("vmi_mn")->default(false);
