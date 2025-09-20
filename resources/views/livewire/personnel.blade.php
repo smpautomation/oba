@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto px-4 mt-6 bg-white rounded-xl py-4">
+<div class="max-w-6xl mx-auto px-4 mt-6 bg-white rounded-xl py-4" >
     <div class="bg-white rounded-3xl card-shadow overflow-hidden">
         <!-- Enhanced Header -->
         <div class="gradient-bg text-white px-8 py-6">
@@ -81,6 +81,7 @@
                                 @if($checklistInfo->status == "Closed")
                                 disabled
                                 @endif
+                                autocomplete="off" spellcheck="false"
                             />
                         </div>
                     </div>

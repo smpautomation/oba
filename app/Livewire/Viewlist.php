@@ -205,28 +205,40 @@ class Viewlist extends Component
 
     public function deleteChecklist()
     {
-        if ($this->checklistToDelete) {
-            $checklist = checklist::find($this->checklistToDelete);
-            if ($checklist) {
-                $checklist->delete();
-                session()->flash('message', 'Checklist deleted successfully.');
-                AppLog::create([
-                    'LogName' => 'User Action',
-                    'LogType' => 'info',
-                    'action' => 'viewlist_delete',
-                    'description' => '{"specific_action":"Delete Checklist '.$this->checklistToDelete.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
-                ]);
-                $this->resetPage(); // Reset to first page after deletion
-            } else {
-                session()->flash('error', 'Checklist not found.');
-                AppLog::create([
-                    'LogName' => 'User Action',
-                    'LogType' => 'error',
-                    'action' => 'viewlist_delete',
-                    'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Not Found", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
-                ]);
+        try
+        {
+            if ($this->checklistToDelete) {
+                $checklist = checklist::find($this->checklistToDelete);
+                if ($checklist) {
+                    $checklist->delete();
+                    session()->flash('message', 'Checklist deleted successfully.');
+                    AppLog::create([
+                        'LogName' => 'User Action',
+                        'LogType' => 'info',
+                        'action' => 'viewlist_delete',
+                        'description' => '{"specific_action":"Delete Checklist '.$this->checklistToDelete.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
+                    ]);
+                    $this->resetPage(); // Reset to first page after deletion
+                } else {
+                    session()->flash('error', 'Checklist not found.');
+                    AppLog::create([
+                        'LogName' => 'User Action',
+                        'LogType' => 'error',
+                        'action' => 'viewlist_delete',
+                        'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Not Found", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
+                    ]);
+                }
             }
+        }catch(\Exception $e)
+        {
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'error',
+                'action' => 'viewlist_delete',
+                'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Has Error", "Error":"'. $e .',  user":"'. Auth::user()->name.'"}'
+            ]);
         }
+
 
         $this->closeDeleteModal();
     }

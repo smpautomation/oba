@@ -250,6 +250,7 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="Enter document name"
                             wire:keydown.enter="confirmRename"
+                            autocomplete="off" spellcheck="false"
                         />
                         <p class="text-xs text-gray-500 mt-1">
                             The file extension will be added automatically

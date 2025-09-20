@@ -1,4 +1,4 @@
-<div class="bg-slate-200">
+<div class="bg-slate-200 no-select" x-data x-on:copy.prevent x-on:paste.prevent x-on:cut.prevent x-on:contextmenu.prevent x-on:selectstart.prevent>
 
     <form wire:submit='doNothing'>
 

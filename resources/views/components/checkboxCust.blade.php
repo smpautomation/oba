@@ -16,5 +16,6 @@
         {{ $attributes->except('class') }}
         type="checkbox"
         class="custom-checkbox {{ $borderClass }} "
-        {{ $status }}>
+        {{ $status }}
+        autocomplete="off" spellcheck="false">
 </div>

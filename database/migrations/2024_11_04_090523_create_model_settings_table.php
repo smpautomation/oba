@@ -22,22 +22,22 @@ return new class extends Migration
                 ->on('section')
                 ->onUpdate('cascade');
             $table->string('model_name', 191)->index();
-            $table->boolean("scanned_qr_pc")->default(true);
-            $table->boolean("sir_qs")->default(true);
-            $table->boolean("vmi_mn")->default(true);
-            $table->boolean("sir_mn")->default(true);
-            $table->boolean("sir_mc")->default(true);
-            $table->boolean("vmi_mc")->default(true);
-            $table->boolean("specific_label_mc")->default(true);
-            $table->boolean("sir_pn")->default(true);
-            $table->boolean("vmi_pn")->default(true);
-            $table->boolean("sci_label_pn")->default(true);
-            $table->boolean("qr_qa_pn")->default(true);
-            $table->boolean("qr_mc_pn")->default(true);
-            $table->boolean("qr_mgtz_pn")->default(true);
-            $table->boolean("sir_po")->default(true);
-            $table->boolean("vmi_po")->default(true);
-            $table->boolean("specific_label_po")->default(true);
+            $table->boolean("scanned_qr_pc")->default(false);
+            $table->boolean("sir_qs")->default(false);
+            $table->boolean("vmi_mn")->default(false);
+            $table->boolean("sir_mn")->default(false);
+            $table->boolean("sir_mc")->default(false);
+            $table->boolean("vmi_mc")->default(false);
+            $table->boolean("specific_label_mc")->default(false);
+            $table->boolean("sir_pn")->default(false);
+            $table->boolean("vmi_pn")->default(false);
+            $table->boolean("sci_label_pn")->default(false);
+            $table->boolean("qr_qa_pn")->default(false);
+            $table->boolean("qr_mc_pn")->default(false);
+            $table->boolean("qr_mgtz_pn")->default(false);
+            $table->boolean("sir_po")->default(false);
+            $table->boolean("vmi_po")->default(false);
+            $table->boolean("specific_label_po")->default(false);
             $table->timestamps();
         });
     }

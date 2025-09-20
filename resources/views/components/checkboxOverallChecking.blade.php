@@ -19,5 +19,6 @@
         {{ $attributes }}
         type="checkbox"
         class="{{ $finalClasses }}"
-        {{ $status }}>
+        {{ $status }}
+        autocomplete="off" spellcheck="false">
 </div>

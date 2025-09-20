@@ -38,6 +38,7 @@
                         {{-- @if($checklistInfo->status == "Closed") --}}
                         disabled
                         {{-- @endif --}}
+                        autocomplete="off" spellcheck="false"
                     />
                 </div>
                 <div class="flex items-center justify-center">
@@ -73,6 +74,7 @@
                         disabled
                         class="custom-input block w-full px-4 py-3 rounded-lg shadow-sm sm:text-sm"
                         placeholder="Model name will appear here"
+                        autocomplete="off" spellcheck="false"
                     />
                     <p class="mt-1 text-xs text-gray-500">This field is auto-populated</p>
                 </div>

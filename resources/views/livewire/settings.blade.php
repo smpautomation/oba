@@ -164,6 +164,7 @@
                                         wire:model="newModelName"
                                         placeholder="Enter model name..."
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                        autocomplete="off" spellcheck="false"
                                     >
                                     @error('newModelName')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -322,6 +323,7 @@
                                         wire:model="newSectionName"
                                         placeholder="Enter section name..."
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                        autocomplete="off" spellcheck="false"
                                     >
                                     @error('newSectionName')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>

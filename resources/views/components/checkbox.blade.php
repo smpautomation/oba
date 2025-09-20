@@ -17,5 +17,6 @@
         {{ $attributes }}
         type="checkbox"
         class="custom-checkbox {{ $ml ? 'ml-3' : '' }} {{ $borderClass }} "
-        {{ $status }}>
+        {{ $status }}
+        autocomplete="off" spellcheck="false">
 </div>

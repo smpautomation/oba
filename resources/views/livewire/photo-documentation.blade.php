@@ -47,6 +47,7 @@
                                 capture="environment"
                                 wire:model="photo"
                                 class="hidden"
+                                autocomplete="off" spellcheck="false"
                             />
                             <div class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 text-sm">
                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,6 +200,7 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="Enter photo name"
                             wire:keydown.enter="confirmRename"
+                            autocomplete="off" spellcheck="false"
                         />
                         <p class="text-xs text-gray-500 mt-1">
                             The file extension will be added automatically

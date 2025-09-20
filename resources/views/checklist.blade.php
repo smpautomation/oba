@@ -14,7 +14,7 @@
 
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        
+
         <livewire:navbar>
 
         @if (isset($id))
@@ -22,9 +22,10 @@
         @else
             <livewire:sectionForm lazy>
         @endif
-        
+
         <x-footer></x-footer>
-        
+
+        <script src="{{ asset('js/disableInputsCopyPaste.js') }}" defer></script>
     </body>
-    
+
 </html>

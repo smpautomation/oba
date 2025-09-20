@@ -18,5 +18,6 @@
         {{ $attributes }}
         type="radio"
         class="{{ $finalClasses }}"
-        {{ $status }}>
+        {{ $status }}
+        >
 </div>1

@@ -22,4 +22,5 @@
     placeholder="00000000"
     class="{{ $finalClasses }}"
     {{ $status }}
+    autocomplete="off" spellcheck="false"
 />

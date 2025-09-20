@@ -26,6 +26,7 @@ $status = '';
         min='0'
         required
         {{ $status }}
+        autocomplete="off" spellcheck="false"
         />
     <div class="absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs text-gray-400 space-x-1 rtl:space-x-reverse">
         <span>{{ $slot }}</span>

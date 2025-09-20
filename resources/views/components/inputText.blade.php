@@ -22,4 +22,5 @@
     type="text"
     class="{{ $finalClasses }}"
     {{ $status }}
+    autocomplete="off" spellcheck="false"
 />

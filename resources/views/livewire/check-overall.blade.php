@@ -393,6 +393,8 @@
                                 @if($checklistInfo->status == "Closed")
                                 disabled
                                 @endif
+                                autocomplete="off"
+                                spellcheck="false"
                             />
                         </div>
                     </div>
