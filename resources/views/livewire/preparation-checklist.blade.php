@@ -27,9 +27,11 @@
                             Status
                         </div>
                     </th>
+                    @if ($mc_checklist_pc)
                     <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[140px]">
                         <div class="text-xs uppercase tracking-wide leading-tight">MC Receiving<br/>Checklist</div>
                     </th>
+                    @endif
                     <th class="px-3 py-4 text-center font-semibold text-gray-700 min-w-[100px]">
                         <div class="text-xs uppercase tracking-wide">OBA Kit</div>
                     </th>
@@ -67,9 +69,11 @@
                             COMPLETE
                         </div>
                     </td>
+                    @if ($mc_checklist_pc)
                     <td class="px-3 py-6 text-center">
                         <x-checkbox id="oneprep2column" value="1" wire:model="inputs.oneprep2column" wire:focusout="dispatchMe('oneprep2column')" :inputStatus="$inputStatus['oneprep2column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
+                    @endif
                     <td class="px-3 py-6 text-center">
                         <x-checkbox id="1-prep-3column" value="1" wire:model="inputs.oneprep3column" wire:focusout="dispatchMe('oneprep3column')" :inputStatus="$inputStatus['oneprep3column']" :closingStatus="$checklistInfo->status"></x-checkbox>
                     </td>
@@ -108,9 +112,11 @@
                             REMARKS
                         </div>
                     </td>
+                    @if ($mc_checklist_pc)
                     <td class="px-2 py-4">
                         <x-inputText id="1-prep-1remarks" wire:model="inputs.oneprep2remarks" wire:focusout="dispatchMe('oneprep2remarks')" :inputStatus="$inputStatus['oneprep2remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
+                    @endif
                     <td class="px-2 py-4">
                         <x-inputText id="1-prep-2remarks" wire:model="inputs.oneprep3remarks" wire:focusout="dispatchMe('oneprep3remarks')" :inputStatus="$inputStatus['oneprep3remarks']" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[44px]" placeholder="Add remarks..." :closingStatus="$checklistInfo->status"></x-inputText>
                     </td>
