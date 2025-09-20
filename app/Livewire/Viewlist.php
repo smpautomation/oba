@@ -216,7 +216,7 @@ class Viewlist extends Component
                         'LogName' => 'User Action',
                         'LogType' => 'info',
                         'action' => 'viewlist_delete',
-                        'description' => '{"specific_action":"Delete Checklist '.$this->checklistToDelete.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
+                        'description' => '{"specific_action":"Delete Checklist '.$this->checklistToDelete.'",  user":"'. Auth::user()->name.'"}'
                     ]);
                     $this->resetPage(); // Reset to first page after deletion
                 } else {
@@ -225,7 +225,7 @@ class Viewlist extends Component
                         'LogName' => 'User Action',
                         'LogType' => 'error',
                         'action' => 'viewlist_delete',
-                        'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Not Found", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
+                        'description' => '{"specific_action":"Selected Checklist '.$this->checklistToDelete.' Not Found",  user":"'. Auth::user()->name.'"}'
                     ]);
                 }
             }
