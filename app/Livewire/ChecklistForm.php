@@ -22,6 +22,7 @@ class ChecklistForm extends Component
     public $checklistInfo;
     public $model_id = "";
     public $scanned_qr_pc = true;
+    public $mc_checklist_pc = true;
     public $userIP;
     public $showSummary = false;
     public $summaryData = [];
@@ -36,6 +37,7 @@ class ChecklistForm extends Component
                 $this->checklistInfo->status = "Closed";
             }
             $this->scanned_qr_pc = $this->checklistInfo->scanned_qr_pc ? true : false;
+            $this->mc_checklist_pc = $this->checklistInfo->mc_checklist_pc ? true : false;
         }catch(\Exception $e){
             AppLog::create([
                 'LogName' => 'System',

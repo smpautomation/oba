@@ -47,8 +47,9 @@ class PreparationChecklist extends Component
     ];
 
     public $scanned_qr_code;
+    public $mc_checklist_pc;
     public $userIP;
-    public function mount($checklist_id, $scanned_qr_code, $userIP){
+    public function mount($checklist_id, $scanned_qr_code, $userIP, $mc_checklist_pc){
 
         try{
             $this->userIP = $userIP;
@@ -77,6 +78,7 @@ class PreparationChecklist extends Component
                 'oneprep9remarks' => $this->checklistInfo->prepCheck->oneprep9remarks ?? null,
                 'oneprep10remarks' => $this->checklistInfo->prepCheck->oneprep10remarks ?? null
             ];
+            $this->mc_checklist_pc = $mc_checklist_pc;
             $this->scanned_qr_code = $scanned_qr_code;
         }catch(\Exception $e){
             AppLog::create([

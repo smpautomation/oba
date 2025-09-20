@@ -20,7 +20,7 @@
                 </svg>
             </div>
         </div>
-        <livewire:preparation-checklist :checklist_id="$model_id" :scanned_qr_code="$scanned_qr_pc" :userIP="$userIP"></livewire:preparation-checklist>
+        <livewire:preparation-checklist :checklist_id="$model_id" :scanned_qr_code="$scanned_qr_pc" :mc_checklist_pc="$mc_checklist_pc" :userIP="$userIP"></livewire:preparation-checklist>
         <livewire:o-b-a-kit-checklist :checklist_id="$model_id" :userIP="$userIP"></livewire:o-b-a-kit-checklist>
         <livewire:shipment-information :checklist_id="$model_id" :userIP="$userIP"></livewire:shipment-information>
         <livewire:check-items :checklist_id="$model_id" :userIP="$userIP"></livewire:check-items>
