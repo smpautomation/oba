@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        model_settings::factory(10)->create();
-        Sections::factory(10)->create();
+        // model_settings::factory(10)->create();
+        // Sections::factory(10)->create();
         $this->call([
             RoleSeeder::class,
         ]);

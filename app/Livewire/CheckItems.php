@@ -71,6 +71,11 @@ class CheckItems extends Component
             $this->inputs['carton_quantity'] = 0;
         }
 
+        // Reset sir_available when need_sir is changed to "NO"
+        if ($field === 'need_sir' && ($this->inputs['need_sir'] === "0" || $this->inputs['need_sir'] === 0 || $this->inputs['need_sir'] === false)) {
+            $this->inputs['sir_available'] = null;
+        }
+
         DB::beginTransaction();
         try{
             //dd($param);
@@ -116,5 +121,10 @@ class CheckItems extends Component
     public function getShowModelDetailsProperty()
     {
         return $this->inputs['same_model'] === "0" || $this->inputs['same_model'] === 0 || $this->inputs['same_model'] === false;
+    }
+
+    public function getShowSirAvailabilityProperty()
+    {
+        return $this->inputs['need_sir'] === "1" || $this->inputs['need_sir'] === 1 || $this->inputs['need_sir'] === true;
     }
 }

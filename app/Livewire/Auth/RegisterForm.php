@@ -17,7 +17,7 @@ class RegisterForm extends Component
     public $email = '';
     public $password = '';
     public $password_confirmation = '';
-    public $role_id; // Will be set to user role ID
+    public $role_id;
     public $terms_accepted = false;
 
     protected function rules()
@@ -25,7 +25,7 @@ class RegisterForm extends Component
         return [
             'name' => 'required|string|max:255|min:2',
             'id_number' => 'required|string|unique:users,id_number|max:50',
-            'email' => 'required|string|email|max:255|unique:users,email',
+            'email' => 'required|string|email|max:255',
             'password' => ['required', 'string', 'confirmed', Password::min(6)],
         ];
     }
@@ -37,7 +37,6 @@ class RegisterForm extends Component
         'id_number.unique' => 'This ID number is already registered.',
         'email.required' => 'Email address is required.',
         'email.email' => 'Please enter a valid email address.',
-        'email.unique' => 'This email address is already registered.',
         'password.required' => 'Password is required.',
         'password.confirmed' => 'Password confirmation does not match.',
         'password.min' => 'Password must be at least 6 characters.',
@@ -45,7 +44,6 @@ class RegisterForm extends Component
 
     public function mount()
     {
-        // Set default role to 'user'
         $userRole = Role::where('name', 'user')->first();
         $this->role_id = $userRole ? $userRole->id : 1;
     }
@@ -76,7 +74,7 @@ class RegisterForm extends Component
                 'LogName' => 'User Action',
                 'LogType' => 'info',
                 'action' => 'register',
-                'description' => '{"specific_action":"Logged In", "user":"'. Auth::user()->name .'"}'
+                'description' => '{"specific_action":"Signed Up", "user":"'. Auth::user()->name .'"}'
             ]);
 
             session()->flash('success', 'Welcome! Your account has been created successfully.');
@@ -85,6 +83,12 @@ class RegisterForm extends Component
             return $this->redirect(route('login'), navigate: true);
 
         } catch (\Exception $e) {
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'info',
+                'action' => 'register',
+                'description' => '{"specific_action":"Error in registration", "message":"'.$e.'"}'
+            ]);
             session()->flash('error', 'Something went wrong. Please try again.');
             return;
         }

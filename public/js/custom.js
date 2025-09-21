@@ -22,11 +22,11 @@ function isMobile() {
       try {
         document.getElementById('current-time').textContent = timeString;
       } catch (error) {
-        
+
       }
-      
+
   }
-  
+
   // Update time every second
   setInterval(updateCurrentTime, 1000);
   updateCurrentTime();
@@ -37,24 +37,24 @@ function isMobile() {
       menu.classList.toggle('hidden');
       menu.classList.toggle('visible');
   }
-  
+
   // Close mobile menu function
   function closeMobileMenu() {
       const menu = document.getElementById('navbar-cta');
       menu.classList.add('hidden');
       menu.classList.remove('visible');
   }
-  
+
   // Close mobile menu when clicking outside
   document.addEventListener('click', function(event) {
       const menu = document.getElementById('navbar-cta');
       const menuButton = document.querySelector('[data-collapse-toggle="navbar-cta"]');
-      
-      if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
-          closeMobileMenu();
-      }
+
+    //   if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
+    //       closeMobileMenu();
+    //   }
   });
-  
+
   // Handle keyboard navigation
   document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
@@ -64,4 +64,3 @@ function isMobile() {
 
 
 
-  

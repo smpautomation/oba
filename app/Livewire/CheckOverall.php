@@ -157,7 +157,8 @@ class CheckOverall extends Component
             $addOneMonth = clone $expirationDate;
 
             $addOneMonth->add(new DateInterval('P1M'));
-            if($addOneMonth < $today){
+
+            if($addOneMonth < $today &&  $this->checklistInfo->shipInfoCheck->wood){
                 $this->showNoticeModal = true;
             }
         }

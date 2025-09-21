@@ -249,7 +249,8 @@
                 </div>
             </div>
 
-            <!-- SIR Availability -->
+            <!-- SIR Availability - Only show when need_sir is YES (1/true) -->
+            @if($this->getShowSirAvailabilityProperty())
             <div id="sir-availability">
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
                     <x-label class="block text-base font-medium text-blue-800 mb-4">IF YES, IS IT AVAILABLE?</x-label>
@@ -291,6 +292,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 

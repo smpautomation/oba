@@ -11,6 +11,7 @@ class model_settings extends Model
     protected $fillable = [
         'section_id',
         'model_name',
+        'mc_checklist_pc',
         'scanned_qr_pc',
         'sir_qs',
         'vmi_mn',
@@ -29,6 +30,7 @@ class model_settings extends Model
         'specific_label_po'
     ];
     protected $casts = [
+        'mc_checklist_pc' => 'boolean',
         'scanned_qr_pc' => 'boolean',
         'sir_qs' => 'boolean',
         'vmi_mn' => 'boolean',
