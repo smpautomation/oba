@@ -722,6 +722,18 @@
                             </label>
                         </div>
                     </div>
+                    <div class="setting-item bg-white rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">SCI Label</h3>
+                                <p class="text-sm text-gray-500">Require SCI label checking</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" wire:model.live="sci_label_po">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

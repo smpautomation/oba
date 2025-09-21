@@ -27,7 +27,8 @@ class model_settings extends Model
         'qr_mgtz_pn',
         'sir_po',
         'vmi_po',
-        'specific_label_po'
+        'specific_label_po',
+        'sci_label_po'
     ];
     protected $casts = [
         'mc_checklist_pc' => 'boolean',
@@ -47,6 +48,7 @@ class model_settings extends Model
         'sir_po' => 'boolean',
         'vmi_po' => 'boolean',
         'specific_label_po' => 'boolean',
+        'sci_label_po' => 'boolean',
     ];
 
     public function getSection(){

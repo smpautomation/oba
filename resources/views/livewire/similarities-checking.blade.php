@@ -1403,6 +1403,50 @@
                             </div>
                         </div>
                         @endif
+
+                        @if($sci_label_po)
+                        <!-- sci Label Section -->
+                        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 overflow-hidden">
+                            <div class="bg-indigo-600 px-4 py-3">
+                                <h3 class="text-white font-semibold flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm2 2V5h1v1H5zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zm2 2v-1h1v1H5zM13 3a1 1 0 00-1 1v3a1 1 0 001 1h3a1 1 0 001-1V4a1 1 0 00-1-1h-3zm1 2v1h1V5h-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    SCI LABEL
+                                </h3>
+                            </div>
+                            <div class="p-4 space-y-4">
+                                <div class="space-y-2">
+                                    <x-label for="5-ponumber-specqr-co" class="text-sm font-medium text-gray-700 flex items-center">
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-2">CUSTOMER</span>
+                                        Customer PO
+                                    </x-label>
+                                    <x-inputText
+                                        id="5-ponumber-specqr-co"
+                                        wire:model='inputs.sci_label_customer_po'
+                                        wire:focusout="dispatchMe('sci_label_customer_po')"
+                                        :inputStatus="$inputStatus['sci_label_customer_po']"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors {{ $inputComparison['sci_label_customer_po'] === 'match' ? 'bg-green-100' : ($inputComparison['sci_label_customer_po'] === 'no-match' ? 'bg-red-100' : '') }}"
+                                        :closingStatus="$checklistInfo->status">
+                                    </x-inputText>
+                                </div>
+                                <div class="space-y-2">
+                                    <x-label for="5-ponumber-specqr-oo" class="text-sm font-medium text-gray-700 flex items-center">
+                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-2">INTERNAL</span>
+                                        Our PO
+                                    </x-label>
+                                    <x-inputText
+                                        id="5-ponumber-specqr-oo"
+                                        wire:model='inputs.sci_label_smp_po'
+                                        wire:focusout="dispatchMe('sci_label_smp_po')"
+                                        :inputStatus="$inputStatus['sci_label_smp_po']"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors {{ $inputComparison['sci_label_smp_po'] === 'match' ? 'bg-green-100' : ($inputComparison['sci_label_smp_po'] === 'no-match' ? 'bg-red-100' : '') }}"
+                                        :closingStatus="$checklistInfo->status">
+                                    </x-inputText>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
 

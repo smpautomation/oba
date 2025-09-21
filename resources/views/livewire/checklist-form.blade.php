@@ -2433,7 +2433,9 @@
                                                     @if($item->internal_fg_label)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">FG Label</span>
                                                 </div>
@@ -2443,7 +2445,9 @@
                                                     @if($item->internal_specific_label)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Spec Label</span>
                                                 </div>
@@ -2453,7 +2457,9 @@
                                                     @if($item->internal_carton_condition)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Carton</span>
                                                 </div>
@@ -2463,7 +2469,9 @@
                                                     @if($item->internal_magnet_pack)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Magnet Pack</span>
                                                 </div>
@@ -2473,7 +2481,9 @@
                                                     @if($item->internal_magnet_pack)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Magnet Condition</span>
                                                 </div>
@@ -2483,7 +2493,9 @@
                                                     @if($item->internal_dessicant)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Dessicant</span>
                                                 </div>
@@ -2494,8 +2506,11 @@
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                         <span class="text-xs text-gray-600"><strong>{{ $item->internal_spacer }}</strong> Spacer</span>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
+                                                    <span class="text-xs text-gray-600">Spacer</span>
                                                 </div>
                                                 @endif
                                                 @if(isset($item->internal_sir))
@@ -2503,7 +2518,9 @@
                                                     @if($item->internal_sir)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Specific Inspection Report</span>
                                                 </div>
@@ -2520,7 +2537,9 @@
                                                     @if($item->external_serem)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">SEREM</span>
                                                 </div>
@@ -2530,7 +2549,9 @@
                                                     @if($item->external_ship_label)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Ship Label</span>
                                                 </div>
@@ -2540,7 +2561,9 @@
                                                     @if($item->external_vmi_label)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">VMI Label</span>
                                                 </div>
@@ -2550,7 +2573,9 @@
                                                     @if($item->external_mc_label)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Box Barcode Label</span>
                                                 </div>
@@ -2560,7 +2585,9 @@
                                                     @if($item->external_delivery_sheet)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Delivery Sheet</span>
                                                 </div>
@@ -2570,7 +2597,9 @@
                                                     @if($item->external_specific_label)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Specific Label</span>
                                                 </div>
@@ -2580,7 +2609,9 @@
                                                     @if($item->external_flux_label)
                                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                                                     @else
-                                                        <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                        <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                                                            <span class="text-[8px] text-gray-700 font-medium">N/A</span>
+                                                        </div>
                                                     @endif
                                                     <span class="text-xs text-gray-600">Flux Label</span>
                                                 </div>

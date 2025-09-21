@@ -31,6 +31,7 @@ class SimilaritiesChecking extends Component
     public $sir_po = true;
     public $vmi_po = true;
     public $specific_label_po = true;
+    public $sci_label_po = true;
 
     public $inputs = [
 
@@ -96,6 +97,8 @@ class SimilaritiesChecking extends Component
         'sir_smp_po' => null,
         'specific_label_customer_po' => null,
         'specific_label_smp_po' => null,
+        'sci_label_customer_po' => null,
+        'sci_label_smp_po' => null,
         'pallet_label_customer_po' => null,
         'pallet_label_smp_po' => null,
         'same_po' => null,
@@ -164,6 +167,8 @@ class SimilaritiesChecking extends Component
         'pallet_label_smp_po' => null,
         'specific_label_customer_po' => null,
         'specific_label_smp_po' => null,
+        'sci_label_customer_po' => null,
+        'sci_label_smp_po' => null,
 
     ];
     public $userIP;
@@ -191,6 +196,7 @@ class SimilaritiesChecking extends Component
             $this->sir_po = $this->checklistInfo->sir_po ? true : false;
             $this->vmi_po = $this->checklistInfo->vmi_po ? true : false;
             $this->specific_label_po = $this->checklistInfo->specific_label_po ? true : false;
+            $this->sci_label_po = $this->checklistInfo->sci_label_po ? true : false;
             $this->inputs = [
                 'pick_list_qs' => $this->checklistInfo->similaritiesCheck->pick_list_qs ?? "",
                 'shipping_invoice_qs' => $this->checklistInfo->similaritiesCheck->shipping_invoice_qs ?? "",
@@ -251,6 +257,8 @@ class SimilaritiesChecking extends Component
                 'sir_smp_po' => $this->checklistInfo->similaritiesCheck->sir_smp_po ?? "",
                 'specific_label_customer_po' => $this->checklistInfo->similaritiesCheck->specific_label_customer_po ?? "",
                 'specific_label_smp_po' => $this->checklistInfo->similaritiesCheck->specific_label_smp_po ?? "",
+                'sci_label_customer_po' => $this->checklistInfo->similaritiesCheck->sci_label_customer_po ?? "",
+                'sci_label_smp_po' => $this->checklistInfo->similaritiesCheck->sci_label_smp_po ?? "",
                 'pallet_label_customer_po' => $this->checklistInfo->similaritiesCheck->pallet_label_customer_po ?? "",
                 'pallet_label_smp_po' => $this->checklistInfo->similaritiesCheck->pallet_label_smp_po ?? "",
                 'same_po' => $this->checklistInfo->similaritiesCheck->same_po ? true : false,
@@ -328,8 +336,8 @@ class SimilaritiesChecking extends Component
             'mn' => ['picklist_mn','shipping_invoice_mn','serem_mn','fg_label_mn','vmi_qr_mn','mc_label_mn','pallet_label_mn', 'shipping_label_mn', 'sir_mn'],
             'mc' => ['picklist_mc','shipping_invoice_mc','serem_mc','sir_mc','shipping_label_mc','vmi_label_mc','mc_barcode_mc','pallet_label_mc','specific_qr_label_mc','package_mc'],
             'pn' => ['shipping_invoice_pn','serem_pn','sir_pn','shipping_label_pn','vmi_pn','package_pn','qr_qa_pn','qr_mgtz_pn','qr_mc_pn','pallet_label_pn','sci_label_pn'], //picklist_pn
-            'customer_po' => ['serem_customer_po','shipping_label_customer_po','vmi_customer_po','sir_customer_po','pallet_label_customer_po','specific_label_customer_po'],
-            'smp_po' => ['serem_smp_po','shipping_label_smp_po','vmi_smp_po','sir_smp_po','pallet_label_smp_po','specific_label_smp_po']
+            'customer_po' => ['serem_customer_po','shipping_label_customer_po','vmi_customer_po','sir_customer_po','pallet_label_customer_po','specific_label_customer_po','sci_label_customer_po'],
+            'smp_po' => ['serem_smp_po','shipping_label_smp_po','vmi_smp_po','sir_smp_po','pallet_label_smp_po','specific_label_smp_po','sci_label_smp_po']
         ];
 
         foreach ($categories as $categoryKey => $fields) {

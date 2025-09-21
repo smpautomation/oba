@@ -35,6 +35,7 @@ return new class extends Migration
             $table->boolean("sir_po")->default(true);
             $table->boolean("vmi_po")->default(true);
             $table->boolean("specific_label_po")->default(true);
+            $table->boolean("sci_label_po")->default(true);
             $table->timestamps();
         });
 
@@ -203,6 +204,8 @@ return new class extends Migration
             $table->string('sir_smp_po')->nullable();
             $table->string('specific_label_customer_po')->nullable();
             $table->string('specific_label_smp_po')->nullable();
+            $table->string('sci_label_customer_po')->nullable();
+            $table->string('sci_label_smp_po')->nullable();
             $table->string('pallet_label_customer_po')->nullable();
             $table->string('pallet_label_smp_po')->nullable();
             $table->boolean('same_po')->nullable();

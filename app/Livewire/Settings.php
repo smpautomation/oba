@@ -51,6 +51,7 @@ class Settings extends Component
     public $sir_po = true;
     public $vmi_po = true;
     public $specific_label_po = true;
+    public $sci_label_po = true;
 
 
     //properties for section visibility
@@ -162,6 +163,7 @@ class Settings extends Component
                 $this->sir_po = (bool) $modelData->sir_po;
                 $this->vmi_po = (bool) $modelData->vmi_po;
                 $this->specific_label_po = (bool) $modelData->specific_label_po;
+                $this->sci_label_po = (bool) $modelData->sci_label_po;
             }
         } else {
             $this->resetSettings();
@@ -189,6 +191,7 @@ class Settings extends Component
         $this->sir_po = true;
         $this->vmi_po = true;
         $this->specific_label_po = true;
+        $this->sci_label_po = true;
     }
 
     public function saveConfiguration()
@@ -216,6 +219,7 @@ class Settings extends Component
                     'sir_po' => $this->sir_po,
                     'vmi_po' => $this->vmi_po,
                     'specific_label_po' => $this->specific_label_po,
+                    'sci_label_po' => $this->sci_label_po,
                 ]);
 
                 session()->flash('message', 'Configuration saved successfully!');

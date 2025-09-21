@@ -103,6 +103,7 @@ class SectionForm extends Component
                 'sir_po' => $model_settings->sir_po ? true : false,
                 'vmi_po' => $model_settings->vmi_po ? true : false,
                 'specific_label_po' => $model_settings->specific_label_po ? true : false,
+                'sci_label_po' => $model_settings->sci_label_po ? true : false,
             ]);
             preparation_checklist::create([
                 'checklist_id' => $new_id

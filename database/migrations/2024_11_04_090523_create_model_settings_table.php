@@ -39,6 +39,7 @@ return new class extends Migration
             $table->boolean("sir_po")->default(false);
             $table->boolean("vmi_po")->default(false);
             $table->boolean("specific_label_po")->default(false);
+            $table->boolean("sci_label_po")->default(false);
             $table->timestamps();
         });
     }
