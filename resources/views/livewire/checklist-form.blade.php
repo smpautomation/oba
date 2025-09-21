@@ -1,4 +1,10 @@
-<div class="bg-slate-200 no-select" x-data x-on:copy.prevent x-on:paste.prevent x-on:cut.prevent x-on:contextmenu.prevent x-on:selectstart.prevent>
+<div class="bg-slate-200 no-select"
+    x-data
+    x-on:copy.prevent
+    x-on:paste.prevent
+    x-on:cut.prevent
+    x-on:contextmenu.prevent
+    x-on:selectstart.prevent>
 
     <form wire:submit='doNothing'>
 
@@ -2711,17 +2717,21 @@
                                                 @php
                                                     $totalBoxes = $boxData->count();
                                                     $completedPallets = $summaryData['overall']->pallets->where('value', true)->count();
+
+                                                    $hasBoxData = $totalBoxes > 0;
+                                                    $hasPalletData = $completedPallets > 0;
                                                     $hasExpiration = !empty($summaryData['overall']->expiration_date);
                                                     $hasResults = !empty($summaryData['overall']->results);
 
-                                                    $totalSections = ($totalBoxes > 0 ? 1 : 0) + ($completedPallets > 0 ? 1 : 0) + ($hasExpiration ? 1 : 0) + ($hasResults ? 1 : 0);
+                                                    $totalSections = 4;
+
                                                     $completedSections = 0;
-                                                    if($totalBoxes > 0) $completedSections++;
-                                                    if($completedPallets > 0) $completedSections++;
+                                                    if($hasBoxData) $completedSections++;
+                                                    if($hasPalletData) $completedSections++;
                                                     if($hasExpiration) $completedSections++;
                                                     if($hasResults) $completedSections++;
 
-                                                    $percentage = $totalSections > 0 ? round(($completedSections / max($totalSections, 4)) * 100) : 0;
+                                                    $percentage = round(($completedSections / $totalSections) * 100);
                                                 @endphp
                                                 {{ $totalBoxes }} boxes inspected • {{ $completedPallets }} pallets verified
                                             </div>
