@@ -362,74 +362,66 @@ class SimilaritiesChecking extends Component
             }
         }
 
+        // Reset comparison for all active fields
         foreach ($activeFields as $field) {
             $this->inputComparison[$field] = null;
         }
 
+        // If less than 2 fields are filled, reset the verification radio to null
         if (count($filledFields) < 2) {
-            if ($categoryKey === 'qs') {
-                $this->inputs['same_quantity_qs'] = null;
-            } elseif ($categoryKey === 'bs') {
-                $this->inputs['same_box_bs'] = null;
-            } elseif ($categoryKey === 'mn') {
-                $this->inputs['same_model_mn'] = null;
-            } elseif ($categoryKey === 'mc') {
-                $this->inputs['same_mc'] = null;
-            } elseif ($categoryKey === 'pn') {
-                $this->inputs['same_pn'] = null;
-            } elseif ($categoryKey === 'customer_po' || $categoryKey === 'smp_po') {
-                $this->inputs['same_po'] = null;
-            }
+            $this->setVerificationRadio($categoryKey, null);
             return;
         }
 
+        // Normalize values for comparison
         $normalizedValues = [];
         foreach ($values as $value) {
             if ($categoryKey === 'mc') {
-                $normalizedValues[] = ltrim($value, '0') ?: '0'; // Keep '0' if value is all zeros
+                $normalizedValues[] = ltrim($value, '0') ?: '0';
             } else {
                 $normalizedValues[] = $value;
             }
         }
 
+        // Check if all values are the same
         $allSame = count(array_unique($normalizedValues)) === 1;
 
+        // Set comparison status for filled fields
         foreach ($filledFields as $field) {
             $this->inputComparison[$field] = $allSame ? 'match' : 'no-match';
         }
 
+        // Only set verification radio if ALL active fields are filled
         if (count($filledFields) === count($activeFields)) {
-            if ($categoryKey === 'qs') {
-                $this->inputs['same_quantity_qs'] = $allSame ? true : false;
-            } elseif ($categoryKey === 'bs') {
-                $this->inputs['same_box_bs'] = $allSame ? true : false;
-            } elseif ($categoryKey === 'mn') {
-                $this->inputs['same_model_mn'] = $allSame ? true : false;
-            } elseif ($categoryKey === 'mc') {
-                $this->inputs['same_mc'] = $allSame ? true : false;
-            } elseif ($categoryKey === 'pn') {
-                $this->inputs['same_pn'] = $allSame ? true : false;
-            } elseif ($categoryKey === 'customer_po') {
-                $this->inputs['same_po'] = $allSame ? true : false;
-            }elseif ($categoryKey === 'smp_po') {
-                $this->inputs['same_po'] = $allSame ? true : false;
-            }
+            $this->setVerificationRadio($categoryKey, $allSame);
         } else {
-            if ($categoryKey === 'qs') {
-                $this->inputs['same_quantity_qs'] = null;
-            } elseif ($categoryKey === 'bs') {
-                $this->inputs['same_box_bs'] = null;
-            } elseif ($categoryKey === 'mn') {
-                $this->inputs['same_model_mn'] = null;
-            } elseif ($categoryKey === 'mc') {
-                $this->inputs['same_mc'] = null;
-            } elseif ($categoryKey === 'pn') {
-                $this->inputs['same_pn'] = null;
-            } elseif ($categoryKey === 'customer_po') {
-                $this->inputs['same_po'] = null;
-            } elseif ($categoryKey === 'smp_po'){
-                $this->inputs['same_po'] = null;
-            }
+            // If not all fields are filled, don't auto-set the verification
+            $this->setVerificationRadio($categoryKey, null);
+        }
+    }
+
+    private function setVerificationRadio($categoryKey, $value)
+    {
+        switch ($categoryKey) {
+            case 'qs':
+                $this->inputs['same_quantity_qs'] = $value;
+                break;
+            case 'bs':
+                $this->inputs['same_box_bs'] = $value;
+                break;
+            case 'mn':
+                $this->inputs['same_model_mn'] = $value;
+                break;
+            case 'mc':
+                $this->inputs['same_mc'] = $value;
+                break;
+            case 'pn':
+                $this->inputs['same_pn'] = $value;
+                break;
+            case 'customer_po':
+            case 'smp_po':
+                $this->inputs['same_po'] = $value;
+                break;
         }
     }
 
@@ -450,18 +442,101 @@ class SimilaritiesChecking extends Component
     }
 
     private function getActiveFieldsForCategory($categoryKey, $fields)
-    {
-        if ($categoryKey === 'qs') {
-            // Filter out sir_qs if $this->sir_qs is false
+{
+    switch ($categoryKey) {
+        case 'qs':
             return array_filter($fields, function($field) {
                 if ($field === 'sir_qs') {
                     return $this->sir_qs;
                 }
                 return true;
             });
-        }
 
-        // For other categories, return all fields
-        return $fields;
+        case 'mn':
+            return array_filter($fields, function($field) {
+                if ($field === 'vmi_qr_mn') {
+                    return $this->vmi_mn;
+                }
+                if ($field === 'sir_mn') {
+                    return $this->sir_mn;
+                }
+                return true;
+            });
+
+        case 'mc':
+            return array_filter($fields, function($field) {
+                if ($field === 'sir_mc') {
+                    return $this->sir_mc;
+                }
+                if ($field === 'vmi_label_mc') {
+                    return $this->vmi_mc;
+                }
+                if ($field === 'specific_qr_label_mc') {
+                    return $this->specific_label_mc;
+                }
+                return true;
+            });
+
+        case 'pn':
+            return array_filter($fields, function($field) {
+                if ($field === 'sir_pn') {
+                    return $this->sir_pn;
+                }
+                if ($field === 'vmi_pn') {
+                    return $this->vmi_pn;
+                }
+                if ($field === 'sci_label_pn') {
+                    return $this->sci_label_pn;
+                }
+                if ($field === 'qr_qa_pn') {
+                    return $this->qr_qa_pn;
+                }
+                if ($field === 'qr_mc_pn') {
+                    return $this->qr_mc_pn;
+                }
+                if ($field === 'qr_mgtz_pn') {
+                    return $this->qr_mgtz_pn;
+                }
+                return true;
+            });
+
+        case 'customer_po':
+            return array_filter($fields, function($field) {
+                if (strpos($field, 'vmi_') === 0) {
+                    return $this->vmi_po;
+                }
+                if (strpos($field, 'sir_') === 0) {
+                    return $this->sir_po;
+                }
+                if (strpos($field, 'specific_label_') === 0) {
+                    return $this->specific_label_po;
+                }
+                if (strpos($field, 'sci_label_') === 0) {
+                    return $this->sci_label_po;
+                }
+                return true;
+            });
+
+        case 'smp_po':
+            return array_filter($fields, function($field) {
+                if (strpos($field, 'vmi_') === 0) {
+                    return $this->vmi_po;
+                }
+                if (strpos($field, 'sir_') === 0) {
+                    return $this->sir_po;
+                }
+                if (strpos($field, 'specific_label_') === 0) {
+                    return $this->specific_label_po;
+                }
+                if (strpos($field, 'sci_label_') === 0) {
+                    return $this->sci_label_po;
+                }
+                return true;
+            });
+
+        default:
+            // For categories without conditional fields (like 'bs')
+            return $fields;
     }
+}
 }

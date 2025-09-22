@@ -50,9 +50,9 @@ function isMobile() {
       const menu = document.getElementById('navbar-cta');
       const menuButton = document.querySelector('[data-collapse-toggle="navbar-cta"]');
 
-    //   if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
-    //       closeMobileMenu();
-    //   }
+      if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
+          closeMobileMenu();
+      }
   });
 
   // Handle keyboard navigation
