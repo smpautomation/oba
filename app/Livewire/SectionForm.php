@@ -76,7 +76,7 @@ class SectionForm extends Component
             if (isset($this->checklist->id)) {
                 $new_id = $this->checklist->id + 1;
             }else{
-                $new_id = Carbon::now()->format('Ym') . 1;
+                $new_id = Carbon::now()->format('Ym') . '001';
             }
 
             $model_settings = model_settings::where('model_name', $this->selectedModel)->first();
