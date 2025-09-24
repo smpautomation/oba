@@ -462,8 +462,9 @@
                 <label for="model-select" class="block text-sm font-medium text-gray-700 mb-3">Select Model</label>
                 <select id="model-select" wire:model.live="selectedModel" class="input-field select-focus w-full md:w-96 px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none bg-white">
                     <option value="">Choose a model...</option>
+
                     @foreach ($models as $model)
-                        <option value="{{ $model->model_name }}">{{ $model->model_name }}</option>
+                        <option value="{{ $model->model_name }}">{{ $model->model_name }} | {{ $model->getSection->section }}</option>
                     @endforeach
                 </select>
             </div>

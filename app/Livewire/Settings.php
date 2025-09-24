@@ -73,7 +73,7 @@ class Settings extends Component
 
     public function mount()
     {
-        $this->models = model_settings::all();
+        $this->models = model_settings::with('getSection')->get();
         $this->totalModels = $this->models->count();
         $this->filteredModels = $this->models;
         $this->sections = Sections::all();
