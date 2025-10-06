@@ -25,6 +25,7 @@ class ChecklistForm extends Component
     public $mc_checklist_pc = true;
     public $userIP;
     public $showSummary = false;
+    public $showMatrix = true;
     public $summaryData = [];
     public $canConfirm = false;
 
@@ -155,6 +156,10 @@ class ChecklistForm extends Component
     public function closeSummary(){
         $this->showSummary = false;
         $this->canConfirm = false;
+    }
+
+    public function closeMatrix(){
+        $this->showMatrix = false;
     }
 
     public function confirmFinishAudit(){

@@ -48,6 +48,24 @@
             @endif
         </div>
 
+        @if ($checklistInfo->status != 'Closed' && $showMatrix)
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="relative bg-white rounded-2xl shadow-2xl mx-4 max-h-[90vh] overflow-hidden glass-effect">
+                <button
+                    class="absolute top-4 right-4 z-10 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
+                    aria-label="Close modal"
+                    wire:click='closeMatrix'
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <img src="{{ asset('photo/OBA_Matrix.png') }}" class="max-h-[90vh] w-auto" alt="SMP Logo" />
+            </div>
+        </div>
+        @endif
+
         @if($showSummary)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" wire:click='closeSummary'>
             <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto glass-effect" wire:click.stop='doNothing'>
