@@ -1,0 +1,115 @@
+@page {
+    size: A4 landscape;
+    margin: 10mm;
+}
+
+@media print {
+    body {
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .page-break { page-break-after: always; }
+    .no-print { display: none; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.a4-landscape {
+    width: 297mm;
+    height: 210mm;
+    padding: 3mm;
+    margin: 0 auto;
+    background: white;
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #000;
+    font-size: 9px;
+}
+
+.no-border { border: none !important; }
+.thick-border { border: 2px solid #000 !important; }
+
+input[type="checkbox"] {
+    width: 10px;
+    height: 10px;
+    margin: 0 2px;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    border: 1px solid #000;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"]:checked {
+    background-color: white;
+    border: 1px solid #000;
+}
+
+input[type="checkbox"]:checked::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: -1px;
+    width: 3px;
+    height: 6px;
+    border: solid black;
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg);
+}
+
+.text-xs { font-size: 8px !important; }
+.text-sm { font-size: 9px !important; }
+.text-base { font-size: 10px !important; }
+.text-lg { font-size: 12px !important; }
+
+.bg-yellow { background-color: #FFEB3B !important; }
+.bg-gray { background-color: #E0E0E0 !important; }
+
+.warning-symbol {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.section-header {
+    background-color: #E0E0E0;
+    font-weight: bold;
+    text-align: center;
+    padding: 2px;
+}
+
+.check-item-cell {
+    text-align: center;
+    font-size: 8px;
+    padding: 1px;
+}
+
+.main-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.left-section {
+    flex: 1;
+    max-width: 65%;
+}
+
+.right-section {
+    width: 35%;
+}

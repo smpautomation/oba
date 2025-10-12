@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChecklistController;
+use App\Http\Controllers\PrintableChecklistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,10 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/viewlist', 'viewlist')->name('viewlist');
     Route::view('/checklist', 'checklist')->name('checklist');
     Route::get('checklist/{id}', [ChecklistController::class, 'showChecklist'])->name('checklist.show');
+    Route::get('print/{checklist_ID}', [PrintableChecklistController::class, 'receiveID'])->name('print');
 });
 
 // Admin-only routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::view('/settings', 'settings')->name('settings');
 });
-

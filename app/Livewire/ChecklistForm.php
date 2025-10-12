@@ -196,6 +196,10 @@ class ChecklistForm extends Component
 
     }
 
+    public function printChecklistForm(){
+        return redirect()->to('/print/' . $this->model_id);
+    }
+
     public function render()
     {
         return view('livewire.checklist-form');

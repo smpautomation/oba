@@ -42,7 +42,7 @@ class CheckItems extends Component
                 'same_model' => $this->checklistInfo->checkItemsCheck->same_model ?? null,
                 'specify_model' => $this->checklistInfo->checkItemsCheck->specify_model ?? "",
                 'judgement' => $this->checklistInfo->checkItemsCheck->judgement ? true : false,
-                'carton_quantity' => $this->checklistInfo->checkItemsCheck->carton_quantity ?? 1,
+                'carton_quantity' => $this->checklistInfo->checkItemsCheck->carton_quantity ? $this->checklistInfo->checkItemsCheck->carton_quantity : 1,
                 'need_sir' => $this->checklistInfo->checkItemsCheck->need_sir ? true : false,
                 'sir_available' => $this->checklistInfo->checkItemsCheck->sir_available ? true : false,
             ];
