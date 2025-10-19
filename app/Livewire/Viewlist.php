@@ -258,10 +258,10 @@ class Viewlist extends Component
     public function loadAvailableUsers()
     {
         $this->availableUsers = User::where('name', '!=', $this->checklistInfo->auditor)
-            ->when($this->search, function($query) {
+            ->when($this->searchAuditor, function($query) {
                 $query->where(function($q) {
-                    $q->where('name', 'like', '%' . $this->search . '%')
-                      ->orWhere('email', 'like', '%' . $this->search . '%');
+                    $q->where('name', 'like', '%' . $this->searchAuditor . '%')
+                      ->orWhere('email', 'like', '%' . $this->searchAuditor . '%');
                 });
             })
             ->orderBy('name')
@@ -273,14 +273,14 @@ class Viewlist extends Component
         $this->checklistInfo = checklist::find($checklistId);
         $this->showAddAuditorModal = true;
         $this->selectedAuditor = null;
-        $this->search = '';
+        $this->searchAuditor = '';
         $this->loadAvailableUsers();
     }
     public function closeAddAuditorModal()
     {
         $this->showAddAuditorModal = false;
         $this->selectedAuditor = null;
-        $this->search = '';
+        $this->searchAuditor = '';
         $this->availableUsers = [];
     }
     public function selectAuditor($userName)
@@ -288,7 +288,7 @@ class Viewlist extends Component
         $this->selectedAuditor = $userName;
         dd($this->selectedAuditor);
     }
-    public function updatedSearch()
+    public function updatedSearchAuditor()
     {
         $this->loadAvailableUsers();
     }
