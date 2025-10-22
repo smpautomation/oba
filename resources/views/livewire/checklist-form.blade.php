@@ -125,12 +125,17 @@
 
                         // Check Preparation Checklist
                         if($summaryData['preparation']) {
-                            if(!$summaryData['preparation']->oneprep2column) $issues[] = ['section' => 'Preparation', 'item' => 'MC Receiving', 'status' => 'Not checked', 'action' => 'Verify MC Receiving documentation'];
+                            if($this->checklistInfo->mc_checklist_pc == 1){
+                                if(!$summaryData['preparation']->oneprep2column) $issues[] = ['section' => 'Preparation', 'item' => 'MC Receiving', 'status' => 'Not checked', 'action' => 'Verify MC Receiving documentation'];
+                            }
                             if(!$summaryData['preparation']->oneprep3column) $issues[] = ['section' => 'Preparation', 'item' => 'OBA Kit', 'status' => 'Not checked', 'action' => 'Confirm OBA Kit availability'];
                             if(!$summaryData['preparation']->oneprep4column) $issues[] = ['section' => 'Preparation', 'item' => 'Packing Specs', 'status' => 'Not checked', 'action' => 'Review packing specifications'];
                             if(!$summaryData['preparation']->oneprep5column) $issues[] = ['section' => 'Preparation', 'item' => 'SEREM', 'status' => 'Not checked', 'action' => 'Verify SEREM document'];
                             if(!$summaryData['preparation']->oneprep6column) $issues[] = ['section' => 'Preparation', 'item' => 'Pick List', 'status' => 'Not checked', 'action' => 'Check Pick List availability'];
                             if(!$summaryData['preparation']->oneprep7column) $issues[] = ['section' => 'Preparation', 'item' => 'FG Lot Trace', 'status' => 'Not checked', 'action' => 'Verify FG Lot Trace documentation'];
+                            if($this->checklistInfo->scanned_qr_pc == 1){
+                                if(!$summaryData['preparation']->oneprep8column) $issues[] = ['section' => 'Preparation', 'item' => 'Scanned QR', 'status' => 'Not checked', 'action' => 'Verify Scanned QR documentation'];
+                            }
                             if(!$summaryData['preparation']->oneprep9column) $issues[] = ['section' => 'Preparation', 'item' => 'Packing Slip', 'status' => 'Not checked', 'action' => 'Confirm Packing Slip is available'];
                             if(!$summaryData['preparation']->oneprep10column) $issues[] = ['section' => 'Preparation', 'item' => 'Related Docs', 'status' => 'Not checked', 'action' => 'Verify all related documents'];
                         }
