@@ -45,7 +45,8 @@
                 </svg>
                 <span class="button-text">Finish Audit</span>
             </button>
-            @else
+            @endif
+            @if ($origStat == "Closed")
             <button
                 class="save-button px-8 py-4 rounded-xl text-white flex items-center space-x-3 font-medium text-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50"
                 wire:click="printChecklistForm">
@@ -105,6 +106,136 @@
                             <div class="section-value">{{ $checklistInfo->section }}</div>
                         </div>
                     </div>
+
+                    @php
+                        $issues = [];
+
+                        // Check Preparation Checklist
+                        if($summaryData['preparation']) {
+                            if(!$summaryData['preparation']->oneprep2column) $issues[] = ['section' => 'Preparation', 'item' => 'MC Receiving', 'status' => 'Not checked', 'action' => 'Verify MC Receiving documentation'];
+                            if(!$summaryData['preparation']->oneprep3column) $issues[] = ['section' => 'Preparation', 'item' => 'OBA Kit', 'status' => 'Not checked', 'action' => 'Confirm OBA Kit availability'];
+                            if(!$summaryData['preparation']->oneprep4column) $issues[] = ['section' => 'Preparation', 'item' => 'Packing Specs', 'status' => 'Not checked', 'action' => 'Review packing specifications'];
+                            if(!$summaryData['preparation']->oneprep5column) $issues[] = ['section' => 'Preparation', 'item' => 'SEREM', 'status' => 'Not checked', 'action' => 'Verify SEREM document'];
+                            if(!$summaryData['preparation']->oneprep6column) $issues[] = ['section' => 'Preparation', 'item' => 'Pick List', 'status' => 'Not checked', 'action' => 'Check Pick List availability'];
+                            if(!$summaryData['preparation']->oneprep7column) $issues[] = ['section' => 'Preparation', 'item' => 'FG Lot Trace', 'status' => 'Not checked', 'action' => 'Verify FG Lot Trace documentation'];
+                            if(!$summaryData['preparation']->oneprep9column) $issues[] = ['section' => 'Preparation', 'item' => 'Packing Slip', 'status' => 'Not checked', 'action' => 'Confirm Packing Slip is available'];
+                            if(!$summaryData['preparation']->oneprep10column) $issues[] = ['section' => 'Preparation', 'item' => 'Related Docs', 'status' => 'Not checked', 'action' => 'Verify all related documents'];
+                        }
+
+                        // Check Items Checking
+                        if($summaryData['check_items']) {
+                            if($summaryData['check_items']->same_model === false) $issues[] = ['section' => 'Items Checking', 'item' => 'Model Name Verification', 'status' => 'Different models found', 'action' => 'Verify model: ' . ($summaryData['check_items']->specify_model ?? 'N/A')];
+                            if($summaryData['check_items']->judgement === false) $issues[] = ['section' => 'Items Checking', 'item' => 'Barcode Label Judgement', 'status' => 'NG', 'action' => 'Re-check barcode labels and correct discrepancies'];
+                            if($summaryData['check_items']->need_sir && !$summaryData['check_items']->sir_available) $issues[] = ['section' => 'Items Checking', 'item' => 'SIR Document', 'status' => 'Required but not available', 'action' => 'Obtain Specific Inspection Report'];
+                        }
+
+                        // Check Similarities - Quantity
+                        if($summaryData['similarities']) {
+                            if($summaryData['similarities']->same_quantity_qs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Quantity for Shipment', 'status' => 'Quantities do not match', 'action' => 'Reconcile quantity differences between Pick List, Shipping Invoice, and SEREM'];
+                            if($summaryData['similarities']->judgement_qs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Quantity Judgement', 'status' => 'NG', 'action' => 'Correct quantity discrepancies before proceeding'];
+
+                            // Check Boxes
+                            if($summaryData['similarities']->same_box_bs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Number of Boxes', 'status' => 'Box counts do not match', 'action' => 'Verify box counts in Pick List, Packing Slip, and Pallet Label'];
+                            if($summaryData['similarities']->judgement_bs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Box Count Judgement', 'status' => 'NG', 'action' => 'Resolve box count differences'];
+
+                            // Check Model Name
+                            if($summaryData['similarities']->same_model_mn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Name', 'status' => 'Model names do not match', 'action' => 'Verify model names across all documents and labels'];
+                            if($summaryData['similarities']->judgement_mn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Name Judgement', 'status' => 'NG', 'action' => 'Correct model name inconsistencies'];
+
+                            // Check Model Code
+                            if($summaryData['similarities']->same_mc === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Code', 'status' => 'Model codes do not match', 'action' => 'Verify model codes across all documents and labels'];
+                            if($summaryData['similarities']->judgement_mc === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Code Judgement', 'status' => 'NG', 'action' => 'Correct model code inconsistencies'];
+
+                            // Check Part Number
+                            if($summaryData['similarities']->same_pn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Part Number', 'status' => 'Part numbers do not match', 'action' => 'Verify part numbers across all documents and labels'];
+                            if($summaryData['similarities']->judgement_pn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Part Number Judgement', 'status' => 'NG', 'action' => 'Correct part number inconsistencies'];
+
+                            // Check PO Number
+                            if($summaryData['similarities']->same_po === false) $issues[] = ['section' => 'Similarities', 'item' => 'PO Number', 'status' => 'PO numbers do not match', 'action' => 'Verify PO numbers across SEREM, Shipping Label, Pallet Label, and other documents'];
+                            if($summaryData['similarities']->judgement_po === false) $issues[] = ['section' => 'Similarities', 'item' => 'PO Number Judgement', 'status' => 'NG', 'action' => 'Correct PO number inconsistencies'];
+                        }
+
+                        // Check Shipment Information
+                        if($summaryData['shipment']) {
+                            if(!$summaryData['shipment']->datetime) $issues[] = ['section' => 'Shipment', 'item' => 'Date & Time', 'status' => 'Not set', 'action' => 'Set shipment date and time'];
+                            if(!$summaryData['shipment']->model_name) $issues[] = ['section' => 'Shipment', 'item' => 'Model Name', 'status' => 'Not specified', 'action' => 'Enter model name'];
+                            if(!$summaryData['shipment']->invoice_number) $issues[] = ['section' => 'Shipment', 'item' => 'Invoice Number', 'status' => 'Not specified', 'action' => 'Enter invoice number'];
+                            if(!$summaryData['shipment']->wood && !$summaryData['shipment']->paper && !$summaryData['shipment']->steel && !$summaryData['shipment']->plastic && !$summaryData['shipment']->others) {
+                                $issues[] = ['section' => 'Shipment', 'item' => 'Pallet Materials', 'status' => 'Not specified', 'action' => 'Select pallet materials used'];
+                            }
+                        }
+
+                        // Check Personnel
+                        if($summaryData['personnel']) {
+                            if(!$summaryData['personnel']->shipping_pic) $issues[] = ['section' => 'Personnel', 'item' => 'Shipping PIC', 'status' => 'Not specified', 'action' => 'Assign Shipping PIC'];
+                            if(!$summaryData['personnel']->date) $issues[] = ['section' => 'Personnel', 'item' => 'Date', 'status' => 'Not specified', 'action' => 'Set audit date'];
+                            if(!$summaryData['personnel']->oba_checked_by) $issues[] = ['section' => 'Personnel', 'item' => 'OBA Checked By', 'status' => 'Not specified', 'action' => 'Assign OBA checker'];
+                            if(!$summaryData['personnel']->check_judgement) $issues[] = ['section' => 'Personnel', 'item' => 'OBA Judgement', 'status' => 'Not specified', 'action' => 'Provide OBA check judgement'];
+                            if(!$summaryData['personnel']->oba_picture_by) $issues[] = ['section' => 'Personnel', 'item' => 'OBA Picture By', 'status' => 'Not specified', 'action' => 'Assign picture taker'];
+                            if(!$summaryData['personnel']->picture_judgement) $issues[] = ['section' => 'Personnel', 'item' => 'Picture Judgement', 'status' => 'Not specified', 'action' => 'Provide picture judgement'];
+                        }
+                    @endphp
+
+                    @if(count($issues) > 0)
+                    <div class="mb-8 bg-red-50 border-2 border-red-200 rounded-2xl overflow-hidden animate-pulse">
+                        <div class="bg-gradient-to-r from-red-600 to-red-700 text-white p-4">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-bold flex items-center space-x-3">
+                                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                    </svg>
+                                    <span>Issues Requiring Attention</span>
+                                </h2>
+                                <div class="bg-white text-red-600 px-4 py-2 rounded-full font-bold text-lg">
+                                    {{ count($issues) }} Issue{{ count($issues) > 1 ? 's' : '' }}
+                                </div>
+                            </div>
+                            <div class="flex content-center justify-center items-center">
+                                <img src="{{ asset('photo/stop_call_wait_go.png') }}" class="max-h-[15vh] w-auto" alt="SMP Logo"/>
+                            </div>
+                        </div>
+
+                        <div class="p-6 space-y-4">
+                            @foreach($issues as $index => $issue)
+                            <div class="bg-white rounded-lg border-l-4 border-red-500 p-4 shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">
+                                            {{ $index + 1 }}
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div>
+                                                <span class="inline-block bg-red-100 text-red-800 text-xs font-semibold px-3 py-1 rounded-full">
+                                                    {{ $issue['section'] }}
+                                                </span>
+                                            </div>
+                                            <div class="text-right">
+                                                <span class="inline-block bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                                    {{ $issue['status'] }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h4 class="text-lg font-bold text-gray-900 mb-2">{{ $issue['item'] }}</h4>
+                                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                                            <div class="flex items-start space-x-2">
+                                                <svg class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2z"/>
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-semibold text-yellow-800 mb-1">Recommended Action:</p>
+                                                    <p class="text-sm text-yellow-900">{{ $issue['action'] }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
 
                     <div class="space-y-6">
                         @if($summaryData['preparation'])
@@ -3045,9 +3176,102 @@
                             <span>Confirm & Finish</span>
                         </button>
                     @endif
+                    @if(count($issues) > 0)
+                        <button wire:click='confirmFailAudit' class="px-8 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white flex items-center space-x-2 font-medium transition-all" @php if(Auth::user()->role_id == 1){echo "disabled";} @endphp>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            @if(Auth::user()->role_id == 1)
+                            <span>Call PIC for Audit Failing</span>
+                            @else
+                            <span>Fail Audit</span>
+                            @endif
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
+        @endif
+
+        @if($showFailConfirmation)
+            <div class="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-60" wire:click='cancelFailAudit'>
+                <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 overflow-hidden" wire:click.stop>
+                    <!-- Header -->
+                    <div class="bg-gradient-to-r from-red-600 to-red-700 text-white p-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-white bg-opacity-20 rounded-full p-3">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold">Confirm Audit Failure</h2>
+                                <p class="text-red-100 text-sm mt-1">This action will mark the audit as failed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-6">
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                                </svg>
+                                <div>
+                                    <h3 class="font-semibold text-red-900 mb-2">Are you sure you want to fail this audit?</h3>
+                                    <p class="text-sm text-red-800 mb-3">
+                                        There {{ count($this->getIssues()) === 1 ? 'is' : 'are' }}
+                                        <strong>{{ count($this->getIssues()) }} unresolved issue{{ count($this->getIssues()) > 1 ? 's' : '' }}</strong>
+                                        that need{{ count($this->getIssues()) === 1 ? 's' : '' }} attention.
+                                    </p>
+                                    <p class="text-sm text-red-800">
+                                        Failing the audit will:
+                                    </p>
+                                    <ul class="text-sm text-red-800 list-disc list-inside mt-2 space-y-1">
+                                        <li>Mark this checklist as <strong>FAILED</strong></li>
+                                        <li>Require resolution of all issues before re-OBA</li>
+                                        <li>Create an audit trail record</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2z"/>
+                                </svg>
+                                <div>
+                                    <p class="text-sm text-blue-900 font-medium">Alternative Action</p>
+                                    <p class="text-sm text-blue-800 mt-1">
+                                        You can click "Review More" to go back and resolve minor issues such as mistyped words or skipped input before completing the audit.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
+                        <button
+                            wire:click='cancelFailAudit'
+                            class="px-6 py-2.5 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            wire:click='failAudit'
+                            class="px-6 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center space-x-2"
+                        >
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            <span>Confirm Failure</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         @endif
 
 

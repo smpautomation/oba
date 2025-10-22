@@ -37,6 +37,9 @@ return new class extends Migration
             $table->boolean("specific_label_po")->default(true);
             $table->boolean("sci_label_po")->default(true);
             $table->timestamps();
+            $table->string('failed_by')->default('');
+            $table->string('fail_reason')->default('');
+            $table->unsignedBigInteger('failed_id_for_re-oba')->default(null);
         });
 
         Schema::create('preparation_checklist', function (Blueprint $table) {

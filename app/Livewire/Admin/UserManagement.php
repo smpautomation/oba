@@ -76,7 +76,7 @@ class UserManagement extends Component
             'roles' => Role::all(),
             'totalUsers' => User::count(),
             'totalAdmins' => User::whereHas('role', fn($q) => $q->where('name', 'admin'))->count(),
-            'totalAuditors' => User::whereHas('role', fn($q) => $q->where('name', 'auditor'))->count(),
+            'totalAuditors' => User::whereHas('role', fn($q) => $q->where('name', 'pic'))->count(),
             'totalRegularUsers' => User::whereHas('role', fn($q) => $q->where('name', 'user'))->count(),
         ]);
     }

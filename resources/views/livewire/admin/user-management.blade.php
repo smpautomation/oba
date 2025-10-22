@@ -45,7 +45,7 @@
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm text-black/70">Auditors</p>
+                    <p class="text-sm text-black/70">Personnel In-Charge</p>
                     <p class="text-2xl font-bold text-black">{{ $totalAuditors }}</p>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                            <td class="px-6 py-4">
                                <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full
                                    {{ $user->role->name === 'admin' ? 'bg-red-500/20 text-red-300' : '' }}
-                                   {{ $user->role->name === 'auditor' ? 'bg-green-500/20 text-green-300' : '' }}
+                                   {{ $user->role->name === 'pic' ? 'bg-green-500/20 text-green-300' : '' }}
                                    {{ $user->role->name === 'user' ? 'bg-blue-500/20 text-blue-300' : '' }}
                                ">
                                    {{ ucfirst($user->role->name) }}
@@ -189,7 +189,7 @@
                                    class="w-4 h-4 text-blue-600 bg-transparent border-white/30"
                                >
                                <div class="ml-3">
-                                   <div class="text-black font-medium">{{ ucfirst($role->name) }}</div>
+                                   <div class="text-black font-medium">{{ strtoupper($role->name) }}</div>
                                    <div class="text-black/60 text-sm">{{ $role->description }}</div>
                                </div>
                            </label>

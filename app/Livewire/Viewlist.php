@@ -176,7 +176,7 @@ class Viewlist extends Component
     {
         return match ($status) {
             'Closed' => 'bg-green-100 text-green-800 border-green-200',
-            'In Progress' => 'bg-blue-100 text-blue-800 border-blue-200',
+            'Failed' => 'bg-red-100 text-red-800 border-red-200',
             'Open' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
             default => 'bg-gray-100 text-gray-800 border-gray-200',
         };
@@ -286,7 +286,6 @@ class Viewlist extends Component
     public function selectAuditor($userName)
     {
         $this->selectedAuditor = $userName;
-        dd($this->selectedAuditor);
     }
     public function updatedSearchAuditor()
     {

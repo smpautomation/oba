@@ -60,6 +60,7 @@
                     <option value="all">All Statuses</option>
                     <option value="Open">Open</option>
                     <option value="Closed">Closed</option>
+                    <option value="Failed">Failed</option>
                 </select>
             </div>
 
@@ -298,12 +299,15 @@
                             <!-- Audit Closed -->
                             <td class="px-6 py-4 text-center">
                                 <div class="space-y-1">
-                                    @if($checklist['status'] == 'Closed')
+                                    @if($checklist['status'] == 'Closed' || $checklist['status'] == 'Failed')
                                     <div class="text-sm font-medium text-gray-700">
                                         {{ \Carbon\Carbon::parse($checklist['updated_at'])->format('M d, Y') }}
                                     </div>
                                     <div class="text-xs {{ \Carbon\Carbon::parse($checklist['updated_at'])->isPast() ? 'text-red-600' : 'text-gray-500' }}">
                                         {{ \Carbon\Carbon::parse($checklist['updated_at'])->diffForHumans() }}
+                                    </div>
+                                    <div class="text-xs {{ \Carbon\Carbon::parse($checklist['updated_at'])->isPast() ? 'text-red-600' : 'text-gray-500' }}">
+                                        {{ $checklist['fail_reason'] }}
                                     </div>
                                     @endif
                                 </div>
@@ -319,7 +323,7 @@
                                         </svg>
                                     </button>
 
-                                    @if(($checklist['status'] != 'Closed' && Auth::user()->name == $checklist->personnelCheck['oba_checked_by']) || Auth::user()->role_id == 2)
+                                    @if(($checklist['status'] != 'Closed' && $checklist['status'] != 'Failed' && Auth::user()->name == $checklist->personnelCheck['oba_checked_by']) || Auth::user()->role_id == 2)
                                     <button class="p-2 text-green-600 hover:bg-red-50 rounded-lg transition-colors"
                                             title="Add Additional Auditor"
                                             wire:click="openAddAuditorModal({{ $checklist['id'] }})">
@@ -331,7 +335,7 @@
                                             </svg>
                                     </button>
                                     @endif
-                                    @if(($checklist['status'] != "Closed" && (Auth::user()->name == $checklist['auditor'] || Auth::user()->name == $checklist['assigned_additional_auditor'])) || Auth::user()->role_id == 2)
+                                    @if(($checklist['status'] != "Closed" && $checklist['status'] != 'Failed' && (Auth::user()->name == $checklist['auditor'] || Auth::user()->name == $checklist['assigned_additional_auditor'])) || Auth::user()->role_id == 2)
                                     <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                             title="Delete"
                                             wire:click="confirmDelete({{ $checklist['id'] }})">
