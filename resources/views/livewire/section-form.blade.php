@@ -35,9 +35,9 @@
                         @endforeach
                     </select>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {{-- <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                        </svg> --}}
                     </div>
                 </div>
                 <div>
@@ -79,9 +79,9 @@
 
                     </select>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {{-- <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                        </svg> --}}
                     </div>
                 </div>
                 <div>
@@ -91,6 +91,101 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             {{ session('ModelError') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="space-y-3 pt-5">
+                <label for="reaudit" class="block text-base sm:text-lg font-semibold text-gray-800 mb-3">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        Re-Audit
+                    </span>
+                </label>
+                <div class="relative">
+                    @if(!$showFailedID)
+                        <!-- Toggle Switch -->
+                        <label class="enhanced-focus touch-target flex items-center justify-between bg-white border-2 border-gray-200 text-gray-900 text-base sm:text-lg rounded-2xl focus-within:ring-4 focus-within:ring-blue-200 focus-within:border-blue-500 w-full p-4 sm:p-5 transition-all duration-200 shadow-sm hover:shadow-md hover:border-gray-300 cursor-pointer">
+                            <span class="text-gray-700">Enable re-audit for failed checklists</span>
+                            <div class="relative inline-block">
+                                <input
+                                    type="checkbox"
+                                    wire:model.live='showFailedID'
+                                    id="reaudit"
+                                    class="sr-only peer"
+                                />
+                                <div class="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 peer-focus:ring-4 peer-focus:ring-blue-200 transition-all duration-200"></div>
+                                <div class="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 peer-checked:translate-x-7 shadow-sm"></div>
+                            </div>
+                        </label>
+                    @else
+                        <!-- Select Input for Failed IDs -->
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Select a failed checklist to re-audit</span>
+                                <button
+                                    wire:click="$set('showFailedID', false)"
+                                    type="button"
+                                    class="text-sm text-red-600 hover:text-red-700 font-medium flex items-center gap-1"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    Cancel
+                                </button>
+                            </div>
+                            <select
+                                wire:model='selectedFailedID'
+                                id="failedID"
+                                class="enhanced-focus select-focus touch-target appearance-none bg-white border-2 border-gray-200 text-gray-900 text-base sm:text-lg rounded-2xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-4 sm:p-5 pr-12 transition-all duration-200 shadow-sm hover:shadow-md hover:border-gray-300"
+                            >
+                                <option value="" selected>Select failed checklist ID</option>
+                                @if(!empty($failedChecklists))
+                                    @foreach ($failedChecklists as $failed)
+                                        <option value="{{ $failed->id }},{{ $failed->model }},{{ $failed->section }}">
+                                            {{ $failed->id }} - {{ $failed->model ?? 'N/A' }}
+                                            @if($failed->section)
+                                                ({{ $failed->section }})
+                                            @endif
+                                            - Failed on {{ \Carbon\Carbon::parse($failed->failed_at)->format('M d, Y') }}
+                                        </option>
+                                    @endforeach
+                                @else
+                                    <option value="" disabled>No failed checklists available</option>
+                                @endif
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    @if (session()->has('ReauditError'))
+                        <div class="text-red-500 text-sm mt-2">
+                            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ session('ReauditError') }}
+                        </div>
+                    @endif
+                    @if (session()->has('ReauditInfo'))
+                        <div class="text-blue-600 text-sm mt-2 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ session('ReauditInfo') }}
+                        </div>
+                    @endif
+                    @if($showFailedID && !empty($failedChecklists))
+                        <div class="text-sm text-gray-600 mt-2 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                            <svg class="inline w-4 h-4 mr-1 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            Re-auditing will create a new checklist with a note of issues from the selected ID one. The original failed record will be preserved.
                         </div>
                     @endif
                 </div>

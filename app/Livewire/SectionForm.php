@@ -32,6 +32,10 @@ class SectionForm extends Component
     public $selectedSection;
     public $selectedModel;
     public $userIP;
+
+    public $showFailedID = false;
+    public $selectedFailedID = '';
+    public $failedChecklists = [];
     private function getClientIpAddress(Request $request): string
     {
         $ipKeys = [
@@ -71,6 +75,18 @@ class SectionForm extends Component
             session()->flash('ModelError', 'Please select a model.');
             return;
         }
+        $failedID = [];
+        if($this->selectedFailedID != ''){
+            $failedID = explode(",", $this->selectedFailedID);
+            if($failedID[2] != $this->selectedSection){
+                session()->flash('ReauditError', 'Section Selected does not match the Failed ID Section.');
+                return;
+            }
+            if($failedID[1] != $this->selectedModel){
+                session()->flash('ReauditError', 'Model Selected does not match the Failed ID Model.');
+                return;
+            }
+        }
         try{
             $this->checklist = Checklist::latest()->first();
             if (isset($this->checklist->id)) {
@@ -104,6 +120,7 @@ class SectionForm extends Component
                 'vmi_po' => $model_settings->vmi_po ? true : false,
                 'specific_label_po' => $model_settings->specific_label_po ? true : false,
                 'sci_label_po' => $model_settings->sci_label_po ? true : false,
+                'failed_id_for_re-oba' => !empty($failedID) ? $failedID[0] : null
             ]);
             preparation_checklist::create([
                 'checklist_id' => $new_id
@@ -159,7 +176,19 @@ class SectionForm extends Component
     {
         $this->sections = Sections::all();
         $this->userIP = $this->getClientIpAddress(request());
+        $this->loadFailedChecklists();
     }
+
+    public function loadFailedChecklists()
+    {
+        $this->failedChecklists = Checklist::where('status', 'Failed')
+            ->orderBy('updated_at', 'desc')
+            ->limit(20)
+            ->get();
+    }
+
+
+
     public function render()
     {
         return view('livewire.section-form');
