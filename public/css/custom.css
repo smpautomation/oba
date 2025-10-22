@@ -938,6 +938,9 @@
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
+        .gradient-bg-red {
+            background: linear-gradient(135deg, #d066ea 0%, #e70f45 100%);
+        }
         .card-shadow {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }

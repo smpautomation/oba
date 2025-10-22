@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use DateTime;
 use App\Models\Check_Items;
 use App\Models\Check_Overall;
 use App\Models\OBA_Kit_Checklist;
@@ -9,6 +10,7 @@ use App\Models\Personnel_Check;
 use App\Models\preparation_checklist;
 use App\Models\shipment_information;
 use App\Models\Similarities_Checking;
+use App\Models\model_settings as ModelSettings;
 use Livewire\Component;
 use App\Models\checklist as Checklist;
 use Illuminate\Http\Request;
@@ -16,9 +18,13 @@ use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
 use App\Models\Log as AppLog;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Exception;
 
 class ChecklistForm extends Component
 {
+    public $checklist;
+    public $dateToFormat;
     public $checklistInfo;
     public $model_id = "";
     public $scanned_qr_pc = true;
@@ -36,8 +42,8 @@ class ChecklistForm extends Component
         try{
             $this->model_id = $model_id;
             $this->checklistInfo = Checklist::find($model_id);
+            $this->origStat = $this->checklistInfo->status;
             if((Auth::user()->name != $this->checklistInfo->auditor && Auth::user()->name != $this->checklistInfo->assigned_additional_auditor) && Auth::user()->role_id != 2){
-                $this->origStat = $this->checklistInfo->status;
                 $this->checklistInfo->status = "Closed";
             }
             $this->scanned_qr_pc = $this->checklistInfo->scanned_qr_pc ? true : false;
@@ -314,6 +320,91 @@ class ChecklistForm extends Component
         }
 
         return $issues;
+    }
+
+    public function reAudit(){
+        $failedID = $this->model_id;
+
+        try{
+            $this->checklist = Checklist::latest()->first();
+            if (isset($this->checklist->id)) {
+                $new_id = $this->checklist->id + 1;
+            }else{
+                $new_id = Carbon::now()->format('Ym') . '001';
+            }
+
+            $this->dateToFormat = new DateTime();
+            $formattedDate = $this->dateToFormat->format('Y-m-d\TH:i');
+
+            $model_settings = ModelSettings::where('model_name', $this->checklistInfo->model)->first();
+
+            Checklist::create([
+                'id' => $new_id,
+                'auditor' => Auth::user()->name,
+                'model' => $this->checklistInfo->model,
+                'section' => $this->checklistInfo->section,
+                'mc_checklist_pc' => $model_settings->mc_checklist_pc ? true : false,
+                'scanned_qr_pc' => $model_settings->scanned_qr_pc ? true : false,
+                'sir_qs' => $model_settings->sir_qs ? true : false,
+                'vmi_mn' => $model_settings->vmi_mn ? true : false,
+                'sir_mn' => $model_settings->sir_mn ? true : false,
+                'sir_mc' => $model_settings->sir_mc ? true : false,
+                'vmi_mc' => $model_settings->vmi_mc ? true : false,
+                'specific_label_mc' => $model_settings->specific_label_mc ? true : false,
+                'sir_pn' => $model_settings->sir_pn ? true : false,
+                'vmi_pn' => $model_settings->vmi_pn ? true : false,
+                'sci_label_pn' => $model_settings->sci_label_pn ? true : false,
+                'qr_qa_pn' => $model_settings->qr_qa_pn ? true : false,
+                'qr_mc_pn' => $model_settings->qr_mc_pn ? true : false,
+                'qr_mgtz_pn' => $model_settings->qr_mgtz_pn ? true : false,
+                'sir_po' => $model_settings->sir_po ? true : false,
+                'vmi_po' => $model_settings->vmi_po ? true : false,
+                'specific_label_po' => $model_settings->specific_label_po ? true : false,
+                'sci_label_po' => $model_settings->sci_label_po ? true : false,
+                'failed_id_for_re-oba' => $failedID
+            ]);
+            preparation_checklist::create([
+                'checklist_id' => $new_id
+            ]);
+            OBA_Kit_Checklist::create([
+                'checklist_id' => $new_id
+            ]);
+            shipment_information::create([
+                'checklist_id' => $new_id,
+                'datetime' => $formattedDate,
+                'model_name' => $this->checklistInfo->model,
+            ]);
+            Check_Items::create([
+                'checklist_id' => $new_id
+            ]);
+            Similarities_Checking::create([
+                'checklist_id' => $new_id
+            ]);
+            Check_Overall::create([
+                'checklist_id' => $new_id
+            ]);
+            Personnel_Check::create([
+                'checklist_id' => $new_id,
+                'oba_checked_by' => Auth::user()->name
+            ]);
+
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'info',
+                'action' => 'create_checklist',
+                'description' => '{"specific_action":"Create new checklist from failed checklist'.$new_id.' Model '.$this->checklistInfo->model.' Section '.$this->checklistInfo->section.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
+            ]);
+
+            session()->flash('status', 'OBA Checklist serial is ' . $new_id);
+        }catch(Exception $e){
+            AppLog::create([
+                'LogName' => 'User Action',
+                'LogType' => 'error',
+                'action' => 'create_checklist',
+                'description' => '{"specific_action":"Create new checklist '.$new_id.' Model '.$this->checklistInfo->model.' Section '.$this->checklistInfo->section.'", "error":"'.$e.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
+            ]);
+        }
+        return redirect()->to('/checklist/'.$new_id);
     }
 
     public function render()

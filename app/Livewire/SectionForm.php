@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use DateTime;
 use App\Models\Check_Overall;
 use App\Models\Personnel_Check;
 use App\Models\preparation_checklist;
@@ -28,6 +29,8 @@ class SectionForm extends Component
     public $sections = [];
     public $models = [];
     public $checklist;
+
+    public $dateToFormat;
 
     public $selectedSection;
     public $selectedModel;
@@ -95,6 +98,9 @@ class SectionForm extends Component
                 $new_id = Carbon::now()->format('Ym') . '001';
             }
 
+            $this->dateToFormat = new DateTime();
+            $formattedDate = $this->dateToFormat->format('Y-m-d\TH:i');
+
             $model_settings = model_settings::where('model_name', $this->selectedModel)->first();
 
             Checklist::create([
@@ -129,7 +135,9 @@ class SectionForm extends Component
                 'checklist_id' => $new_id
             ]);
             shipment_information::create([
-                'checklist_id' => $new_id
+                'checklist_id' => $new_id,
+                'datetime' => $formattedDate,
+                'model_name' => $this->selectedModel,
             ]);
             Check_Items::create([
                 'checklist_id' => $new_id
@@ -161,10 +169,6 @@ class SectionForm extends Component
                 'description' => '{"specific_action":"Create new checklist '.$new_id.' Model '.$this->selectedModel.' Section '.$this->selectedSection.'", "error":"'.$e.'", "ip address":"'. $this->userIP .',  user":"'. Auth::user()->name.'"}'
             ]);
         }
-
-
-
-
         return redirect()->to('/checklist/'.$new_id);
     }
 

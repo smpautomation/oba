@@ -34,9 +34,12 @@
         <livewire:check-overall :checklist_id="$model_id" :userIP="$userIP"></livewire:check-overall>
         <livewire:personnel :checklist_id="$model_id" :userIP="$userIP"></livewire:personnel>
         <livewire:photo-documentation :checklist_id="$model_id" :userIP="$userIP"></livewire:photo-documentation>
+        @if($checklistInfo['failed_id_for_re-oba'] != "" || $checklistInfo->status == "Failed")
+        <livewire:issues :checklist_id="$model_id"></livewire:issues>
+        @endif
         <livewire:additional-documentation :checklist_id="$model_id" :userIP="$userIP"></livewire:additional-documentation>
         <div class="container-bg p-6 rounded-2xl shadow-lg flex items-center justify-center">
-            @if ($checklistInfo->status != 'Closed')
+            @if ($checklistInfo->status != 'Closed' && $origStat != "Failed")
             <button
                 class="save-button px-8 py-4 rounded-xl text-white flex items-center space-x-3 font-medium text-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50"
                 wire:click="showSummaryModal">
@@ -56,9 +59,19 @@
                 <span class="button-text">Print Checklist Form</span>
             </button>
             @endif
+            @if ($origStat == "Failed")
+            <button
+                class="save-button px-8 py-4 rounded-xl text-white flex items-center space-x-3 font-medium text-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50"
+                wire:click="reAudit">
+                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                <span class="button-text">Re-Audit</span>
+            </button>
+            @endif
         </div>
 
-        @if ($checklistInfo->status != 'Closed' && $showMatrix)
+        @if ($checklistInfo->status != 'Closed' && $showMatrix && $origStat != "Failed")
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div class="relative bg-white rounded-2xl shadow-2xl mx-4 max-h-[90vh] overflow-hidden glass-effect">
                 <button
@@ -124,35 +137,35 @@
 
                         // Check Items Checking
                         if($summaryData['check_items']) {
-                            if($summaryData['check_items']->same_model === false) $issues[] = ['section' => 'Items Checking', 'item' => 'Model Name Verification', 'status' => 'Different models found', 'action' => 'Verify model: ' . ($summaryData['check_items']->specify_model ?? 'N/A')];
-                            if($summaryData['check_items']->judgement === false) $issues[] = ['section' => 'Items Checking', 'item' => 'Barcode Label Judgement', 'status' => 'NG', 'action' => 'Re-check barcode labels and correct discrepancies'];
+                            if($summaryData['check_items']->same_model == 0) $issues[] = ['section' => 'Items Checking', 'item' => 'Model Name Verification', 'status' => 'Different models found', 'action' => 'Verify model: ' . ($summaryData['check_items']->specify_model ?? 'N/A')];
+                            if($summaryData['check_items']->judgement == 0) $issues[] = ['section' => 'Items Checking', 'item' => 'Barcode Label Judgement', 'status' => 'NG', 'action' => 'Re-check barcode labels and correct discrepancies'];
                             if($summaryData['check_items']->need_sir && !$summaryData['check_items']->sir_available) $issues[] = ['section' => 'Items Checking', 'item' => 'SIR Document', 'status' => 'Required but not available', 'action' => 'Obtain Specific Inspection Report'];
                         }
 
                         // Check Similarities - Quantity
                         if($summaryData['similarities']) {
-                            if($summaryData['similarities']->same_quantity_qs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Quantity for Shipment', 'status' => 'Quantities do not match', 'action' => 'Reconcile quantity differences between Pick List, Shipping Invoice, and SEREM'];
-                            if($summaryData['similarities']->judgement_qs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Quantity Judgement', 'status' => 'NG', 'action' => 'Correct quantity discrepancies before proceeding'];
+                            if($summaryData['similarities']->same_quantity_qs == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Quantity for Shipment', 'status' => 'Quantities do not match', 'action' => 'Reconcile quantity differences between Pick List, Shipping Invoice, and SEREM'];
+                            if($summaryData['similarities']->judgement_qs == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Quantity Judgement', 'status' => 'NG', 'action' => 'Correct quantity discrepancies before proceeding'];
 
                             // Check Boxes
-                            if($summaryData['similarities']->same_box_bs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Number of Boxes', 'status' => 'Box counts do not match', 'action' => 'Verify box counts in Pick List, Packing Slip, and Pallet Label'];
-                            if($summaryData['similarities']->judgement_bs === false) $issues[] = ['section' => 'Similarities', 'item' => 'Box Count Judgement', 'status' => 'NG', 'action' => 'Resolve box count differences'];
+                            if($summaryData['similarities']->same_box_bs == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Number of Boxes', 'status' => 'Box counts do not match', 'action' => 'Verify box counts in Pick List, Packing Slip, and Pallet Label'];
+                            if($summaryData['similarities']->judgement_bs == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Box Count Judgement', 'status' => 'NG', 'action' => 'Resolve box count differences'];
 
                             // Check Model Name
-                            if($summaryData['similarities']->same_model_mn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Name', 'status' => 'Model names do not match', 'action' => 'Verify model names across all documents and labels'];
-                            if($summaryData['similarities']->judgement_mn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Name Judgement', 'status' => 'NG', 'action' => 'Correct model name inconsistencies'];
+                            if($summaryData['similarities']->same_model_mn == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Model Name', 'status' => 'Model names do not match', 'action' => 'Verify model names across all documents and labels'];
+                            if($summaryData['similarities']->judgement_mn == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Model Name Judgement', 'status' => 'NG', 'action' => 'Correct model name inconsistencies'];
 
                             // Check Model Code
-                            if($summaryData['similarities']->same_mc === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Code', 'status' => 'Model codes do not match', 'action' => 'Verify model codes across all documents and labels'];
-                            if($summaryData['similarities']->judgement_mc === false) $issues[] = ['section' => 'Similarities', 'item' => 'Model Code Judgement', 'status' => 'NG', 'action' => 'Correct model code inconsistencies'];
+                            if($summaryData['similarities']->same_mc == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Model Code', 'status' => 'Model codes do not match', 'action' => 'Verify model codes across all documents and labels'];
+                            if($summaryData['similarities']->judgement_mc == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Model Code Judgement', 'status' => 'NG', 'action' => 'Correct model code inconsistencies'];
 
                             // Check Part Number
-                            if($summaryData['similarities']->same_pn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Part Number', 'status' => 'Part numbers do not match', 'action' => 'Verify part numbers across all documents and labels'];
-                            if($summaryData['similarities']->judgement_pn === false) $issues[] = ['section' => 'Similarities', 'item' => 'Part Number Judgement', 'status' => 'NG', 'action' => 'Correct part number inconsistencies'];
+                            if($summaryData['similarities']->same_pn == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Part Number', 'status' => 'Part numbers do not match', 'action' => 'Verify part numbers across all documents and labels'];
+                            if($summaryData['similarities']->judgement_pn == 0) $issues[] = ['section' => 'Similarities', 'item' => 'Part Number Judgement', 'status' => 'NG', 'action' => 'Correct part number inconsistencies'];
 
                             // Check PO Number
-                            if($summaryData['similarities']->same_po === false) $issues[] = ['section' => 'Similarities', 'item' => 'PO Number', 'status' => 'PO numbers do not match', 'action' => 'Verify PO numbers across SEREM, Shipping Label, Pallet Label, and other documents'];
-                            if($summaryData['similarities']->judgement_po === false) $issues[] = ['section' => 'Similarities', 'item' => 'PO Number Judgement', 'status' => 'NG', 'action' => 'Correct PO number inconsistencies'];
+                            if($summaryData['similarities']->same_po == 0) $issues[] = ['section' => 'Similarities', 'item' => 'PO Number', 'status' => 'PO numbers do not match', 'action' => 'Verify PO numbers across SEREM, Shipping Label, Pallet Label, and other documents'];
+                            if($summaryData['similarities']->judgement_po == 0) $issues[] = ['section' => 'Similarities', 'item' => 'PO Number Judgement', 'status' => 'NG', 'action' => 'Correct PO number inconsistencies'];
                         }
 
                         // Check Shipment Information
